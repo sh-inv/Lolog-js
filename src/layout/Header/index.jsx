@@ -12,15 +12,17 @@ const Header = () => {
       <Content>
         <Logo href='/'>velog</Logo>
         <RightIcons>
-          <div className='theme-mode'>
+          <div className='theme-mode icon'>
             <HiMoon />
-            <BsFillSunFill />
+            {/* <BsFillSunFill /> */}
           </div>
-          <div className='search'>
+          <a className='search icon' href='/'>
             <BiSearch />
+          </a>
+          <div className='new-post' herf='/'>
+            <a href='/'>새 글 작성</a>
           </div>
-          <div className='new-post'>new-post</div>
-          <div className='profile'>
+          <div className='profile icon'>
             <CgProfile />
           </div>
           <div className='toggle-menu'>
@@ -51,9 +53,15 @@ const Content = styled.div`
   display: flex;
   justify-content: space-between;
   width: 90%;
+
+  a:visited {
+    color: ${darkModeFontColor};
+  }
 `;
 
 const Logo = styled.a`
+  display: flex;
+  align-items: center;
   font-size: 1.5rem;
   :visited {
     color: ${darkModeFontColor};
@@ -64,7 +72,36 @@ const RightIcons = styled.div`
   display: flex;
   align-items: center;
 
-  div {
-    margin-left: 1.25rem;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-left: 0.3rem;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .new-post {
+    a {
+      padding: 0.3rem 1rem;
+      margin-left: 0.3rem;
+      border: 1px solid ${darkModeFontColor};
+      border-radius: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .toggle-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 10px;
+    }
   }
 `;
