@@ -1,7 +1,7 @@
 import GlobalStyle from './GlobalStyle';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
-import Header from './layout';
+import { Header } from './layout';
 
 const App = () => {
   return (
