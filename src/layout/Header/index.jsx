@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darkModeBackgroundColor, darkModeFontColor } from '../../styles';
+import { darkModeBackgroundColor, darkModeFontColor } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { BsFillSunFill } from 'react-icons/bs';
@@ -45,14 +45,13 @@ const Positioner = styled.div`
   left: 0;
   width: 100%;
   height: 4rem;
-  background-color: ${darkModeBackgroundColor};
-  color: ${darkModeFontColor};
 `;
 
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
   width: 90%;
+  max-width: 1728px;
 
   a:visited {
     color: ${darkModeFontColor};
@@ -63,9 +62,6 @@ const Logo = styled.a`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-  :visited {
-    color: ${darkModeFontColor};
-  }
 `;
 
 const RightIcons = styled.div`
