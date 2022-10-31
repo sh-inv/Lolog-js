@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 import { darkModeBackgroundColor, darkModeFontColor } from '../../styles';
+import { HiMoon } from 'react-icons/hi';
+import { BiSearch } from 'react-icons/bi';
+import { BsFillSunFill } from 'react-icons/bs';
+import { CgProfile } from 'react-icons/cg';
+import { VscTriangleDown } from 'react-icons/vsc';
 
 const Header = () => {
   return (
@@ -7,11 +12,20 @@ const Header = () => {
       <Content>
         <Logo href='/'>velog</Logo>
         <RightIcons>
-          <div className='theme-mode'>moon</div>
-          <div className='search'>search</div>
-          <div className='new-post'>search</div>
-          <div className='profile'>profile</div>
-          <div className='toggle-menu'>toggle</div>
+          <div className='theme-mode'>
+            <HiMoon />
+            <BsFillSunFill />
+          </div>
+          <div className='search'>
+            <BiSearch />
+          </div>
+          <div className='new-post'>new-post</div>
+          <div className='profile'>
+            <CgProfile />
+          </div>
+          <div className='toggle-menu'>
+            <VscTriangleDown />
+          </div>
         </RightIcons>
       </Content>
     </Positioner>
