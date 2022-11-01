@@ -12,24 +12,30 @@ const Header = () => {
       <Content>
         <Logo href='/'>velog</Logo>
         <RightIcons>
-          <div className='theme-mode icon'>
+          <div className='theme-mode setting-hover'>
             <HiMoon />
             {/* <BsFillSunFill /> */}
           </div>
-          <a className='search icon' href='/'>
+          <a className='search setting-hover' href='/'>
             <BiSearch />
           </a>
-          <div className='new-post' herf='/'>
+          <div className='new-post'>
             <a href='/'>새 글 작성</a>
           </div>
           <div className='profile'>
             <CgProfile />
           </div>
-          <div className='toggle-menu'>
+          <div className='toggle'>
             <VscTriangleDown />
           </div>
         </RightIcons>
       </Content>
+      <ToggleMenu>
+        <p>내 벨로그</p>
+        <p>임시 글</p>
+        <p>읽기 목록</p>
+        <p>로그아웃</p>
+      </ToggleMenu>
     </Positioner>
   );
 };
@@ -43,6 +49,7 @@ const Positioner = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: 4rem;
 `;
@@ -69,7 +76,7 @@ const RightIcons = styled.div`
   display: flex;
   align-items: center;
 
-  .icon {
+  .setting-hover {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,14 +85,14 @@ const RightIcons = styled.div`
     margin-left: 0.3rem;
     border-radius: 40px;
 
-    :hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-    }
-
     svg {
       width: 24px;
       height: 24px;
+    }
+
+    :hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
     }
   }
 
@@ -116,7 +123,7 @@ const RightIcons = styled.div`
     }
   }
 
-  .toggle-menu {
+  .toggle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -133,6 +140,26 @@ const RightIcons = styled.div`
       svg {
         color: #ececec;
       }
+    }
+  }
+`;
+
+const ToggleMenu = styled.div`
+  position: absolute;
+  right: 0;
+  top: 4rem;
+  width: 12rem;
+  margin-top: 0.3rem;
+  margin-right: 5%;
+  background-color: #1e1e1e;
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
+
+  p {
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    :hover {
+      color: #96f2d7;
     }
   }
 `;
