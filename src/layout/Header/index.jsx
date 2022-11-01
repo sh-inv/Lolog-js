@@ -22,7 +22,7 @@ const Header = () => {
           <div className='new-post' herf='/'>
             <a href='/'>새 글 작성</a>
           </div>
-          <div className='profile icon'>
+          <div className='profile'>
             <CgProfile />
           </div>
           <div className='toggle-menu'>
@@ -62,6 +62,7 @@ const Logo = styled.a`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
+  letter-spacing: 0.2rem;
 `;
 
 const RightIcons = styled.div`
@@ -75,6 +76,12 @@ const RightIcons = styled.div`
     width: 40px;
     height: 40px;
     margin-left: 0.3rem;
+    border-radius: 40px;
+
+    :hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
 
     svg {
       width: 24px;
@@ -84,11 +91,28 @@ const RightIcons = styled.div`
 
   .new-post {
     a {
-      padding: 0.3rem 1rem;
-      margin-left: 0.3rem;
+      padding: 0.4rem 1rem;
+      margin-left: 0.5rem;
       border: 1px solid ${darkModeFontColor};
-      border-radius: 1rem;
+      border-radius: 1.3rem;
       font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.125s ease-in 0s;
+
+      :hover {
+        background-color: ${darkModeFontColor};
+        color: ${darkModeBackgroundColor};
+      }
+    }
+  }
+
+  .profile {
+    margin-left: 0.8rem;
+    cursor: pointer;
+
+    svg {
+      width: 32px;
+      height: 32px;
     }
   }
 
@@ -96,8 +120,19 @@ const RightIcons = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 0.5rem;
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
+
     svg {
-      width: 10px;
+      width: 12px;
+      color: #acacac;
+    }
+
+    :hover {
+      svg {
+        color: #ececec;
+      }
     }
   }
 `;
