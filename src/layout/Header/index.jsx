@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { darkMode, lightMode } from '../../store/modules/header';
 import { darkModeBackgroundColor, darkModeFontColor } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
@@ -7,14 +10,21 @@ import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 
 const Header = () => {
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
+  const dispatch = useDispatch();
+
+  const changeTheme = () => {
+    isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
+  };
+
   return (
     <Positioner>
       <Content>
         <Logo href='/'>velog</Logo>
         <RightIcons>
-          <div className='theme-mode setting-hover'>
-            <HiMoon />
-            {/* <BsFillSunFill /> */}
+          <div className='theme-mode setting-hover' onClick={changeTheme}>
+            {isDarkMode ? <HiMoon /> : <BsFillSunFill />}
           </div>
           <a className='search setting-hover' href='/'>
             <BiSearch />
@@ -22,20 +32,22 @@ const Header = () => {
           <div className='new-post'>
             <a href='/'>새 글 작성</a>
           </div>
-          <div className='profile'>
+          <div className='profile' onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <CgProfile />
           </div>
-          <div className='toggle'>
+          <div className='toggle' onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <VscTriangleDown />
           </div>
         </RightIcons>
       </Content>
-      <ToggleMenu>
-        <p>내 벨로그</p>
-        <p>임시 글</p>
-        <p>읽기 목록</p>
-        <p>로그아웃</p>
-      </ToggleMenu>
+      {isToggleOpen && (
+        <ToggleMenu>
+          <p>내 벨로그</p>
+          <p>임시 글</p>
+          <p>읽기 목록</p>
+          <p>로그아웃</p>
+        </ToggleMenu>
+      )}
     </Positioner>
   );
 };
