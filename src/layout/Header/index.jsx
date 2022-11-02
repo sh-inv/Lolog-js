@@ -26,7 +26,7 @@ const Header = () => {
           <div className='theme-mode setting-hover' onClick={changeTheme}>
             {isDarkMode ? <HiMoon /> : <BsFillSunFill />}
           </div>
-          <a className='search setting-hover' href='/'>
+          <a className='search setting-hover' href='/search'>
             <BiSearch />
           </a>
           <div className='new-post'>

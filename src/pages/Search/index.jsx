@@ -17,7 +17,7 @@ export default Search;
 
 const Positioner = styled.div`
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
