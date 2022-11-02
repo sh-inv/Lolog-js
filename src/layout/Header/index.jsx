@@ -42,10 +42,10 @@ const Header = () => {
       </Content>
       {isToggleOpen && (
         <ToggleMenu>
-          <p>내 벨로그</p>
-          <p>임시 글</p>
-          <p>읽기 목록</p>
-          <p>로그아웃</p>
+          <a href='/'>내 벨로그</a>
+          <a href='/'>임시 글</a>
+          <a href='/'>읽기 목록</a>
+          <a href='/'>로그아웃</a>
         </ToggleMenu>
       )}
     </Positioner>
@@ -64,6 +64,10 @@ const Positioner = styled.div`
   z-index: 1;
   width: 100%;
   height: 4rem;
+
+  a:visited {
+    color: ${darkModeFontColor};
+  }
 `;
 
 const Content = styled.div`
@@ -71,10 +75,6 @@ const Content = styled.div`
   justify-content: space-between;
   width: 90%;
   max-width: 1728px;
-
-  a:visited {
-    color: ${darkModeFontColor};
-  }
 `;
 
 const Logo = styled.a`
@@ -166,7 +166,8 @@ const ToggleMenu = styled.div`
   background-color: #1e1e1e;
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 
-  p {
+  a {
+    display: block;
     padding: 1.25rem;
     font-size: 0.9rem;
     cursor: pointer;

@@ -8,11 +8,9 @@ const themeModeSlice = createSlice({
   reducers: {
     darkMode: state => {
       state.isDarkMode = true;
-      console.log('dark on');
     },
     lightMode: state => {
       state.isDarkMode = false;
-      console.log('light on');
     },
   },
 });
