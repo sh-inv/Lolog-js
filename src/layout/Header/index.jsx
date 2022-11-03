@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
+import MediaQuery from 'react-responsive';
 import { darkModeBackgroundColor, darkModeFontColor } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
@@ -29,9 +30,11 @@ const Header = () => {
           <a className='search setting-hover' href='/search'>
             <BiSearch />
           </a>
-          <div className='new-post'>
-            <a href='/'>새 글 작성</a>
-          </div>
+          <MediaQuery minWidth={1024}>
+            <div className='new-post'>
+              <a href='/'>새 글 작성</a>
+            </div>
+          </MediaQuery>
           <div className='profile' onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <CgProfile />
           </div>
@@ -43,6 +46,9 @@ const Header = () => {
       {isToggleOpen && (
         <ToggleMenu>
           <a href='/'>내 벨로그</a>
+          <MediaQuery maxWidth={1023}>
+            <a>새 글 작성</a>
+          </MediaQuery>
           <a href='/'>임시 글</a>
           <a href='/'>읽기 목록</a>
           <a href='/'>로그아웃</a>
@@ -56,14 +62,17 @@ export default Header;
 
 const Positioner = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
   z-index: 1;
+  padding: 0 1rem;
   width: 100%;
-  height: 4rem;
+  max-width: 1728px;
+  min-width: 250px;
 
   a:visited {
     color: ${darkModeFontColor};
@@ -73,8 +82,8 @@ const Positioner = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  max-width: 1728px;
+  width: 100%;
+  height: 4rem;
 `;
 
 const Logo = styled.a`
@@ -157,12 +166,9 @@ const RightIcons = styled.div`
 `;
 
 const ToggleMenu = styled.div`
-  position: absolute;
-  right: 0;
-  top: 4rem;
   width: 12rem;
-  margin-top: 0.3rem;
-  margin-right: 5%;
+  margin-top: 1rem;
+  margin-left: auto;
   background-color: #1e1e1e;
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 
