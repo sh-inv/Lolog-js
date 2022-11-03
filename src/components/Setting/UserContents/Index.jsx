@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 const UserContents = ({ modify, setModify, onModify }) => {
   const [title, setTitle] = useState('');
-  const [social, setSocial] = useState('');
 
   useEffect(() => {
     const contents = {
@@ -24,15 +23,10 @@ const UserContents = ({ modify, setModify, onModify }) => {
     };
 
     setTitle(contents.title);
-    setSocial(contents.social);
   }, []);
 
   const getTitle = e => {
     setTitle(e.target.value);
-  };
-
-  const getSocial = e => {
-    setSocial(e.target.value);
   };
 
   return (
@@ -82,7 +76,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
               </ul>
             </div>
             <div className='edit-wrapper'>
-              <ModifyButton />
+              <ModifyButton onModify={onModify} />
             </div>
           </div>
         </div>
