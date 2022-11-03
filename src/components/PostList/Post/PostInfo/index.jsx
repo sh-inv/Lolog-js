@@ -34,7 +34,7 @@ const PostInfoBox = styled.div`
 
   .main-text {
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     /* height: 3.9375rem; */
     margin-bottom: 1.5rem;
