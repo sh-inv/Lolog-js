@@ -162,6 +162,21 @@ const UserContentsContainer = styled.section`
         -webkit-box-align: center;
         align-items: center;
 
+        .modify-input {
+          flex: 1 1 0%;
+          display: block;
+          padding: 0.5rem;
+          margin-right: 1rem;
+
+          border: 1px solid #dee2e6;
+          border-radius: 4px;
+          background: #fff;
+          color: #495057;
+          font-size: 1rem;
+          line-height: 1rem;
+          outline: none;
+        }
+
         .edit-wrapper {
           display: flex;
           -webkit-box-align: center;
