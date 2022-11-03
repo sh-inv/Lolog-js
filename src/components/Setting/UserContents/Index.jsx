@@ -1,6 +1,7 @@
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
+import ModifyButton from '../ModifyButton/Index';
 import styled from 'styled-components';
 
 const UserContents = () => {
@@ -14,7 +15,7 @@ const UserContents = () => {
           <div className='interval'>
             <div className='contents'>daydream.log</div>
             <div className='edit-wrapper'>
-              <button>수정</button>
+              <ModifyButton />
             </div>
           </div>
         </div>
@@ -51,7 +52,7 @@ const UserContents = () => {
               </ul>
             </div>
             <div className='edit-wrapper'>
-              <button>수정</button>
+              <ModifyButton />
             </div>
           </div>
         </div>
@@ -136,19 +137,6 @@ const UserContentsContainer = styled.section`
           -webkit-box-align: center;
           align-items: center;
           margin-left: 1rem;
-        }
-
-        button {
-          outline: none;
-          padding: 0px;
-          border: none;
-          display: inline;
-          font-size: 1rem;
-          line-height: 1.5;
-          color: #12b886;
-          text-decoration: underline;
-          background: none;
-          cursor: pointer;
         }
       }
 

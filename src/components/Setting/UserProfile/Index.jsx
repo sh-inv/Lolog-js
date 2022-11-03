@@ -1,17 +1,30 @@
 import { useState, useEffect } from 'react';
 import Button from '../../Button/Index';
+import ModifyButton from '../ModifyButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 
 const UserProfileContainer = () => {
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState('');
   const [modify, setModify] = useState(false);
 
   useEffect(() => {
     // fetch =>user info
     const user = { user: 'Eden' };
-    setUsername(user.user);
+    setUser(user.user);
   }, []);
+
+  const getUser = e => {
+    setUser(e.target.value);
+  };
+
+  const onModify = () => {
+    if (!modify) {
+      setModify(true);
+      return;
+    }
+    setModify(false);
+  };
 
   return (
     <ProfileContainer>
@@ -21,17 +34,7 @@ const UserProfileContainer = () => {
         <Button text='이미지 제거' backgroundColor='transparent' color='#12b886' />
       </div>
       <div className='info-area'>
-        {modify ? (
-          <input
-            type='text'
-            onChange={e => {
-              setUsername(e.target.value);
-            }}
-            value={username}
-          />
-        ) : (
-          <h2>Eden</h2>
-        )}
+        {modify ? <input type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}
         <p>one part.</p>
         {modify ? (
           <Button
@@ -43,18 +46,7 @@ const UserProfileContainer = () => {
             color='#fff'
           />
         ) : (
-          <button
-            onClick={() => {
-              if (!modify) {
-                setModify(true);
-                return;
-              }
-              // api request
-              setModify(false);
-            }}
-          >
-            수정
-          </button>
+          <ModifyButton onModify={onModify} />
         )}
       </div>
     </ProfileContainer>
