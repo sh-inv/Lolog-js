@@ -21,12 +21,11 @@ const PostBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 20rem;
-  /* min-height: 273px; */
-  /* height: 377px; */
   margin: 1rem;
   border-radius: 4px;
   background: #1e1e1e;
   transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+  overflow: hidden;
 
   // 반응형
   ${postMaxWidth1056px}
