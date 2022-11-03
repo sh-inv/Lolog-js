@@ -91,6 +91,10 @@ const Logo = styled.a`
   align-items: center;
   font-size: 1.5rem;
   letter-spacing: 0.2rem;
+
+  @media only screen and (max-width: 1023px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const RightIcons = styled.div`
@@ -167,7 +171,7 @@ const RightIcons = styled.div`
 
 const ToggleMenu = styled.div`
   width: 12rem;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
   margin-left: auto;
   background-color: #1e1e1e;
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
