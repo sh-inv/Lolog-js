@@ -1,11 +1,22 @@
+import { useState } from 'react';
 import UserProfile from '../../components/Setting/UserProfile/Index';
 import UserContents from '../../components/Setting/UserContents/Index';
 import styled from 'styled-components';
 
 const Setting = () => {
+  const [modify, setModify] = useState(false);
+
+  const onModify = () => {
+    if (!modify) {
+      setModify(true);
+      return;
+    }
+    setModify(false);
+  };
+
   return (
     <SettingPage>
-      <UserProfile />
+      <UserProfile modify={modify} setModify={setModify} onModify={onModify} />
       <UserContents />
     </SettingPage>
   );

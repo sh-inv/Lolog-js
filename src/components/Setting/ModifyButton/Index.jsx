@@ -5,16 +5,20 @@ const ModifyButton = ({ onModify }) => {
 };
 
 const Modify = styled.button`
-  outline: none;
-  padding: 0px;
-  border: none;
   display: inline;
+  padding: 0px;
+
+  background: none;
+  border: none;
   font-size: 1rem;
   line-height: 1.5;
   color: #12b886;
   text-decoration: underline;
-  background: none;
-  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default ModifyButton;

@@ -4,26 +4,24 @@ import ModifyButton from '../ModifyButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 
-const UserProfileContainer = () => {
+const UserProfileContainer = ({ modify, setModify, onModify }) => {
   const [user, setUser] = useState('');
-  const [modify, setModify] = useState(false);
+  const [introduction, setIntroduction] = useState('');
 
   useEffect(() => {
     // fetch =>user info
-    const user = { user: 'Eden' };
-    setUser(user.user);
+    const profile = { user: 'Eden', introduction: 'one part' };
+
+    setUser(profile.user);
+    setIntroduction(profile.introduction);
   }, []);
 
   const getUser = e => {
     setUser(e.target.value);
   };
 
-  const onModify = () => {
-    if (!modify) {
-      setModify(true);
-      return;
-    }
-    setModify(false);
+  const getIntro = e => {
+    setIntroduction(e.target.value);
   };
 
   return (
@@ -34,8 +32,8 @@ const UserProfileContainer = () => {
         <Button text='이미지 제거' backgroundColor='transparent' color='#12b886' />
       </div>
       <div className='info-area'>
-        {modify ? <input type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}
-        <p>one part.</p>
+        {modify ? <input className='modify-input modify-user' type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}
+        {modify ? <input className='modify-input modify-intro' type='text' onChange={getIntro} value={introduction} /> : <p>one part.</p>}
         {modify ? (
           <Button
             onClick={() => {
@@ -91,21 +89,27 @@ const ProfileContainer = styled.section`
       color: #868e96;
     }
 
-    button {
-      display: inline;
-      padding: 0px;
+    .modify-input {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
 
-      background: none;
-      border: none;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #495057;
       font-size: 1rem;
-      line-height: 1.5;
-      color: #12b886;
-      text-decoration: underline;
+      line-height: 1rem;
       outline: none;
+    }
 
-      &:hover {
-        cursor: pointer;
-      }
+    .modify-user {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .modify-intro {
+      margin: 1rem 0;
     }
   }
 `;
