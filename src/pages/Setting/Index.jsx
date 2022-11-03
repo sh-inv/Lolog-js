@@ -17,7 +17,7 @@ const Setting = () => {
   return (
     <SettingPage>
       <UserProfile modify={modify} setModify={setModify} onModify={onModify} />
-      <UserContents />
+      <UserContents modify={modify} setModify={setModify} onModify={onModify} />
     </SettingPage>
   );
 };

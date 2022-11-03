@@ -1,10 +1,40 @@
+import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
 import styled from 'styled-components';
 
-const UserContents = () => {
+const UserContents = ({ modify, setModify, onModify }) => {
+  const [title, setTitle] = useState('');
+  const [social, setSocial] = useState('');
+
+  useEffect(() => {
+    const contents = {
+      title: 'my.log',
+      social: [
+        {
+          email: 'you8inpark@gmail.com',
+        },
+        { github: 'daydreamplace' },
+        { twitter: 'eden' },
+        { facebook: 'eden' },
+        { home: 'dev-eden.shop' },
+      ],
+    };
+
+    setTitle(contents.title);
+    setSocial(contents.social);
+  }, []);
+
+  const getTitle = e => {
+    setTitle(e.target.value);
+  };
+
+  const getSocial = e => {
+    setSocial(e.target.value);
+  };
+
   return (
     <UserContentsContainer>
       <div className='bottom-block'>
@@ -13,9 +43,9 @@ const UserContents = () => {
             <h3>벨로그 제목</h3>
           </div>
           <div className='interval'>
-            <div className='contents'>daydream.log</div>
+            {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
             <div className='edit-wrapper'>
-              <ModifyButton />
+              <ModifyButton onModify={onModify} />
             </div>
           </div>
         </div>
