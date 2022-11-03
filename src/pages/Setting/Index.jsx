@@ -1,4 +1,3 @@
-import { BsToggleOn, BsToggleOff } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../components/button/Index';
@@ -90,11 +89,15 @@ const Setting = () => {
               <ul>
                 <li>
                   <span className='alert'>댓글 알림</span>
-                  <BsToggleOff className='toggle-off' />
+                  <div className='toggle-off'>
+                    <div className='circle' />
+                  </div>
                 </li>
                 <li>
                   <span className='alert'>벨로그 업데이트 소식</span>
-                  <BsToggleOn className='toggle-on' />
+                  <div className='toggle'>
+                    <div className='circle' />
+                  </div>
                 </li>
               </ul>
             </div>
@@ -117,6 +120,9 @@ const Setting = () => {
 };
 
 const SettingPage = styled.div`
+  background: #fff;
+  color: #000;
+
   width: 768px;
   margin-top: 3rem;
   margin-left: auto;
@@ -262,16 +268,52 @@ const UserContents = styled.section`
               width: 14rem;
             }
 
-            .toggle-on {
-              text-align: center;
-              font-size: 30px;
-              color: #12b886;
+            .toggle {
+              cursor: pointer;
+              display: flex;
+              -webkit-box-align: center;
+              align-items: center;
+              width: 2.875rem;
+              height: 1.5rem;
+              padding: 0.125rem;
+
+              border-radius: 1.125rem;
+
+              background: #12b886;
+              transition: all 0.125s ease-in 0s;
+
+              .circle {
+                width: 1.25rem;
+                height: 1.25rem;
+                transform: translate(1.375rem);
+
+                border-radius: 0.625rem;
+                background: #fff;
+                box-shadow: rgb(0 0 0 / 10%) -2px 0px 4px;
+              }
             }
 
             .toggle-off {
-              text-align: center;
-              font-size: 30px;
-              color: #495057;
+              cursor: pointer;
+              display: flex;
+              -webkit-box-align: center;
+              align-items: center;
+              width: 2.875rem;
+              height: 1.5rem;
+              padding: 0.125rem;
+
+              border-radius: 1.125rem;
+
+              background: rgb(134, 142, 150);
+              transition: all 0.125s ease-in 0s;
+
+              .circle {
+                width: 1.25rem;
+                height: 1.25rem;
+
+                border-radius: 0.625rem;
+                background: #fff;
+              }
             }
           }
         }
