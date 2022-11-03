@@ -16,10 +16,17 @@ const Search = () => {
 export default Search;
 
 const Positioner = styled.div`
+  display: flex;
+  justify-content: center;
   position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
+
+  @media only screen and (max-width: 767px) {
+    top: 20%;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -39,6 +46,17 @@ const InputWrapper = styled.div`
     height: 2rem;
     margin-right: 1rem;
   }
+
+  @media only screen and (max-width: 767px) {
+    padding: 0.125rem 1.5rem;
+    width: 90%;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-right: 0.5rem;
+    }
+  }
 `;
 
 const SearchInput = styled.input`
@@ -49,4 +67,8 @@ const SearchInput = styled.input`
   color: ${darkModeFontColor};
   background-color: transparent;
   cursor: text;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 1.125rem;
+  }
 `;
