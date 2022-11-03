@@ -1,7 +1,7 @@
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
-// import Button from '../../components/button/Index';
+import Button from '../../components/button/Index';
 import profile from '../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 
@@ -11,8 +11,8 @@ const Setting = () => {
       <UserInfo>
         <div className='thumbnail-area'>
           <img alt='profile' src={profile} />
-          {/* <Button text='이미지 업로드' backgroundColor='#12b886' color='#fff' />
-          <Button text='이미지 제거' backgroundColor='transparent' color='#12b886' /> */}
+          <Button text='이미지 업로드' backgroundColor='#12b886' color='#fff' />
+          <Button text='이미지 제거' backgroundColor='transparent' color='#12b886' />
         </div>
         <div className='info-area'>
           <h2>Eden</h2>
@@ -105,12 +105,13 @@ const Setting = () => {
             <div className='title-wrapper'>
               <h3>회원 탈퇴</h3>
             </div>
-            <div className='contents'>{/* <Button text='회원 탈퇴' backgroundColor='#FF6B6B' color='#fff' /> */}</div>
+            <div className='contents'>
+              <Button text='회원 탈퇴' backgroundColor='#FF6B6B' color='#fff' />
+            </div>
           </div>
           <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
         </div>
       </UserContents>
-      {/* <Button text='로그인' backgroundColor='skyblue' color='#fff' /> */}
     </SettingPage>
   );
 };
