@@ -29,7 +29,6 @@ const ToggleBox = styled.div`
     padding: 0.125rem;
 
     border-radius: 1.125rem;
-
     background: ${primary2};
     transition: all 0.125s ease-in 0s;
 
@@ -54,7 +53,6 @@ const ToggleBox = styled.div`
     padding: 0.125rem;
 
     border-radius: 1.125rem;
-
     background: ${backgroundElement9};
     transition: all 0.125s ease-in 0s;
 
