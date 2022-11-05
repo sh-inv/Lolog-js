@@ -41,8 +41,8 @@ const UserProfileContainer = ({ modify, setModify, onModify }) => {
               setModify(false);
             }}
             text='저장'
-            backgroundColor='#12b886'
-            color='#fff'
+            backgroundColor='#96F2D7'
+            color='#121212'
           />
         ) : (
           <ModifyButton onModify={onModify} />
