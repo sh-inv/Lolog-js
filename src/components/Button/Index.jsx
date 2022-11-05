@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = ({ text, backgroundColor, color, hoverBackground, ...resetProps }) => {
+const Button = ({ text, backgroundColor, color, hoverBackground, hoverColor, ...resetProps }) => {
   return (
     <Buttons text={text} backgroundColor={backgroundColor} color={color} hoverBackground={hoverBackground} {...resetProps}>
       {text}
@@ -28,6 +28,7 @@ const Buttons = styled.button`
   &:hover {
     cursor: pointer;
     background-color: ${props => props.hoverBackground};
+    color: ${props => props.hoverColor};
   }
 `;
 

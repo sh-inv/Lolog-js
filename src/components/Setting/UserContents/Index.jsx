@@ -118,7 +118,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
             <h3>회원 탈퇴</h3>
           </div>
           <div className='contents'>
-            <Button text='회원 탈퇴' backgroundColor='#FFC9C9' color='#121212' />
+            <Button text='회원 탈퇴' backgroundColor='#FFC9C9' color='#121212' hoverBackground='#FFA8A8' />
           </div>
         </div>
         <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>

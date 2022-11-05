@@ -3,7 +3,7 @@ import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
-import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, backgroundElement10, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserProfileContainer = ({ modify, setModify, onModify }) => {
   const [user, setUser] = useState('');
@@ -29,8 +29,8 @@ const UserProfileContainer = ({ modify, setModify, onModify }) => {
     <ProfileContainer>
       <div className='thumbnail-area'>
         <img alt='profile' src={profile} />
-        <Button text='이미지 업로드' backgroundColor='#96F2D7' color='#121212' />
-        <Button text='이미지 제거' backgroundColor='transparent' color='#96F2D7' />
+        <Button text='이미지 업로드' backgroundColor='#96F2D7' color='#121212' hoverBackground='#63E6BE' />
+        <Button text='이미지 제거' backgroundColor='transparent' color='#96F2D7' hoverColor='#63E6BE' hoverBackground='#ffffff1A' />
       </div>
       <div className='info-area'>
         {modify ? <input className='modify-input modify-user' type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}

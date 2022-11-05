@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement9, primary2 } from '../../../styles/color';
 
 const Toggle = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const onToggle = () => {
+    if (!toggle) {
+      setToggle(true);
+      return;
+    }
+    setToggle(false);
+  };
+
   return (
-    <ToggleButton>
-      <div className='circle' />
-    </ToggleButton>
+    <>
+      <ToggleButton>
+        <div className='circle' onClick={onToggle} />
+      </ToggleButton>
+    </>
   );
 };
 
