@@ -133,7 +133,14 @@ const UserContents = ({ modify, setModify, onModify }) => {
           <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
         </div>
       </UserContentsContainer>
-      <ConfirmModal visible={modal} title='회원탈퇴' message='정말로 탈퇴 하시겠습니까?' />
+      <ConfirmModal
+        visible={modal}
+        title='회원탈퇴'
+        message='정말로 탈퇴 하시겠습니까?'
+        onClose={() => {
+          setModal(false);
+        }}
+      />
     </>
   );
 };

@@ -2,7 +2,7 @@ import Button from '../Button/Index';
 import styled from 'styled-components';
 import { backgroundElement1, text1, text2, opaqueLayer } from '../../styles/color';
 
-const ConfirmModal = ({ visible, title, message }) => {
+const ConfirmModal = ({ visible, title, message, onClose }) => {
   if (!visible) return null;
   return (
     <>
@@ -12,8 +12,8 @@ const ConfirmModal = ({ visible, title, message }) => {
           <div>
             <h3>{title}</h3>
             <div className='msg'>{message}</div>
-            <Button text='취소' />
-            <Button text='확인' />
+            <Button text='취소' onClick={onClose} />
+            <Button text='확인' onClick={onClose} />
           </div>
         </ModalContainer>
       </Modal>
