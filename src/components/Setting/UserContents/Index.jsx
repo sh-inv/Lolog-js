@@ -15,7 +15,6 @@ const UserContents = ({ modify, setModify, onModify }) => {
   const onModal = () => {
     //token 값 추가해야함
     setModal(true);
-    console.log(1);
   };
 
   useEffect(() => {

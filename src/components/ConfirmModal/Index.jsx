@@ -12,8 +12,10 @@ const ConfirmModal = ({ visible, title, message, onClose }) => {
           <div>
             <h3>{title}</h3>
             <div className='msg'>{message}</div>
-            <Button text='취소' onClick={onClose} />
-            <Button text='확인' onClick={onClose} />
+            <div className='button'>
+              <Button text='취소' onClick={onClose} />
+              <Button text='확인' onClick={onClose} />
+            </div>
           </div>
         </ModalContainer>
       </Modal>
@@ -69,6 +71,15 @@ const ModalContainer = styled.div`
     font-size: 1rem;
     color: ${text2};
     white-space: pre-wrap;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 10px;
+    }
   }
 `;
 
