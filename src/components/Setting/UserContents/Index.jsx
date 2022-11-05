@@ -4,6 +4,7 @@ import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'reac
 import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
 import styled from 'styled-components';
+import { backgroundElement1, backgroundElement9, border3, border4, text2, text3, primary2 } from '../../../styles/color';
 
 const UserContents = ({ modify, setModify, onModify }) => {
   const [title, setTitle] = useState('');
@@ -162,10 +163,10 @@ const UserContentsContainer = styled.section`
           padding: 0.5rem;
           margin-right: 1rem;
 
-          border: 1px solid #dee2e6;
+          border: 1px solid ${border3};
           border-radius: 4px;
-          background: #fff;
-          color: #495057;
+          background: ${backgroundElement1};
+          color: ${text2};
           font-size: 1rem;
           line-height: 1rem;
           outline: none;
@@ -182,7 +183,7 @@ const UserContentsContainer = styled.section`
       .contents {
         flex: 1 1 0%;
         font-size: 1rem;
-        color: #495057;
+        color: ${text2};
         line-height: 1.5;
 
         ul {
@@ -223,7 +224,7 @@ const UserContentsContainer = styled.section`
 
               border-radius: 1.125rem;
 
-              background: #12b886;
+              background: ${primary2};
               transition: all 0.125s ease-in 0s;
 
               .circle {
@@ -232,7 +233,7 @@ const UserContentsContainer = styled.section`
                 transform: translate(1.375rem);
 
                 border-radius: 0.625rem;
-                background: #fff;
+                background: ${backgroundElement1};
                 box-shadow: rgb(0 0 0 / 10%) -2px 0px 4px;
               }
             }
@@ -248,7 +249,7 @@ const UserContentsContainer = styled.section`
 
               border-radius: 1.125rem;
 
-              background: rgb(134, 142, 150);
+              background: ${backgroundElement9};
               transition: all 0.125s ease-in 0s;
 
               .circle {
@@ -256,7 +257,7 @@ const UserContentsContainer = styled.section`
                 height: 1.25rem;
 
                 border-radius: 0.625rem;
-                background: #fff;
+                background: ${backgroundElement1};
               }
             }
           }
@@ -266,13 +267,13 @@ const UserContentsContainer = styled.section`
 
     .desc {
       margin-top: 0.875rem;
-      color: #868e96;
+      color: ${text3};
       font-size: 0.875rem;
     }
   }
 
   .border {
-    border-top: 1px solid #f1f3f5;
+    border-top: 1px solid ${border4};
   }
 `;
 

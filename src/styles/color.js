@@ -12,6 +12,7 @@ export const backgroundElement5 = '#F1F3F5';
 export const backgroundElement6 = '#F8F9FA';
 export const backgroundElement7 = '#252525';
 export const backgroundElement8 = '#0c0c0c';
+export const backgroundElement9 = '#868e96';
 export const backgroundInvert = '#FFFFFF';
 export const backgroundInlineCode = '#363636';
 export const backgroundTag = '#252525';
