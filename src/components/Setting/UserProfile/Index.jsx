@@ -29,8 +29,8 @@ const UserProfileContainer = ({ modify, setModify, onModify }) => {
     <ProfileContainer>
       <div className='thumbnail-area'>
         <img alt='profile' src={profile} />
-        <Button text='이미지 업로드' backgroundColor='#12b886' color='#fff' />
-        <Button text='이미지 제거' backgroundColor='transparent' color='#12b886' />
+        <Button text='이미지 업로드' backgroundColor='#96F2D7' color='#121212' />
+        <Button text='이미지 제거' backgroundColor='transparent' color='#96F2D7' />
       </div>
       <div className='info-area'>
         {modify ? <input className='modify-input modify-user' type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}
@@ -68,6 +68,11 @@ const ProfileContainer = styled.section`
       border-radius: 50%;
       display: block;
       margin-bottom: 1.25rem;
+    }
+
+    button + button {
+      margin-top: 0.5rem;
+      margin-left: 0px;
     }
   }
 
