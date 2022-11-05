@@ -23,10 +23,6 @@ const Setting = () => {
 };
 
 const SettingPage = styled.div`
-  /* 임시 */
-  background: #fff;
-  color: #000;
-
   width: 768px;
   margin-top: 3rem;
   margin-left: auto;

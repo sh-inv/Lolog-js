@@ -3,6 +3,7 @@ import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
+import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserProfileContainer = ({ modify, setModify, onModify }) => {
   const [user, setUser] = useState('');
@@ -73,7 +74,7 @@ const ProfileContainer = styled.section`
   .info-area {
     flex: 1 1 0%;
     padding-left: 1.5rem;
-    border-left: 1px solid #f1f3f5;
+    border-left: 1px solid ${border4};
 
     h2 {
       margin: 0px;
@@ -86,7 +87,7 @@ const ProfileContainer = styled.section`
       margin-bottom: 0.5rem;
       line-height: 1.5;
       font-size: 1rem;
-      color: #868e96;
+      color: ${text3};
     }
 
     .modify-input {
@@ -94,10 +95,10 @@ const ProfileContainer = styled.section`
       width: 100%;
       padding: 0.5rem;
 
-      border: 1px solid #dee2e6;
+      border: 1px solid ${border3};
       border-radius: 4px;
-      background: #ffffff;
-      color: #495057;
+      background: ${backgroundElement1};
+      color: ${text2};
       font-size: 1rem;
       line-height: 1rem;
       outline: none;
