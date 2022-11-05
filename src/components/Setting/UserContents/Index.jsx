@@ -3,6 +3,7 @@ import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
+import Toggle from '../Toggle/Index';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement9, border3, border4, text2, text3, primary2 } from '../../../styles/color';
 
@@ -101,15 +102,11 @@ const UserContents = ({ modify, setModify, onModify }) => {
             <ul>
               <li>
                 <span className='alert'>댓글 알림</span>
-                <div className='toggle-off'>
-                  <div className='circle' />
-                </div>
+                <Toggle />
               </li>
               <li>
                 <span className='alert'>벨로그 업데이트 소식</span>
-                <div className='toggle'>
-                  <div className='circle' />
-                </div>
+                <Toggle />
               </li>
             </ul>
           </div>
@@ -211,54 +208,6 @@ const UserContentsContainer = styled.section`
 
             .alert {
               width: 14rem;
-            }
-
-            .toggle {
-              cursor: pointer;
-              display: flex;
-              -webkit-box-align: center;
-              align-items: center;
-              width: 2.875rem;
-              height: 1.5rem;
-              padding: 0.125rem;
-
-              border-radius: 1.125rem;
-
-              background: ${primary2};
-              transition: all 0.125s ease-in 0s;
-
-              .circle {
-                width: 1.25rem;
-                height: 1.25rem;
-                transform: translate(1.375rem);
-
-                border-radius: 0.625rem;
-                background: ${backgroundElement1};
-                box-shadow: rgb(0 0 0 / 10%) -2px 0px 4px;
-              }
-            }
-
-            .toggle-off {
-              cursor: pointer;
-              display: flex;
-              -webkit-box-align: center;
-              align-items: center;
-              width: 2.875rem;
-              height: 1.5rem;
-              padding: 0.125rem;
-
-              border-radius: 1.125rem;
-
-              background: ${backgroundElement9};
-              transition: all 0.125s ease-in 0s;
-
-              .circle {
-                width: 1.25rem;
-                height: 1.25rem;
-
-                border-radius: 0.625rem;
-                background: ${backgroundElement1};
-              }
             }
           }
         }
