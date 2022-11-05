@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { primary1 } from '../../../styles/color';
 
 const ModifyButton = ({ onModify }) => {
   return <Modify onClick={onModify}>수정</Modify>;
@@ -12,7 +13,7 @@ const Modify = styled.button`
   border: none;
   font-size: 1rem;
   line-height: 1.5;
-  color: #12b886;
+  color: ${primary1};
   text-decoration: underline;
   outline: none;
 
