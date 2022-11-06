@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import EditButton from '../../EditButton/Index';
 import styled from 'styled-components';
-import { text1, text2, text3 } from '../../../styles/color';
+import { text1, text2, text3, border3 } from '../../../styles/color';
 
 const SavesList = () => {
   const [list, setList] = useState([
@@ -55,7 +55,7 @@ const List = styled.div`
     padding-bottom: 1.5rem;
     line-height: 1.5;
 
-    border-bottom: 1px solid #868e96;
+    border-bottom: 1px solid ${border3};
 
     h3 {
       margin-top: 0px;
@@ -81,13 +81,6 @@ const List = styled.div`
       }
 
       button {
-        cursor: pointer;
-        padding: 0px;
-        text-decoration: underline;
-        outline: none;
-        border: none;
-        background: none;
-        font-size: inherit;
         color: ${text1};
       }
     }
