@@ -3,12 +3,19 @@ import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
 import ModifyButton from '../ModifyButton/Index';
+import ConfirmModal from '../../ConfirmModal/Index';
 import Toggle from '../Toggle/Index';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement9, border3, border4, text2, text3, primary2 } from '../../../styles/color';
+import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserContents = ({ modify, setModify, onModify }) => {
   const [title, setTitle] = useState('');
+  const [modal, setModal] = useState(false);
+
+  const onModal = () => {
+    //token 값 추가해야함
+    setModal(true);
+  };
 
   useEffect(() => {
     const contents = {
@@ -32,98 +39,108 @@ const UserContents = ({ modify, setModify, onModify }) => {
   };
 
   return (
-    <UserContentsContainer>
-      <div className='bottom-block'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>벨로그 제목</h3>
-          </div>
-          <div className='interval'>
-            {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
-            <div className='edit-wrapper'>
-              <ModifyButton onModify={onModify} />
+    <>
+      <UserContentsContainer>
+        <div className='bottom-block'>
+          <div className='wrapper'>
+            <div className='title-wrapper'>
+              <h3>벨로그 제목</h3>
+            </div>
+            <div className='interval'>
+              {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
+              <div className='edit-wrapper'>
+                <ModifyButton onModify={onModify} />
+              </div>
             </div>
           </div>
+          <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
         </div>
-        <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
-      </div>
-      <div className='bottom-block border'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>소셜 정보</h3>
+        <div className='bottom-block border'>
+          <div className='wrapper'>
+            <div className='title-wrapper'>
+              <h3>소셜 정보</h3>
+            </div>
+            <div className='interval'>
+              <div className='contents'>
+                <ul>
+                  <li>
+                    <MdEmail className='icon' />
+                    <span>you8inpark@gmail.com</span>
+                  </li>
+                  <li>
+                    <AiFillGithub className='icon' />
+                    <span>daydreamplace</span>
+                  </li>
+                  <li>
+                    <AiOutlineTwitter className='icon' />
+                    <span>eden</span>
+                  </li>
+                  <li>
+                    <AiFillFacebook className='icon' />
+                    <span>eden</span>
+                  </li>
+                  <li>
+                    <AiFillHome className='icon' />
+                    <span>dev-eden.shop</span>
+                  </li>
+                </ul>
+              </div>
+              <div className='edit-wrapper'>
+                <ModifyButton onModify={onModify} />
+              </div>
+            </div>
           </div>
-          <div className='interval'>
+          <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
+        </div>
+        <div className='bottom-block border'>
+          <div className='wrapper'>
+            <div className='title-wrapper'>
+              <h3>이메일 주소</h3>
+            </div>
+            <div className='contents'>you8inpark@gmail.com</div>
+          </div>
+          <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
+        </div>
+        <div className='bottom-block border'>
+          <div className='wrapper'>
+            <div className='title-wrapper'>
+              <h3>이메일 수신 설정</h3>
+            </div>
             <div className='contents'>
               <ul>
                 <li>
-                  <MdEmail className='icon' />
-                  <span>you8inpark@gmail.com</span>
+                  <span className='alert'>댓글 알림</span>
+                  <Toggle />
                 </li>
                 <li>
-                  <AiFillGithub className='icon' />
-                  <span>daydreamplace</span>
-                </li>
-                <li>
-                  <AiOutlineTwitter className='icon' />
-                  <span>eden</span>
-                </li>
-                <li>
-                  <AiFillFacebook className='icon' />
-                  <span>eden</span>
-                </li>
-                <li>
-                  <AiFillHome className='icon' />
-                  <span>dev-eden.shop</span>
+                  <span className='alert'>벨로그 업데이트 소식</span>
+                  <Toggle />
                 </li>
               </ul>
             </div>
-            <div className='edit-wrapper'>
-              <ModifyButton onModify={onModify} />
+          </div>
+        </div>
+        <div className='bottom-block  border'>
+          <div className='wrapper'>
+            <div className='title-wrapper'>
+              <h3>회원 탈퇴</h3>
+            </div>
+            <div className='contents'>
+              <Button text='회원 탈퇴' backgroundColor='#FFC9C9' color='#121212' hoverBackground='#FFA8A8' onClick={onModal} />
             </div>
           </div>
+          <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
         </div>
-        <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
-      </div>
-      <div className='bottom-block border'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>이메일 주소</h3>
-          </div>
-          <div className='contents'>you8inpark@gmail.com</div>
-        </div>
-        <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
-      </div>
-      <div className='bottom-block border'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>이메일 수신 설정</h3>
-          </div>
-          <div className='contents'>
-            <ul>
-              <li>
-                <span className='alert'>댓글 알림</span>
-                <Toggle />
-              </li>
-              <li>
-                <span className='alert'>벨로그 업데이트 소식</span>
-                <Toggle />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className='bottom-block  border'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>회원 탈퇴</h3>
-          </div>
-          <div className='contents'>
-            <Button text='회원 탈퇴' backgroundColor='#FFC9C9' color='#121212' hoverBackground='#FFA8A8' />
-          </div>
-        </div>
-        <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
-      </div>
-    </UserContentsContainer>
+      </UserContentsContainer>
+      <ConfirmModal
+        visible={modal}
+        title='회원탈퇴'
+        message='정말로 탈퇴 하시겠습니까?'
+        onClose={() => {
+          setModal(false);
+        }}
+      />
+    </>
   );
 };
 
