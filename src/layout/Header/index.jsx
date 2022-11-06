@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
 import MediaQuery from 'react-responsive';
-import { darkModeBackgroundColor, darkModeFontColor, toggle } from '../../styles/color';
+import { toggle } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { BsFillSunFill } from 'react-icons/bs';
@@ -71,9 +71,13 @@ const Positioner = styled.div`
   transform: translate(-50%, 0%);
   z-index: 1;
   padding: 0 1rem;
-  width: 100%;
+  width: 1024px;
   max-width: 1728px;
   min-width: 250px;
+
+  @media only screen and (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
