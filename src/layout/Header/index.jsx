@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
@@ -11,6 +11,7 @@ import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 
 const Header = () => {
+  const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
   const dispatch = useDispatch();
@@ -19,6 +20,17 @@ const Header = () => {
     e.target.className = 'theme-mode-change setting-hover';
     isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
   };
+
+  const closeToggleMenu = e => {
+    if (isToggleOpen && toggleMenuRef !== e.target) setIsToggleOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', closeToggleMenu);
+    return () => {
+      document.removeEventListener('click', closeToggleMenu);
+    };
+  }, []);
 
   return (
     <Positioner>
@@ -45,7 +57,7 @@ const Header = () => {
         </RightIcons>
       </Content>
       {isToggleOpen && (
-        <ToggleMenu>
+        <ToggleMenu ref={toggleMenuRef}>
           <a href='/'>내 벨로그</a>
           <MediaQuery maxWidth={1023}>
             <a>새 글 작성</a>
