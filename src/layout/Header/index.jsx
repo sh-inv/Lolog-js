@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
 import MediaQuery from 'react-responsive';
@@ -15,7 +15,8 @@ const Header = () => {
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
   const dispatch = useDispatch();
 
-  const changeTheme = () => {
+  const changeTheme = e => {
+    e.target.className = 'theme-mode-change setting-hover';
     isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
   };
 
@@ -113,11 +114,30 @@ const RightIcons = styled.div`
     svg {
       width: 24px;
       height: 24px;
+      pointer-events: none;
     }
 
     :hover {
       background-color: rgba(255, 255, 255, 0.1);
       cursor: pointer;
+    }
+  }
+
+  @keyframes themeChange {
+    from {
+      width: 10px;
+      height: 10px;
+      transform: rotate(180deg);
+    }
+    to {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .theme-mode-change {
+    svg {
+      animation: themeChange 0.1s linear;
     }
   }
 
