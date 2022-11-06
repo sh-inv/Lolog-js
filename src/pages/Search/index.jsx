@@ -38,7 +38,7 @@ const InputWrapper = styled.div`
   transition: all 0.125s ease-in 0s;
 
   :focus-within {
-    border-color: #ececec;
+    border-color: var(--text);
   }
 
   svg {

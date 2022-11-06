@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
 import MediaQuery from 'react-responsive';
-import { darkModeBackgroundColor, darkModeFontColor } from '../../styles/color';
+import { darkModeBackgroundColor, darkModeFontColor, toggle } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { BsFillSunFill } from 'react-icons/bs';
@@ -74,10 +74,6 @@ const Positioner = styled.div`
   width: 100%;
   max-width: 1728px;
   min-width: 250px;
-
-  a:visited {
-    color: ${darkModeFontColor};
-  }
 `;
 
 const Content = styled.div`
@@ -145,15 +141,16 @@ const RightIcons = styled.div`
     a {
       padding: 0.4rem 1rem;
       margin-left: 0.5rem;
-      border: 1px solid ${darkModeFontColor};
+      border: 1px solid var(--text);
       border-radius: 1.3rem;
+      background-color: var(--new-post-btn-background);
       font-size: 1rem;
       font-weight: bold;
-      transition: all 0.125s ease-in 0s;
 
       :hover {
-        background-color: ${darkModeFontColor};
-        color: ${darkModeBackgroundColor};
+        background-color: var(--new-post-btn-hover-background);
+        color: var(--new-post-btn-hover-text);
+        transition: all 0.125s ease-in 0s;
       }
     }
   }
@@ -178,12 +175,12 @@ const RightIcons = styled.div`
 
     svg {
       width: 12px;
-      color: #acacac;
+      color: ${toggle};
     }
 
     :hover {
       svg {
-        color: #ececec;
+        color: var(--toggle-hover);
       }
     }
   }
@@ -193,7 +190,7 @@ const ToggleMenu = styled.div`
   width: 12rem;
   margin-top: 0.3rem;
   margin-left: auto;
-  background-color: #1e1e1e;
+  background-color: var(--toggle-background);
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 
   a {
