@@ -9,9 +9,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
+    /* max-width: 1728px; */
     background: ${darkModeBackgroundColor};
     color: ${darkModeFontColor};
-    max-width: 1728px;
   }
   a {
     text-decoration: none;
