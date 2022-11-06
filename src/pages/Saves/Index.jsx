@@ -1,3 +1,4 @@
+import EditButton from '../../components/Setting/EditButton';
 import styled from 'styled-components';
 
 const Saves = () => {
@@ -13,7 +14,7 @@ const Saves = () => {
           </p>
           <section>
             <div className='time'>2022년 10월 3일</div>
-            <button>삭제</button>
+            <EditButton />
           </section>
         </div>
         <div className='article'>
