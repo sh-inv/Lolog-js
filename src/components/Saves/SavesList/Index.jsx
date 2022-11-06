@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import EditButton from '../../Setting/EditButton/Index';
+import EditButton from '../../EditButton/Index';
 import styled from 'styled-components';
 import { text1, text2, text3 } from '../../../styles/color';
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
-import EditButton from '../EditButton/Index';
+import EditButton from '../../EditButton/Index';
 import ConfirmModal from '../../ConfirmModal/Index';
 import Toggle from '../Toggle/Index';
 import styled from 'styled-components';
