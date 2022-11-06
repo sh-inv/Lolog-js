@@ -1,5 +1,6 @@
 export const darkModeBackgroundColor = '#121212';
 export const darkModeFontColor = '#ECECEC';
+export const darkModeTextColor = 'D9D9D9';
 
 //dark mode
 export const backgroundPage = '#121212';
