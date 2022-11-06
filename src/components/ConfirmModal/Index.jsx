@@ -1,6 +1,6 @@
 import Button from '../Button/Index';
 import styled from 'styled-components';
-import { backgroundElement1, text1, text2, opaqueLayer } from '../../styles/color';
+import { backgroundElement1, text1, text2, opaqueLayer, buttonText, primary1 } from '../../styles/color';
 
 const ConfirmModal = ({ visible, title, message, onClose }) => {
   if (!visible) return null;
@@ -13,8 +13,8 @@ const ConfirmModal = ({ visible, title, message, onClose }) => {
             <h3>{title}</h3>
             <div className='msg'>{message}</div>
             <div className='button'>
-              <Button text='취소' onClick={onClose} />
-              <Button text='확인' onClick={onClose} />
+              <Button className='cancel' text='취소' onClick={onClose} />
+              <Button className='confirm' text='확인' onClick={onClose} />
             </div>
           </div>
         </ModalContainer>
@@ -79,6 +79,16 @@ const ModalContainer = styled.div`
 
     button {
       margin-left: 10px;
+    }
+
+    .cancel {
+      background: none;
+      color: ${primary1};
+    }
+
+    .confirm {
+      background: ${primary1};
+      color: ${buttonText};
     }
   }
 `;
