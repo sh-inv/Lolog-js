@@ -3,7 +3,7 @@ import Button from '../../Button/Index';
 import EditButton from '../../EditButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement10, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserProfileContainer = ({ modify, setModify, onModify }) => {
   const [user, setUser] = useState('');
@@ -45,7 +45,7 @@ const UserProfileContainer = ({ modify, setModify, onModify }) => {
             color='#121212'
           />
         ) : (
-          <EditButton onModify={onModify} />
+          <EditButton text='수정' onModify={onModify} />
         )}
       </div>
     </ProfileContainer>

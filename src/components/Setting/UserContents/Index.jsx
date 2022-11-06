@@ -49,7 +49,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
             <div className='interval'>
               {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
               <div className='edit-wrapper'>
-                <EditButton onModify={onModify} />
+                <EditButton text='수정' onModify={onModify} />
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
                 </ul>
               </div>
               <div className='edit-wrapper'>
-                <EditButton onModify={onModify} />
+                <EditButton text='수정' onModify={onModify} />
               </div>
             </div>
           </div>
