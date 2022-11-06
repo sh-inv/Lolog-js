@@ -199,7 +199,8 @@ const ToggleMenu = styled.div`
     font-size: 0.9rem;
     cursor: pointer;
     :hover {
-      color: #96f2d7;
+      color: var(--a-tag-hover-text);
+      background-color: var(--a-tag-hover-background);
     }
   }
 `;

@@ -11,6 +11,10 @@ import {
   lightModeToggle,
   darkModeToggleBackgound,
   lightModeToggleBackgound,
+  darkModeATagHoverText,
+  lightModeATagHoverText,
+  darkModeATagHoverBackground,
+  lightModeATagHoverBackground,
 } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
@@ -34,6 +38,8 @@ const GlobalStyle = createGlobalStyle`
     --new-post-btn-hover-background: ${props => (props.isDarkMode ? lightModeNewPostBtnColor : darkModeNewPostBtnColor)};
     --toggle-hover: ${props => (props.isDarkMode ? darkModeToggle : lightModeToggle)};
     --toggle-background: ${props => (props.isDarkMode ? darkModeToggleBackgound : lightModeToggleBackgound)};
+    --a-tag-hover-text: ${props => (props.isDarkMode ? darkModeATagHoverText : lightModeATagHoverText)};
+    --a-tag-hover-background: ${props => (props.isDarkMode ? darkModeATagHoverBackground : lightModeATagHoverBackground)};
   }
 
   a {
