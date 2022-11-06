@@ -40,7 +40,7 @@ const SavesList = () => {
             <p>{saves.contents}</p>
             <section>
               <div className='time'>{saves.created_at}</div>
-              <EditButton />
+              <EditButton text='삭제' />
             </section>
           </div>
         );

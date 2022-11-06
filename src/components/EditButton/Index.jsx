@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { primary1 } from '../../styles/color';
 
-const ModifyButton = ({ onModify }) => {
-  return <Modify onClick={onModify}>수정</Modify>;
+const ModifyButton = ({ onModify, text }) => {
+  return <Modify onClick={onModify}>{text}</Modify>;
 };
 
 const Modify = styled.button`
