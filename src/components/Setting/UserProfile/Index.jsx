@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from '../../Button/Index';
-import ModifyButton from '../ModifyButton/Index';
+import EditButton from '../EditButton/Index';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement10, border3, border4, text2, text3 } from '../../../styles/color';
@@ -45,7 +45,7 @@ const UserProfileContainer = ({ modify, setModify, onModify }) => {
             color='#121212'
           />
         ) : (
-          <ModifyButton onModify={onModify} />
+          <EditButton onModify={onModify} />
         )}
       </div>
     </ProfileContainer>

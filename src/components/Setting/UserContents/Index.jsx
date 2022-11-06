@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import Button from '../../Button/Index';
-import ModifyButton from '../ModifyButton/Index';
+import EditButton from '../EditButton/Index';
 import ConfirmModal from '../../ConfirmModal/Index';
 import Toggle from '../Toggle/Index';
 import styled from 'styled-components';
@@ -49,7 +49,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
             <div className='interval'>
               {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
               <div className='edit-wrapper'>
-                <ModifyButton onModify={onModify} />
+                <EditButton onModify={onModify} />
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ const UserContents = ({ modify, setModify, onModify }) => {
                 </ul>
               </div>
               <div className='edit-wrapper'>
-                <ModifyButton onModify={onModify} />
+                <EditButton onModify={onModify} />
               </div>
             </div>
           </div>

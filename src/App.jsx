@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
 import Header from './layout';
 import Setting from './pages/Setting/Index';
+import Saves from './pages/Saves/Index';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/setting' element={<Setting />} />
+        <Route path='/saves' element={<Saves />} />
       </Routes>
     </>
   );
