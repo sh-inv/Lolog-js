@@ -59,18 +59,23 @@ const UserContents = () => {
   const info = [
     {
       icon: <MdEmail className='icon' />,
+      placeholder: '이메일을 입력하세요.',
     },
     {
       icon: <AiFillGithub className='icon' />,
+      placeholder: 'Github 계정을 입력하세요.',
     },
     {
       icon: <AiOutlineTwitter className='icon' />,
+      placeholder: 'Twitter 계정을 입력하세요.',
     },
     {
       icon: <AiFillFacebook className='icon' />,
+      placeholder: 'http://www.facebook.com/',
     },
     {
       icon: <AiFillHome className='icon' />,
+      placeholder: '홈페이지 주소를 입력하세요.',
     },
   ];
 
@@ -100,35 +105,21 @@ const UserContents = () => {
               <div className='contents'>
                 {modifyContents ? (
                   <ul>
-                    {info.map(el => (
-                      <li>
-                        {el.icon}
-                        <input className='modify-input' type='text' />
+                    {info.map(content => (
+                      <li key={content.icon}>
+                        {content.icon}
+                        <input className='modify-input' type='text' placeholder={content.placeholder} />
                       </li>
                     ))}
                   </ul>
                 ) : (
                   <ul>
-                    <li>
-                      <MdEmail className='icon' />
-                      <span>you8inpark@gmail.com</span>
-                    </li>
-                    <li>
-                      <AiFillGithub className='icon' />
-                      <span>daydreamplace</span>
-                    </li>
-                    <li>
-                      <AiOutlineTwitter className='icon' />
-                      <span>eden</span>
-                    </li>
-                    <li>
-                      <AiFillFacebook className='icon' />
-                      <span>eden</span>
-                    </li>
-                    <li>
-                      <AiFillHome className='icon' />
-                      <span>dev-eden.shop</span>
-                    </li>
+                    {info.map(content => (
+                      <li key={content.icon}>
+                        {content.icon}
+                        <span>eden8@gmail.com</span>
+                      </li>
+                    ))}
                   </ul>
                 )}
               </div>
