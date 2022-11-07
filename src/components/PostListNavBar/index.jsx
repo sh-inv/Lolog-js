@@ -29,7 +29,7 @@ const PostListNavBar = () => {
       <div className='nav'>
         <div className='nav-tab'>
           {navBar.map(navItem => (
-            <NavLink to={navItem.path} className={navItem.className} end>
+            <NavLink to={navItem.path} key={navItem.name} className={navItem.className} end>
               {navItem.icon}
               {navItem.name}
             </NavLink>
