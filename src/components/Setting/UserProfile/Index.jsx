@@ -5,7 +5,7 @@ import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
-const UserProfile = ({ onModify }) => {
+const UserProfile = () => {
   return (
     <UserProfileContainer>
       <img alt='profile' src={profile} />
