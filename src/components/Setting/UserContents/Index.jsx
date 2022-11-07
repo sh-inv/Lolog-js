@@ -12,15 +12,15 @@ const UserContents = () => {
   const [title, setTitle] = useState('');
   const [social, setSocial] = useState('');
   const [isModal, setIsModal] = useState(false);
-  const [modifyTitle, setModifyTitle] = useState(false);
-  const [modifyContents, setModifyContents] = useState(false);
+  const [isModifyTitle, setIsModifyTitle] = useState(false);
+  const [isModifyContents, setIsModifyContents] = useState(false);
 
   const onModifyTitle = () => {
-    modifyTitle ? setModifyTitle(false) : setModifyTitle(true);
+    isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
   };
 
   const onModifyContents = () => {
-    modifyContents ? setModifyContents(false) : setModifyContents(true);
+    isModifyContents ? setIsModifyContents(false) : setIsModifyContents(true);
   };
 
   const onModal = () => {
@@ -78,7 +78,7 @@ const UserContents = () => {
               <h3>벨로그 제목</h3>
             </div>
             <div className='interval'>
-              {modifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>{title}</div>}
+              {isModifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>{title}</div>}
               <div className='edit-wrapper'>
                 <EditButton text='수정' onClick={onModifyTitle} />
               </div>
@@ -93,7 +93,7 @@ const UserContents = () => {
             </div>
             <div className='interval'>
               <div className='contents'>
-                {modifyContents ? (
+                {isModifyContents ? (
                   <ul>
                     {info.map(content => (
                       <li key={content.id}>
