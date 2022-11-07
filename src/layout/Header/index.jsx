@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { darkMode, lightMode } from '../../store/modules/header';
-import MediaQuery from 'react-responsive';
 import { toggle } from '../../styles/color';
 import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
@@ -85,8 +84,6 @@ const Header = () => {
   );
 };
 
-export default Header;
-
 const Positioner = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,6 +100,10 @@ const Positioner = styled.div`
 
   @media only screen and (max-width: 1023px) {
     width: 100%;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    width: 1376px;
   }
 `;
 
@@ -241,3 +242,5 @@ const ToggleMenu = styled.div`
     }
   }
 `;
+
+export default Header;

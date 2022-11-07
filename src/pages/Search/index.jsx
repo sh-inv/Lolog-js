@@ -13,8 +13,6 @@ const Search = () => {
   );
 };
 
-export default Search;
-
 const Positioner = styled.div`
   display: flex;
   justify-content: center;
@@ -72,3 +70,5 @@ const SearchInput = styled.input`
     font-size: 1.125rem;
   }
 `;
+
+export default Search;
