@@ -6,7 +6,7 @@ import EditButton from '../../EditButton';
 import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
@@ -86,8 +86,7 @@ const UserContents = () => {
                       setIsModifyTitle(false);
                     }}
                     text='저장'
-                    backgroundColor='#96F2D7'
-                    color='#121212'
+                    className='confirm-button'
                   />
                 </>
               ) : (
@@ -197,7 +196,7 @@ const UserContents = () => {
               <h3>회원 탈퇴</h3>
             </div>
             <div className='contents'>
-              <Button text='회원 탈퇴' backgroundColor='#FFC9C9' color='#121212' hoverBackground='#FFA8A8' onClick={onModal} />
+              <Button text='회원 탈퇴' onClick={onModal} className='withdrawal-button' />
             </div>
           </div>
           <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
@@ -307,6 +306,15 @@ const UserContentsContainer = styled.section`
             .alert {
               width: 14rem;
             }
+          }
+        }
+
+        .withdrawal-button {
+          background: ${destructive1};
+          color: ${buttonText};
+
+          &:hover {
+            background: ${destructive2};
           }
         }
       }

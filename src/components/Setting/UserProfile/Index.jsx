@@ -1,13 +1,14 @@
 import Button from '../../Button';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
+import { backgroundElement10, buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
 
 const UserProfile = () => {
   return (
     <UserProfileContainer>
       <img alt='profile' src={profile} />
-      <Button text='이미지 업로드' backgroundColor='#96F2D7' color='#121212' hoverBackground='#63E6BE' />
-      <Button text='이미지 제거' backgroundColor='transparent' color='#96F2D7' hoverColor='#63E6BE' hoverBackground='#ffffff1A' />
+      <Button text='이미지 업로드' className='upload' />
+      <Button text='이미지 제거' className='remove' />
     </UserProfileContainer>
   );
 };
@@ -24,6 +25,25 @@ const UserProfileContainer = styled.div`
     border-radius: 50%;
     display: block;
     margin-bottom: 1.25rem;
+  }
+
+  .upload {
+    background: ${primary1};
+    color: ${buttonText};
+
+    &:hover {
+      background: ${primary2};
+    }
+  }
+
+  .remove {
+    background: transparent;
+    color: ${primary1};
+
+    &:hover {
+      background: ${slightLayer}
+      color: ${primary2};
+    }
   }
 
   button + button {
