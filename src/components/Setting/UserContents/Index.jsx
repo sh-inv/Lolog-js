@@ -78,10 +78,26 @@ const UserContents = () => {
               <h3>벨로그 제목</h3>
             </div>
             <div className='interval'>
-              {isModifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>{title}</div>}
-              <div className='edit-wrapper'>
-                <EditButton text='수정' onClick={onModifyTitle} />
-              </div>
+              {isModifyTitle ? (
+                <>
+                  <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
+                  <Button
+                    onClick={() => {
+                      setIsModifyTitle(false);
+                    }}
+                    text='저장'
+                    backgroundColor='#96F2D7'
+                    color='#121212'
+                  />
+                </>
+              ) : (
+                <>
+                  <div className='contents'>{title}</div>
+                  <div className='edit-wrapper'>
+                    <EditButton text='수정' onClick={onModifyTitle} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
@@ -92,44 +108,57 @@ const UserContents = () => {
               <h3>소셜 정보</h3>
             </div>
             <div className='interval'>
-              <div className='contents'>
-                {isModifyContents ? (
-                  <ul>
-                    {info.map(content => (
-                      <li key={content.id}>
-                        {content.icon}
-                        <input className='modify-input' type='text' placeholder={content.placeholder} />
+              {isModifyContents ? (
+                <>
+                  <div className='contents'>
+                    <ul>
+                      {info.map(content => (
+                        <li key={content.id}>
+                          {content.icon}
+                          <input className='modify-input' type='text' placeholder={content.placeholder} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      setIsModifyContents(false);
+                    }}
+                    text='저장'
+                    className='confirm-button'
+                  />
+                </>
+              ) : (
+                <>
+                  <div className='contents'>
+                    <ul>
+                      <li>
+                        <MdEmail className='icon' />
+                        <span>{social.email}</span>
                       </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <ul>
-                    <li>
-                      <MdEmail className='icon' />
-                      <span>{social.email}</span>
-                    </li>
-                    <li>
-                      <AiFillGithub className='icon' />
-                      <span>{social.github}</span>
-                    </li>
-                    <li>
-                      <AiOutlineTwitter className='icon' />
-                      <span>{social.twitter}</span>
-                    </li>
-                    <li>
-                      <AiFillFacebook className='icon' />
-                      <span>{social.facebook}</span>
-                    </li>
-                    <li>
-                      <AiFillHome className='icon' />
-                      <span>{social.url}</span>
-                    </li>
-                  </ul>
-                )}
-              </div>
-              <div className='edit-wrapper'>
-                <EditButton text='수정' onClick={onModifyContents} />
-              </div>
+                      <li>
+                        <AiFillGithub className='icon' />
+                        <span>{social.github}</span>
+                      </li>
+                      <li>
+                        <AiOutlineTwitter className='icon' />
+                        <span>{social.twitter}</span>
+                      </li>
+                      <li>
+                        <AiFillFacebook className='icon' />
+                        <span>{social.facebook}</span>
+                      </li>
+                      <li>
+                        <AiFillHome className='icon' />
+                        <span>{social.url}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className='edit-wrapper'>
+                    <EditButton text='수정' onClick={onModifyContents} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
@@ -231,6 +260,11 @@ const UserContentsContainer = styled.section`
           :focus {
             border: 1px solid ${border1};
           }
+        }
+
+        .confirm-button {
+          background: #96f2d7;
+          color: #121212;
         }
 
         .edit-wrapper {
