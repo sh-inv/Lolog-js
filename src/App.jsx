@@ -16,6 +16,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
+        <Route path='/recent' element={<Main />} />
         <Route path='/search' element={<Search />} />
         <Route path='/setting' element={<Setting />} />
         <Route path='/saves' element={<Saves />} />

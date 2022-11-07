@@ -1,13 +1,13 @@
 import Post from './Post';
+import PostListNavBar from '../PostListNavBar';
 import styled from 'styled-components';
 import { postListMaxWidth1056px, postListMaxWidth1440px, postListMaxWidth1920px } from '../../styles/media';
-import PostListNavBar from '../PostListNavBar';
 
 const PostList = () => {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   return (
-    <PostListBox>
+    <PostListContainer>
       <PostListNavBar />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
@@ -16,11 +16,11 @@ const PostList = () => {
           })}
         </div>
       </div>
-    </PostListBox>
+    </PostListContainer>
   );
 };
 
-const PostListBox = styled.div`
+const PostListContainer = styled.div`
   width: 1728px;
   margin: 0 auto;
   .post-list-out-box {
