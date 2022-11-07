@@ -1,34 +1,27 @@
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
-import { useEffect, useRef, useState } from 'react';
 
-const Period = () => {
+const PeriodFilter = () => {
   const [activeFilter, setActiveFilter] = useState(false);
   const [filter, setFilter] = useState('이번 주');
+  const [filterList, setFilterList] = useState();
   const filterRef = useRef();
   const filterBoxRef = useRef();
-  const [filterList, setFilterList] = useState([
-    {
-      name: '오늘',
-      query: 'today',
-      active: false,
-    },
-    {
-      name: '이번 주',
-      query: 'week',
-      active: true,
-    },
-    {
-      name: '이번 달',
-      query: 'month',
-      active: false,
-    },
-    {
-      name: '올해',
-      query: 'yaer',
-      active: false,
-    },
-  ]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { filterdata },
+        } = await axios.get('data/postlist/filter.json');
+        setFilterList(filterdata);
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     const clickOutside = e => {
@@ -42,35 +35,36 @@ const Period = () => {
   }, [activeFilter]);
 
   return (
-    <Periodbox>
+    <PeriodFilterContainer>
       <div className='trending-category' ref={filterBoxRef} onClick={() => setActiveFilter(!activeFilter)}>
         {filter} <MdOutlineArrowDropDown className='arrow' />
       </div>
       <Filter activeFilter={activeFilter}>
         <ul ref={filterRef}>
-          {filterList.map((filter, i) => (
-            <li
-              key={filter.name}
-              className={filter.active ? 'active' : ''}
-              onClick={() => {
-                let arr = [...filterList];
-                arr.forEach(filter => (filter.active = false));
-                arr[i].active = true;
-                setFilterList(arr);
-                setFilter(filter.name);
-                setActiveFilter(false);
-              }}
-            >
-              {filter.name}
-            </li>
-          ))}
+          {filterList &&
+            filterList.map((filter, i) => (
+              <li
+                key={filter.name}
+                className={filter.view ? 'active' : ''}
+                onClick={() => {
+                  let arr = [...filterList];
+                  arr.forEach(filter => (filter.view = false));
+                  arr[i].view = true;
+                  setFilterList(arr);
+                  setFilter(filter.name);
+                  setActiveFilter(false);
+                }}
+              >
+                {filter.name}
+              </li>
+            ))}
         </ul>
       </Filter>
-    </Periodbox>
+    </PeriodFilterContainer>
   );
 };
 
-const Periodbox = styled.div`
+const PeriodFilterContainer = styled.div`
   .trending-category {
     display: flex;
     justify-content: space-between;
@@ -132,4 +126,4 @@ const Filter = styled.div`
   }
 `;
 
-export default Period;
+export default PeriodFilter;

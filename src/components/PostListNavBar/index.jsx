@@ -1,35 +1,50 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
+import { NavLink } from 'react-router-dom';
 import { SlGraph } from 'react-icons/sl';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
-import Period from './Period';
+import PeriodFilter from './PeriodFilter';
+import styled from 'styled-components';
+import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
 
 const PostListNavBar = () => {
+  const navBar = [
+    {
+      name: '트렌딩',
+      icon: <SlGraph className='icon' />,
+      className: 'tab-btn',
+      path: '/',
+      query: '',
+    },
+    {
+      name: '최신',
+      icon: <AiOutlineClockCircle className='icon' />,
+      className: 'tab-btn',
+      path: '/recent',
+      query: '',
+    },
+  ];
+
   return (
-    <PostListNavBarBox>
+    <PostListNavBarContainer>
       <div className='nav'>
         <div className='nav-tab'>
-          <Link to='/' className='tab-btn'>
-            <SlGraph className='icon' />
-            트렌딩
-          </Link>
-          <Link to='/recent' className='tab-btn'>
-            <AiOutlineClockCircle className='icon' />
-            최신
-          </Link>
+          {navBar.map(navItem => (
+            <NavLink to={navItem.path} className={navItem.className} end>
+              {navItem.icon}
+              {navItem.name}
+            </NavLink>
+          ))}
         </div>
-        <Period />
+        <PeriodFilter />
       </div>
       <div>
         <FiMoreVertical className='icon' />
       </div>
-    </PostListNavBarBox>
+    </PostListNavBarContainer>
   );
 };
 
-const PostListNavBarBox = styled.div`
+const PostListNavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
