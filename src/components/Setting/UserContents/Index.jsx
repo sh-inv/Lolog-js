@@ -16,19 +16,11 @@ const UserContents = () => {
   const [modifyContents, setModifyContents] = useState(false);
 
   const onModifyTitle = () => {
-    if (!modifyTitle) {
-      setModifyTitle(true);
-      return;
-    }
-    setModifyTitle(false);
+    modifyTitle ? setModifyTitle(false) : setModifyTitle(true);
   };
 
   const onModifyContents = () => {
-    if (!modifyContents) {
-      setModifyContents(true);
-      return;
-    }
-    setModifyContents(false);
+    modifyContents ? setModifyContents(false) : setModifyContents(true);
   };
 
   const onModal = () => {
