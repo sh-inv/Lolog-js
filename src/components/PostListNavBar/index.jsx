@@ -1,47 +1,59 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
-import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { NavLink } from 'react-router-dom';
 import { SlGraph } from 'react-icons/sl';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { FiMoreVertical } from 'react-icons/fi';
+import PeriodFilter from './PeriodFilter';
+import styled from 'styled-components';
+import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
 
 const PostListNavBar = () => {
+  const navBar = [
+    {
+      name: '트렌딩',
+      icon: <SlGraph className='icon' />,
+      className: 'tab-btn',
+      path: '/',
+      query: '',
+    },
+    {
+      name: '최신',
+      icon: <AiOutlineClockCircle className='icon' />,
+      className: 'tab-btn',
+      path: '/recent',
+      query: '',
+    },
+  ];
+
   return (
-    <PostListNavBarBox>
+    <PostListNavBarContainer>
       <div className='nav'>
         <div className='nav-tab'>
-          <Link to='' className='tab-btn active'>
-            <SlGraph className='icon' />
-            트렌딩
-          </Link>
-          <Link to='' className='tab-btn passive'>
-            <AiOutlineClockCircle className='icon' />
-            최신
-          </Link>
+          {navBar.map(navItem => (
+            <NavLink to={navItem.path} key={navItem.name} className={navItem.className} end>
+              {navItem.icon}
+              {navItem.name}
+            </NavLink>
+          ))}
         </div>
-        <div className='trending-category'>
-          이번 주 <MdOutlineArrowDropDown className='arrow' />
-        </div>
-        <div className='filter'>
-          <ul>
-            <li className=''>오늘</li>
-            <li className='active'>이번 주</li>
-            <li className=''>이번 달</li>
-            <li className=''>올해</li>
-          </ul>
-        </div>
+        <PeriodFilter />
       </div>
-      <div></div>
-    </PostListNavBarBox>
+      <div>
+        <FiMoreVertical className='icon' />
+      </div>
+    </PostListNavBarContainer>
   );
 };
 
-const PostListNavBarBox = styled.div`
+const PostListNavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 1.5rem;
 
+  .icon {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+  }
   .nav {
     position: relative;
     display: flex;
@@ -59,76 +71,11 @@ const PostListNavBarBox = styled.div`
         height: 3rem;
         margin: 0;
         font-size: 1.125rem;
-        color: ${darkModeTextColor};
-
-        .icon {
-          font-size: 1.4rem;
-          margin-right: 0.5rem;
-        }
+        color: #acacac;
       }
 
       .active {
         color: ${darkModeFontColor};
-      }
-    }
-
-    .trending-category {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 6rem;
-      height: 2rem;
-      padding: 0 0.5rem;
-      border-radius: 4px;
-      background: #1e1e1e;
-      color: #d9d9d9;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-
-      .arrow {
-        width: 23px;
-        height: 20px;
-      }
-
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-
-    .filter {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      z-index: 5;
-      margin-top: 0.5rem;
-      width: 12rem;
-      background: #1e1e1e;
-      opacity: 1;
-      transform: scale(1);
-      transition: 0.3s;
-      transform-origin: right top;
-
-      ul {
-        li {
-          border-top: 1px solid #2a2a2a;
-          padding: 0.9rem 1rem;
-          font-weight: 600;
-          font-size: 0.875rem;
-          cursor: pointer;
-
-          &:nth-child(1) {
-            border: none;
-          }
-
-          &:hover {
-            color: #96f2d7;
-          }
-        }
-
-        .active {
-          color: #96f2d7;
-        }
       }
     }
   }

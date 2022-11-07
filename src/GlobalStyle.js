@@ -26,9 +26,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    margin-top: 4rem;
     background: ${props => (props.isDarkMode ? darkModeBackgroundColor : lightModeBackgroundColor)};
     color: ${props => (props.isDarkMode ? darkModeFontColor : lightModeFontColor)};
-    max-width: 1728px;
   }
 
   :root {
