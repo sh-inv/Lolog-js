@@ -65,11 +65,9 @@ const Header = () => {
               <Link to='/write'>새 글 작성</Link>
             </div>
           </MediaQuery>
-          <div className='profile' onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <CgProfile />
-          </div>
-          <div className='toggle' onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <VscTriangleDown />
+          <div className='my-zone' onClick={() => setIsToggleOpen(!isToggleOpen)}>
+            <CgProfile className='profile' />
+            <VscTriangleDown className='toggle' />
           </div>
         </RightIcons>
       </Content>
@@ -187,32 +185,27 @@ const RightIcons = styled.div`
       }
     }
   }
-
-  .profile {
-    margin-left: 0.8rem;
-    cursor: pointer;
-
-    svg {
-      width: 32px;
-      height: 32px;
-    }
-  }
-
-  .toggle {
+  .my-zone {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.5rem;
-    transition: all 0.125s ease-in 0s;
-    cursor: pointer;
+    margin-left: 0.8rem;
 
-    svg {
-      width: 12px;
-      color: ${toggle};
+    .profile {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
     }
 
-    :hover {
-      svg {
+    .toggle {
+      margin-left: 0.5rem;
+      transition: all 0.125s ease-in 0s;
+      cursor: pointer;
+
+      width: 12px;
+      color: ${toggle};
+
+      :hover {
         color: var(--toggle-hover);
       }
     }
