@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import { darkMode, lightMode } from '../../store/modules/header';
 import MediaQuery from 'react-responsive';
 import { toggle } from '../../styles/color';
@@ -10,13 +11,12 @@ import { BsFillSunFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import styled from 'styled-components';
-import axios from 'axios';
 
 const Header = () => {
   const toggleMenuRef = useRef();
   const myZoneRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const [toggleMenuList, setToggleMenuList] = useState([]);
+  const [toggleMenuList, setToggleMenuList] = useState();
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
   const dispatch = useDispatch();
 
@@ -61,11 +61,9 @@ const Header = () => {
           <Link className='search setting-hover' to='/search'>
             <BiSearch />
           </Link>
-          <MediaQuery minWidth={1024}>
-            <div className='new-post'>
-              <Link to='/write'>새 글 작성</Link>
-            </div>
-          </MediaQuery>
+          <div className='new-post'>
+            <Link to='/write'>새 글 작성</Link>
+          </div>
           <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <CgProfile className='profile' />
             <VscTriangleDown className='toggle' />
@@ -185,7 +183,12 @@ const RightIcons = styled.div`
         transition: all 0.125s ease-in 0s;
       }
     }
+
+    @media only screen and (max-width: 1023px) {
+      display: none;
+    }
   }
+
   .my-zone {
     display: flex;
     align-items: center;
@@ -225,6 +228,13 @@ const ToggleMenu = styled.div`
     padding: 1.25rem;
     font-size: 0.9rem;
     cursor: pointer;
+
+    :nth-child(2) {
+      @media only screen and (min-width: 1024px) {
+        display: none;
+      }
+    }
+
     :hover {
       color: var(--a-tag-hover-text);
       background-color: var(--a-tag-hover-background);
