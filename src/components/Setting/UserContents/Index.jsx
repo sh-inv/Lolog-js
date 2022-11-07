@@ -33,7 +33,6 @@ const UserContents = () => {
       title: 'my.log',
       social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
     };
-
     setTitle(contents.title);
     setSocial(contents.social);
   }, []);
