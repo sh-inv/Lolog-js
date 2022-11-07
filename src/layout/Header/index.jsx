@@ -14,6 +14,7 @@ import axios from 'axios';
 
 const Header = () => {
   const toggleMenuRef = useRef();
+  const myZoneRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [toggleMenuList, setToggleMenuList] = useState([]);
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
@@ -24,17 +25,17 @@ const Header = () => {
     isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
   };
 
-  // useEffect(() => {
-  //   const closeToggleMenu = e => {
-  //     if (isToggleOpen && toggleMenuRef !== e.target) {
-  //       setIsToggleOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener('mousedown', closeToggleMenu);
-  //   return () => {
-  //     document.removeEventListener('mousedown', closeToggleMenu);
-  //   };
-  // }, [isToggleOpen]);
+  useEffect(() => {
+    const closeToggleMenu = e => {
+      if (isToggleOpen && !toggleMenuRef.current.contains(e.target) && !myZoneRef.current.contains(e.target)) {
+        setIsToggleOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', closeToggleMenu);
+    return () => {
+      document.removeEventListener('mousedown', closeToggleMenu);
+    };
+  }, [isToggleOpen]);
 
   useEffect(() => {
     (async () => {
@@ -65,7 +66,7 @@ const Header = () => {
               <Link to='/write'>새 글 작성</Link>
             </div>
           </MediaQuery>
-          <div className='my-zone' onClick={() => setIsToggleOpen(!isToggleOpen)}>
+          <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <CgProfile className='profile' />
             <VscTriangleDown className='toggle' />
           </div>
@@ -75,7 +76,7 @@ const Header = () => {
         <ToggleMenu ref={toggleMenuRef}>
           {toggleMenuList.map(menu => {
             return (
-              <Link key={menu.name} className='link-tag' to={menu.path}>
+              <Link key={menu.name} className='link-tag' to={menu.path} onClick={() => setIsToggleOpen(false)}>
                 {menu.name}
               </Link>
             );
