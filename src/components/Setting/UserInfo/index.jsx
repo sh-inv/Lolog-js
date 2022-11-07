@@ -7,10 +7,10 @@ import { backgroundElement1, border1, border3, border4, text2, text3 } from '../
 const UserInfo = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
-  const [modify, setModify] = useState(false);
+  const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
-    modify ? setModify(false) : setModify(true);
+    isModify ? setIsModify(false) : setIsModify(true);
   };
 
   useEffect(() => {
@@ -31,13 +31,13 @@ const UserInfo = () => {
 
   return (
     <UserInfoContainer>
-      {modify ? (
+      {isModify ? (
         <>
           <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
           <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={introduction} />
           <Button
             onClick={() => {
-              setModify(false);
+              setIsModify(false);
             }}
             text='저장'
             backgroundColor='#96F2D7'
