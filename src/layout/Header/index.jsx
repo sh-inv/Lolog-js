@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { darkMode, lightMode } from '../../store/modules/header';
 import MediaQuery from 'react-responsive';
@@ -9,10 +9,13 @@ import { BiSearch } from 'react-icons/bi';
 import { BsFillSunFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
+import styled from 'styled-components';
+import axios from 'axios';
 
 const Header = () => {
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [toggleMenuList, setToggleMenuList] = useState([]);
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
   const dispatch = useDispatch();
 
@@ -21,30 +24,45 @@ const Header = () => {
     isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
   };
 
+  // useEffect(() => {
+  //   const closeToggleMenu = e => {
+  //     if (isToggleOpen && toggleMenuRef !== e.target) {
+  //       setIsToggleOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener('mousedown', closeToggleMenu);
+  //   return () => {
+  //     document.removeEventListener('mousedown', closeToggleMenu);
+  //   };
+  // }, [isToggleOpen]);
+
   useEffect(() => {
-    const closeToggleMenu = e => {
-      if (isToggleOpen && toggleMenuRef !== e.target) setIsToggleOpen(false);
-    };
-    document.addEventListener('mousedown', closeToggleMenu);
-    return () => {
-      document.removeEventListener('mousedown', closeToggleMenu);
-    };
-  }, [isToggleOpen]);
+    (async () => {
+      try {
+        const {
+          data: { toggle },
+        } = await axios.get('data/header/toggle.json');
+        setToggleMenuList(toggle);
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
+  }, []);
 
   return (
     <Positioner>
       <Content>
-        <Logo href='/'>velog</Logo>
+        <Logo to='/'>velog</Logo>
         <RightIcons>
           <div className='theme-mode setting-hover' onClick={changeTheme}>
             {isDarkMode ? <HiMoon /> : <BsFillSunFill />}
           </div>
-          <a className='search setting-hover' href='/search'>
+          <Link className='search setting-hover' to='/search'>
             <BiSearch />
-          </a>
+          </Link>
           <MediaQuery minWidth={1024}>
             <div className='new-post'>
-              <a href='/'>새 글 작성</a>
+              <Link to='/write'>새 글 작성</Link>
             </div>
           </MediaQuery>
           <div className='profile' onClick={() => setIsToggleOpen(!isToggleOpen)}>
@@ -55,15 +73,15 @@ const Header = () => {
           </div>
         </RightIcons>
       </Content>
-      {isToggleOpen && (
+      {isToggleOpen && toggleMenuList && (
         <ToggleMenu ref={toggleMenuRef}>
-          <a href='/'>내 벨로그</a>
-          <MediaQuery maxWidth={1023}>
-            <a>새 글 작성</a>
-          </MediaQuery>
-          <a href='/'>임시 글</a>
-          <a href='/'>읽기 목록</a>
-          <a href='/'>로그아웃</a>
+          {toggleMenuList.map(menu => {
+            return (
+              <Link key={menu.name} className='link-tag' to={menu.path}>
+                {menu.name}
+              </Link>
+            );
+          })}
         </ToggleMenu>
       )}
     </Positioner>
@@ -98,7 +116,7 @@ const Content = styled.div`
   height: 4rem;
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 1.5rem;
@@ -208,7 +226,7 @@ const ToggleMenu = styled.div`
   background-color: var(--toggle-background);
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 
-  a {
+  .link-tag {
     display: block;
     padding: 1.25rem;
     font-size: 0.9rem;
