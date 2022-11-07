@@ -78,7 +78,7 @@ const UserContents = () => {
               <h3>벨로그 제목</h3>
             </div>
             <div className='interval'>
-              {modifyTitle ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
+              {modifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
               <div className='edit-wrapper'>
                 <EditButton text='수정' onClick={onModifyTitle} />
               </div>
