@@ -53,7 +53,7 @@ const SavesList = () => {
               <p>{saves.contents}</p>
               <section>
                 <div className='time'>{saves.created_at}</div>
-                <EditButton text='삭제' onModal={onModal} />
+                <EditButton text='삭제' onClick={onModal} />
               </section>
             </div>
           );
