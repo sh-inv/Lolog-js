@@ -1,9 +1,8 @@
-import Button from '../Button/Index';
+import Button from '../Button';
 import styled from 'styled-components';
 import { backgroundElement1, text1, text2, opaqueLayer, buttonText, primary1 } from '../../styles/color';
 
-const ConfirmModal = ({ visible, title, message, onClose }) => {
-  if (!visible) return null;
+const ConfirmModal = ({ title, message, onClose }) => {
   return (
     <>
       <Background />

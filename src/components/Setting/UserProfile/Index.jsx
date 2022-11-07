@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
-import Button from '../../Button/Index';
-import EditButton from '../../EditButton/Index';
+import Button from '../../Button';
+import EditButton from '../../EditButton';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
-const UserProfileContainer = () => {
+const UserProfile = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [modify, setModify] = useState(false);
 
   const onModify = () => {
-    if (!modify) {
-      setModify(true);
-      return;
-    }
-    setModify(false);
+    modify ? setModify(false) : setModify(true);
+    // if (!modify) {
+    //   setModify(true);
+    //   return;
+    // }
+    // setModify(false);
   };
 
   useEffect(() => {
@@ -42,19 +43,24 @@ const UserProfileContainer = () => {
         <Button text='이미지 제거' backgroundColor='transparent' color='#96F2D7' hoverColor='#63E6BE' hoverBackground='#ffffff1A' />
       </div>
       <div className='info-area'>
-        {modify ? <input className='modify-input modify-user' type='text' onChange={getUser} value={user} /> : <h2>Eden</h2>}
-        {modify ? <input className='modify-input modify-intro' type='text' onChange={getIntro} value={introduction} /> : <p>one part.</p>}
         {modify ? (
-          <Button
-            onClick={() => {
-              setModify(false);
-            }}
-            text='저장'
-            backgroundColor='#96F2D7'
-            color='#121212'
-          />
+          <>
+            <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
+            <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={introduction} />
+            <Button
+              onClick={() => {
+                setModify(false);
+              }}
+              text='저장'
+              backgroundColor='#96F2D7'
+              color='#121212'
+            />
+          </>
         ) : (
-          <EditButton text='수정' onModify={onModify} />
+          <>
+            <h2>Eden</h2> <p>one part.</p>
+            <EditButton text='수정' onModify={onModify} />
+          </>
         )}
       </div>
     </ProfileContainer>
@@ -129,4 +135,4 @@ const ProfileContainer = styled.section`
   }
 `;
 
-export default UserProfileContainer;
+export default UserProfile;

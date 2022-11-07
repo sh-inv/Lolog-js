@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
-import Button from '../../Button/Index';
-import EditButton from '../../EditButton/Index';
-import ConfirmModal from '../../ConfirmModal/Index';
-import Toggle from '../Toggle/Index';
+import Button from '../../Button';
+import EditButton from '../../EditButton';
+import ConfirmModal from '../../ConfirmModal';
+import Toggle from '../Toggle';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
-  const [modal, setModal] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [modifyTitle, setModifyTitle] = useState(false);
   const [modifyContents, setModifyContents] = useState(false);
 
@@ -32,7 +32,7 @@ const UserContents = () => {
 
   const onModal = () => {
     //token 값 추가해야함
-    setModal(true);
+    setIsModal(true);
   };
 
   useEffect(() => {
@@ -55,6 +55,24 @@ const UserContents = () => {
   const getTitle = e => {
     setTitle(e.target.value);
   };
+
+  const info = [
+    {
+      icon: <MdEmail className='icon' />,
+    },
+    {
+      icon: <AiFillGithub className='icon' />,
+    },
+    {
+      icon: <AiOutlineTwitter className='icon' />,
+    },
+    {
+      icon: <AiFillFacebook className='icon' />,
+    },
+    {
+      icon: <AiFillHome className='icon' />,
+    },
+  ];
 
   return (
     <>
@@ -82,26 +100,12 @@ const UserContents = () => {
               <div className='contents'>
                 {modifyContents ? (
                   <ul>
-                    <li>
-                      <MdEmail className='icon' />
-                      <input className='modify-input' type='text' />
-                    </li>
-                    <li>
-                      <AiFillGithub className='icon' />
-                      <input className='modify-input' type='text' />
-                    </li>
-                    <li>
-                      <AiOutlineTwitter className='icon' />
-                      <input className='modify-input' type='text' />
-                    </li>
-                    <li>
-                      <AiFillFacebook className='icon' />
-                      <input className='modify-input' type='text' />
-                    </li>
-                    <li>
-                      <AiFillHome className='icon' />
-                      <input className='modify-input' type='text' />
-                    </li>
+                    {info.map(el => (
+                      <li>
+                        {el.icon}
+                        <input className='modify-input' type='text' />
+                      </li>
+                    ))}
                   </ul>
                 ) : (
                   <ul>
@@ -175,12 +179,12 @@ const UserContents = () => {
           <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
         </div>
       </UserContentsContainer>
-      {modal && (
+      {isModal && (
         <ConfirmModal
           title='회원탈퇴'
           message='정말로 탈퇴 하시겠습니까?'
           onClose={() => {
-            setModal(false);
+            setIsModal(false);
           }}
         />
       )}

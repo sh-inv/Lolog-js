@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import Main from './pages/Main';
 import { Header } from './layout';
 import Search from './pages/Search';
-import Setting from './pages/Setting/Index';
-import Saves from './pages/Saves/Index';
+import Setting from './pages/Setting';
+import Saves from './pages/Saves';
 
 const App = () => {
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);

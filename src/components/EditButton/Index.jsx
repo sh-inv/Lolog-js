@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { primary1 } from '../../styles/color';
 
 const EditButton = ({ text, onModal, onModify, onModifyTitle, onModifyContents }) => {
-  return <Edit onClick={onModal}>{text}</Edit>;
+  return <Edit onClick={(onModal, onModify, onModifyTitle, onModifyContents)}>{text}</Edit>;
 };
 
 const Edit = styled.button`

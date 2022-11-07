@@ -1,5 +1,5 @@
-import UserProfile from '../../components/Setting/UserProfile/Index';
-import UserContents from '../../components/Setting/UserContents/Index';
+import UserProfile from '../../components/Setting/UserProfile';
+import UserContents from '../../components/Setting/UserContents';
 import styled from 'styled-components';
 
 const Setting = () => {
