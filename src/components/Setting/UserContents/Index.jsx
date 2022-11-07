@@ -10,6 +10,7 @@ import { backgroundElement1, border3, border4, text2, text3 } from '../../../sty
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
+  const [social, setSocial] = useState('');
   const [isModal, setIsModal] = useState(false);
   const [modifyTitle, setModifyTitle] = useState(false);
   const [modifyContents, setModifyContents] = useState(false);
@@ -38,18 +39,11 @@ const UserContents = () => {
   useEffect(() => {
     const contents = {
       title: 'my.log',
-      social: [
-        {
-          email: 'you8inpark@gmail.com',
-        },
-        { github: 'daydreamplace' },
-        { twitter: 'eden' },
-        { facebook: 'eden' },
-        { home: 'dev-eden.shop' },
-      ],
+      social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
     };
 
     setTitle(contents.title);
+    setSocial(contents.social);
   }, []);
 
   const getTitle = e => {
@@ -58,22 +52,27 @@ const UserContents = () => {
 
   const info = [
     {
+      id: 1,
       icon: <MdEmail className='icon' />,
       placeholder: '이메일을 입력하세요.',
     },
     {
+      id: 2,
       icon: <AiFillGithub className='icon' />,
       placeholder: 'Github 계정을 입력하세요.',
     },
     {
+      id: 3,
       icon: <AiOutlineTwitter className='icon' />,
       placeholder: 'Twitter 계정을 입력하세요.',
     },
     {
+      id: 4,
       icon: <AiFillFacebook className='icon' />,
       placeholder: 'http://www.facebook.com/',
     },
     {
+      id: 5,
       icon: <AiFillHome className='icon' />,
       placeholder: '홈페이지 주소를 입력하세요.',
     },
@@ -106,7 +105,7 @@ const UserContents = () => {
                 {modifyContents ? (
                   <ul>
                     {info.map(content => (
-                      <li key={content.icon}>
+                      <li key={content.id}>
                         {content.icon}
                         <input className='modify-input' type='text' placeholder={content.placeholder} />
                       </li>
@@ -114,12 +113,26 @@ const UserContents = () => {
                   </ul>
                 ) : (
                   <ul>
-                    {info.map(content => (
-                      <li key={content.icon}>
-                        {content.icon}
-                        <span>eden8@gmail.com</span>
-                      </li>
-                    ))}
+                    <li>
+                      <MdEmail className='icon' />
+                      <span>{social.email}</span>
+                    </li>
+                    <li>
+                      <AiFillGithub className='icon' />
+                      <span>{social.github}</span>
+                    </li>
+                    <li>
+                      <AiOutlineTwitter className='icon' />
+                      <span>{social.twitter}</span>
+                    </li>
+                    <li>
+                      <AiFillFacebook className='icon' />
+                      <span>{social.facebook}</span>
+                    </li>
+                    <li>
+                      <AiFillHome className='icon' />
+                      <span>{social.url}</span>
+                    </li>
                   </ul>
                 )}
               </div>
