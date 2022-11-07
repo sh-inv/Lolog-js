@@ -6,7 +6,7 @@ import { text1, text2, text3, border3 } from '../../../styles/color';
 
 const SavesList = () => {
   const [list, setList] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     const savesData = [
@@ -40,13 +40,12 @@ const SavesList = () => {
   }, []);
 
   const onModal = () => {
-    setModal(true);
-    console.log(1);
+    setIsModal(true);
   };
 
   return (
     <>
-      <List>
+      <SavesListContainer>
         {list.map(saves => {
           return (
             <div className='article' key={saves.title}>
@@ -59,21 +58,21 @@ const SavesList = () => {
             </div>
           );
         })}
-      </List>
-      <ConfirmModal
-        visible={modal}
-        title='임시 글 삭제'
-        message='임시 저장한 글을 삭제하시겠습니까?'
-        message2='삭제한 글은 복구할 수 없습니다.'
-        onClose={() => {
-          setModal(false);
-        }}
-      />
+      </SavesListContainer>
+      {isModal && (
+        <ConfirmModal
+          title='임시 글 삭제'
+          message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
+          onClose={() => {
+            setIsModal(false);
+          }}
+        />
+      )}
     </>
   );
 };
 
-const List = styled.div`
+const SavesListContainer = styled.div`
   .article {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;

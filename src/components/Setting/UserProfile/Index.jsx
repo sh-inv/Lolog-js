@@ -5,9 +5,18 @@ import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
-const UserProfileContainer = ({ modify, setModify, onModify }) => {
+const UserProfileContainer = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
+  const [modify, setModify] = useState(false);
+
+  const onModify = () => {
+    if (!modify) {
+      setModify(true);
+      return;
+    }
+    setModify(false);
+  };
 
   useEffect(() => {
     // fetch =>user info

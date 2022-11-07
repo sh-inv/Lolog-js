@@ -8,9 +8,27 @@ import Toggle from '../Toggle/Index';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
-const UserContents = ({ modify, setModify, onModify }) => {
+const UserContents = () => {
   const [title, setTitle] = useState('');
   const [modal, setModal] = useState(false);
+  const [modifyTitle, setModifyTitle] = useState(false);
+  const [modifyContents, setModifyContents] = useState(false);
+
+  const onModifyTitle = () => {
+    if (!modifyTitle) {
+      setModifyTitle(true);
+      return;
+    }
+    setModifyTitle(false);
+  };
+
+  const onModifyContents = () => {
+    if (!modifyContents) {
+      setModifyContents(true);
+      return;
+    }
+    setModifyContents(false);
+  };
 
   const onModal = () => {
     //token 값 추가해야함
@@ -47,9 +65,9 @@ const UserContents = ({ modify, setModify, onModify }) => {
               <h3>벨로그 제목</h3>
             </div>
             <div className='interval'>
-              {modify ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
+              {modifyTitle ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
               <div className='edit-wrapper'>
-                <EditButton text='수정' onModify={onModify} />
+                <EditButton text='수정' onModifyTitle={onModifyTitle} />
               </div>
             </div>
           </div>
@@ -62,31 +80,56 @@ const UserContents = ({ modify, setModify, onModify }) => {
             </div>
             <div className='interval'>
               <div className='contents'>
-                <ul>
-                  <li>
-                    <MdEmail className='icon' />
-                    <span>you8inpark@gmail.com</span>
-                  </li>
-                  <li>
-                    <AiFillGithub className='icon' />
-                    <span>daydreamplace</span>
-                  </li>
-                  <li>
-                    <AiOutlineTwitter className='icon' />
-                    <span>eden</span>
-                  </li>
-                  <li>
-                    <AiFillFacebook className='icon' />
-                    <span>eden</span>
-                  </li>
-                  <li>
-                    <AiFillHome className='icon' />
-                    <span>dev-eden.shop</span>
-                  </li>
-                </ul>
+                {modifyContents ? (
+                  <ul>
+                    <li>
+                      <MdEmail className='icon' />
+                      <input className='modify-input' type='text' />
+                    </li>
+                    <li>
+                      <AiFillGithub className='icon' />
+                      <input className='modify-input' type='text' />
+                    </li>
+                    <li>
+                      <AiOutlineTwitter className='icon' />
+                      <input className='modify-input' type='text' />
+                    </li>
+                    <li>
+                      <AiFillFacebook className='icon' />
+                      <input className='modify-input' type='text' />
+                    </li>
+                    <li>
+                      <AiFillHome className='icon' />
+                      <input className='modify-input' type='text' />
+                    </li>
+                  </ul>
+                ) : (
+                  <ul>
+                    <li>
+                      <MdEmail className='icon' />
+                      <span>you8inpark@gmail.com</span>
+                    </li>
+                    <li>
+                      <AiFillGithub className='icon' />
+                      <span>daydreamplace</span>
+                    </li>
+                    <li>
+                      <AiOutlineTwitter className='icon' />
+                      <span>eden</span>
+                    </li>
+                    <li>
+                      <AiFillFacebook className='icon' />
+                      <span>eden</span>
+                    </li>
+                    <li>
+                      <AiFillHome className='icon' />
+                      <span>dev-eden.shop</span>
+                    </li>
+                  </ul>
+                )}
               </div>
               <div className='edit-wrapper'>
-                <EditButton text='수정' onModify={onModify} />
+                <EditButton text='수정' onModifyContents={onModifyContents} />
               </div>
             </div>
           </div>
@@ -132,14 +175,15 @@ const UserContents = ({ modify, setModify, onModify }) => {
           <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
         </div>
       </UserContentsContainer>
-      <ConfirmModal
-        visible={modal}
-        title='회원탈퇴'
-        message='정말로 탈퇴 하시겠습니까?'
-        onClose={() => {
-          setModal(false);
-        }}
-      />
+      {modal && (
+        <ConfirmModal
+          title='회원탈퇴'
+          message='정말로 탈퇴 하시겠습니까?'
+          onClose={() => {
+            setModal(false);
+          }}
+        />
+      )}
     </>
   );
 };
