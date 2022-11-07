@@ -90,7 +90,7 @@ const UserContents = () => {
             <div className='interval'>
               {modifyTitle ? <input className='modify-input modify-title' type='text' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
               <div className='edit-wrapper'>
-                <EditButton text='수정' onModifyTitle={onModifyTitle} />
+                <EditButton text='수정' onClick={onModifyTitle} />
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ const UserContents = () => {
                 )}
               </div>
               <div className='edit-wrapper'>
-                <EditButton text='수정' onModifyContents={onModifyContents} />
+                <EditButton text='수정' onClick={onModifyContents} />
               </div>
             </div>
           </div>

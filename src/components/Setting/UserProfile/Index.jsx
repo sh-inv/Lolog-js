@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import Button from '../../Button';
-import EditButton from '../../EditButton';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
-import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserProfile = () => {
   return (

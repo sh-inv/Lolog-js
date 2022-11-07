@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import UserProfile from '../../components/Setting/UserProfile';
 import UserInfo from '../../components/Setting/UserInfo';
 import UserContents from '../../components/Setting/UserContents';
 import styled from 'styled-components';
 
 const Setting = () => {
-  const [modify, setModify] = useState(false);
-
-  const onModify = () => {
-    modify ? setModify(false) : setModify(true);
-  };
-
   return (
     <SettingPage>
       <section className='setting-top'>
-        <UserProfile onModify={onModify} />
-        <UserInfo onModify={onModify} />
+        <UserProfile />
+        <UserInfo />
       </section>
       <UserContents />
     </SettingPage>

@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 import EditButton from '../../EditButton';
+import Button from '../../Button';
 import styled from 'styled-components';
 import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
 
-const UserInfo = ({ modify, setModify, onModify }) => {
+const UserInfo = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
+  const [modify, setModify] = useState(false);
+
+  const onModify = () => {
+    modify ? setModify(false) : setModify(true);
+  };
 
   useEffect(() => {
     // fetch =>user info
@@ -41,7 +47,7 @@ const UserInfo = ({ modify, setModify, onModify }) => {
       ) : (
         <>
           <h2>Eden</h2> <p>one part.</p>
-          <EditButton text='수정' onModify={onModify} />
+          <EditButton text='수정' onClick={onModify} />
         </>
       )}
     </UserInfoContainer>
