@@ -21,16 +21,15 @@ const Header = () => {
     isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
   };
 
-  const closeToggleMenu = e => {
-    if (isToggleOpen && toggleMenuRef !== e.target) setIsToggleOpen(false);
-  };
-
   useEffect(() => {
-    document.addEventListener('click', closeToggleMenu);
-    return () => {
-      document.removeEventListener('click', closeToggleMenu);
+    const closeToggleMenu = e => {
+      if (isToggleOpen && toggleMenuRef !== e.target) setIsToggleOpen(false);
     };
-  }, []);
+    document.addEventListener('mousedown', closeToggleMenu);
+    return () => {
+      document.removeEventListener('mousedown', closeToggleMenu);
+    };
+  }, [isToggleOpen]);
 
   return (
     <Positioner>
