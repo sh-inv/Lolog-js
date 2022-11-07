@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import EditButton from '../../EditButton';
 import Button from '../../Button';
 import styled from 'styled-components';
-import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, border1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserInfo = () => {
   const [user, setUser] = useState('');
@@ -85,6 +85,10 @@ const UserInfoContainer = styled.div`
     font-size: 1rem;
     line-height: 1rem;
     outline: none;
+
+    :focus {
+      border: 1px solid ${border1};
+    }
   }
 
   .modify-user {

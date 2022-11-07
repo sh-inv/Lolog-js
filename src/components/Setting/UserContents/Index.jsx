@@ -6,7 +6,7 @@ import EditButton from '../../EditButton';
 import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
-import { backgroundElement1, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, border1, border3, border4, text2, text3 } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
@@ -78,7 +78,7 @@ const UserContents = () => {
               <h3>벨로그 제목</h3>
             </div>
             <div className='interval'>
-              {modifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>daydream.log</div>}
+              {modifyTitle ? <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} /> : <div className='contents'>{title}</div>}
               <div className='edit-wrapper'>
                 <EditButton text='수정' onClick={onModifyTitle} />
               </div>
@@ -227,6 +227,10 @@ const UserContentsContainer = styled.section`
           font-size: 1rem;
           line-height: 1rem;
           outline: none;
+
+          :focus {
+            border: 1px solid ${border1};
+          }
         }
 
         .edit-wrapper {
