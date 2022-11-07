@@ -12,11 +12,6 @@ const UserProfile = () => {
 
   const onModify = () => {
     modify ? setModify(false) : setModify(true);
-    // if (!modify) {
-    //   setModify(true);
-    //   return;
-    // }
-    // setModify(false);
   };
 
   useEffect(() => {
