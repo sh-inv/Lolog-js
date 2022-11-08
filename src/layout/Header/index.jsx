@@ -1,28 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { darkMode, lightMode } from '../../store/modules/header';
 import { toggle } from '../../styles/color';
-import { HiMoon } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
-import { BsFillSunFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import styled from 'styled-components';
+import ToggleMenuList from './ToggleMenuList';
+import ThemeMode from './ThemeMode';
 
 const Header = () => {
-  const toggleMenuRef = useRef();
   const myZoneRef = useRef();
+  const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [toggleMenuList, setToggleMenuList] = useState();
-  const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
-  const dispatch = useDispatch();
-
-  const changeTheme = e => {
-    e.target.className = 'theme-mode-change setting-hover';
-    isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
-  };
 
   useEffect(() => {
     const closeToggleMenu = e => {
@@ -54,9 +45,7 @@ const Header = () => {
       <Content>
         <Logo to='/'>velog</Logo>
         <RightIcons>
-          <div className='theme-mode setting-hover' onClick={changeTheme}>
-            {isDarkMode ? <HiMoon /> : <BsFillSunFill />}
-          </div>
+          <ThemeMode />
           <Link className='search setting-hover' to='/search'>
             <BiSearch />
           </Link>
@@ -69,17 +58,7 @@ const Header = () => {
           </div>
         </RightIcons>
       </Content>
-      {isToggleOpen && toggleMenuList && (
-        <ToggleMenu ref={toggleMenuRef}>
-          {toggleMenuList.map(menu => {
-            return (
-              <Link key={menu.name} className='link-tag' to={menu.path} onClick={() => setIsToggleOpen(false)}>
-                {menu.name}
-              </Link>
-            );
-          })}
-        </ToggleMenu>
-      )}
+      {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
     </Positioner>
   );
 };
@@ -150,24 +129,6 @@ const RightIcons = styled.div`
     }
   }
 
-  @keyframes themeChange {
-    from {
-      width: 10px;
-      height: 10px;
-      transform: rotate(180deg);
-    }
-    to {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  .theme-mode-change {
-    svg {
-      animation: themeChange 0.1s linear;
-    }
-  }
-
   .new-post {
     a {
       padding: 0.4rem 1rem;
@@ -213,32 +174,6 @@ const RightIcons = styled.div`
       :hover {
         color: var(--toggle-hover);
       }
-    }
-  }
-`;
-
-const ToggleMenu = styled.div`
-  width: 12rem;
-  margin-top: 0.3rem;
-  margin-left: auto;
-  background-color: var(--toggle-background);
-  box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
-
-  .link-tag {
-    display: block;
-    padding: 1.25rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-
-    :nth-child(2) {
-      @media only screen and (min-width: 1024px) {
-        display: none;
-      }
-    }
-
-    :hover {
-      color: var(--a-tag-hover-text);
-      background-color: var(--a-tag-hover-background);
     }
   }
 `;
