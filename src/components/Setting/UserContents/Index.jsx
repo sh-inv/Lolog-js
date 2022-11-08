@@ -41,6 +41,10 @@ const UserContents = () => {
     setTitle(e.target.value);
   };
 
+  const getSocial = e => {
+    setSocial(e.target.value);
+  };
+
   const info = [
     {
       id: 1,
@@ -93,7 +97,7 @@ const UserContents = () => {
                 <>
                   <div className='contents'>{title}</div>
                   <div className='edit-wrapper'>
-                    <EditButton text='수정' onClick={onModifyTitle} />
+                    <EditButton text='수정' onClick={onModifyTitle} onChange={getSocial} value={social} />
                   </div>
                 </>
               )}
