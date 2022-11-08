@@ -43,15 +43,17 @@ const Header = () => {
   return (
     <Positioner>
       <Content>
-        <Logo to='/'>velog</Logo>
+        <Link className='logo' to='/'>
+          velog
+        </Link>
         <RightIcons>
           <ThemeMode />
           <Link className='search setting-hover' to='/search'>
             <BiSearch />
           </Link>
-          <div className='new-post'>
-            <Link to='/write'>새 글 작성</Link>
-          </div>
+          <Link className='new-post' to='/write'>
+            새 글 작성
+          </Link>
           <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <CgProfile className='profile' />
             <VscTriangleDown className='toggle' />
@@ -91,16 +93,16 @@ const Content = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 4rem;
-`;
 
-const Logo = styled(Link)`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  letter-spacing: 0.2rem;
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
 
-  @media only screen and (max-width: 1023px) {
-    font-size: 1.25rem;
+    @media only screen and (max-width: 1023px) {
+      font-size: 1.25rem;
+    }
   }
 `;
 
@@ -130,20 +132,18 @@ const RightIcons = styled.div`
   }
 
   .new-post {
-    a {
-      padding: 0.4rem 1rem;
-      margin-left: 0.5rem;
-      border: 1px solid var(--text);
-      border-radius: 1.3rem;
-      background-color: var(--new-post-btn-background);
-      font-size: 1rem;
-      font-weight: bold;
+    padding: 0.4rem 1rem;
+    margin-left: 0.5rem;
+    border: 1px solid var(--text);
+    border-radius: 1.3rem;
+    background-color: var(--new-post-btn-background);
+    font-size: 1rem;
+    font-weight: bold;
 
-      :hover {
-        background-color: var(--new-post-btn-hover-background);
-        color: var(--new-post-btn-hover-text);
-        transition: all 0.125s ease-in 0s;
-      }
+    :hover {
+      background-color: var(--new-post-btn-hover-background);
+      color: var(--new-post-btn-hover-text);
+      transition: all 0.125s ease-in 0s;
     }
 
     @media only screen and (max-width: 1023px) {
