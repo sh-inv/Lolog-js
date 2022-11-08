@@ -4,7 +4,6 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
 import PeriodFilter from './PeriodFilter';
 import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
 
 const PostListNavBar = () => {
   const navBar = [
@@ -75,7 +74,7 @@ const PostListNavBarContainer = styled.div`
       }
 
       .active {
-        color: ${darkModeFontColor};
+        color: var(--text);
       }
     }
   }

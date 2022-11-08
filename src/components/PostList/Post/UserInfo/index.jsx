@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../../../styles/color';
+import { text1 } from '../../../../styles/color';
 
 const UserInfo = () => {
   return (
@@ -41,10 +41,10 @@ const UserInfoContainer = styled.div`
     }
 
     .user-by {
-      color: ${darkModeTextColor};
+      color: #d9d9d9;
 
       .user-name {
-        color: ${darkModeFontColor};
+        color: ${text1};
         font-weight: bold;
       }
     }

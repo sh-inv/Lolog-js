@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { darkModeFontColor } from '../../styles/color';
 import { BiSearch } from 'react-icons/bi';
 
 const Search = () => {
@@ -12,8 +11,6 @@ const Search = () => {
     </Positioner>
   );
 };
-
-export default Search;
 
 const Positioner = styled.div`
   display: flex;
@@ -64,7 +61,7 @@ const SearchInput = styled.input`
   line-height: 2rem;
   font-size: 1.5rem;
   border: none;
-  color: ${darkModeFontColor};
+  color: var(--text);
   background-color: transparent;
   cursor: text;
 
@@ -72,3 +69,5 @@ const SearchInput = styled.input`
     font-size: 1.125rem;
   }
 `;
+
+export default Search;
