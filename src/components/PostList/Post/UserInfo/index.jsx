@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { AiFillHeart } from 'react-icons/ai';
+import styled from 'styled-components';
 import { text1 } from '../../../../styles/color';
 
 const UserInfo = () => {
   return (
-    <UserInfoBox>
+    <UserInfoContainer>
       <Link to='' className='user'>
         <img className='profile-img' src='https://velog.velcdn.com/images/saint6839/profile/b070ce76-2a5a-4ebb-958f-ac4fdf8db267/image.png' alt='' />
         <span className='user-by'>
@@ -16,11 +16,11 @@ const UserInfo = () => {
         <AiFillHeart className='heart' />
         <span className='like-count'>0</span>
       </div>
-    </UserInfoBox>
+    </UserInfoContainer>
   );
 };
 
-const UserInfoBox = styled.div`
+const UserInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.625rem 1rem;
@@ -59,7 +59,7 @@ const UserInfoBox = styled.div`
     }
 
     .like-count {
-      margin-top: 3px;
+      margin-top: 2px;
     }
   }
 `;

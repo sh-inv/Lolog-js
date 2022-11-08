@@ -4,7 +4,7 @@ import { text1 } from '../../../../styles/color';
 
 const PostInfo = () => {
   return (
-    <PostInfoBox>
+    <PostInfoContainer>
       <Link to=''>
         <h4 className='post-title'>Reactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbu</h4>
         <div className='main-text'>
@@ -12,11 +12,11 @@ const PostInfo = () => {
         </div>
       </Link>
       <div className='sub-info'>약 7시간 전 · 0개의 댓글</div>
-    </PostInfoBox>
+    </PostInfoContainer>
   );
 };
 
-const PostInfoBox = styled.div`
+const PostInfoContainer = styled.div`
   display: flex;
   flex: 1 1 0%;
   flex-direction: column;

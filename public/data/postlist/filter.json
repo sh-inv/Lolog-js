@@ -1,0 +1,24 @@
+{
+  "filterdata": [
+    {
+      "name": "오늘",
+      "query": "today",
+      "view": false
+    },
+    {
+      "name": "이번 주",
+      "query": "week",
+      "view": true
+    },
+    {
+      "name": "이번 달",
+      "query": "month",
+      "view": false
+    },
+    {
+      "name": "올해",
+      "query": "year",
+      "view": false
+    }
+  ]
+}

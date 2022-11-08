@@ -1,34 +1,16 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import styled from 'styled-components';
 
-const ToggleMenuList = ({ toggleMenuRef, setIsToggleOpen }) => {
-  const [toggleMenuList, setToggleMenuList] = useState();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { toggle },
-        } = await axios.get('data/header/toggle.json');
-        setToggleMenuList(toggle);
-      } catch (error) {
-        console.log('error => ', error);
-      }
-    })();
-  }, []);
-
+const ToggleMenuList = ({ toggleMenuRef, toggleMenuList, setIsToggleOpen }) => {
   return (
     <ToggleMenuListContainer ref={toggleMenuRef}>
-      {toggleMenuList &&
-        toggleMenuList.map(menu => {
-          return (
-            <Link key={menu.name} className='link-tag' to={menu.path} onClick={() => setIsToggleOpen(false)}>
-              {menu.name}
-            </Link>
-          );
-        })}
+      {toggleMenuList.map(menu => {
+        return (
+          <Link key={menu.name} className='link-tag' to={menu.path} onClick={() => setIsToggleOpen(false)}>
+            {menu.name}
+          </Link>
+        );
+      })}
     </ToggleMenuListContainer>
   );
 };

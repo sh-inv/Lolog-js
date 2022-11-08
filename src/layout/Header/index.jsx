@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { backgroundElement9 } from '../../styles/color';
 import { BiSearch } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
@@ -12,6 +13,7 @@ const Header = () => {
   const myZoneRef = useRef();
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [toggleMenuList, setToggleMenuList] = useState();
 
   useEffect(() => {
     const closeToggleMenu = e => {
@@ -24,6 +26,19 @@ const Header = () => {
       document.removeEventListener('mousedown', closeToggleMenu);
     };
   }, [isToggleOpen]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { toggle },
+        } = await axios.get('data/header/toggle.json');
+        setToggleMenuList(toggle);
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
+  }, []);
 
   return (
     <Positioner>
@@ -45,7 +60,7 @@ const Header = () => {
           </div>
         </RightIcons>
       </Content>
-      {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
+      {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
     </Positioner>
   );
 };
