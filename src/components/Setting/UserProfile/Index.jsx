@@ -1,7 +1,7 @@
-import Button from '../../Button';
+import Button from '../../../Button';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
-import { backgroundElement10, buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
+import { buttonText, primary1, primary2, slightLayer } from '../../../../styles/color';
 
 const UserProfile = () => {
   return (
@@ -41,7 +41,7 @@ const UserProfileContainer = styled.div`
     color: ${primary1};
 
     &:hover {
-      background: ${slightLayer}
+      background: ${slightLayer};
       color: ${primary2};
     }
   }
