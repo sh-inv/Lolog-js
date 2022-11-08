@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { toggle } from '../../styles/color';
+import { backgroundElement9 } from '../../styles/color';
 import { BiSearch } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
@@ -154,7 +154,7 @@ const RightIcons = styled.div`
       cursor: pointer;
 
       width: 12px;
-      color: ${toggle};
+      color: ${backgroundElement9};
 
       :hover {
         color: var(--toggle-hover);

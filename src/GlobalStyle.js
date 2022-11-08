@@ -1,20 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import {
-  darkModeBackgroundColor,
-  darkModeFontColor,
   lightModeBackgroundColor,
   lightModeFontColor,
-  darkModeNewPostBtnColor,
   lightModeNewPostBtnColor,
-  darkModeToggle,
   lightModeToggle,
-  darkModeToggleBackgound,
   lightModeToggleBackgound,
-  darkModeATagHoverText,
   lightModeATagHoverText,
-  darkModeATagHoverBackground,
   lightModeATagHoverBackground,
+  backgroundPage,
+  text1,
+  backgroundElement1,
+  primary1,
 } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
@@ -27,26 +24,26 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin-top: 4rem;
-    background: ${props => (props.isDarkMode ? darkModeBackgroundColor : lightModeBackgroundColor)};
-    color: ${props => (props.isDarkMode ? darkModeFontColor : lightModeFontColor)};
+    background: ${props => (props.isDarkMode ? backgroundPage : lightModeBackgroundColor)};
+    color: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
   }
 
   :root {
-    --text: ${props => (props.isDarkMode ? darkModeFontColor : lightModeFontColor)};
-    --new-post-btn-background: ${props => (props.isDarkMode ? darkModeNewPostBtnColor : lightModeNewPostBtnColor)};
-    --new-post-btn-hover-text: ${props => (props.isDarkMode ? lightModeFontColor : darkModeFontColor)};
-    --new-post-btn-hover-background: ${props => (props.isDarkMode ? lightModeNewPostBtnColor : darkModeNewPostBtnColor)};
-    --toggle-hover: ${props => (props.isDarkMode ? darkModeToggle : lightModeToggle)};
-    --toggle-background: ${props => (props.isDarkMode ? darkModeToggleBackgound : lightModeToggleBackgound)};
-    --a-tag-hover-text: ${props => (props.isDarkMode ? darkModeATagHoverText : lightModeATagHoverText)};
-    --a-tag-hover-background: ${props => (props.isDarkMode ? darkModeATagHoverBackground : lightModeATagHoverBackground)};
+    --text: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
+    --new-post-btn-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeNewPostBtnColor)};
+    --new-post-btn-hover-text: ${props => (props.isDarkMode ? lightModeFontColor : text1)};
+    --new-post-btn-hover-background: ${props => (props.isDarkMode ? lightModeNewPostBtnColor : backgroundElement1)};
+    --toggle-hover: ${props => (props.isDarkMode ? text1 : lightModeToggle)};
+    --toggle-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeToggleBackgound)};
+    --a-tag-hover-text: ${props => (props.isDarkMode ? primary1 : lightModeATagHoverText)};
+    --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
   }
 
   a {
     text-decoration: none;
 
     :visited {
-      color: ${props => (props.isDarkMode ? darkModeFontColor : lightModeFontColor)};
+      color: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
   }
   }
 

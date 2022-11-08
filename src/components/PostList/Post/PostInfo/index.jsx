@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../../../styles/color';
+import { text1 } from '../../../../styles/color';
 
 const PostInfo = () => {
   return (
@@ -29,7 +29,7 @@ const PostInfoBox = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: ${darkModeFontColor};
+    color: ${text1};
   }
 
   .main-text {
@@ -43,13 +43,13 @@ const PostInfoBox = styled.div`
     line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${darkModeTextColor};
+    color: #d9d9d9;
   }
 
   .sub-info {
     font-size: 0.75rem;
     line-height: 1.5;
-    color: ${darkModeTextColor};
+    color: #d9d9d9;
   }
 `;
 

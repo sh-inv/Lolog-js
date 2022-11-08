@@ -1,11 +1,3 @@
-export const darkModeBackgroundColor = '#121212';
-export const darkModeFontColor = '#ECECEC';
-export const darkModeNewPostBtnColor = '#1E1E1E';
-export const darkModeToggle = '#ececec';
-export const darkModeToggleBackgound = '#1E1E1E';
-export const darkModeATagHoverText = '#96f2d7';
-export const darkModeATagHoverBackground = '#1E1E1E';
-
 export const lightModeBackgroundColor = '#FFFFFF';
 export const lightModeFontColor = '#212529';
 export const lightModeNewPostBtnColor = '#F8F9FA';
@@ -16,7 +8,6 @@ export const lightModeATagHoverText = '#12B886';
 export const lightModeATagHoverBackground = 'rgba(249, 249, 249, 0.85)';
 
 export const toggle = '#868E96';
-export const darkModeTextColor = 'D9D9D9';
 
 //dark mode
 export const backgroundPage = '#121212';

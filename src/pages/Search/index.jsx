@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { darkModeFontColor } from '../../styles/color';
 import { BiSearch } from 'react-icons/bi';
 
 const Search = () => {

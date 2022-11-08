@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { darkModeFontColor, darkModeTextColor } from '../../styles/color';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { SlGraph } from 'react-icons/sl';
 import { AiOutlineClockCircle } from 'react-icons/ai';
@@ -59,7 +58,7 @@ const PostListNavBarBox = styled.div`
         height: 3rem;
         margin: 0;
         font-size: 1.125rem;
-        color: ${darkModeTextColor};
+        color: #d9d9d9;
 
         .icon {
           font-size: 1.4rem;
@@ -68,7 +67,7 @@ const PostListNavBarBox = styled.div`
       }
 
       .active {
-        color: ${darkModeFontColor};
+        color: var(--text);
       }
     }
 
