@@ -62,7 +62,7 @@ const SearchInput = styled.input`
   line-height: 2rem;
   font-size: 1.5rem;
   border: none;
-  color: ${darkModeFontColor};
+  color: var(--text);
   background-color: transparent;
   cursor: text;
 
