@@ -1,13 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { backgroundElement9 } from '../../styles/color';
 import { BiSearch } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
-import styled from 'styled-components';
 import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
+import styled from 'styled-components';
+import { backgroundElement9 } from '../../styles/color';
+import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
   const myZoneRef = useRef();
@@ -75,17 +76,12 @@ const Positioner = styled.div`
   transform: translate(-50%, 0%);
   z-index: 1;
   padding: 0 1rem;
-  width: 1024px;
-  max-width: 1728px;
-  min-width: 250px;
+  width: 1728px;
 
-  @media only screen and (max-width: 1023px) {
-    width: 100%;
-  }
-
-  @media only screen and (min-width: 1440px) {
-    width: 1376px;
-  }
+  ${maxWidth1920px}
+  ${maxWidth1440px}
+  ${maxWidth1056px}
+  ${minWidth250px}
 `;
 
 const Content = styled.div`

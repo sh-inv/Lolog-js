@@ -1,7 +1,7 @@
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import styled from 'styled-components';
-import { postListMaxWidth1056px, postListMaxWidth1440px, postListMaxWidth1920px } from '../../styles/media';
+import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const PostList = () => {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -32,9 +32,10 @@ const PostListContainer = styled.div`
     }
   }
 
-  ${postListMaxWidth1920px}
-  ${postListMaxWidth1440px}
-  ${postListMaxWidth1056px}
+  ${maxWidth1920px}
+  ${maxWidth1440px}
+  ${maxWidth1056px}
+  ${minWidth250px}
 `;
 
 export default PostList;
