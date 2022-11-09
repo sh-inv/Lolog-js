@@ -74,8 +74,9 @@ const PeriodFilterContainer = styled.div`
     height: 2rem;
     padding: 0 0.5rem;
     border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 4px;
     background: var(--new-post-btn-background);
-    color: ${text2};
+    color: var(--postlist-navbar-filter-color);
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;

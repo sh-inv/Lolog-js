@@ -37,8 +37,8 @@ const PostListNavBar = () => {
         </div>
         <PeriodFilter />
       </div>
-      <div>
-        <FiMoreVertical className='icon' />
+      <div className='more'>
+        <FiMoreVertical className='more-icon' />
       </div>
     </PostListNavBarContainer>
   );
@@ -77,6 +77,15 @@ const PostListNavBarContainer = styled.div`
       .active {
         color: var(--text);
       }
+    }
+  }
+
+  .more {
+    display: flex;
+    align-items: center;
+
+    .more-icon {
+      font-size: 1.4rem;
     }
   }
 `;

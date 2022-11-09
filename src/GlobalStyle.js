@@ -10,11 +10,13 @@ import {
   lightModeATagHoverText,
   lightModeATagHoverBackground,
   backgroundPage,
-  text1,
   backgroundElement1,
   primary1,
   border4,
   backgroundElement5,
+  text1,
+  text2,
+  text5,
 } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
@@ -29,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 4rem;
     background: ${props => (props.isDarkMode ? backgroundPage : backgroundElement6)};
     color: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
+    transition: background-color 0.2s;
   }
 
   :root {
@@ -41,6 +44,8 @@ const GlobalStyle = createGlobalStyle`
     --a-tag-hover-text: ${props => (props.isDarkMode ? primary1 : lightModeATagHoverText)};
     --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
     --post-border-top: ${props => (props.isDarkMode ? border4 : backgroundElement5)};
+    --postlist-navbar-filter-color: ${props => (props.isDarkMode ? text2 : text5)};
+    --postlist-navbar-more-icon-color: ${props => (props.isDarkMode ? text2 : text5)};
   }
 
   a {

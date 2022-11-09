@@ -29,6 +29,7 @@ export const text1 = '#ECECEC';
 export const text2 = '#D9D9D9';
 export const text3 = '#ACACAC';
 export const text4 = '#595959';
+export const text5 = '#495057';
 export const border1 = '#E0E0E0';
 export const border2 = '#A0A0A0';
 export const border3 = '#4D4D4D';
