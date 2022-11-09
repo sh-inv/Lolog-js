@@ -60,6 +60,15 @@ const UserInfoContainer = styled.div`
   padding-left: 1.5rem;
   border-left: 1px solid ${border4};
 
+  @media screen and (max-width: 768px) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid ${border4};
+    border-bottom: 1px solid ${border4};
+    border-left: none;
+    padding-left: 0px;
+  }
+
   h2 {
     margin: 0px;
     line-height: 1.5;

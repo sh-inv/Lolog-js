@@ -1,7 +1,8 @@
-import Button from '../../../Button';
+import Button from '../../Button';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
-import { buttonText, primary1, primary2, slightLayer } from '../../../../styles/color';
+import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
+import { UserProfileMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
@@ -49,6 +50,13 @@ const UserProfileContainer = styled.div`
   button + button {
     margin-top: 0.5rem;
     margin-left: 0px;
+  }
+
+  @media (max-width: 768px) {
+    -webkit-box-align: center;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    padding-right: 0px;
   }
 `;
 
