@@ -73,6 +73,10 @@ const UserInfoContainer = styled.div`
     margin: 0px;
     line-height: 1.5;
     font-size: 2.25rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.25rem;
+    }
   }
 
   p {

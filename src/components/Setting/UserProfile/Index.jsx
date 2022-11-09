@@ -25,6 +25,12 @@ const UserProfileContainer = styled.div`
     border-radius: 50%;
     display: block;
     margin-bottom: 1.25rem;
+
+    @media screen and (max-width: 768px) {
+      width: 6rem;
+      height: 6rem;
+      margin-bottom: 1rem;
+    }
   }
 
   button {
