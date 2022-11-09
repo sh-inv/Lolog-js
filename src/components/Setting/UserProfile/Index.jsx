@@ -2,7 +2,6 @@ import Button from '../../Button';
 import profile from '../../../assets/profile_sample.jpg';
 import styled from 'styled-components';
 import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
-import { UserProfileMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
@@ -26,6 +25,12 @@ const UserProfileContainer = styled.div`
     border-radius: 50%;
     display: block;
     margin-bottom: 1.25rem;
+  }
+
+  button {
+    @media screen and (max-width: 768px) {
+      width: 10rem;
+    }
   }
 
   .upload {

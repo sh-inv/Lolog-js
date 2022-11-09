@@ -222,12 +222,20 @@ const UserContents = () => {
 const UserContentsContainer = styled.section`
   margin-top: 4rem;
 
+  @media screen and (max-width: 768px) {
+    margin-top: 0rem;
+  }
+
   .bottom-block {
     padding-top: 1rem;
     padding-bottom: 1rem;
 
     .wrapper {
       display: flex;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
 
       .title-wrapper {
         width: 9.5rem;
@@ -237,6 +245,10 @@ const UserContentsContainer = styled.section`
           margin: 0px;
           line-height: 1.5;
           font-size: 1.125rem;
+
+          @media screen and (max-width: 768px) {
+            margin-bottom: 0.5rem;
+          }
         }
       }
 
