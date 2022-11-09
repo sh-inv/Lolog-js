@@ -1,77 +1,70 @@
 import { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { darkMode, lightMode } from '../../store/modules/header';
-import MediaQuery from 'react-responsive';
-import { toggle } from '../../styles/color';
-import { HiMoon } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { BiSearch } from 'react-icons/bi';
-import { BsFillSunFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
+import ThemeMode from './ThemeMode';
+import ToggleMenuList from './ToggleMenuList';
+import styled from 'styled-components';
+import { backgroundElement9 } from '../../styles/color';
+import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
+  const myZoneRef = useRef();
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
-  const dispatch = useDispatch();
-
-  const changeTheme = e => {
-    e.target.className = 'theme-mode-change setting-hover';
-    isDarkMode ? dispatch(lightMode()) : dispatch(darkMode());
-  };
-
-  const closeToggleMenu = e => {
-    if (isToggleOpen && toggleMenuRef !== e.target) setIsToggleOpen(false);
-  };
+  const [toggleMenuList, setToggleMenuList] = useState();
 
   useEffect(() => {
-    document.addEventListener('click', closeToggleMenu);
-    return () => {
-      document.removeEventListener('click', closeToggleMenu);
+    const closeToggleMenu = e => {
+      if (isToggleOpen && !toggleMenuRef.current.contains(e.target) && !myZoneRef.current.contains(e.target)) {
+        setIsToggleOpen(false);
+      }
     };
+    document.addEventListener('mousedown', closeToggleMenu);
+    return () => {
+      document.removeEventListener('mousedown', closeToggleMenu);
+    };
+  }, [isToggleOpen]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { toggle },
+        } = await axios.get('data/header/toggle.json');
+        setToggleMenuList(toggle);
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
   }, []);
 
   return (
     <Positioner>
       <Content>
-        <Logo href='/'>velog</Logo>
+        <Link className='logo' to='/'>
+          velog
+        </Link>
         <RightIcons>
-          <div className='theme-mode setting-hover' onClick={changeTheme}>
-            {isDarkMode ? <HiMoon /> : <BsFillSunFill />}
-          </div>
-          <a className='search setting-hover' href='/search'>
+          <ThemeMode />
+          <Link className='search setting-hover' to='/search'>
             <BiSearch />
-          </a>
-          <MediaQuery minWidth={1024}>
-            <div className='new-post'>
-              <a href='/'>새 글 작성</a>
-            </div>
-          </MediaQuery>
-          <div className='profile' onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <CgProfile />
-          </div>
-          <div className='toggle' onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <VscTriangleDown />
+          </Link>
+          <Link className='new-post' to='/write'>
+            새 글 작성
+          </Link>
+          <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
+            <CgProfile className='profile' />
+            <VscTriangleDown className='toggle' />
           </div>
         </RightIcons>
       </Content>
-      {isToggleOpen && (
-        <ToggleMenu ref={toggleMenuRef}>
-          <a href='/'>내 벨로그</a>
-          <MediaQuery maxWidth={1023}>
-            <a>새 글 작성</a>
-          </MediaQuery>
-          <a href='/'>임시 글</a>
-          <a href='/'>읽기 목록</a>
-          <a href='/'>로그아웃</a>
-        </ToggleMenu>
-      )}
+      {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
     </Positioner>
   );
 };
-
-export default Header;
 
 const Positioner = styled.div`
   display: flex;
@@ -83,13 +76,12 @@ const Positioner = styled.div`
   transform: translate(-50%, 0%);
   z-index: 1;
   padding: 0 1rem;
-  width: 1024px;
-  max-width: 1728px;
-  min-width: 250px;
+  width: 1728px;
 
-  @media only screen and (max-width: 1023px) {
-    width: 100%;
-  }
+  ${maxWidth1920px}
+  ${maxWidth1440px}
+  ${maxWidth1056px}
+  ${minWidth250px}
 `;
 
 const Content = styled.div`
@@ -97,16 +89,16 @@ const Content = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 4rem;
-`;
 
-const Logo = styled.a`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  letter-spacing: 0.2rem;
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
 
-  @media only screen and (max-width: 1023px) {
-    font-size: 1.25rem;
+    @media only screen and (max-width: 1023px) {
+      font-size: 1.25rem;
+    }
   }
 `;
 
@@ -135,88 +127,51 @@ const RightIcons = styled.div`
     }
   }
 
-  @keyframes themeChange {
-    from {
-      width: 10px;
-      height: 10px;
-      transform: rotate(180deg);
-    }
-    to {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  .theme-mode-change {
-    svg {
-      animation: themeChange 0.1s linear;
-    }
-  }
-
   .new-post {
-    a {
-      padding: 0.4rem 1rem;
-      margin-left: 0.5rem;
-      border: 1px solid var(--text);
-      border-radius: 1.3rem;
-      background-color: var(--new-post-btn-background);
-      font-size: 1rem;
-      font-weight: bold;
+    padding: 0.4rem 1rem;
+    margin-left: 0.5rem;
+    border: 1px solid var(--text);
+    border-radius: 1.3rem;
+    background-color: var(--new-post-btn-background);
+    font-size: 1rem;
+    font-weight: bold;
 
-      :hover {
-        background-color: var(--new-post-btn-hover-background);
-        color: var(--new-post-btn-hover-text);
-        transition: all 0.125s ease-in 0s;
-      }
+    :hover {
+      background-color: var(--new-post-btn-hover-background);
+      color: var(--new-post-btn-hover-text);
+      transition: all 0.125s ease-in 0s;
+    }
+
+    @media only screen and (max-width: 1023px) {
+      display: none;
     }
   }
 
-  .profile {
-    margin-left: 0.8rem;
-    cursor: pointer;
-
-    svg {
-      width: 32px;
-      height: 32px;
-    }
-  }
-
-  .toggle {
+  .my-zone {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.5rem;
-    transition: all 0.125s ease-in 0s;
-    cursor: pointer;
+    margin-left: 0.8rem;
 
-    svg {
-      width: 12px;
-      color: ${toggle};
+    .profile {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
     }
 
-    :hover {
-      svg {
+    .toggle {
+      margin-left: 0.5rem;
+      transition: all 0.125s ease-in 0s;
+      cursor: pointer;
+
+      width: 12px;
+      color: ${backgroundElement9};
+
+      :hover {
         color: var(--toggle-hover);
       }
     }
   }
 `;
 
-const ToggleMenu = styled.div`
-  width: 12rem;
-  margin-top: 0.3rem;
-  margin-left: auto;
-  background-color: var(--toggle-background);
-  box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
-
-  a {
-    display: block;
-    padding: 1.25rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    :hover {
-      color: var(--a-tag-hover-text);
-      background-color: var(--a-tag-hover-background);
-    }
-  }
-`;
+export default Header;
