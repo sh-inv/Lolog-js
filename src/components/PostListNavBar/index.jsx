@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { SlGraph } from 'react-icons/sl';
-import { AiOutlineClockCircle } from 'react-icons/ai';
-import { FiMoreVertical } from 'react-icons/fi';
 import PeriodFilter from './PeriodFilter';
+import More from './More';
 import styled from 'styled-components';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { SlGraph } from 'react-icons/sl';
 
 const PostListNavBar = () => {
   const navBar = [
@@ -36,9 +36,7 @@ const PostListNavBar = () => {
         </div>
         <PeriodFilter />
       </div>
-      <div>
-        <FiMoreVertical className='icon' />
-      </div>
+      <More />
     </PostListNavBarContainer>
   );
 };

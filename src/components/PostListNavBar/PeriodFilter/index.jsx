@@ -73,7 +73,7 @@ const PeriodFilterContainer = styled.div`
     height: 2rem;
     padding: 0 0.5rem;
     border-radius: 4px;
-    background: #1e1e1e;
+    background: var(--new-post-btn-background);
     color: #d9d9d9;
     font-size: 0.875rem;
     font-weight: 600;
@@ -97,7 +97,7 @@ const Filter = styled.div`
   z-index: 5;
   margin-top: 0.5rem;
   width: 12rem;
-  background: #1e1e1e;
+  background: var(--new-post-btn-background);
   opacity: ${({ activeFilter }) => (activeFilter ? '1' : '0')};
   transform: ${({ activeFilter }) => (activeFilter ? 'scale(1)' : 'scale(0)')};
   transition: 0.3s;
