@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import EditButton from '../../EditButton/Index';
-import ConfirmModal from '../../ConfirmModal/Index';
+import EditButton from '../EditButton';
+import ConfirmModal from '../ConfirmModal';
 import styled from 'styled-components';
-import { text1, text2, text3, border3 } from '../../../styles/color';
+import { text1, text2, text3, border3 } from '../../styles/color';
 
 const SavesList = () => {
   const [list, setList] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     const savesData = [
@@ -31,7 +31,7 @@ const SavesList = () => {
       {
         title: '[TIL] 컴퓨터사고',
         contents:
-          '학습 목표 컴퓨터처럼 사고하는 것이 무엇인지 설명할 수 있다. 복잡한 문제를 해결하기 위한 방법은 무엇인지 설명할 수 있다. 프로그래밍의 논리 작성 단계를 알 수 있다. 프로그래밍에서 사용되는 기본적인 데이터 타입을 알 수 있다. 컴퓨터 사고 컴퓨터 사고 = 문제 해결 능력 함수 엊저고젖저곶짤려라 젭알',
+          '학습 목표 컴퓨터처럼 사고하는 것이 무엇인지 설명할 수 있다. 복잡한 문제를 해결하기 위한 방법은 무엇인지 설명할 수 있다. 프로그래밍의 논리 작성 단계를 알 수 있다. 프로그래밍에서 사용되는 기본적인 데이터 타입을 알 수 있다. 컴퓨터 사고 컴퓨터 사고 = 문제 해결 능력 함수 엊저고젖저곶짤려라 젭알 학습 목표 컴퓨터처럼 사고하는 것이 무엇인지 설명할 수 있다. 복잡한 문제를 해결하기 위한 방법은 무엇인지 설명할 수 있다. 프로그래밍의 논리 작성 단계를 알 수 있다. 프로그래밍에서 사용되는 기본적인 데이터 타입을 알 수 있다. 컴퓨터 사고 컴퓨터 사고 = 문제 해결 능력 함수 엊저고젖저곶짤려라 젭알 학습 목표 컴퓨터처럼 사고하는 것이 무엇인지 설명할 수 있다. 복잡한 문제를 해결하기 위한 방법은 무엇인지 설명할 수 있다. 프로그래밍의 논리 작성 단계를 알 수 있다. 프로그래밍에서 사용되는 기본적인 데이터 타입을 알 수 있다. 컴퓨터 사고 컴퓨터 사고 = 문제 해결 능력 함수 엊저고젖저곶짤려라 젭알 학습 목표 컴퓨터처럼 사고하는 것이 무엇인지 설명할 수 있다. 복잡한 문제를 해결하기 위한 방법은 무엇인지 설명할 수 있다. 프로그래밍의 논리 작성 단계를 알 수 있다. 프로그래밍에서 사용되는 기본적인 데이터 타입을 알 수 있다. 컴퓨터 사고 컴퓨터 사고 = 문제 해결 능력 함수 엊저고젖저곶짤려라 젭알 ',
         created_at: '2022년 5월 28일',
       },
     ];
@@ -40,13 +40,12 @@ const SavesList = () => {
   }, []);
 
   const onModal = () => {
-    setModal(true);
-    console.log(1);
+    setIsModal(true);
   };
 
   return (
     <>
-      <List>
+      <SavesListContainer>
         {list.map(saves => {
           return (
             <div className='article' key={saves.title}>
@@ -54,26 +53,26 @@ const SavesList = () => {
               <p>{saves.contents}</p>
               <section>
                 <div className='time'>{saves.created_at}</div>
-                <EditButton text='삭제' onModal={onModal} />
+                <EditButton text='삭제' onClick={onModal} />
               </section>
             </div>
           );
         })}
-      </List>
-      <ConfirmModal
-        visible={modal}
-        title='임시 글 삭제'
-        message='임시 저장한 글을 삭제하시겠습니까?'
-        message2='삭제한 글은 복구할 수 없습니다.'
-        onClose={() => {
-          setModal(false);
-        }}
-      />
+      </SavesListContainer>
+      {isModal && (
+        <ConfirmModal
+          title='임시 글 삭제'
+          message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
+          onClose={() => {
+            setIsModal(false);
+          }}
+        />
+      )}
     </>
   );
 };
 
-const List = styled.div`
+const SavesListContainer = styled.div`
   .article {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -89,6 +88,11 @@ const List = styled.div`
     }
 
     p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      white-space: normal;
       margin-top: 0px;
       margin-bottom: 1rem;
       font-size: 1rem;
