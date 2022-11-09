@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { border4, text2 } from '../../../styles/color';
 
 const PeriodFilter = () => {
   const [activeFilter, setActiveFilter] = useState(false);
@@ -73,8 +74,8 @@ const PeriodFilterContainer = styled.div`
     height: 2rem;
     padding: 0 0.5rem;
     border-radius: 4px;
-    background: #1e1e1e;
-    color: #d9d9d9;
+    background: var(--new-post-btn-background);
+    color: ${text2};
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
@@ -97,7 +98,7 @@ const Filter = styled.div`
   z-index: 5;
   margin-top: 0.5rem;
   width: 12rem;
-  background: #1e1e1e;
+  background: var(--new-post-btn-background);
   opacity: ${({ activeFilter }) => (activeFilter ? '1' : '0')};
   transform: ${({ activeFilter }) => (activeFilter ? 'scale(1)' : 'scale(0)')};
   transition: 0.3s;
@@ -105,7 +106,7 @@ const Filter = styled.div`
 
   ul {
     li {
-      border-top: 1px solid #2a2a2a;
+      border-top: 1px solid ${border4};
       padding: 0.9rem 1rem;
       font-weight: 600;
       font-size: 0.875rem;
@@ -116,12 +117,12 @@ const Filter = styled.div`
       }
 
       &:hover {
-        color: #96f2d7;
+        color: var(--a-tag-hover-text);
       }
     }
 
     .active {
-      color: #96f2d7;
+      color: var(--a-tag-hover-text);
     }
   }
 `;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
-import { text1 } from '../../../../styles/color';
+import { border4, text2 } from '../../../../styles/color';
 
 const UserInfo = () => {
   return (
@@ -24,7 +24,7 @@ const UserInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.625rem 1rem;
-  border-top: 1px solid #2a2a2a;
+  border-top: 1px solid var(--post-border-top);
   line-height: 1.5;
   font-size: 0.75rem;
 
@@ -41,10 +41,10 @@ const UserInfoContainer = styled.div`
     }
 
     .user-by {
-      color: #d9d9d9;
+      color: ${text2};
 
       .user-name {
-        color: ${text1};
+        color: var(--text);
         font-weight: bold;
       }
     }
