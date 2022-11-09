@@ -1,41 +1,62 @@
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import styled from 'styled-components';
-import { postListMaxWidth1056px, postListMaxWidth1440px, postListMaxWidth1920px } from '../../styles/media';
 import { useRef, useState, useEffect } from 'react';
+import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
+import axios from 'axios';
 
 const PostList = () => {
-  const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const [postData, setPostData] = useState([]);
+  const observerRef = useRef(null);
   const [bottom, setBottom] = useState(null);
-  const bottomObserver = useRef(null);
-  const totalElement = arr.length;
+
   const limit = 10;
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          if (totalElement < limit * (page - 1)) {
-            return;
-          }
-          setPage(page + 1);
-        }
-      },
-      { threshold: 0.1, rootMargin: '100px' }
-    );
-    bottomObserver.current = observer;
-  }, []);
+  const getPostData = () => {
+    try {
+      (async () => {
+        const {
+          data: { data },
+        } = await axios.get('data/postlist/data.json');
+        setPostData([...postData, ...data]);
+      })();
+    } catch (error) {
+      console.log('error => ', error);
+    }
+  };
+
+  useEffect(getPostData, [page]);
+
+  const intersectionObserver = entries => {
+    if (entries[0].isIntersecting) {
+      if (postData.length < limit * (page - 1)) {
+        return;
+      }
+      setPage(page => page + 1);
+      console.log('불러왔다.', page);
+    }
+  };
+
+  const observerOptions = {
+    threshold: 1,
+    rootMargin: '50px',
+  };
 
   useEffect(() => {
-    const observer = bottomObserver.current;
+    const observer = new IntersectionObserver(intersectionObserver, observerOptions);
+    observerRef.current = observer;
+  }, [postData]);
+
+  useEffect(() => {
+    const observer = observerRef.current;
     if (bottom) {
       observer.observe(bottom);
+      console.log('관찰시작');
     }
     return () => {
-      if (bottom) {
-        observer.unobserve(bottom);
-      }
+      if (bottom) observer.unobserve(bottom);
+      console.log('관찰종료');
     };
   }, [bottom]);
 
@@ -44,10 +65,10 @@ const PostList = () => {
       <PostListNavBar />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
-          {arr.slice(0, limit * page).map((el, i) => {
+          {postData.slice(0, limit * page).map((post, i) => {
             return <Post key={i} />;
           })}
-          <div ref={bottomObserver} />
+          {postData.length && <div ref={setBottom} />}
         </div>
       </div>
     </PostListContainer>
@@ -66,9 +87,10 @@ const PostListContainer = styled.div`
     }
   }
 
-  ${postListMaxWidth1920px}
-  ${postListMaxWidth1440px}
-  ${postListMaxWidth1056px}
+  ${maxWidth1920px}
+  ${maxWidth1440px}
+  ${maxWidth1056px}
+  ${minWidth250px}
 `;
 
 export default PostList;
