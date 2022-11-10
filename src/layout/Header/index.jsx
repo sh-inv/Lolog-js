@@ -6,6 +6,7 @@ import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
+import Login from '../../components/Login';
 import styled from 'styled-components';
 import { backgroundElement9 } from '../../styles/color';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
@@ -15,6 +16,11 @@ const Header = () => {
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [toggleMenuList, setToggleMenuList] = useState();
+  const [isLoginModal, setIsLoginModal] = useState(false);
+
+  const onLoginModal = () => {
+    setIsLoginModal(true);
+  };
 
   useEffect(() => {
     const closeToggleMenu = e => {
@@ -42,27 +48,33 @@ const Header = () => {
   }, []);
 
   return (
-    <Positioner>
-      <Content>
-        <Link className='logo' to='/'>
-          velog
-        </Link>
-        <RightIcons>
-          <ThemeMode />
-          <Link className='search setting-hover' to='/search'>
-            <BiSearch />
+    <>
+      <Positioner>
+        <Content>
+          <Link className='logo' to='/'>
+            velog
           </Link>
-          <Link className='new-post' to='/write'>
-            새 글 작성
-          </Link>
-          <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <CgProfile className='profile' />
-            <VscTriangleDown className='toggle' />
-          </div>
-        </RightIcons>
-      </Content>
-      {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
-    </Positioner>
+          <RightIcons>
+            <ThemeMode />
+            <Link className='search setting-hover' to='/search'>
+              <BiSearch />
+            </Link>
+            <button className='login' onClick={onLoginModal}>
+              로그인
+            </button>
+            <Link className='new-post' to='/write'>
+              새 글 작성
+            </Link>
+            <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
+              <CgProfile className='profile' />
+              <VscTriangleDown className='toggle' />
+            </div>
+          </RightIcons>
+        </Content>
+        {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
+      </Positioner>
+      <Login isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} onLoginModal={onLoginModal} />
+    </>
   );
 };
 
@@ -124,6 +136,26 @@ const RightIcons = styled.div`
     :hover {
       background-color: rgba(255, 255, 255, 0.1);
       cursor: pointer;
+    }
+  }
+
+  .login {
+    padding: 0.4rem 1rem;
+    margin-left: 0.5rem;
+    border: 1px solid var(--text);
+    border-radius: 1.3rem;
+    background-color: var(--new-post-btn-background);
+    font-size: 1rem;
+    font-weight: bold;
+
+    :hover {
+      background-color: var(--new-post-btn-hover-background);
+      color: var(--new-post-btn-hover-text);
+      transition: all 0.125s ease-in 0s;
+    }
+
+    @media only screen and (max-width: 1023px) {
+      display: none;
     }
   }
 
