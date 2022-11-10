@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Button = ({ text, backgroundColor, color, hoverBackground, hoverColor, ...resetProps }) => {
   return (
-    <Buttons text={text} backgroundColor={backgroundColor} color={color} hoverBackground={hoverBackground} {...resetProps}>
+    <Buttons text={text} backgroundColor={backgroundColor} color={color} {...resetProps}>
       {text}
     </Buttons>
   );
