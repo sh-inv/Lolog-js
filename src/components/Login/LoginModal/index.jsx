@@ -82,22 +82,32 @@ const Positioner = styled.div`
 `;
 
 const LoginContainer = styled.div`
+  display: flex;
   width: 606px;
   height: 530px;
   animation: 0.4s ease-in-out 0s 1 normal forwards running cptskd;
   box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
-  display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex: 1 1 0%;
+    width: auto;
+    height: 100%;
+  }
 
   .left-block {
-    width: 216px;
-    background: ${backgroundElement2};
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
+    width: 216px;
+    padding: 1.5rem;
+    background: ${backgroundElement2};
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
 
     .welcome {
       margin-top: 1.5rem;
@@ -107,6 +117,7 @@ const LoginContainer = styled.div`
       font-size: 1.75rem;
     }
   }
+
   .right-block {
     flex: 1 1 0%;
     display: flex;
