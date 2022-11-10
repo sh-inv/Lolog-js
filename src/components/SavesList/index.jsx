@@ -106,6 +106,10 @@ const SavesListContainer = styled.div`
 
     button {
       color: ${text1};
+
+      &:hover {
+        color: rgb(250, 82, 82);
+      }
     }
   }
 `;
