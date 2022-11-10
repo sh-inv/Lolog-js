@@ -34,6 +34,7 @@ export const border1 = '#E0E0E0';
 export const border2 = '#A0A0A0';
 export const border3 = '#4D4D4D';
 export const border4 = '#2A2A2A';
+export const border5 = '#DEE2E6';
 export const primary1 = '#96F2D7';
 export const primary2 = '#63E6BE';
 export const destructive1 = '#FFC9C9';

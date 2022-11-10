@@ -16,7 +16,11 @@ import {
   backgroundElement5,
   text1,
   text2,
+  text3,
   text5,
+  border3,
+  border5,
+  backgroundElement9,
 } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
@@ -45,7 +49,8 @@ const GlobalStyle = createGlobalStyle`
     --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
     --post-border-top: ${props => (props.isDarkMode ? border4 : backgroundElement5)};
     --postlist-navbar-filter-color: ${props => (props.isDarkMode ? text2 : text5)};
-    --postlist-navbar-more-icon-color: ${props => (props.isDarkMode ? text2 : text5)};
+    --postlist-navbar-more-btn-color: ${props => (props.isDarkMode ? text3 : backgroundElement9)};
+    --postlist-navbar-more-border-top: ${props => (props.isDarkMode ? border3 : border5)};
   }
 
   a {
