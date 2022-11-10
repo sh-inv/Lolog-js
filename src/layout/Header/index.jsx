@@ -6,7 +6,7 @@ import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
-import LoginModal from '../../components/Login/LoginModal';
+import Login from '../../components/Login';
 import styled from 'styled-components';
 import { backgroundElement9 } from '../../styles/color';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
@@ -73,16 +73,7 @@ const Header = () => {
         </Content>
         {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
       </Positioner>
-      {isLoginModal && (
-        <LoginModal
-          title='로그인'
-          message='아직 회원이 아니신가요?'
-          link='회원가입'
-          onClose={() => {
-            setIsLoginModal(false);
-          }}
-        />
-      )}
+      <Login isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} onLoginModal={onLoginModal} />
     </>
   );
 };

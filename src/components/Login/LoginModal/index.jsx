@@ -6,7 +6,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement2, backgroundPage2, buttonText, primary1, text1, text2, text3, border3, border4, opaqueLayer } from '../../../styles/color';
 
-const LoginModal = ({ title, message, link, onClose }) => {
+const LoginModal = ({ title, message, link, onClose, onChange }) => {
   return (
     <>
       <Background />
@@ -45,7 +45,9 @@ const LoginModal = ({ title, message, link, onClose }) => {
             </div>
             <div className='foot'>
               <span>{message}</span>
-              <div className='link'>{link}</div>
+              <div className='link' onClick={onChange}>
+                {link}
+              </div>
             </div>
           </div>
         </LoginContainer>
