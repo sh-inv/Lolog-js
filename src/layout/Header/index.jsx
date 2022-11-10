@@ -16,7 +16,7 @@ const Header = () => {
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const [toggleMenuList, setToggleMenuList] = useState();
-  const [isLoginModal, setIsLoginModal] = useState();
+  const [isLoginModal, setIsLoginModal] = useState(false);
 
   const onLoginModal = () => {
     setIsLoginModal(true);
