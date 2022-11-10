@@ -16,6 +16,16 @@ const SavesContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
 
+  @media screen and (max-width: 1024px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
   .title {
     margin-top: 0px;
     margin-bottom: 3rem;
