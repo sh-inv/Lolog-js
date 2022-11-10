@@ -1,6 +1,6 @@
 import Button from '../Button';
 import styled from 'styled-components';
-import { backgroundElement1, text1, text2, opaqueLayer, buttonText, primary1 } from '../../styles/color';
+import { backgroundElement1, backgroundElement10, text1, text2, opaqueLayer, buttonText, primary1, primary2 } from '../../styles/color';
 
 const ConfirmModal = ({ title, message, onClose }) => {
   return (
@@ -85,11 +85,19 @@ const ModalContainer = styled.div`
     .cancel {
       background: none;
       color: ${primary1};
+
+      &:hover {
+        background: ${backgroundElement10};
+      }
     }
 
     .confirm {
       background: ${primary1};
       color: ${buttonText};
+
+      &:hover {
+        background: ${primary2};
+      }
     }
   }
 `;

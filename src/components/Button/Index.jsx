@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { primary1, primary2 } from '../../styles/color';
 
 const Button = ({ text, backgroundColor, color, hoverBackground, hoverColor, ...resetProps }) => {
   return (
@@ -17,7 +18,7 @@ const Buttons = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background-color: ${props => props.backgroundColor};
+  background-color: ${primary1};
   outline: none;
   border: none;
   border-radius: 4px;
@@ -27,7 +28,7 @@ const Buttons = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: ${props => props.hoverBackground};
+    background: ${primary2};
     color: ${props => props.hoverColor};
   }
 `;
