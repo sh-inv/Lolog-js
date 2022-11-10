@@ -6,7 +6,7 @@ import EditButton from '../../EditButton';
 import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText } from '../../../styles/color';
+import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
@@ -278,8 +278,12 @@ const UserContentsContainer = styled.section`
         }
 
         .confirm-button {
-          background: #96f2d7;
-          color: #121212;
+          background: ${primary1};
+          color: ${buttonText};
+
+          &:hover {
+            background: ${primary2};
+          }
         }
 
         .edit-wrapper {

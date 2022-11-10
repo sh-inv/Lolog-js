@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primary1 } from '../../styles/color';
+import { primary1, primary2 } from '../../styles/color';
 
 const EditButton = ({ text, onClick }) => {
   return <Edit onClick={onClick}>{text}</Edit>;
@@ -19,6 +19,7 @@ const Edit = styled.button`
 
   &:hover {
     cursor: pointer;
+    color: ${primary2};
   }
 `;
 
