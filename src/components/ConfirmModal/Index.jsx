@@ -1,9 +1,8 @@
-import Button from '../Button/Index';
+import Button from '../Button';
 import styled from 'styled-components';
 import { backgroundElement1, text1, text2, opaqueLayer, buttonText, primary1 } from '../../styles/color';
 
-const ConfirmModal = ({ visible, title, message, message2, onClose }) => {
-  if (!visible) return null;
+const ConfirmModal = ({ title, message, onClose }) => {
   return (
     <>
       <Background />
@@ -12,7 +11,6 @@ const ConfirmModal = ({ visible, title, message, message2, onClose }) => {
           <div>
             <h3>{title}</h3>
             <p className='msg'>{message}</p>
-            <p className='msg msg2'>{message2}</p>
             <div className='button'>
               <Button className='cancel' text='취소' onClick={onClose} />
               <Button className='confirm' text='확인' onClick={onClose} />
@@ -67,15 +65,11 @@ const ModalContainer = styled.div`
 
   .msg {
     margin-top: 1rem;
+    margin-bottom: 1rem;
     line-height: 1.5;
     font-size: 1rem;
     color: ${text2};
     white-space: pre-wrap;
-  }
-
-  .msg2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
   }
 
   .button {

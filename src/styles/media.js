@@ -22,3 +22,14 @@ export const postMaxWidth767px = `@media screen and (max-width: 767px) {
   width: calc(100% - 2rem);
   margin: 1rem;
 }`;
+
+//setting 반응형
+export const settingMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}`;
+
+export const settingMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  margin-top: 1.5rem;
+}`;
