@@ -25,22 +25,21 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
               <section>
                 <h4>이메일로 {title}</h4>
                 <form>
-                  <input type='text' placeholder='이메일을 입력하세요.' />
-                  <input type='password' placeholder='비밀번호를 입력하세요.' />
-                  {/* <button>{title}</button> */}
-                  <Button className='login-button' text={title} />
+                  <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
+                  <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
+                  <Button className='login-button' text={title} tabIndex='4' />
                 </form>
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
                 <div className='social'>
-                  <Link className='github'>
+                  <Link className='github' tabIndex='5'>
                     <AiOutlineGithub />
                   </Link>
-                  <Link className='google'>
+                  <Link className='google' tabIndex='6'>
                     <FcGoogle />
                   </Link>
-                  <Link className='facebook'>
+                  <Link className='facebook' tabIndex='7'>
                     <FaFacebookF />
                   </Link>
                 </div>
@@ -48,7 +47,7 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
             </div>
             <div className='foot'>
               <span>{message}</span>
-              <div className='link' onClick={onChange}>
+              <div className='link' onClick={onChange} tabIndex='8'>
                 {link}
               </div>
             </div>
