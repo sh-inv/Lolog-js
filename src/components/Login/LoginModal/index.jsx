@@ -251,7 +251,7 @@ const LoginContainer = styled.div`
       }
 
       section + section {
-        margin-top: 2.5rem;
+        margin-top: 1.5rem;
       }
     }
 
