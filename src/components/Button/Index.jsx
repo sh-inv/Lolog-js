@@ -1,12 +1,9 @@
+import bus from 'nodemon/lib/utils/bus';
 import styled from 'styled-components';
-import { primary1, primary2 } from '../../styles/color';
+import { buttonText, primary1, primary2 } from '../../styles/color';
 
-const Button = ({ text, backgroundColor, color, hoverBackground, hoverColor, ...resetProps }) => {
-  return (
-    <Buttons text={text} backgroundColor={backgroundColor} color={color} {...resetProps}>
-      {text}
-    </Buttons>
-  );
+const Button = ({ text }) => {
+  return <Buttons text={text}>{text}</Buttons>;
 };
 
 const Buttons = styled.button`
@@ -22,14 +19,14 @@ const Buttons = styled.button`
   outline: none;
   border: none;
   border-radius: 4px;
-  color: ${props => props.color};
+  color: ${buttonText};
   font-size: 1rem;
   font-weight: bold;
 
   &:hover {
     cursor: pointer;
     background: ${primary2};
-    color: ${props => props.hoverColor};
+    color: ${buttonText};
   }
 `;
 

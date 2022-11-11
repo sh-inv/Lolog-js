@@ -3,6 +3,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
+import Button from '../../Button';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement2, backgroundPage2, buttonText, primary1, text1, text2, text3, border3, border4, opaqueLayer } from '../../../styles/color';
 
@@ -25,7 +26,9 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
                 <h4>이메일로 {title}</h4>
                 <form>
                   <input type='text' placeholder='이메일을 입력하세요.' />
-                  <button>{title}</button>
+                  <input type='password' placeholder='비밀번호를 입력하세요.' />
+                  {/* <button>{title}</button> */}
+                  <Button className='login-button' text={title} />
                 </form>
               </section>
               <section>
@@ -139,6 +142,7 @@ const LoginContainer = styled.div`
       flex: 1 1 0%;
       display: flex;
       flex-direction: column;
+
       h2 {
         font-size: 1.3125rem;
         color: ${text1};
@@ -149,15 +153,13 @@ const LoginContainer = styled.div`
 
         form {
           display: flex;
+          flex-direction: column;
           width: 100%;
-          height: 3rem;
 
           input {
             flex: 1 1 0%;
             padding: 1rem;
             background: ${backgroundElement1};
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
             border: 0.5px solid ${border4};
             outline: none;
             font-size: 1rem;
@@ -169,12 +171,11 @@ const LoginContainer = styled.div`
           }
 
           button {
-            width: 6rem;
+            height: 3rem;
+            margin-top: 10px;
             background: ${primary1};
             outline: none;
             border: none;
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
             color: ${buttonText};
             font-size: 1rem;
             font-weight: bold;
