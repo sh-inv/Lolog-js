@@ -4,6 +4,7 @@ import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 import Button from '../../Button';
+import welcome from '../../../assets/welcome.png';
 import styled from 'styled-components';
 import { backgroundElement1, backgroundElement2, backgroundPage2, buttonText, primary1, text1, text2, text3, border3, border4, opaqueLayer } from '../../../styles/color';
 
@@ -14,6 +15,7 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
       <Positioner>
         <LoginContainer>
           <div className='left-block'>
+            <img alt='welcome' src={welcome} />
             <div className='welcome'>환영합니다!</div>
           </div>
           <div className='right-block'>
@@ -109,6 +111,12 @@ const LoginContainer = styled.div`
 
     @media screen and (max-width: 768px) {
       display: none;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .welcome {
