@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import PeriodFilter from './PeriodFilter';
 import More from './More';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import { SlGraph } from 'react-icons/sl';
 import { text3 } from '../../styles/color';
 
 const PostListNavBar = () => {
+  const location = useLocation();
   const navBar = [
     {
       name: '트렌딩',
@@ -34,8 +35,9 @@ const PostListNavBar = () => {
               {navItem.name}
             </NavLink>
           ))}
+          <SlideBorder location={location} />
         </div>
-        <PeriodFilter />
+        {location.pathname === '/' && <PeriodFilter />}
       </div>
       <More />
     </PostListNavBarContainer>
@@ -58,6 +60,7 @@ const PostListNavBarContainer = styled.div`
     align-items: center;
 
     .nav-tab {
+      position: relative;
       display: flex;
       width: 14rem;
 
@@ -86,6 +89,35 @@ const PostListNavBarContainer = styled.div`
       font-size: 1.4rem;
     }
   }
+`;
+
+const SlideBorder = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: ${({ location }) => (location.pathname === '/' ? '0' : '50%')};
+  display: block;
+  width: 50%;
+  height: 2px;
+  background: #fff;
+  transition: ease all 0.3s;
+
+  /* animation: boxAni 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-delay: 1s;
+
+  @keyframes boxAni {
+    0% {
+      left: ${({ location }) => (location.pathname === '/' ? '50%' : '0')};
+    }
+    80% {
+      left: ${({ location }) => (location.pathname === '/' ? '-5%' : '55%')};
+    }
+    100% {
+      left: ${({ location }) => (location.pathname === '/' ? '0' : '50%')};
+    }
+  } */
 `;
 
 export default PostListNavBar;
