@@ -6,21 +6,16 @@ const PostInfo = () => {
   const detailDate = date => {
     const milliSeconds = new Date() - date;
     const seconds = milliSeconds / 1000;
-    if (seconds < 300) return `방금 전`;
     const minutes = seconds / 60;
-    if (5 < minutes < 60) return `${Math.floor(minutes)}분 전`;
     const hours = minutes / 60;
-    if (hours < 24) return `${Math.floor(hours)}시간 전`;
     const days = hours / 24;
-    if (days < 7) return `${Math.floor(days)}일 전`;
-    const weeks = days / 7;
-    if (weeks < 5) return `${Math.floor(weeks)}주 전`;
-    const months = days / 30;
-    if (months < 12) return `${Math.floor(months)}개월 전`;
-    const years = days / 365;
-    return `${Math.floor(years)}년 전`;
+    if (seconds < 360) return `방금 전`;
+    else if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+    else if (hours < 24) return `${Math.floor(hours)}시간 전`;
+    else if (days < 8) return `${Math.floor(days)}일 전`;
+    else return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
   };
-  const nowDate = detailDate('글쓴시간');
+  const postDate = detailDate(new Date('November 01, 2022 12:27:00'));
 
   return (
     <PostInfoContainer>
@@ -30,7 +25,7 @@ const PostInfo = () => {
           fkuvbajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbufkuvbajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbufkuvbajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbufkuvbajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbuReactsdfbsdbfsdbgsdfbasdfasdfasdfasdfadsfksajdlfnlkajnsdklvanbsjildvaklsjdnvljabvfahsdbvalsdbvabdsvbaiasdfaadefbvadfbvadfkuvbaeukvbu
         </div>
       </Link>
-      <div className='sub-info'>약 7시간 전 · 0개의 댓글</div>
+      <div className='sub-info'>{postDate} · 0개의 댓글</div>
     </PostInfoContainer>
   );
 };
