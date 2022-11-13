@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import EditButton from '../../EditButton';
 import Button from '../../Button';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, text2, text3 } from '../../../styles/color';
+import { backgroundElement1, border1, border3, border4, buttonText, primary1, primary2, text2, text3 } from '../../../styles/color';
 
 const UserInfo = () => {
   const [user, setUser] = useState('');
@@ -36,12 +36,11 @@ const UserInfo = () => {
           <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
           <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={introduction} />
           <Button
+            className='confirm-button'
             onClick={() => {
               setIsModify(false);
             }}
             text='저장'
-            backgroundColor='#96F2D7'
-            color='#121212'
           />
         </>
       ) : (
@@ -69,24 +68,6 @@ const UserInfoContainer = styled.div`
     padding-left: 0px;
   }
 
-  h2 {
-    margin: 0px;
-    line-height: 1.5;
-    font-size: 2.25rem;
-
-    @media screen and (max-width: 768px) {
-      font-size: 1.25rem;
-    }
-  }
-
-  p {
-    margin-top: 0.25rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-    font-size: 1rem;
-    color: ${text3};
-  }
-
   .modify-input {
     display: block;
     width: 100%;
@@ -112,6 +93,33 @@ const UserInfoContainer = styled.div`
 
   .modify-intro {
     margin: 1rem 0;
+  }
+
+  .confirm-button {
+    background: ${primary1};
+    color: ${buttonText};
+
+    &:hover {
+      background: ${primary2};
+    }
+  }
+
+  h2 {
+    margin: 0px;
+    line-height: 1.5;
+    font-size: 2.25rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  p {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: ${text3};
   }
 `;
 

@@ -45,20 +45,18 @@ const SavesList = () => {
 
   return (
     <>
-      <SavesListContainer>
-        {list.map(saves => {
-          return (
-            <div className='article' key={saves.title}>
-              <h3>{saves.title}</h3>
-              <p>{saves.contents}</p>
-              <section>
-                <div className='time'>{saves.created_at}</div>
-                <EditButton text='삭제' onClick={onModal} />
-              </section>
-            </div>
-          );
-        })}
-      </SavesListContainer>
+      {list.map(saves => {
+        return (
+          <SavesListContainer key={saves.title}>
+            <h3>{saves.title}</h3>
+            <p>{saves.contents}</p>
+            <section>
+              <div className='time'>{saves.created_at}</div>
+              <EditButton text='삭제' onClick={onModal} />
+            </section>
+          </SavesListContainer>
+        );
+      })}
       {isModal && (
         <ConfirmModal
           title='임시 글 삭제'
@@ -73,43 +71,44 @@ const SavesList = () => {
 };
 
 const SavesListContainer = styled.div`
-  .article {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    line-height: 1.5;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  line-height: 1.5;
+  border-bottom: 1px solid ${border3};
 
-    border-bottom: 1px solid ${border3};
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: ${text1};
+  }
 
-    h3 {
-      margin-top: 0px;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    margin-top: 0px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: ${text2};
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .time {
+      color: ${text3};
+    }
+
+    button {
       color: ${text1};
-    }
 
-    p {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      white-space: normal;
-      margin-top: 0px;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      color: ${text2};
-    }
-
-    section {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-
-      .time {
-        color: ${text3};
-      }
-
-      button {
-        color: ${text1};
+      &:hover {
+        color: rgb(250, 82, 82);
       }
     }
   }
