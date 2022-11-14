@@ -56,8 +56,8 @@ const SocialInfo = () => {
   return (
     <>
       {isModifySocialInfo ? (
-        <>
-          <SocialInfoContainer>
+        <SocialInfoContainer>
+          <form>
             <ul>
               {info.map(content => (
                 <li key={content.id}>
@@ -66,9 +66,11 @@ const SocialInfo = () => {
                 </li>
               ))}
             </ul>
-          </SocialInfoContainer>
-          <Button onClick={onModify} text='저장' className='confirm-button' />
-        </>
+            <div className='button-wrapper'>
+              <Button onClick={onModify} text='저장' className='confirm-button' />
+            </div>
+          </form>
+        </SocialInfoContainer>
       ) : (
         <>
           <SocialInfoContainer>
@@ -110,31 +112,39 @@ const SocialInfoContainer = styled.div`
   color: ${text2};
   line-height: 1.5;
 
-  .modify-input {
-    flex: 1 1 0%;
-    display: block;
-    padding: 0.5rem;
-    margin-right: 1rem;
+  form {
+    .modify-input {
+      flex: 1 1 0%;
+      display: block;
+      padding: 0.5rem;
 
-    border: 1px solid ${border3};
-    border-radius: 4px;
-    background: ${backgroundElement1};
-    color: ${text2};
-    font-size: 1rem;
-    line-height: 1rem;
-    outline: none;
+      border: 1px solid ${border3};
+      border-radius: 4px;
+      background: ${backgroundElement1};
+      color: ${text2};
+      font-size: 1rem;
+      line-height: 1rem;
+      outline: none;
 
-    :focus {
-      border: 1px solid ${border1};
+      :focus {
+        border: 1px solid ${border1};
+      }
     }
-  }
 
-  .confirm-button {
-    background: ${primary1};
-    color: ${buttonText};
+    .button-wrapper {
+      margin-top: 1.5rem;
+      display: flex;
+      -webkit-box-pack: end;
+      justify-content: flex-end;
 
-    &:hover {
-      background: ${primary2};
+      .confirm-button {
+        background: ${primary1};
+        color: ${buttonText};
+
+        &:hover {
+          background: ${primary2};
+        }
+      }
     }
   }
 

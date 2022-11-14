@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
-import Button from '../../Button';
-import EditButton from '../../EditButton';
 import Title from './Title';
 import SocialInfo from './SocialInfo';
 import Email from './Email';
 import EmailReceiveSetting from './EmailReceiveSetting';
 import Withdrawal from './Withdrawal';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, text2, text3, buttonText, primary1, primary2 } from '../../../styles/color';
+import { border4, text3 } from '../../../styles/color';
 
 const UserContents = () => {
   return (
@@ -23,7 +20,7 @@ const UserContents = () => {
         </div>
         <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
       </div>
-      <div className='contents-box border'>
+      <div className='contents-box'>
         <div className='wrapper'>
           <div className='title-wrapper'>
             <h3>소셜 정보</h3>
@@ -34,7 +31,7 @@ const UserContents = () => {
         </div>
         <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
       </div>
-      <div className='contents-box border'>
+      <div className='contents-box'>
         <div className='wrapper'>
           <div className='title-wrapper'>
             <h3>이메일 주소</h3>
@@ -43,7 +40,7 @@ const UserContents = () => {
         </div>
         <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
       </div>
-      <div className='contents-box border'>
+      <div className='contents-box'>
         <div className='wrapper'>
           <div className='title-wrapper'>
             <h3>이메일 수신 설정</h3>
@@ -51,7 +48,7 @@ const UserContents = () => {
           <EmailReceiveSetting />
         </div>
       </div>
-      <div className='contents-box border'>
+      <div className='contents-box'>
         <div className='wrapper'>
           <div className='title-wrapper'>
             <h3>회원 탈퇴</h3>
@@ -69,10 +66,6 @@ const UserContentsContainer = styled.section`
 
   @media screen and (max-width: 768px) {
     margin-top: 0rem;
-  }
-
-  .border {
-    border-top: 1px solid ${border4};
   }
 
   .contents-box {
@@ -114,6 +107,10 @@ const UserContentsContainer = styled.section`
       color: ${text3};
       font-size: 0.875rem;
     }
+  }
+
+  .contents-box + .contents-box {
+    border-top: 1px solid ${border4};
   }
 `;
 

@@ -29,7 +29,7 @@ const Title = () => {
         <TitleContainer>
           <form>
             <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
-            <Button onClick={onModify} text='저장' className='confirm-button' />
+            <Button type='submit' onClick={onModify} text='저장' className='confirm-button' />
           </form>
         </TitleContainer>
       ) : (
