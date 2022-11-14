@@ -8,7 +8,7 @@ import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
 import Login from '../../components/Login';
 import styled from 'styled-components';
-import { backgroundElement9 } from '../../styles/color';
+import { backgroundElement5, backgroundElement6, backgroundElement9, buttonText } from '../../styles/color';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
@@ -140,22 +140,26 @@ const RightIcons = styled.div`
   }
 
   .login {
-    padding: 0.4rem 1rem;
-    margin-left: 0.5rem;
-    border: 1px solid var(--text);
-    border-radius: 1.3rem;
-    background-color: var(--new-post-btn-background);
+    height: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     font-size: 1rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
     font-weight: bold;
+    word-break: keep-all;
+    background: ${backgroundElement5};
+    color: ${buttonText};
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
 
     :hover {
-      background-color: var(--new-post-btn-hover-background);
-      color: var(--new-post-btn-hover-text);
-      transition: all 0.125s ease-in 0s;
+      background: ${backgroundElement6};
     }
 
-    @media only screen and (max-width: 1023px) {
-      display: none;
+    &:hover {
+      box-shadow: rgb(0 0 0 / 19%) 0px 2px 12px;
     }
   }
 
