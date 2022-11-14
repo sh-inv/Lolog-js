@@ -14,18 +14,18 @@ const Buttons = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background-color: ${primary1};
+  /* background-color: ${primary1}; */
   outline: none;
   border: none;
   border-radius: 4px;
-  color: ${buttonText};
+  /* color: ${buttonText}; */
   font-size: 1rem;
   font-weight: bold;
 
   &:hover {
     cursor: pointer;
-    background: ${primary2};
-    color: ${buttonText};
+    /* background: ${primary2}; */
+    /* color: ${buttonText}; */
   }
 `;
 
