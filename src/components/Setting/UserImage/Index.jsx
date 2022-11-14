@@ -19,12 +19,12 @@ const UserImageContainer = styled.div`
   padding-right: 1.5rem;
 
   img {
-    object-fit: cover;
+    display: block;
     width: 8rem;
     height: 8rem;
-    border-radius: 50%;
-    display: block;
     margin-bottom: 1.25rem;
+    border-radius: 50%;
+    object-fit: cover;
 
     @media screen and (max-width: 768px) {
       width: 6rem;
