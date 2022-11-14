@@ -12,14 +12,12 @@ const PostListNavBar = () => {
     {
       name: '트렌딩',
       icon: <SlGraph className='icon' />,
-      className: 'tab-btn',
       path: '/',
       query: '',
     },
     {
       name: '최신',
       icon: <AiOutlineClockCircle className='icon' />,
-      className: 'tab-btn',
       path: '/recent',
       query: '',
     },
@@ -30,12 +28,12 @@ const PostListNavBar = () => {
       <div className='nav'>
         <div className='nav-tab'>
           {navBar.map(navItem => (
-            <NavLink to={navItem.path} key={navItem.name} className={navItem.className} end>
+            <NavLink to={navItem.path} key={navItem.name} className='tab-btn' end>
               {navItem.icon}
               {navItem.name}
             </NavLink>
           ))}
-          <SlideBorder location={location} />
+          <SlideBorder className='' location={location} />
         </div>
         {location.pathname === '/' && <PeriodFilter />}
       </div>
@@ -101,11 +99,13 @@ const SlideBorder = styled.div`
   background: #fff;
   transition: ease all 0.3s;
 
-  /* animation: boxAni 0.3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  animation-direction: alternate;
-  animation-delay: 1s;
+  /* .ani {
+    animation: boxAni 0.3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-delay: 1s;
+  }
 
   @keyframes boxAni {
     0% {
