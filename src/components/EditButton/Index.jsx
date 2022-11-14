@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import { primary1, primary2 } from '../../styles/color';
 
-const EditButton = ({ text, onClick }) => {
-  return <Edit onClick={onClick}>{text}</Edit>;
+const EditButton = ({ text, onClick, ...props }) => {
+  return (
+    <Edit onClick={onClick} {...props}>
+      {text}
+    </Edit>
+  );
 };
 
 const Edit = styled.button`

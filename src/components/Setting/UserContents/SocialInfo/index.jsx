@@ -4,7 +4,7 @@ import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'reac
 import EditButton from '../../../EditButton';
 import Button from '../../../Button';
 import styled from 'styled-components';
-import { text2 } from '../../../../styles/color';
+import { backgroundElement1, border1, border3, text2, primary1, primary2, buttonText } from '../../../../styles/color';
 
 const SocialInfo = () => {
   const [social, setSocial] = useState('');
@@ -101,9 +101,9 @@ const SocialInfo = () => {
               </li>
             </ul>
           </SocialInfoContainer>
-          <div className='edit-wrapper'>
+          <EditButtonContainer>
             <EditButton text='수정' onClick={onModify} />
-          </div>
+          </EditButtonContainer>
         </>
       )}
     </>
@@ -116,6 +116,34 @@ const SocialInfoContainer = styled.div`
   color: ${text2};
   line-height: 1.5;
 
+  .modify-input {
+    flex: 1 1 0%;
+    display: block;
+    padding: 0.5rem;
+    margin-right: 1rem;
+
+    border: 1px solid ${border3};
+    border-radius: 4px;
+    background: ${backgroundElement1};
+    color: ${text2};
+    font-size: 1rem;
+    line-height: 1rem;
+    outline: none;
+
+    :focus {
+      border: 1px solid ${border1};
+    }
+  }
+
+  .confirm-button {
+    background: ${primary1};
+    color: ${buttonText};
+
+    &:hover {
+      background: ${primary2};
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0px;
@@ -125,7 +153,6 @@ const SocialInfoContainer = styled.div`
       display: flex;
       -webkit-box-align: center;
       align-items: center;
-      margin-bottom: 0.5rem;
 
       .icon {
         width: 1rem;
@@ -139,7 +166,18 @@ const SocialInfoContainer = styled.div`
         font-size: 1rem;
       }
     }
+
+    li + li {
+      margin-top: 0.5rem;
+    }
   }
+`;
+
+const EditButtonContainer = styled.div`
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-left: 1rem;
 `;
 
 export default SocialInfo;
