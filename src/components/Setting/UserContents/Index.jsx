@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
+import Withdrawal from './Withdrawal';
 import Button from '../../Button';
 import EditButton from '../../EditButton';
-import ConfirmModal from '../../ConfirmModal';
+// import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
 import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
@@ -11,7 +12,7 @@ import { backgroundElement1, border1, border3, border4, text2, text3, destructiv
 const UserContents = () => {
   const [title, setTitle] = useState('');
   const [social, setSocial] = useState('');
-  const [isModal, setIsModal] = useState(false);
+  // const [isModal, setIsModal] = useState(false);
   const [isModifyTitle, setIsModifyTitle] = useState(false);
   const [isModifyContents, setIsModifyContents] = useState(false);
 
@@ -23,10 +24,10 @@ const UserContents = () => {
     isModifyContents ? setIsModifyContents(false) : setIsModifyContents(true);
   };
 
-  const onModal = () => {
-    //token 값 추가해야함
-    setIsModal(true);
-  };
+  // const onModal = () => {
+  //   //token 값 추가해야함
+  //   setIsModal(true);
+  // };
 
   useEffect(() => {
     const contents = {
@@ -74,148 +75,139 @@ const UserContents = () => {
   ];
 
   return (
-    <>
-      <UserContentsContainer>
-        <div className='bottom-block'>
-          <div className='wrapper'>
-            <div className='title-wrapper'>
-              <h3>벨로그 제목</h3>
-            </div>
-            <div className='interval'>
-              {isModifyTitle ? (
-                <>
-                  <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
-                  <Button
-                    onClick={() => {
-                      setIsModifyTitle(false);
-                    }}
-                    text='저장'
-                    className='confirm-button'
-                  />
-                </>
-              ) : (
-                <>
-                  <div className='contents'>{title}</div>
-                  <div className='edit-wrapper'>
-                    <EditButton text='수정' onClick={onModifyTitle} onChange={getSocial} value={social} />
-                  </div>
-                </>
-              )}
-            </div>
+    // <>
+    <UserContentsContainer>
+      <div className='bottom-block'>
+        <div className='wrapper'>
+          <div className='title-wrapper'>
+            <h3>벨로그 제목</h3>
           </div>
-          <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
-        </div>
-        <div className='bottom-block border'>
-          <div className='wrapper'>
-            <div className='title-wrapper'>
-              <h3>소셜 정보</h3>
-            </div>
-            <div className='interval'>
-              {isModifyContents ? (
-                <>
-                  <div className='contents'>
-                    <ul>
-                      {info.map(content => (
-                        <li key={content.id}>
-                          {content.icon}
-                          <input className='modify-input' type='text' placeholder={content.placeholder} />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button
-                    onClick={() => {
-                      setIsModifyContents(false);
-                    }}
-                    text='저장'
-                    className='confirm-button'
-                  />
-                </>
-              ) : (
-                <>
-                  <div className='contents'>
-                    <ul>
-                      <li>
-                        <MdEmail className='icon' />
-                        <span>{social.email}</span>
-                      </li>
-                      <li>
-                        <AiFillGithub className='icon' />
-                        <span>{social.github}</span>
-                      </li>
-                      <li>
-                        <AiOutlineTwitter className='icon' />
-                        <span>{social.twitter}</span>
-                      </li>
-                      <li>
-                        <AiFillFacebook className='icon' />
-                        <span>{social.facebook}</span>
-                      </li>
-                      <li>
-                        <AiFillHome className='icon' />
-                        <span>{social.url}</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className='edit-wrapper'>
-                    <EditButton text='수정' onClick={onModifyContents} />
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-          <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
-        </div>
-        <div className='bottom-block border'>
-          <div className='wrapper'>
-            <div className='title-wrapper'>
-              <h3>이메일 주소</h3>
-            </div>
-            <div className='contents'>you8inpark@gmail.com</div>
-          </div>
-          <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
-        </div>
-        <div className='bottom-block border'>
-          <div className='wrapper'>
-            <div className='title-wrapper'>
-              <h3>이메일 수신 설정</h3>
-            </div>
-            <div className='contents'>
-              <ul>
-                <li>
-                  <span className='alert'>댓글 알림</span>
-                  <Toggle />
-                </li>
-                <li>
-                  <span className='alert'>벨로그 업데이트 소식</span>
-                  <Toggle />
-                </li>
-              </ul>
-            </div>
+          <div className='interval'>
+            {isModifyTitle ? (
+              <>
+                <input className='modify-input modify-title' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
+                <Button
+                  onClick={() => {
+                    setIsModifyTitle(false);
+                  }}
+                  text='저장'
+                  className='confirm-button'
+                />
+              </>
+            ) : (
+              <>
+                <div className='contents'>{title}</div>
+                <div className='edit-wrapper'>
+                  <EditButton text='수정' onClick={onModifyTitle} onChange={getSocial} value={social} />
+                </div>
+              </>
+            )}
           </div>
         </div>
-        <div className='bottom-block  border'>
-          <div className='wrapper'>
-            <div className='title-wrapper'>
-              <h3>회원 탈퇴</h3>
-            </div>
-            <div className='contents'>
-              <Button text='회원 탈퇴' onClick={onModal} className='withdrawal-button' />
-            </div>
+        <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
+      </div>
+      <div className='bottom-block border'>
+        <div className='wrapper'>
+          <div className='title-wrapper'>
+            <h3>소셜 정보</h3>
           </div>
-          <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
+          <div className='interval'>
+            {isModifyContents ? (
+              <>
+                <div className='contents'>
+                  <ul>
+                    {info.map(content => (
+                      <li key={content.id}>
+                        {content.icon}
+                        <input className='modify-input' type='text' placeholder={content.placeholder} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button
+                  onClick={() => {
+                    setIsModifyContents(false);
+                  }}
+                  text='저장'
+                  className='confirm-button'
+                />
+              </>
+            ) : (
+              <>
+                <div className='contents'>
+                  <ul>
+                    <li>
+                      <MdEmail className='icon' />
+                      <span>{social.email}</span>
+                    </li>
+                    <li>
+                      <AiFillGithub className='icon' />
+                      <span>{social.github}</span>
+                    </li>
+                    <li>
+                      <AiOutlineTwitter className='icon' />
+                      <span>{social.twitter}</span>
+                    </li>
+                    <li>
+                      <AiFillFacebook className='icon' />
+                      <span>{social.facebook}</span>
+                    </li>
+                    <li>
+                      <AiFillHome className='icon' />
+                      <span>{social.url}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className='edit-wrapper'>
+                  <EditButton text='수정' onClick={onModifyContents} />
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </UserContentsContainer>
-      {isModal && (
-        <ConfirmModal
-          title='회원탈퇴'
-          message='정말로 탈퇴 하시겠습니까?'
-          onClose={() => {
-            setIsModal(false);
-          }}
-        />
-      )}
-    </>
+        <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
+      </div>
+      <div className='bottom-block border'>
+        <div className='wrapper'>
+          <div className='title-wrapper'>
+            <h3>이메일 주소</h3>
+          </div>
+          <div className='contents'>you8inpark@gmail.com</div>
+        </div>
+        <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
+      </div>
+      <div className='bottom-block border'>
+        <div className='wrapper'>
+          <div className='title-wrapper'>
+            <h3>이메일 수신 설정</h3>
+          </div>
+          <div className='contents'>
+            <ul>
+              <li>
+                <span className='alert'>댓글 알림</span>
+                <Toggle />
+              </li>
+              <li>
+                <span className='alert'>벨로그 업데이트 소식</span>
+                <Toggle />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className='bottom-block border'>
+        <div className='wrapper'>
+          <div className='title-wrapper'>
+            <h3>회원 탈퇴</h3>
+          </div>
+          <div className='contents'>
+            <Withdrawal />
+            {/* <Button text='회원 탈퇴' onClick={onModal} className='withdrawal-button' /> */}
+          </div>
+        </div>
+        <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
+      </div>
+    </UserContentsContainer>
   );
 };
 

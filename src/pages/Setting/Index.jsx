@@ -1,5 +1,5 @@
 import UserImage from '../../components/Setting/UserImage';
-import UserInfo from '../../components/Setting/UserInfo';
+import UserIntroduction from '../../components/Setting/UserIntroduction';
 import UserContents from '../../components/Setting/UserContents';
 import styled from 'styled-components';
 import { settingMaxWidth1024px, settingMaxWidth768px } from '../../styles/media';
@@ -9,7 +9,7 @@ const Setting = () => {
     <SettingPage>
       <section className='setting-user'>
         <UserImage />
-        <UserInfo />
+        <UserIntroduction />
       </section>
       <UserContents />
     </SettingPage>
