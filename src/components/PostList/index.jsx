@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
-import PostListLoading from '../PostListLoading';
+import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const PostList = () => {
@@ -63,7 +63,7 @@ const PostList = () => {
           {postData.map((_, i) => {
             return <Post key={i} />;
           })}
-          <PostListLoading />
+          <PostSkeleton />
         </div>
         {postData.length ? <div ref={setBottom} /> : null}
       </div>
