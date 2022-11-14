@@ -4,7 +4,7 @@ import Button from '../../Button';
 import styled from 'styled-components';
 import { backgroundElement1, border1, border3, border4, buttonText, primary1, primary2, text2, text3 } from '../../../styles/color';
 
-const UserInfo = () => {
+const UserIntroduction = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
@@ -123,4 +123,4 @@ const UserInfoContainer = styled.div`
   }
 `;
 
-export default UserInfo;
+export default UserIntroduction;
