@@ -1,6 +1,5 @@
 import UserProfileImage from './UserProfileImage';
 import Button from '../../Button';
-import profile from '../../../assets/profile.png';
 import styled from 'styled-components';
 import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
 
