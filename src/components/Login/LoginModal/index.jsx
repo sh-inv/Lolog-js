@@ -173,13 +173,17 @@ const LoginContainer = styled.div`
             color: ${text1};
 
             :focus {
-              border: 1px solid ${primary1};
+              outline: 1px solid ${primary1};
             }
+          }
+
+          input + input {
+            margin-top: 0.25rem;
           }
 
           button {
             height: 3rem;
-            margin-top: 10px;
+            margin-top: 15px;
             background: ${primary1};
             outline: none;
             border: none;
