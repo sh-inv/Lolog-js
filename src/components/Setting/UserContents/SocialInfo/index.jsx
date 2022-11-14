@@ -67,13 +67,7 @@ const SocialInfo = () => {
               ))}
             </ul>
           </SocialInfoContainer>
-          <Button
-            onClick={() => {
-              setisModifySocialInfo(false);
-            }}
-            text='저장'
-            className='confirm-button'
-          />
+          <Button onClick={onModify} text='저장' className='confirm-button' />
         </>
       ) : (
         <>

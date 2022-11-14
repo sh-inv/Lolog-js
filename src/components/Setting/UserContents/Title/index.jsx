@@ -8,9 +8,8 @@ const Title = () => {
   const [title, setTitle] = useState('');
   const [isModifyTitle, setIsModifyTitle] = useState(false);
 
-  const onModifyTitle = () => {
+  const onModify = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
-    console.log(isModifyTitle);
   };
 
   useEffect(() => {
@@ -30,14 +29,14 @@ const Title = () => {
         <TitleContainer>
           <form>
             <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
-            <Button onClick={onModifyTitle} text='저장' className='confirm-button' />
+            <Button onClick={onModify} text='저장' className='confirm-button' />
           </form>
         </TitleContainer>
       ) : (
         <>
           <TitleContainer>{title}</TitleContainer>
           <EditButtonContainer>
-            <EditButton text='수정' onClick={onModifyTitle} onChange={getTitle} value={title} />
+            <EditButton text='수정' onClick={onModify} onChange={getTitle} value={title} />
           </EditButtonContainer>
         </>
       )}
