@@ -4,7 +4,7 @@ import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'reac
 import Withdrawal from './Withdrawal';
 import Button from '../../Button';
 import EditButton from '../../EditButton';
-import Toggle from '../Toggle';
+import EmailReceiveSetting from './EmailReceiveSetting';
 import styled from 'styled-components';
 import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
 
@@ -68,7 +68,6 @@ const UserContents = () => {
   ];
 
   return (
-    // <>
     <UserContentsContainer>
       <div className='bottom-block'>
         <div className='wrapper'>
@@ -175,16 +174,7 @@ const UserContents = () => {
             <h3>이메일 수신 설정</h3>
           </div>
           <div className='contents'>
-            <ul>
-              <li>
-                <span className='alert'>댓글 알림</span>
-                <Toggle />
-              </li>
-              <li>
-                <span className='alert'>벨로그 업데이트 소식</span>
-                <Toggle />
-              </li>
-            </ul>
+            <EmailReceiveSetting />
           </div>
         </div>
       </div>
@@ -305,10 +295,6 @@ const UserContentsContainer = styled.section`
 
             span {
               font-size: 1rem;
-            }
-
-            .alert {
-              width: 14rem;
             }
           }
         }

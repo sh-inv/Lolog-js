@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement9, primary2 } from '../../../styles/color';
+import { backgroundElement1, backgroundElement9, primary2 } from '../../../../styles/color';
 
 const Toggle = () => {
   const [toggle, setToggle] = useState(false);
