@@ -26,7 +26,7 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
           message='계정이 이미 있으신가요?'
           link='로그인'
           onClose={() => {
-            setIsLoginModal(false);
+            setIsJoinModal(false);
           }}
           onChange={() => {
             setIsJoinModal(false);
