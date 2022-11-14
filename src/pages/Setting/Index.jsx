@@ -1,4 +1,4 @@
-import UserImage from '../../components/Setting/UserImage';
+import UserProfile from '../../components/Setting/UserProfile';
 import UserIntroduction from '../../components/Setting/UserIntroduction';
 import UserInformation from '../../components/Setting/UserInformation';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ const Setting = () => {
   return (
     <SettingPage>
       <section className='setting-user'>
-        <UserImage />
+        <UserProfile />
         <UserIntroduction />
       </section>
       <UserInformation />

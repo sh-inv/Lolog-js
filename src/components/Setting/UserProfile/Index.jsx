@@ -1,37 +1,23 @@
+import UserProfileImage from './UserProfileImage';
 import Button from '../../Button';
 import profile from '../../../assets/profile.png';
 import styled from 'styled-components';
 import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
 
-const UserImage = () => {
+const UserProfile = () => {
   return (
-    <UserImageContainer>
-      <img alt='profile' src={profile} />
+    <UserProfileContainer>
+      <UserProfileImage />
       <Button text='이미지 업로드' className='upload' />
       <Button text='이미지 제거' className='remove' />
-    </UserImageContainer>
+    </UserProfileContainer>
   );
 };
 
-const UserImageContainer = styled.div`
+const UserProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 1.5rem;
-
-  img {
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    margin-bottom: 1.25rem;
-    border-radius: 50%;
-    object-fit: cover;
-
-    @media screen and (max-width: 768px) {
-      width: 6rem;
-      height: 6rem;
-      margin-bottom: 1rem;
-    }
-  }
 
   button {
     @media screen and (max-width: 768px) {
@@ -71,4 +57,4 @@ const UserImageContainer = styled.div`
   }
 `;
 
-export default UserImage;
+export default UserProfile;
