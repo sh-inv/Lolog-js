@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { text2 } from '../../../../styles/color';
 
 const PostInfo = () => {
-  const detailDate = date => {
+  const getPostDate = date => {
     const milliSeconds = new Date() - date;
     const seconds = milliSeconds / 1000;
     const minutes = seconds / 60;
@@ -15,7 +15,7 @@ const PostInfo = () => {
     else if (days < 8) return `${Math.floor(days)}일 전`;
     else return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
   };
-  const postDate = detailDate(new Date('November 01, 2022 12:27:00'));
+  const postDate = getPostDate(new Date('November 14, 2022 11:08:00'));
 
   return (
     <PostInfoContainer>

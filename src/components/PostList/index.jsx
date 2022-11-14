@@ -27,33 +27,33 @@ const PostList = () => {
 
   useEffect(getPostData, [pageNum]);
 
-  // const intersectionObserver = entries => {
-  //   if (entries[0].isIntersecting) {
-  //     setPageNum(pageNum => pageNum + 1);
-  //   }
-  // };
+  const intersectionObserver = entries => {
+    if (entries[0].isIntersecting) {
+      setPageNum(pageNum => pageNum + 1);
+    }
+  };
 
-  // const observerOptions = {
-  //   threshold: 0.1,
-  //   rootMargin: '500px',
-  // };
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '500px',
+  };
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(intersectionObserver, observerOptions);
-  //   observerRef.current = observer;
-  // }, [postData]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(intersectionObserver, observerOptions);
+    observerRef.current = observer;
+  }, [postData]);
 
-  // useEffect(() => {
-  //   const observer = observerRef.current;
-  //   if (bottom) {
-  //     observer.observe(bottom);
-  //     console.log('관찰시작');
-  //   }
-  //   return () => {
-  //     if (bottom) observer.unobserve(bottom);
-  //     console.log('관찰종료');
-  //   };
-  // }, [bottom]);
+  useEffect(() => {
+    const observer = observerRef.current;
+    if (bottom) {
+      observer.observe(bottom);
+      console.log('관찰시작');
+    }
+    return () => {
+      if (bottom) observer.unobserve(bottom);
+      console.log('관찰종료');
+    };
+  }, [bottom]);
 
   return (
     <PostListContainer>
@@ -65,7 +65,7 @@ const PostList = () => {
           })}
           <PostListLoading />
         </div>
-        {postData.length ? <div ref={setBottom} /> : <></>}
+        {postData.length ? <div ref={setBottom} /> : null}
       </div>
     </PostListContainer>
   );
