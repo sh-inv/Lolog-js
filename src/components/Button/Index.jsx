@@ -1,4 +1,3 @@
-import bus from 'nodemon/lib/utils/bus';
 import styled from 'styled-components';
 import { buttonText, primary1, primary2 } from '../../styles/color';
 
