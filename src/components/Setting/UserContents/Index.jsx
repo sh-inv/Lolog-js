@@ -4,7 +4,6 @@ import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'reac
 import Withdrawal from './Withdrawal';
 import Button from '../../Button';
 import EditButton from '../../EditButton';
-// import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
 import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
@@ -12,7 +11,6 @@ import { backgroundElement1, border1, border3, border4, text2, text3, destructiv
 const UserContents = () => {
   const [title, setTitle] = useState('');
   const [social, setSocial] = useState('');
-  // const [isModal, setIsModal] = useState(false);
   const [isModifyTitle, setIsModifyTitle] = useState(false);
   const [isModifyContents, setIsModifyContents] = useState(false);
 
@@ -23,11 +21,6 @@ const UserContents = () => {
   const onModifyContents = () => {
     isModifyContents ? setIsModifyContents(false) : setIsModifyContents(true);
   };
-
-  // const onModal = () => {
-  //   //token 값 추가해야함
-  //   setIsModal(true);
-  // };
 
   useEffect(() => {
     const contents = {
@@ -202,7 +195,6 @@ const UserContents = () => {
           </div>
           <div className='contents'>
             <Withdrawal />
-            {/* <Button text='회원 탈퇴' onClick={onModal} className='withdrawal-button' /> */}
           </div>
         </div>
         <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
