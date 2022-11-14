@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
+import PostListLoading from '../PostListLoading';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const PostList = () => {
@@ -26,33 +27,33 @@ const PostList = () => {
 
   useEffect(getPostData, [pageNum]);
 
-  const intersectionObserver = entries => {
-    if (entries[0].isIntersecting) {
-      setPageNum(pageNum => pageNum + 1);
-    }
-  };
+  // const intersectionObserver = entries => {
+  //   if (entries[0].isIntersecting) {
+  //     setPageNum(pageNum => pageNum + 1);
+  //   }
+  // };
 
-  const observerOptions = {
-    threshold: 1,
-    rootMargin: '50px',
-  };
+  // const observerOptions = {
+  //   threshold: 0.1,
+  //   rootMargin: '500px',
+  // };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(intersectionObserver, observerOptions);
-    observerRef.current = observer;
-  }, [postData]);
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(intersectionObserver, observerOptions);
+  //   observerRef.current = observer;
+  // }, [postData]);
 
-  useEffect(() => {
-    const observer = observerRef.current;
-    if (bottom) {
-      observer.observe(bottom);
-      console.log('관찰시작');
-    }
-    return () => {
-      if (bottom) observer.unobserve(bottom);
-      console.log('관찰종료');
-    };
-  }, [bottom]);
+  // useEffect(() => {
+  //   const observer = observerRef.current;
+  //   if (bottom) {
+  //     observer.observe(bottom);
+  //     console.log('관찰시작');
+  //   }
+  //   return () => {
+  //     if (bottom) observer.unobserve(bottom);
+  //     console.log('관찰종료');
+  //   };
+  // }, [bottom]);
 
   return (
     <PostListContainer>
@@ -62,8 +63,9 @@ const PostList = () => {
           {postData.map((_, i) => {
             return <Post key={i} />;
           })}
+          <PostListLoading />
         </div>
-        {postData.length && <div ref={setBottom} />}
+        {postData.length ? <div ref={setBottom} /> : <></>}
       </div>
     </PostListContainer>
   );
