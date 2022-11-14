@@ -58,7 +58,7 @@ const SocialInfo = () => {
       {isModifySocialInfo ? (
         <SocialInfoContainer>
           <form>
-            <ul>
+            <ul className='modify-info'>
               {info.map(content => (
                 <li key={content.id}>
                   {content.icon}
@@ -74,7 +74,7 @@ const SocialInfo = () => {
       ) : (
         <>
           <SocialInfoContainer>
-            <ul>
+            <ul className='save-info'>
               <li>
                 <MdEmail className='icon' />
                 <span>{social.email}</span>
@@ -112,23 +112,43 @@ const SocialInfoContainer = styled.div`
   color: ${text2};
   line-height: 1.5;
 
-  form {
-    .modify-input {
-      flex: 1 1 0%;
-      display: block;
-      padding: 0.5rem;
+  li {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
 
-      border: 1px solid ${border3};
-      border-radius: 4px;
-      background: ${backgroundElement1};
-      color: ${text2};
+    .icon {
+      width: 1rem;
+      height: 1rem;
       font-size: 1rem;
-      line-height: 1rem;
-      outline: none;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+  }
 
-      :focus {
-        border: 1px solid ${border1};
+  form {
+    .modify-info {
+      .modify-input {
+        flex: 1 1 0%;
+        display: block;
+        padding: 0.5rem;
+
+        border: 1px solid ${border3};
+        border-radius: 4px;
+        background: ${backgroundElement1};
+        color: ${text2};
+        font-size: 1rem;
+        line-height: 1rem;
+        outline: none;
+
+        :focus {
+          border: 1px solid ${border1};
+        }
       }
+    }
+
+    li + li {
+      margin-top: 1rem;
     }
 
     .button-wrapper {
@@ -148,32 +168,18 @@ const SocialInfoContainer = styled.div`
     }
   }
 
-  ul {
+  .save-info {
     list-style: none;
     padding: 0px;
     margin: 0px;
 
-    li {
-      display: flex;
-      -webkit-box-align: center;
-      align-items: center;
-
-      .icon {
-        width: 1rem;
-        height: 1rem;
-        font-size: 1rem;
-        margin-right: 0.5rem;
-        flex-shrink: 0;
-      }
-
-      span {
-        font-size: 1rem;
-      }
+    span {
+      font-size: 1rem;
     }
+  }
 
-    li + li {
-      margin-top: 0.5rem;
-    }
+  li + li {
+    margin-top: 0.5rem;
   }
 `;
 
