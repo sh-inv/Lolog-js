@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
-import { MdEmail } from 'react-icons/md';
-import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
-import Withdrawal from './Withdrawal';
 import Button from '../../Button';
 import EditButton from '../../EditButton';
+import SocialInfo from './SocialInfo';
+import Email from './Email';
 import EmailReceiveSetting from './EmailReceiveSetting';
+import Withdrawal from './Withdrawal';
 import styled from 'styled-components';
 import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
-  const [social, setSocial] = useState('');
+  // const [social, setSocial] = useState('');
   const [isModifyTitle, setIsModifyTitle] = useState(false);
-  const [isModifyContents, setIsModifyContents] = useState(false);
+  // const [isModifyContents, setIsModifyContents] = useState(false);
 
   const onModifyTitle = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
   };
 
-  const onModifyContents = () => {
-    isModifyContents ? setIsModifyContents(false) : setIsModifyContents(true);
-  };
+  // const onModifyContents = () => {
+  //   isModifyContents ? setIsModifyContents(false) : setIsModifyContents(true);
+  // };
 
   useEffect(() => {
     const contents = {
@@ -28,44 +28,16 @@ const UserContents = () => {
       social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
     };
     setTitle(contents.title);
-    setSocial(contents.social);
+    // setSocial(contents.social);
   }, []);
 
   const getTitle = e => {
     setTitle(e.target.value);
   };
 
-  const getSocial = e => {
-    setSocial(e.target.value);
-  };
-
-  const info = [
-    {
-      id: 1,
-      icon: <MdEmail className='icon' />,
-      placeholder: '이메일을 입력하세요.',
-    },
-    {
-      id: 2,
-      icon: <AiFillGithub className='icon' />,
-      placeholder: 'Github 계정을 입력하세요.',
-    },
-    {
-      id: 3,
-      icon: <AiOutlineTwitter className='icon' />,
-      placeholder: 'Twitter 계정을 입력하세요.',
-    },
-    {
-      id: 4,
-      icon: <AiFillFacebook className='icon' />,
-      placeholder: 'http://www.facebook.com/',
-    },
-    {
-      id: 5,
-      icon: <AiFillHome className='icon' />,
-      placeholder: '홈페이지 주소를 입력하세요.',
-    },
-  ];
+  // const getSocial = e => {
+  //   setSocial(e.target.value);
+  // };
 
   return (
     <UserContentsContainer>
@@ -90,7 +62,7 @@ const UserContents = () => {
               <>
                 <div className='contents'>{title}</div>
                 <div className='edit-wrapper'>
-                  <EditButton text='수정' onClick={onModifyTitle} onChange={getSocial} value={social} />
+                  <EditButton text='수정' onClick={onModifyTitle} onChange={getTitle} value={title} />
                 </div>
               </>
             )}
@@ -104,57 +76,7 @@ const UserContents = () => {
             <h3>소셜 정보</h3>
           </div>
           <div className='interval'>
-            {isModifyContents ? (
-              <>
-                <div className='contents'>
-                  <ul>
-                    {info.map(content => (
-                      <li key={content.id}>
-                        {content.icon}
-                        <input className='modify-input' type='text' placeholder={content.placeholder} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Button
-                  onClick={() => {
-                    setIsModifyContents(false);
-                  }}
-                  text='저장'
-                  className='confirm-button'
-                />
-              </>
-            ) : (
-              <>
-                <div className='contents'>
-                  <ul>
-                    <li>
-                      <MdEmail className='icon' />
-                      <span>{social.email}</span>
-                    </li>
-                    <li>
-                      <AiFillGithub className='icon' />
-                      <span>{social.github}</span>
-                    </li>
-                    <li>
-                      <AiOutlineTwitter className='icon' />
-                      <span>{social.twitter}</span>
-                    </li>
-                    <li>
-                      <AiFillFacebook className='icon' />
-                      <span>{social.facebook}</span>
-                    </li>
-                    <li>
-                      <AiFillHome className='icon' />
-                      <span>{social.url}</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className='edit-wrapper'>
-                  <EditButton text='수정' onClick={onModifyContents} />
-                </div>
-              </>
-            )}
+            <SocialInfo />
           </div>
         </div>
         <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
@@ -164,7 +86,7 @@ const UserContents = () => {
           <div className='title-wrapper'>
             <h3>이메일 주소</h3>
           </div>
-          <div className='contents'>you8inpark@gmail.com</div>
+          <Email />
         </div>
         <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
       </div>
@@ -269,10 +191,10 @@ const UserContentsContainer = styled.section`
       }
 
       .contents {
-        flex: 1 1 0%;
+        /* flex: 1 1 0%;
         font-size: 1rem;
         color: ${text2};
-        line-height: 1.5;
+        line-height: 1.5; */
 
         ul {
           list-style: none;
@@ -296,15 +218,6 @@ const UserContentsContainer = styled.section`
             span {
               font-size: 1rem;
             }
-          }
-        }
-
-        .withdrawal-button {
-          background: ${destructive1};
-          color: ${buttonText};
-
-          &:hover {
-            background: ${destructive2};
           }
         }
       }

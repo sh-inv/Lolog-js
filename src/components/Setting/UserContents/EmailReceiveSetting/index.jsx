@@ -1,4 +1,4 @@
-import Toggle from '../Toggle';
+import Toggle from './Toggle';
 import styled from 'styled-components';
 import { text2 } from '../../../../styles/color';
 
