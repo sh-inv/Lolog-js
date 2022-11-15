@@ -1,10 +1,4 @@
-export const lightModeBackgroundColor = '#FFFFFF';
-export const lightModeFontColor = '#212529';
-export const lightModeNewPostBtnColor = '#F8F9FA';
 export const lightModeBorderColor = '#343A40';
-export const lightModeToggleBackgound = '#FFFFFF';
-export const lightModeATagHoverText = '#12B886';
-export const lightModeATagHoverBackground = 'rgba(249, 249, 249, 0.85)';
 
 export const darkTheme = `
   --bg-page1: #121212;

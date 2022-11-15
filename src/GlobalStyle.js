@@ -1,24 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import {
-  lightModeFontColor,
-  lightModeToggleBackgound,
-  lightModeATagHoverText,
-  lightModeATagHoverBackground,
-  backgroundElement1,
-  primary1,
-  border4,
-  backgroundElement5,
-  text1,
-  text2,
-  text3,
-  text5,
-  border3,
-  border5,
-  backgroundElement9,
-  lightTheme,
-  darkTheme,
-} from './styles/color';
+import { border4, backgroundElement5, text2, text3, text5, border3, border5, backgroundElement9, lightTheme, darkTheme } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -53,8 +35,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --a-tag-hover-text: ${props => (props.isDarkMode ? primary1 : lightModeATagHoverText)};
-    --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
     --post-border-top: ${props => (props.isDarkMode ? border4 : backgroundElement5)};
     --postlist-navbar-filter-color: ${props => (props.isDarkMode ? text2 : text5)};
     --postlist-navbar-more-btn-color: ${props => (props.isDarkMode ? text3 : backgroundElement9)};
@@ -63,10 +43,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-
-    :visited {
-      color: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
-  }
+    color: var(--text1);
   }
 
 
