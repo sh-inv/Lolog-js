@@ -75,8 +75,8 @@ const PeriodFilterContainer = styled.div`
     padding: 0 0.5rem;
     border-radius: 4px;
     box-shadow: rgb(0 0 0 / 5%) 0 0 4px;
-    background: var(--new-post-btn-background);
-    color: var(--postlist-navbar-filter-color);
+    background: var(--bg-element1);
+    color: var(--text2);
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
@@ -100,7 +100,7 @@ const Filter = styled.div`
 
   ul {
     li {
-      border-top: 1px solid var(--post-border-top);
+      border-top: 1px solid var(--border4);
       padding: 0.9rem 1rem;
       font-weight: 600;
       font-size: 0.875rem;
@@ -111,12 +111,12 @@ const Filter = styled.div`
       }
 
       &:hover {
-        color: var(--a-tag-hover-text);
+        color: var(--primary1);
       }
     }
 
     .active {
-      color: var(--a-tag-hover-text);
+      color: var(--primary1);
     }
   }
 `;

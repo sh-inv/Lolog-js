@@ -34,11 +34,6 @@ const GlobalStyle = createGlobalStyle`
     ${darkTheme};
   }
 
-  :root {
-    --postlist-navbar-filter-color: ${props => (props.isDarkMode ? text2 : text5)};
-    --postlist-navbar-more-border-top: ${props => (props.isDarkMode ? border3 : border5)};
-  }
-
   a {
     text-decoration: none;
     color: var(--text1);
