@@ -29,7 +29,7 @@ const SocialInfo = () => {
     });
   }, []);
 
-  const onChange = e => {
+  const getSocialInfo = e => {
     setSocialInfo({
       ...socialInfo,
       [e.target.name]: e.target.value,
@@ -78,7 +78,7 @@ const SocialInfo = () => {
               {info.map(content => (
                 <li key={content.id}>
                   {content.icon}
-                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={socialInfo[content.name]} onChange={onChange} />
+                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={socialInfo[content.name]} onChange={getSocialInfo} />
                 </li>
               ))}
             </ul>

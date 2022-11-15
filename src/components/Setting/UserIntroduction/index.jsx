@@ -46,8 +46,8 @@ const UserIntroduction = () => {
         </>
       ) : (
         <>
-          <h2>Eden</h2>
-          <p>one part.</p>
+          <h2>{user}</h2>
+          <p>{introduction}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}
