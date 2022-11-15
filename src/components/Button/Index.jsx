@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import { buttonText, primary1, primary2 } from '../../styles/color';
 
-const Button = ({ text }) => {
-  return <Buttons text={text}>{text}</Buttons>;
+const Button = ({ text, onClick, ...props }) => {
+  return (
+    <Buttons onClick={onClick} text={text} {...props}>
+      {text}
+    </Buttons>
+  );
 };
 
 const Buttons = styled.button`
@@ -14,7 +18,7 @@ const Buttons = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background-color: ${primary1};
+  background: ${primary2};
   outline: none;
   border: none;
   border-radius: 4px;

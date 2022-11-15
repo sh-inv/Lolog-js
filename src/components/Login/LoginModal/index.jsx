@@ -183,7 +183,7 @@ const LoginContainer = styled.div`
 
           button {
             height: 3rem;
-            margin-top: 15px;
+            margin-top: 0.5rem;
             background: ${primary1};
             outline: none;
             border: none;
