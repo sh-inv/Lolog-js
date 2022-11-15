@@ -3,6 +3,8 @@ import { MdOutlineClose } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
+import Button from '../../Button';
+import welcome from '../../../assets/welcome.png';
 import styled from 'styled-components';
 
 const LoginModal = ({ title, message, link, onClose, onChange }) => {
@@ -12,6 +14,7 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
       <Positioner>
         <LoginContainer>
           <div className='left-block'>
+            <img alt='welcome' src={welcome} />
             <div className='welcome'>환영합니다!</div>
           </div>
           <div className='right-block'>
@@ -23,20 +26,21 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
               <section>
                 <h4>이메일로 {title}</h4>
                 <form>
-                  <input type='text' placeholder='이메일을 입력하세요.' />
-                  <button>{title}</button>
+                  <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
+                  <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
+                  <Button className='login-button' text={title} tabIndex='4' />
                 </form>
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
                 <div className='social'>
-                  <Link className='github'>
+                  <Link className='github' tabIndex='5'>
                     <AiOutlineGithub />
                   </Link>
-                  <Link className='google'>
+                  <Link className='google' tabIndex='6'>
                     <FcGoogle />
                   </Link>
-                  <Link className='facebook'>
+                  <Link className='facebook' tabIndex='7'>
                     <FaFacebookF />
                   </Link>
                 </div>
@@ -44,7 +48,7 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
             </div>
             <div className='foot'>
               <span>{message}</span>
-              <div className='link' onClick={onChange}>
+              <div className='link' onClick={onChange} tabIndex='8'>
                 {link}
               </div>
             </div>
@@ -108,6 +112,12 @@ const LoginContainer = styled.div`
       display: none;
     }
 
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .welcome {
       margin-top: 1.5rem;
       color: var(--text2);
@@ -138,6 +148,7 @@ const LoginContainer = styled.div`
       flex: 1 1 0%;
       display: flex;
       flex-direction: column;
+
       h2 {
         font-size: 1.3125rem;
         color: var(--text1);
@@ -148,8 +159,8 @@ const LoginContainer = styled.div`
 
         form {
           display: flex;
+          flex-direction: column;
           width: 100%;
-          height: 3rem;
 
           input {
             flex: 1 1 0%;
@@ -165,6 +176,10 @@ const LoginContainer = styled.div`
             :focus {
               border: 1px solid var(--primary1);
             }
+          }
+
+          input + input {
+            margin-top: 0.25rem;
           }
 
           button {
@@ -249,7 +264,7 @@ const LoginContainer = styled.div`
       }
 
       section + section {
-        margin-top: 2.5rem;
+        margin-top: 1.5rem;
       }
     }
 

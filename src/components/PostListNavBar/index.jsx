@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import PeriodFilter from './PeriodFilter';
 import More from './More';
 import styled from 'styled-components';
@@ -6,18 +6,17 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 
 const PostListNavBar = () => {
+  const location = useLocation();
   const navBar = [
     {
       name: '트렌딩',
       icon: <SlGraph className='icon' />,
-      className: 'tab-btn',
       path: '/',
       query: '',
     },
     {
       name: '최신',
       icon: <AiOutlineClockCircle className='icon' />,
-      className: 'tab-btn',
       path: '/recent',
       query: '',
     },
@@ -28,13 +27,14 @@ const PostListNavBar = () => {
       <div className='nav'>
         <div className='nav-tab'>
           {navBar.map(navItem => (
-            <NavLink to={navItem.path} key={navItem.name} className={navItem.className} end>
+            <NavLink to={navItem.path} key={navItem.name} className='tab-btn' end>
               {navItem.icon}
               {navItem.name}
             </NavLink>
           ))}
+          <SlideBorder className='' location={location} />
         </div>
-        <PeriodFilter />
+        {location.pathname === '/' && <PeriodFilter />}
       </div>
       <More />
     </PostListNavBarContainer>
@@ -57,6 +57,7 @@ const PostListNavBarContainer = styled.div`
     align-items: center;
 
     .nav-tab {
+      position: relative;
       display: flex;
       width: 14rem;
 
@@ -85,6 +86,37 @@ const PostListNavBarContainer = styled.div`
       font-size: 1.4rem;
     }
   }
+`;
+
+const SlideBorder = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: ${({ location }) => (location.pathname === '/' ? '0' : '50%')};
+  display: block;
+  width: 50%;
+  height: 2px;
+  background: #fff;
+  transition: ease all 0.3s;
+
+  /* .ani {
+    animation: boxAni 0.3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-delay: 1s;
+  }
+
+  @keyframes boxAni {
+    0% {
+      left: ${({ location }) => (location.pathname === '/' ? '50%' : '0')};
+    }
+    80% {
+      left: ${({ location }) => (location.pathname === '/' ? '-5%' : '55%')};
+    }
+    100% {
+      left: ${({ location }) => (location.pathname === '/' ? '0' : '50%')};
+    }
+  } */
 `;
 
 export default PostListNavBar;

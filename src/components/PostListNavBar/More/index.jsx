@@ -3,44 +3,39 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiMoreVertical } from 'react-icons/fi';
 import { tabStyle } from '../../../styles/postlistnavbar';
+import axios from 'axios';
+import { closeToggle } from '../../../utils/closetoggle';
 
 const More = () => {
   const navigate = useNavigate();
-  const [isActiveBox, setIsActiveBox] = useState(false);
-  const moreBoxRef = useRef();
-  const moreRef = useRef();
-  const moreContentList = [
-    {
-      name: '공지사항',
-      path: '',
-    },
-    {
-      name: '태그 목록',
-      path: '/tags',
-    },
-    {
-      name: '만든이',
-      path: '',
-    },
-  ];
+  const [isToggle, setIsToggle] = useState(false);
+  const toggleBoxRef = useRef();
+  const toggleBtnRef = useRef();
+  const [moreContentList, setMoreContentList] = useState([]);
 
   useEffect(() => {
-    const clickOutside = e => {
-      if (isActiveBox && !moreBoxRef.current.contains(e.target) && !moreRef.current.contains(e.target)) {
-        setIsActiveBox(false);
-      }
-    };
-    document.addEventListener('mousedown', clickOutside);
+    try {
+      (async () => {
+        const {
+          data: { moredata },
+        } = await axios.get('data/postlist/more.json');
+        setMoreContentList(moredata);
+      })();
+    } catch (error) {
+      console.log('error => ', error);
+    }
+  }, []);
 
-    return () => document.removeEventListener('mousedown', clickOutside);
-  }, [isActiveBox]);
+  useEffect(() => {
+    closeToggle(isToggle, setIsToggle, toggleBoxRef, toggleBtnRef);
+  }, [isToggle]);
 
   return (
     <MoreContainer>
-      <div className='more-icon' ref={moreBoxRef} onClick={() => setIsActiveBox(!isActiveBox)}>
+      <div className='more-icon' ref={toggleBtnRef} onClick={() => setIsToggle(!isToggle)}>
         <FiMoreVertical className='icon' />
       </div>
-      <MoreBox ref={moreRef} isActiveBox={isActiveBox}>
+      <MoreBox ref={toggleBoxRef} isToggle={isToggle}>
         <ul>
           {moreContentList.map(content => (
             <li
@@ -48,7 +43,7 @@ const More = () => {
               className='content'
               onClick={() => {
                 navigate(content.path);
-                setIsActiveBox(false);
+                setIsToggle(false);
               }}
             >
               {content.name}

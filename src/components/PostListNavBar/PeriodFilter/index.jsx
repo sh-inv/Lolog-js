@@ -3,13 +3,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
+import { closeToggle } from '../../../utils/closetoggle';
 
 const PeriodFilter = () => {
-  const [isActiveBox, setIsActiveBox] = useState(false);
+  const [isToggle, setIsToggle] = useState(false);
   const [filter, setFilter] = useState('이번 주');
   const [filterList, setFilterList] = useState();
-  const filterRef = useRef();
-  const filterBoxRef = useRef();
+  const toggleBtnRef = useRef();
+  const toggleBoxRef = useRef();
 
   useEffect(() => {
     (async () => {
@@ -25,23 +26,16 @@ const PeriodFilter = () => {
   }, []);
 
   useEffect(() => {
-    const clickOutside = e => {
-      if (isActiveBox && !filterBoxRef.current.contains(e.target) && !filterRef.current.contains(e.target)) {
-        setIsActiveBox(false);
-      }
-    };
-    document.addEventListener('mousedown', clickOutside);
-
-    return () => document.removeEventListener('mousedown', clickOutside);
-  }, [isActiveBox]);
+    closeToggle(isToggle, setIsToggle, toggleBoxRef, toggleBtnRef);
+  }, [isToggle]);
 
   return (
     <PeriodFilterContainer>
-      <div className='trending-category' ref={filterBoxRef} onClick={() => setIsActiveBox(!isActiveBox)}>
+      <div className='trending-category' ref={toggleBtnRef} onClick={() => setIsToggle(!isToggle)}>
         {filter} <MdOutlineArrowDropDown className='arrow' />
       </div>
-      <Filter isActiveBox={isActiveBox}>
-        <ul ref={filterRef}>
+      <Filter isToggle={isToggle}>
+        <ul ref={toggleBoxRef}>
           {filterList &&
             filterList.map((filter, i) => (
               <li
@@ -53,7 +47,7 @@ const PeriodFilter = () => {
                   arr[i].view = true;
                   setFilterList(arr);
                   setFilter(filter.name);
-                  setIsActiveBox(false);
+                  setIsToggle(false);
                 }}
               >
                 {filter.name}
@@ -94,8 +88,8 @@ const PeriodFilterContainer = styled.div`
 
 const Filter = styled.div`
   ${tabStyle}
-  opacity: ${({ isActiveBox }) => (isActiveBox ? '1' : '0')};
-  transform: ${({ isActiveBox }) => (isActiveBox ? 'scale(1)' : 'scale(0)')};
+  opacity: ${({ isToggle }) => (isToggle ? '1' : '0')};
+  transform: ${({ isToggle }) => (isToggle ? 'scale(1)' : 'scale(0)')};
   top: 100%;
 
   ul {
