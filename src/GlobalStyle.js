@@ -12,18 +12,9 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin-top: 4rem;
-    ${lightTheme}
     background: var(--bg-page1);
     color: var(--text1);
     transition: background-color 0.2s;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    body {
-      ${darkTheme}
-      background: var(--bg-page1);
-      color: var(--text1);
-    }
   }
 
   body[data-theme='light'] {
