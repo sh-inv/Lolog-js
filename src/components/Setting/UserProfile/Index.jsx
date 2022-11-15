@@ -1,7 +1,6 @@
 import Button from '../../Button';
 import profile from '../../../assets/profile.png';
 import styled from 'styled-components';
-import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
 
 const UserProfile = () => {
   return (
@@ -40,21 +39,21 @@ const UserProfileContainer = styled.div`
   }
 
   .upload {
-    background: ${primary1};
-    color: ${buttonText};
+    background: var(--primary1);
+    color: var(--button-text);
 
     &:hover {
-      background: ${primary2};
+      background: var(--primary2);
     }
   }
 
   .remove {
     background: transparent;
-    color: ${primary1};
+    color: var(--primary1);
 
     &:hover {
-      background: ${slightLayer};
-      color: ${primary2};
+      background: var(--slight-layer);
+      color: var(--primary2);
     }
   }
 

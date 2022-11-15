@@ -4,7 +4,6 @@ import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement2, backgroundPage2, buttonText, primary1, text1, text2, text3, border3, border4, opaqueLayer } from '../../../styles/color';
 
 const LoginModal = ({ title, message, link, onClose, onChange }) => {
   return (
@@ -62,7 +61,7 @@ const Background = styled.div`
   left: 0px;
   width: 100%;
   height: 100%;
-  background: ${opaqueLayer};
+  background: var(--opaque-layer);
   z-index: 10;
   animation: 0.25s ease 0s 1 normal forwards running cJoqxJ;
 `;
@@ -103,7 +102,7 @@ const LoginContainer = styled.div`
     align-items: center;
     width: 216px;
     padding: 1.5rem;
-    background: ${backgroundElement2};
+    background: var(--bg-element2);
 
     @media screen and (max-width: 768px) {
       display: none;
@@ -111,7 +110,7 @@ const LoginContainer = styled.div`
 
     .welcome {
       margin-top: 1.5rem;
-      color: ${text2};
+      color: var(--text2);
       text-align: center;
       font-weight: 600;
       font-size: 1.75rem;
@@ -123,7 +122,7 @@ const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    background: ${backgroundPage2};
+    background: var(--bg-page2);
 
     .exit {
       display: flex;
@@ -131,7 +130,7 @@ const LoginContainer = styled.div`
       justify-content: flex-end;
       margin-bottom: 2.25rem;
       font-size: 1.5rem;
-      color: ${text3};
+      color: var(--text3);
       cursor: pointer;
     }
 
@@ -141,7 +140,7 @@ const LoginContainer = styled.div`
       flex-direction: column;
       h2 {
         font-size: 1.3125rem;
-        color: ${text1};
+        color: var(--text1);
       }
 
       section {
@@ -155,27 +154,27 @@ const LoginContainer = styled.div`
           input {
             flex: 1 1 0%;
             padding: 1rem;
-            background: ${backgroundElement1};
+            background: var(--bg-element1);
             border-top-left-radius: 2px;
             border-bottom-left-radius: 2px;
-            border: 0.5px solid ${border4};
+            border: 0.5px solid var(--border4);
             outline: none;
             font-size: 1rem;
-            color: ${text1};
+            color: var(--text1);
 
             :focus {
-              border: 1px solid ${primary1};
+              border: 1px solid var(--primary1);
             }
           }
 
           button {
             width: 6rem;
-            background: ${primary1};
+            background: var(--primary1);
             outline: none;
             border: none;
             border-top-right-radius: 2px;
             border-bottom-right-radius: 2px;
-            color: ${buttonText};
+            color: var(--button-text);
             font-size: 1rem;
             font-weight: bold;
             word-break: keep-all;
@@ -186,7 +185,7 @@ const LoginContainer = styled.div`
         h4 {
           margin-top: 1rem;
           margin-bottom: 1rem;
-          color: ${text3};
+          color: var(--text3);
         }
 
         .social {
@@ -228,7 +227,7 @@ const LoginContainer = styled.div`
             outline: none;
             transition: all 0.125s ease-in 0s;
             color: fff;
-            border: 1px solid ${border3};
+            border: 1px solid var(--border3);
           }
         }
 
@@ -264,7 +263,7 @@ const LoginContainer = styled.div`
       .link {
         display: inline-block;
         font-weight: bold;
-        color: ${primary1};
+        color: var(--primary1);
         cursor: pointer;
       }
     }

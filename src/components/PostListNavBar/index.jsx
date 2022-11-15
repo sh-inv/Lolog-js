@@ -4,7 +4,6 @@ import More from './More';
 import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
-import { text3 } from '../../styles/color';
 
 const PostListNavBar = () => {
   const navBar = [

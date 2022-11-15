@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import { border4, backgroundElement5, text2, text3, text5, border3, border5, backgroundElement9, lightTheme, darkTheme } from './styles/color';
+import { lightTheme, darkTheme } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
 
