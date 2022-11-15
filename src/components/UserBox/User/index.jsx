@@ -27,6 +27,11 @@ const UserContainer = styled.div`
   -webkit-box-align: center;
   align-items: center;
 
+  img {
+    margin-bottom: 0;
+    box-shadow: rgb(0 0 0 / 6%) 0px 0px 4px 0px;
+  }
+
   .user-info {
     display: flex;
     flex-direction: column;
