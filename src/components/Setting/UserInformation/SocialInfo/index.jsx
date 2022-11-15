@@ -9,6 +9,13 @@ import { backgroundElement1, border1, border3, text2, primary1, primary2, button
 const SocialInfo = () => {
   const [social, setSocial] = useState('');
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
+  const [socialInfo, setSocialInfo] = useState({
+    email: '',
+    github: '',
+    twitter: '',
+    facebook: '',
+    url: '',
+  });
 
   const onModify = () => {
     isModifySocialInfo ? setisModifySocialInfo(false) : setisModifySocialInfo(true);
@@ -21,26 +28,31 @@ const SocialInfo = () => {
   const info = [
     {
       id: 1,
+      name: 'email',
       icon: <MdEmail className='icon' />,
       placeholder: '이메일을 입력하세요.',
     },
     {
       id: 2,
+      name: 'github',
       icon: <AiFillGithub className='icon' />,
       placeholder: 'Github 계정을 입력하세요.',
     },
     {
       id: 3,
+      name: 'twitter',
       icon: <AiOutlineTwitter className='icon' />,
       placeholder: 'Twitter 계정을 입력하세요.',
     },
     {
       id: 4,
+      name: 'facebook',
       icon: <AiFillFacebook className='icon' />,
       placeholder: 'http://www.facebook.com/',
     },
     {
       id: 5,
+      name: 'url',
       icon: <AiFillHome className='icon' />,
       placeholder: '홈페이지 주소를 입력하세요.',
     },
@@ -51,7 +63,17 @@ const SocialInfo = () => {
       social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
     };
     setSocial(contents.social);
+    setSocialInfo({
+      ...contents.social,
+    });
   }, []);
+
+  const onChange = e => {
+    setSocialInfo({
+      ...socialInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <>
@@ -62,7 +84,7 @@ const SocialInfo = () => {
               {info.map(content => (
                 <li key={content.id}>
                   {content.icon}
-                  <input className='modify-input' type='text' placeholder={content.placeholder} />
+                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={socialInfo[content.name]} onChange={onChange} />
                 </li>
               ))}
             </ul>
