@@ -21,7 +21,7 @@ const Buttons = styled.button`
   outline: none;
   border: none;
   border-radius: 4px;
-  color: ${buttonText};
+  color: var(--button-text);
   font-size: 1rem;
   font-weight: bold;
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import EditButton from '../../../EditButton';
 import Button from '../../../Button';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, text2, primary1, primary2, buttonText } from '../../../../styles/color';
 
 const Title = () => {
   const [title, setTitle] = useState('');
@@ -47,7 +46,7 @@ const Title = () => {
 const TitleContainer = styled.div`
   flex: 1 1 0%;
   font-size: 1rem;
-  color: ${text2};
+  color: var(--text2);
   line-height: 1.5;
 
   form {
@@ -61,25 +60,25 @@ const TitleContainer = styled.div`
       padding: 0.5rem;
       margin-right: 1rem;
 
-      border: 1px solid ${border3};
+      border: 1px solid var(--border3);
       border-radius: 4px;
-      background: ${backgroundElement1};
-      color: ${text2};
+      background: var(--bg-element1);
+      color: var(--text2);
       font-size: 1rem;
       line-height: 1rem;
       outline: none;
 
       :focus {
-        border: 1px solid ${border1};
+        border: 1px solid var(--border1);
       }
     }
 
     .confirm-button {
-      background: ${primary1};
-      color: ${buttonText};
+      background: var(--primary1);
+      color: var(--button-text);
 
       &:hover {
-        background: ${primary2};
+        background: var(--primary2);
       }
     }
   }

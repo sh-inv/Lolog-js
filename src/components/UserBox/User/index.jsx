@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import UserProfileImage from '../../Setting/UserProfile/UserProfileImage';
 import styled from 'styled-components';
-import { backgroundElement3, text1, text2 } from '../../../styles/color';
 
 const User = () => {
   return (
@@ -43,7 +42,7 @@ const UserContainer = styled.div`
       font-size: 1.5rem;
       line-height: 1.5;
       font-weight: bold;
-      color: ${text1};
+      color: var(--text1);
 
       a {
         color: inherit;
@@ -56,7 +55,7 @@ const UserContainer = styled.div`
       font-size: 1.125rem;
       line-height: 1.5;
       margin-top: 0.25rem;
-      color: ${text2};
+      color: var(--text2);
       letter-spacing: -0.004em;
     }
   }
@@ -67,7 +66,7 @@ const Border = styled.div`
   height: 1px;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
-  background: ${backgroundElement3};
+  background: var(--bg-element3);
 `;
 
 export default User;

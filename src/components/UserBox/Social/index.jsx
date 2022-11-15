@@ -3,7 +3,6 @@ import { AiFillGithub, AiOutlineTwitter, AiFillHome } from 'react-icons/ai';
 import { ImFacebook2 } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
-import { text3 } from '../../../styles/color';
 
 const Social = () => {
   return (
@@ -29,7 +28,7 @@ const Social = () => {
 
 const SocialContainer = styled.div`
   display: flex;
-  color: ${text3};
+  color: var(--text3);
 
   .social-link {
     display: block;
