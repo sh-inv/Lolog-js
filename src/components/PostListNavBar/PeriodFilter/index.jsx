@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
-import { closeToggle } from '../../../utils/closetoggle';
 
 const PeriodFilter = () => {
   const [isToggle, setIsToggle] = useState(false);
@@ -26,7 +25,16 @@ const PeriodFilter = () => {
   }, []);
 
   useEffect(() => {
-    closeToggle(isToggle, setIsToggle, toggleBoxRef, toggleBtnRef);
+    const clickOutside = e => {
+      if (isToggle && !toggleBoxRef.current.contains(e.target) && !toggleBtnRef.current.contains(e.target)) {
+        setIsToggle(false);
+      }
+    };
+    document.addEventListener('mousedown', clickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', clickOutside);
+    };
   }, [isToggle]);
 
   return (
