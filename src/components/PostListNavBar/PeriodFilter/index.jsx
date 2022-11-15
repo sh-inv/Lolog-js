@@ -100,8 +100,9 @@ const Filter = styled.div`
 
   ul {
     li {
-      border-top: 1px solid var(--border4);
       padding: 0.9rem 1rem;
+      border-top: 1px solid var(--border4);
+      background-color: var(--bg-element2);
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
