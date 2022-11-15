@@ -2,7 +2,7 @@ import UserProfile from '../../components/Setting/UserProfile';
 import UserIntroduction from '../../components/Setting/UserIntroduction';
 import UserInformation from '../../components/Setting/UserInformation';
 import styled from 'styled-components';
-import { settingMaxWidth1024px, settingMaxWidth768px } from '../../styles/media';
+import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
 
 const Setting = () => {
   return (
@@ -30,10 +30,7 @@ const SettingPage = styled.div`
     display: flex;
     height: 13.75rem;
 
-    @media (max-width: 768px) {
-      height: auto;
-      flex-direction: column;
-    }
+    ${settingUserMaxWidth768px};
   }
 `;
 

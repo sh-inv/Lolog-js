@@ -2,6 +2,7 @@ import UserProfileImage from './UserProfileImage';
 import Button from '../../Button';
 import styled from 'styled-components';
 import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
+import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
@@ -18,10 +19,10 @@ const UserProfileContainer = styled.div`
   flex-direction: column;
   padding-right: 1.5rem;
 
+  ${settingProfileMaxWidth768px};
+
   button {
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
+    ${settingProfileButtonMaxWidth768px};
   }
 
   .upload {
@@ -46,13 +47,6 @@ const UserProfileContainer = styled.div`
   button + button {
     margin-top: 0.5rem;
     margin-left: 0px;
-  }
-
-  @media (max-width: 768px) {
-    -webkit-box-align: center;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    padding-right: 0px;
   }
 `;
 

@@ -5,10 +5,11 @@ import EmailReceiveSetting from './EmailReceiveSetting';
 import Withdrawal from './Withdrawal';
 import styled from 'styled-components';
 import { border4, text3 } from '../../../styles/color';
+import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTitleMaxWidth768px } from '../../../styles/media';
 
-const UserContents = () => {
+const UserInformation = () => {
   return (
-    <UserContentsContainer>
+    <UserInformationContainer>
       <div className='contents-box'>
         <div className='wrapper'>
           <div className='title-wrapper'>
@@ -57,16 +58,14 @@ const UserContents = () => {
         </div>
         <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
       </div>
-    </UserContentsContainer>
+    </UserInformationContainer>
   );
 };
 
-const UserContentsContainer = styled.section`
+const UserInformationContainer = styled.section`
   margin-top: 4rem;
 
-  @media screen and (max-width: 768px) {
-    margin-top: 0rem;
-  }
+  ${UserContentsMaxWidth768px};
 
   .contents-box {
     padding-top: 1rem;
@@ -75,9 +74,7 @@ const UserContentsContainer = styled.section`
     .wrapper {
       display: flex;
 
-      @media screen and (max-width: 768px) {
-        flex-direction: column;
-      }
+      ${UserContentsBoxMaxWidth768px};
 
       .title-wrapper {
         width: 9.5rem;
@@ -88,9 +85,7 @@ const UserContentsContainer = styled.section`
           line-height: 1.5;
           font-size: 1.125rem;
 
-          @media screen and (max-width: 768px) {
-            margin-bottom: 0.5rem;
-          }
+          ${UserContentsTitleMaxWidth768px};
         }
       }
 
@@ -114,4 +109,4 @@ const UserContentsContainer = styled.section`
   }
 `;
 
-export default UserContents;
+export default UserInformation;
