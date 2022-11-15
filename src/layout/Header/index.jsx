@@ -59,10 +59,10 @@ const Header = () => {
             <Link className='search setting-hover' to='/search'>
               <BiSearch />
             </Link>
-            <button className='login' onClick={onLoginModal}>
+            <button className='login hover-link-btn' onClick={onLoginModal}>
               로그인
             </button>
-            <Link className='new-post' to='/write'>
+            <Link className='new-post hover-link-btn' to='/write'>
               새 글 작성
             </Link>
             <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
@@ -139,41 +139,24 @@ const RightIcons = styled.div`
     }
   }
 
-  .login {
+  .hover-link-btn {
     padding: 0.4rem 1rem;
     margin-left: 0.5rem;
-    border: 1px solid var(--text);
+    border: 1px solid var(--text1);
     border-radius: 1.3rem;
-    background-color: var(--new-post-btn-background);
+    background-color: var(--bg-element1);
+    color: var(--text1);
     font-size: 1rem;
     font-weight: bold;
 
     :hover {
-      background-color: var(--new-post-btn-hover-background);
-      color: var(--new-post-btn-hover-text);
+      background-color: var(--bg-element2);
+      color: var(--text5);
       transition: all 0.125s ease-in 0s;
-    }
-
-    @media only screen and (max-width: 1023px) {
-      display: none;
     }
   }
 
   .new-post {
-    padding: 0.4rem 1rem;
-    margin-left: 0.5rem;
-    border: 1px solid var(--text);
-    border-radius: 1.3rem;
-    background-color: var(--new-post-btn-background);
-    font-size: 1rem;
-    font-weight: bold;
-
-    :hover {
-      background-color: var(--new-post-btn-hover-background);
-      color: var(--new-post-btn-hover-text);
-      transition: all 0.125s ease-in 0s;
-    }
-
     @media only screen and (max-width: 1023px) {
       display: none;
     }
@@ -200,7 +183,7 @@ const RightIcons = styled.div`
       color: ${backgroundElement9};
 
       :hover {
-        color: var(--toggle-hover);
+        color: var(--text1);
       }
     }
   }

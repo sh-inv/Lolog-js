@@ -21,6 +21,8 @@ import {
   border3,
   border5,
   backgroundElement9,
+  lightTheme,
+  darkTheme,
 } from './styles/color';
 
 const GlobalStyle = createGlobalStyle`
@@ -33,17 +35,34 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin-top: 4rem;
-    background: ${props => (props.isDarkMode ? backgroundPage : backgroundElement6)};
-    color: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
+    ${lightTheme}
+    background: var(--bg-page1);
+    color: var(--text1);
     transition: background-color 0.2s;
   }
 
+  @media (prefers-color-scheme: dark) {
+    body {
+      ${darkTheme}
+      background: var(--bg-page1);
+      color: var(--text1);
+    }
+  }
+
+  body[data-theme='light'] {
+    ${lightTheme};
+  }
+
+  body[data-theme='dark'] {
+    ${darkTheme};
+  }
+
   :root {
-    --text: ${props => (props.isDarkMode ? text1 : lightModeFontColor)};
-    --new-post-btn-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeBackgroundColor)};
-    --new-post-btn-hover-text: ${props => (props.isDarkMode ? lightModeFontColor : text1)};
-    --new-post-btn-hover-background: ${props => (props.isDarkMode ? lightModeNewPostBtnColor : backgroundElement1)};
-    --toggle-hover: ${props => (props.isDarkMode ? text1 : lightModeToggle)};
+    /* --text: ${props => (props.isDarkMode ? text1 : lightModeFontColor)}; */
+    /* --new-post-btn-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeBackgroundColor)}; */
+    /* --new-post-btn-hover-text: ${props => (props.isDarkMode ? lightModeFontColor : text1)}; */
+    /* --new-post-btn-hover-background: ${props => (props.isDarkMode ? lightModeNewPostBtnColor : backgroundElement1)}; */
+    /* --toggle-hover: ${props => (props.isDarkMode ? text1 : lightModeToggle)}; */
     --toggle-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeToggleBackgound)};
     --a-tag-hover-text: ${props => (props.isDarkMode ? primary1 : lightModeATagHoverText)};
     --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
