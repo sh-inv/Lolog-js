@@ -147,19 +147,14 @@ const RightIcons = styled.div`
     background-color: var(--bg-element1);
     color: var(--text1);
     font-size: 1rem;
-    border-radius: 1rem;
-    border: none;
-    outline: none;
     font-weight: bold;
+    border-radius: 1rem;
     word-break: keep-all;
-    background: ${backgroundElement5};
-    color: ${buttonText};
     transition: all 0.125s ease-in 0s;
-    cursor: pointer;
 
     :hover {
       background-color: var(--bg-invert);
-      color: var(--text5);
+      color: var(--text-invert);
       transition: all 0.125s ease-in 0s;
       cursor: pointer;
     }

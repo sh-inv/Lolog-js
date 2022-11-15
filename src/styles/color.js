@@ -17,7 +17,7 @@ export const darkTheme = `
   --text2: #D9D9D9;
   --text3: #ACACAC;
   --text4: #595959;
-  --text5: #212529;
+  --text-invert: #212529;
   --border1: #E0E0E0;
   --border2: #A0A0A0;
   --border3: #4D4D4D;
@@ -65,7 +65,7 @@ export const lightTheme = `
   --text2: #495057;
   --text3: #868E96;
   --text4: #CED4DA;
-  --text5: #ECECEC;
+  --text-invert: #ECECEC;
   --border1: #343A40;
   --border2: #ADB5BD;
   --border3: #DEE2E6;
