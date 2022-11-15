@@ -35,9 +35,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --post-border-top: ${props => (props.isDarkMode ? border4 : backgroundElement5)};
     --postlist-navbar-filter-color: ${props => (props.isDarkMode ? text2 : text5)};
-    --postlist-navbar-more-btn-color: ${props => (props.isDarkMode ? text3 : backgroundElement9)};
     --postlist-navbar-more-border-top: ${props => (props.isDarkMode ? border3 : border5)};
   }
 

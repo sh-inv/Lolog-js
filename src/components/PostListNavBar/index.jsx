@@ -69,11 +69,11 @@ const PostListNavBarContainer = styled.div`
         height: 3rem;
         margin: 0;
         font-size: 1.125rem;
-        color: ${text3};
+        color: var(--text3);
       }
 
       .active {
-        color: var(--text);
+        color: var(--text1);
       }
     }
   }
