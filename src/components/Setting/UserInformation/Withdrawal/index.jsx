@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Button from '../../../Button';
 import ConfirmModal from '../../../ConfirmModal';
 import styled from 'styled-components';
-import { text2, buttonText, destructive1, destructive2 } from '../../../../styles/color';
 
 const Withdrawal = () => {
   const [isModal, setIsModal] = useState(false);
@@ -33,15 +32,15 @@ const Withdrawal = () => {
 const WithdrawalContainer = styled.div`
   flex: 1 1 0%;
   font-size: 1rem;
-  color: ${text2};
+  color: var(--text2);
   line-height: 1.5;
 
   .withdrawal-button {
-    background: ${destructive1};
-    color: ${buttonText};
+    background: var(--destructive1);
+    color: var(--button-text);
 
     &:hover {
-      background: ${destructive2};
+      background: var(--destructive2);
     }
   }
 `;

@@ -1,6 +1,5 @@
 import Toggle from './Toggle';
 import styled from 'styled-components';
-import { text2 } from '../../../../styles/color';
 
 const EmailReceiveSetting = () => {
   return (
@@ -22,7 +21,7 @@ const EmailReceiveSetting = () => {
 const EmailReceiveSettingContainer = styled.div`
   flex: 1 1 0%;
   font-size: 1rem;
-  color: ${text2};
+  color: var(--text2);
   line-height: 1.5;
 
   ul {

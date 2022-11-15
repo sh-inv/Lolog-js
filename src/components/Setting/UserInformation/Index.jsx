@@ -4,7 +4,6 @@ import Email from './Email';
 import EmailReceiveSetting from './EmailReceiveSetting';
 import Withdrawal from './Withdrawal';
 import styled from 'styled-components';
-import { border4, text3 } from '../../../styles/color';
 import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTitleMaxWidth768px } from '../../../styles/media';
 
 const UserInformation = () => {
@@ -99,13 +98,13 @@ const UserInformationContainer = styled.section`
 
     .desc {
       margin-top: 0.875rem;
-      color: ${text3};
+      color: var(--text3);
       font-size: 0.875rem;
     }
   }
 
   .contents-box + .contents-box {
-    border-top: 1px solid ${border4};
+    border-top: 1px solid var(--border4);
   }
 `;
 
