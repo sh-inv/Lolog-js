@@ -53,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --toggle-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeToggleBackgound)};
     --a-tag-hover-text: ${props => (props.isDarkMode ? primary1 : lightModeATagHoverText)};
     --a-tag-hover-background: ${props => (props.isDarkMode ? backgroundElement1 : lightModeATagHoverBackground)};
     --post-border-top: ${props => (props.isDarkMode ? border4 : backgroundElement5)};

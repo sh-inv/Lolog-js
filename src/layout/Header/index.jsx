@@ -8,7 +8,6 @@ import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
 import Login from '../../components/Login';
 import styled from 'styled-components';
-import { backgroundElement9 } from '../../styles/color';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
@@ -126,6 +125,7 @@ const RightIcons = styled.div`
     height: 40px;
     margin-left: 0.3rem;
     border-radius: 40px;
+    color: var(--text1);
 
     svg {
       width: 24px;
@@ -134,7 +134,7 @@ const RightIcons = styled.div`
     }
 
     :hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--slight-layer);
       cursor: pointer;
     }
   }
@@ -150,9 +150,10 @@ const RightIcons = styled.div`
     font-weight: bold;
 
     :hover {
-      background-color: var(--bg-element2);
+      background-color: var(--bg-invert);
       color: var(--text5);
       transition: all 0.125s ease-in 0s;
+      cursor: pointer;
     }
   }
 
@@ -180,7 +181,7 @@ const RightIcons = styled.div`
       cursor: pointer;
 
       width: 12px;
-      color: ${backgroundElement9};
+      color: var(--bg-element9);
 
       :hover {
         color: var(--text1);

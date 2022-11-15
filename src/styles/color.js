@@ -6,8 +6,6 @@ export const lightModeToggleBackgound = '#FFFFFF';
 export const lightModeATagHoverText = '#12B886';
 export const lightModeATagHoverBackground = 'rgba(249, 249, 249, 0.85)';
 
-export const toggle = '#868E96';
-
 export const darkTheme = `
   --bg-page1: #121212;
   --bg-page2: #121212;
