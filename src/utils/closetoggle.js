@@ -6,5 +6,7 @@ export const closeToggle = (isToggle, setIsToggle, toggleBoxRef, toggleBtnRef) =
   };
   document.addEventListener('mousedown', clickOutside);
 
-  return () => document.removeEventListener('mousedown', clickOutside);
+  return () => {
+    document.removeEventListener('mousedown', clickOutside);
+  };
 };

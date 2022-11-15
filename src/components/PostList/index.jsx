@@ -34,8 +34,8 @@ const PostList = () => {
   };
 
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '500px',
+    threshold: 1,
+    rootMargin: '50px',
   };
 
   useEffect(() => {
@@ -63,9 +63,9 @@ const PostList = () => {
           {postData.map((_, i) => {
             return <Post key={i} />;
           })}
+          {postData.length ? <div ref={setBottom} /> : null}
           <PostSkeleton />
         </div>
-        {postData.length ? <div ref={setBottom} /> : null}
       </div>
     </PostListContainer>
   );

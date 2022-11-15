@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-const Button = ({ text }) => {
-  return <Buttons text={text}>{text}</Buttons>;
+const Button = ({ text, onClick, ...props }) => {
+  return (
+    <Buttons onClick={onClick} text={text} {...props}>
+      {text}
+    </Buttons>
+  );
 };
 
 const Buttons = styled.button`

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-const EditButton = ({ text, onClick }) => {
-  return <Edit onClick={onClick}>{text}</Edit>;
+const EditButton = ({ text, onClick, ...props }) => {
+  return (
+    <Edit onClick={onClick} {...props}>
+      {text}
+    </Edit>
+  );
 };
 
 const Edit = styled.button`

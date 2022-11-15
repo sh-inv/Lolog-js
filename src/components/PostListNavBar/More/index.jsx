@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
+import { closeToggle } from '../../../utils/closetoggle';
 import { FiMoreVertical } from 'react-icons/fi';
 import { tabStyle } from '../../../styles/postlistnavbar';
-import axios from 'axios';
-import { closeToggle } from '../../../utils/closetoggle';
 
 const More = () => {
   const navigate = useNavigate();
@@ -27,7 +27,16 @@ const More = () => {
   }, []);
 
   useEffect(() => {
-    closeToggle(isToggle, setIsToggle, toggleBoxRef, toggleBtnRef);
+    const clickOutside = e => {
+      if (isToggle && !toggleBoxRef.current.contains(e.target) && !toggleBtnRef.current.contains(e.target)) {
+        setIsToggle(false);
+      }
+    };
+    document.addEventListener('mousedown', clickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', clickOutside);
+    };
   }, [isToggle]);
 
   return (

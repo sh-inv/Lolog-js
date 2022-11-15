@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import EditButton from '../../EditButton';
 import Button from '../../Button';
 import styled from 'styled-components';
+import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../styles/media';
 
-const UserInfo = () => {
+const UserIntroduction = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
@@ -29,7 +30,7 @@ const UserInfo = () => {
   };
 
   return (
-    <UserInfoContainer>
+    <UserIntroContainer>
       {isModify ? (
         <>
           <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
@@ -44,28 +45,21 @@ const UserInfo = () => {
         </>
       ) : (
         <>
-          <h2>Eden</h2>
-          <p>one part.</p>
+          <h2>{user}</h2>
+          <p>{introduction}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}
-    </UserInfoContainer>
+    </UserIntroContainer>
   );
 };
 
-const UserInfoContainer = styled.div`
+const UserIntroContainer = styled.div`
   flex: 1 1 0%;
   padding-left: 1.5rem;
   border-left: 1px solid var(--border4);
 
-  @media screen and (max-width: 768px) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-top: 1px solid var(--border4);
-    border-bottom: 1px solid var(--border4);
-    border-left: none;
-    padding-left: 0px;
-  }
+  ${UserIntroMaxWidth768px};
 
   .modify-input {
     display: block;
@@ -108,9 +102,7 @@ const UserInfoContainer = styled.div`
     line-height: 1.5;
     font-size: 2.25rem;
 
-    @media screen and (max-width: 768px) {
-      font-size: 1.25rem;
-    }
+    ${UserIntroTitleMaxWidth768px};
   }
 
   p {
@@ -122,4 +114,4 @@ const UserInfoContainer = styled.div`
   }
 `;
 
-export default UserInfo;
+export default UserIntroduction;
