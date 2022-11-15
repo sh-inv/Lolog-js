@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { backgroundElement1, border1, border3, text2, primary1, primary2, buttonText } from '../../../../styles/color';
 
 const SocialInfo = () => {
-  const [social, setSocial] = useState('');
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
   const [socialInfo, setSocialInfo] = useState({
     email: '',
@@ -21,8 +20,20 @@ const SocialInfo = () => {
     isModifySocialInfo ? setisModifySocialInfo(false) : setisModifySocialInfo(true);
   };
 
-  const getSocial = e => {
-    setSocial(e.target.value);
+  useEffect(() => {
+    const contents = {
+      social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
+    };
+    setSocialInfo({
+      ...contents.social,
+    });
+  }, []);
+
+  const onChange = e => {
+    setSocialInfo({
+      ...socialInfo,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const info = [
@@ -58,23 +69,6 @@ const SocialInfo = () => {
     },
   ];
 
-  useEffect(() => {
-    const contents = {
-      social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
-    };
-    setSocial(contents.social);
-    setSocialInfo({
-      ...contents.social,
-    });
-  }, []);
-
-  const onChange = e => {
-    setSocialInfo({
-      ...socialInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <>
       {isModifySocialInfo ? (
@@ -99,23 +93,23 @@ const SocialInfo = () => {
             <ul className='save-info'>
               <li>
                 <MdEmail className='icon' />
-                <span>{social.email}</span>
+                <span>{socialInfo.email}</span>
               </li>
               <li>
                 <AiFillGithub className='icon' />
-                <span>{social.github}</span>
+                <span>{socialInfo.github}</span>
               </li>
               <li>
                 <AiOutlineTwitter className='icon' />
-                <span>{social.twitter}</span>
+                <span>{socialInfo.twitter}</span>
               </li>
               <li>
                 <AiFillFacebook className='icon' />
-                <span>{social.facebook}</span>
+                <span>{socialInfo.facebook}</span>
               </li>
               <li>
                 <AiFillHome className='icon' />
-                <span>{social.url}</span>
+                <span>{socialInfo.url}</span>
               </li>
             </ul>
           </SocialInfoContainer>
