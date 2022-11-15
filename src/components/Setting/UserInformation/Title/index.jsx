@@ -36,7 +36,7 @@ const Title = () => {
         <>
           <TitleContainer>{title}</TitleContainer>
           <EditButtonContainer>
-            <EditButton text='수정' onClick={onModify} onChange={getTitle} value={title} />
+            <EditButton text='수정' onClick={onModify} />
           </EditButtonContainer>
         </>
       )}
