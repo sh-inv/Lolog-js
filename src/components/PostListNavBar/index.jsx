@@ -4,7 +4,6 @@ import More from './More';
 import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
-import { text3 } from '../../styles/color';
 
 const PostListNavBar = () => {
   const location = useLocation();
@@ -70,11 +69,11 @@ const PostListNavBarContainer = styled.div`
         height: 3rem;
         margin: 0;
         font-size: 1.125rem;
-        color: ${text3};
+        color: var(--text3);
       }
 
       .active {
-        color: var(--text);
+        color: var(--text1);
       }
     }
   }

@@ -71,7 +71,7 @@ const MoreContainer = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: var(--postlist-navbar-more-btn-color);
+    color: var(--text3);
 
     .icon {
       font-size: 1.4rem;
@@ -82,19 +82,20 @@ const MoreContainer = styled.div`
 const MoreBox = styled.div`
   ${tabStyle}
   top: 160%;
-  border: 1px solid var(--postlist-navbar-more-border-top);
-  opacity: ${({ isToggle }) => (isToggle ? '1' : '0')};
-  transform: ${({ isToggle }) => (isToggle ? 'scale(1)' : 'scale(0)')};
+  border: 1px solid var(--border3);
+  background-color: var(--bg-element1);
+  opacity: ${({ isActiveBox }) => (isActiveBox ? '1' : '0')};
+  transform: ${({ isActiveBox }) => (isActiveBox ? 'scale(1)' : 'scale(0)')};
 
   .content {
     font-size: 0.875rem;
     font-weight: 600;
     padding: 0.75rem 1rem;
-    border-top: 1px solid var(--post-border-top);
+    border-top: 1px solid var(--border4);
     cursor: pointer;
 
     :hover {
-      color: var(--a-tag-hover-text);
+      color: var(--primary1);
     }
 
     :nth-child(1) {

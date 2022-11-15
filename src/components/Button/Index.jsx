@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { buttonText, primary1, primary2 } from '../../styles/color';
 
 const Button = ({ text, onClick, ...props }) => {
   return (
@@ -18,7 +17,7 @@ const Buttons = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background: ${primary2};
+  background-color: var(--primary1);
   outline: none;
   border: none;
   border-radius: 4px;
@@ -28,8 +27,8 @@ const Buttons = styled.button`
 
   &:hover {
     cursor: pointer;
-    background: ${primary2};
-    color: ${buttonText};
+    background: var(--primary2);
+    color: ${props => props.hoverColor};
   }
 `;
 

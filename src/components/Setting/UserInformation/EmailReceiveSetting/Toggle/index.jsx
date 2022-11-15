@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement9, primary2 } from '../../../../../styles/color';
 
 const Toggle = () => {
   const [toggle, setToggle] = useState(false);
@@ -29,7 +28,7 @@ const ToggleBox = styled.div`
     padding: 0.125rem;
 
     border-radius: 1.125rem;
-    background: ${primary2};
+    background: var(--primary2);
     transition: all 0.125s ease-in 0s;
 
     .circle {
@@ -38,7 +37,7 @@ const ToggleBox = styled.div`
       transform: translate(1.375rem);
 
       border-radius: 0.625rem;
-      background: ${backgroundElement1};
+      background: var(--bg-element1);
       box-shadow: rgb(0 0 0 / 10%) -2px 0px 4px;
     }
   }
@@ -53,7 +52,7 @@ const ToggleBox = styled.div`
     padding: 0.125rem;
 
     border-radius: 1.125rem;
-    background: ${backgroundElement9};
+    background: var(--bg-element9);
     transition: all 0.125s ease-in 0s;
 
     .circle {
@@ -61,7 +60,7 @@ const ToggleBox = styled.div`
       height: 1.25rem;
 
       border-radius: 0.625rem;
-      background: ${backgroundElement1};
+      background: var(--bg-element1);
     }
   }
 `;

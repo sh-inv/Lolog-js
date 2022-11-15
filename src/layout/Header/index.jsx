@@ -8,7 +8,6 @@ import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
 import Login from '../../components/Login';
 import styled from 'styled-components';
-import { backgroundElement5, backgroundElement6, backgroundElement9, buttonText } from '../../styles/color';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
@@ -59,10 +58,10 @@ const Header = () => {
             <Link className='search setting-hover' to='/search'>
               <BiSearch />
             </Link>
-            <button className='login' onClick={onLoginModal}>
+            <button className='login hover-link-btn' onClick={onLoginModal}>
               로그인
             </button>
-            <Link className='new-post' to='/write'>
+            <Link className='new-post hover-link-btn' to='/write'>
               새 글 작성
             </Link>
             <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
@@ -126,6 +125,7 @@ const RightIcons = styled.div`
     height: 40px;
     margin-left: 0.3rem;
     border-radius: 40px;
+    color: var(--text1);
 
     svg {
       width: 24px;
@@ -134,50 +134,33 @@ const RightIcons = styled.div`
     }
 
     :hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--slight-layer);
       cursor: pointer;
     }
   }
 
-  .login {
-    height: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .hover-link-btn {
+    padding: 0.4rem 1rem;
+    margin-left: 0.5rem;
+    border: 1px solid var(--text1);
+    border-radius: 1.3rem;
+    background-color: var(--bg-element1);
+    color: var(--text1);
     font-size: 1rem;
-    border-radius: 1rem;
-    border: none;
-    outline: none;
     font-weight: bold;
+    border-radius: 1rem;
     word-break: keep-all;
-    background: ${backgroundElement5};
-    color: ${buttonText};
     transition: all 0.125s ease-in 0s;
-    cursor: pointer;
 
     :hover {
-      background: ${backgroundElement6};
-    }
-
-    &:hover {
-      box-shadow: rgb(0 0 0 / 19%) 0px 2px 12px;
+      background-color: var(--bg-invert);
+      color: var(--text-invert);
+      transition: all 0.125s ease-in 0s;
+      cursor: pointer;
     }
   }
 
   .new-post {
-    padding: 0.4rem 1rem;
-    margin-left: 0.5rem;
-    border: 1px solid var(--text);
-    border-radius: 1.3rem;
-    background-color: var(--new-post-btn-background);
-    font-size: 1rem;
-    font-weight: bold;
-
-    :hover {
-      background-color: var(--new-post-btn-hover-background);
-      color: var(--new-post-btn-hover-text);
-      transition: all 0.125s ease-in 0s;
-    }
-
     @media only screen and (max-width: 1023px) {
       display: none;
     }
@@ -201,10 +184,10 @@ const RightIcons = styled.div`
       cursor: pointer;
 
       width: 12px;
-      color: ${backgroundElement9};
+      color: var(--bg-element9);
 
       :hover {
-        color: var(--toggle-hover);
+        color: var(--text1);
       }
     }
   }

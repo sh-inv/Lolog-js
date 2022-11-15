@@ -51,12 +51,11 @@ export const UserProfileImageMaxWidth768px = `@media screen and (max-width: 768p
   height: 6rem;
   margin-bottom: 1rem;
 }`;
-import { border4 } from './color';
 export const UserIntroMaxWidth768px = `@media screen and (max-width: 768px) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  border-top: 1px solid ${border4};
-  border-bottom: 1px solid ${border4};
+  border-top: 1px solid var(--border4);
+  border-bottom: 1px solid var(--border4);
   border-left: none;
   padding-left: 0px;
 }`;

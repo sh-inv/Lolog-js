@@ -1,7 +1,6 @@
 import UserProfileImage from './UserProfileImage';
 import Button from '../../Button';
 import styled from 'styled-components';
-import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
 import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
@@ -26,21 +25,21 @@ const UserProfileContainer = styled.div`
   }
 
   .upload {
-    background: ${primary1};
-    color: ${buttonText};
+    background: var(--primary1);
+    color: var(--button-text);
 
     &:hover {
-      background: ${primary2};
+      background: var(--primary2);
     }
   }
 
   .remove {
     background: transparent;
-    color: ${primary1};
+    color: var(--primary1);
 
     &:hover {
-      background: ${slightLayer};
-      color: ${primary2};
+      background: var(--slight-layer);
+      color: var(--primary2);
     }
   }
 
