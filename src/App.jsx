@@ -6,6 +6,7 @@ import { Header } from './layout';
 import Search from './pages/Search';
 import Setting from './pages/Setting';
 import Saves from './pages/Saves';
+import MyLolog from './pages/MyLolog';
 import Series from './components/Series';
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/search' element={<Search />} />
         <Route path='/setting' element={<Setting />} />
         <Route path='/saves' element={<Saves />} />
-        <Route path='/id'>
+        <Route path='/id' element={<MyLolog />}>
           <Route index element={<Series />} />
           <Route path='series' element={<Series />} />
           <Route path='about' element={<Series />} />
