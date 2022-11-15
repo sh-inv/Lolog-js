@@ -29,7 +29,7 @@ const PostInfoContainer = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: var(--text);
+    color: var(--text1);
   }
 
   .main-text {

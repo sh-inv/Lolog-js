@@ -23,7 +23,7 @@ const PostBox = styled.div`
   width: 20rem;
   margin: 1rem;
   border-radius: 4px;
-  background: var(--new-post-btn-background);
+  background: var(--bg-element1);
   box-shadow: rgb(0 0 0 / 4%) 0 4px 16px 0;
   transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
   overflow: hidden;
