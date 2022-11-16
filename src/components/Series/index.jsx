@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SeriesPost from './SeriesPost';
 import styled from 'styled-components';
+import { SeriesMaxWidth768px } from '../../styles/media';
 
 const Series = () => {
   const [seriesList, setSeriesList] = useState([]);
@@ -57,6 +58,8 @@ const SeriesContainer = styled.div`
   margin-top: -3rem;
   margin-left: -1rem;
   margin-right: -1rem;
+
+  ${SeriesMaxWidth768px};
 `;
 
 export default Series;

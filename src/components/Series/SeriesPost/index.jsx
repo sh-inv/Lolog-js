@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Thumbnail from '../../Thumbnail';
 import SeriesInfo from './SeriesInfo';
 import styled from 'styled-components';
+import { SeriesPostMaxWidth768px } from '../../../styles/media';
 
 const SeriesPost = ({ src, title, update }) => {
   return (
@@ -21,6 +22,8 @@ const SeriesPostContainer = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 3rem;
+
+  ${SeriesPostMaxWidth768px};
 `;
 
 const ThumbnailContainer = styled.div`

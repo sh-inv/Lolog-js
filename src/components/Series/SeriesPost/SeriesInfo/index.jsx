@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { SeriesInfoMaxWidth768px } from '../../../../styles/media';
 
 const SeriesInfo = ({ title, update }) => {
   return (
@@ -24,11 +25,15 @@ const SeriesInfoContainer = styled.div`
     line-height: 1.5;
     color: var(--text1);
     overflow: hidden;
+
+    ${SeriesInfoMaxWidth768px};
   }
 
   .info {
     font-size: 0.875rem;
     color: var(--text3);
+
+    ${SeriesInfoMaxWidth768px};
 
     .count {
       color: var(--text1);
