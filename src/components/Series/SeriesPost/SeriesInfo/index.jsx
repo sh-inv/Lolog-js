@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SeriesInfo = () => {
+const SeriesInfo = ({ title, update }) => {
   return (
     <SeriesInfoContainer>
-      <h4>TIL</h4>
+      <h4>
+        <Link to=''>{title}</Link>
+      </h4>
       <div className='info'>
         <span className='count'>0개의 포스트</span>
         <span className='dot'>·</span>
-        마지막 업데이트 2022년 11월 16일
+        마지막 업데이트 <span>{update}</span>
       </div>
     </SeriesInfoContainer>
   );
@@ -20,6 +23,7 @@ const SeriesInfoContainer = styled.div`
     margin-bottom: 0.5rem;
     line-height: 1.5;
     color: var(--text1);
+    overflow: hidden;
   }
 
   .info {

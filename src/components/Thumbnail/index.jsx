@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Thumbnail = () => {
-  return <ThumbnailImage alt='thumbnail' src='https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png' />;
+const Thumbnail = ({ src }) => {
+  return <ThumbnailImage alt='thumbnail' src={src} />;
 };
 
 const ThumbnailImage = styled.img`
