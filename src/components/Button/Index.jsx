@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 const Button = ({ text, onClick, ...props }) => {
   return (
-    <Buttons onClick={onClick} text={text} {...props}>
+    <ButtonContainer onClick={onClick} text={text} {...props}>
       {text}
-    </Buttons>
+    </ButtonContainer>
   );
 };
 
-const Buttons = styled.button`
+const ButtonContainer = styled.button`
   display: inline-flex;
   -webkit-box-align: center;
   align-items: center;
@@ -28,7 +28,7 @@ const Buttons = styled.button`
   &:hover {
     cursor: pointer;
     background: var(--primary2);
-    color: ${props => props.hoverColor};
+    color: var(--button-text);
   }
 `;
 
