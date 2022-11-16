@@ -29,6 +29,7 @@ const AboutContainer = styled.div`
       font-size: 1.125rem;
     }
   }
+
   .intro-wrapper {
     width: 768px;
     margin-left: auto;
