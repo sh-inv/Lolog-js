@@ -23,6 +23,7 @@ const AboutContainer = styled.div`
     margin-bottom: 1.5rem;
     -webkit-box-pack: end;
     justify-content: flex-end;
+
     button {
       height: 2.5rem;
       font-size: 1.125rem;
