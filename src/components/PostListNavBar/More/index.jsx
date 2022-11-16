@@ -84,8 +84,8 @@ const MoreBox = styled.div`
   top: 160%;
   border: 1px solid var(--border3);
   background-color: var(--bg-element1);
-  opacity: ${({ isActiveBox }) => (isActiveBox ? '1' : '0')};
-  transform: ${({ isActiveBox }) => (isActiveBox ? 'scale(1)' : 'scale(0)')};
+  opacity: ${({ isToggle }) => (isToggle ? '1' : '0')};
+  transform: ${({ isToggle }) => (isToggle ? 'scale(1)' : 'scale(0)')};
 
   .content {
     font-size: 0.875rem;
