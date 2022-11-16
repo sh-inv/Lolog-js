@@ -1,6 +1,6 @@
-import profile from '../../../../assets/profile.png';
+import profile from '../../assets/profile.png';
 import styled from 'styled-components';
-import { UserProfileImageMaxWidth768px } from '../../../../styles/media';
+import { UserProfileImageMaxWidth768px } from '../../styles/media';
 
 const UserProfileImage = () => {
   return <UserProfileImageContainer alt='profile' src={profile} />;

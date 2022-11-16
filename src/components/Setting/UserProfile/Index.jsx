@@ -1,4 +1,4 @@
-import UserProfileImage from './UserProfileImage';
+import UserProfileImage from '../../UserProfileImage';
 import Button from '../../Button';
 import styled from 'styled-components';
 import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
