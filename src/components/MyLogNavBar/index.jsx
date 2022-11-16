@@ -79,12 +79,9 @@ const SlideBorder = styled.div`
   position: absolute;
   bottom: -2px;
   left: ${({ location }) => {
-    if (location.pathname === '/') return '0';
-    else if (location.pathname === '/id/series') {
-      return '33.3333%';
-    } else if (location.pathname === '/id/about') {
-      return '66.6666%';
-    }
+    if (location.pathname === '/id') return '0';
+    else if (location.pathname === '/id/series') return '33.3333%';
+    else if (location.pathname === '/id/about') return '66.6666%';
   }};
   width: 8rem;
   height: 2px;
