@@ -71,3 +71,18 @@ export const UserContentsBoxMaxWidth768px = `@media screen and (max-width: 768px
 export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768px) {
   margin-bottom: 0.5rem;
 }`;
+
+//series 반응형
+export const SeriesMaxWidth768px = `@media screen and (max-width: 768px) {
+  margin: 0px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}`;
+export const SeriesPostMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  padding: 0px;
+  margin-bottom: 3rem;
+}`;
+export const SeriesInfoMaxWidth768px = `@media screen and (max-width: 768px) {
+  line-height: 1;
+}`;
