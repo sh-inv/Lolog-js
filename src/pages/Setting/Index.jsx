@@ -1,6 +1,6 @@
-import UserProfile from '../../components/Setting/UserProfile';
-import UserIntroduction from '../../components/Setting/UserIntroduction';
-import UserInformation from '../../components/Setting/UserInformation';
+import UserProfile from './UserProfile';
+import UserIntroduction from './UserIntroduction';
+import UserInformation from './UserInformation';
 import styled from 'styled-components';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
 
