@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { buttonText, primary1, primary2 } from '../../styles/color';
 
-const Button = ({ text }) => {
-  return <Buttons text={text}>{text}</Buttons>;
+const Button = ({ text, onClick, ...props }) => {
+  return (
+    <Buttons onClick={onClick} text={text} {...props}>
+      {text}
+    </Buttons>
+  );
 };
 
 const Buttons = styled.button`
@@ -14,18 +17,18 @@ const Buttons = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background-color: ${primary1};
+  background-color: var(--primary1);
   outline: none;
   border: none;
   border-radius: 4px;
-  color: ${buttonText};
+  color: var(--button-text);
   font-size: 1rem;
   font-weight: bold;
 
   &:hover {
     cursor: pointer;
-    background: ${primary2};
-    color: ${buttonText};
+    background: var(--primary2);
+    color: ${props => props.hoverColor};
   }
 `;
 

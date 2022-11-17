@@ -6,7 +6,6 @@ import EditButton from '../../EditButton';
 import ConfirmModal from '../../ConfirmModal';
 import Toggle from '../Toggle';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, text2, text3, destructive1, destructive2, buttonText, primary1, primary2 } from '../../../styles/color';
 
 const UserContents = () => {
   const [title, setTitle] = useState('');
@@ -264,25 +263,25 @@ const UserContentsContainer = styled.section`
           padding: 0.5rem;
           margin-right: 1rem;
 
-          border: 1px solid ${border3};
+          border: 1px solid var(--border3);
           border-radius: 4px;
-          background: ${backgroundElement1};
-          color: ${text2};
+          background: var(--bg-element1);
+          color: var(--text2);
           font-size: 1rem;
           line-height: 1rem;
           outline: none;
 
           :focus {
-            border: 1px solid ${border1};
+            border: 1px solid var(--border2);
           }
         }
 
         .confirm-button {
-          background: ${primary1};
-          color: ${buttonText};
+          background: var(--primary1);
+          color: var(--button-text);
 
           &:hover {
-            background: ${primary2};
+            background: var(--primary2);
           }
         }
 
@@ -297,7 +296,7 @@ const UserContentsContainer = styled.section`
       .contents {
         flex: 1 1 0%;
         font-size: 1rem;
-        color: ${text2};
+        color: var(--text2);
         line-height: 1.5;
 
         ul {
@@ -330,11 +329,11 @@ const UserContentsContainer = styled.section`
         }
 
         .withdrawal-button {
-          background: ${destructive1};
-          color: ${buttonText};
+          background: var(--destructive1);
+          color: var(--button-text);
 
           &:hover {
-            background: ${destructive2};
+            background: var(--destructive2);
           }
         }
       }
@@ -342,13 +341,13 @@ const UserContentsContainer = styled.section`
 
     .desc {
       margin-top: 0.875rem;
-      color: ${text3};
+      color: var(--text3);
       font-size: 0.875rem;
     }
   }
 
   .border {
-    border-top: 1px solid ${border4};
+    border-top: 1px solid var(--border4);
   }
 `;
 

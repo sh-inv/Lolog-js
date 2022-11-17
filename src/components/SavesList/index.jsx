@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import EditButton from '../EditButton';
 import ConfirmModal from '../ConfirmModal';
 import styled from 'styled-components';
-import { text1, text2, text3, border3 } from '../../styles/color';
 
 const SavesList = () => {
   const [list, setList] = useState([]);
@@ -74,13 +73,13 @@ const SavesListContainer = styled.div`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   line-height: 1.5;
-  border-bottom: 1px solid ${border3};
+  border-bottom: 1px solid var(--border3);
 
   h3 {
     margin-top: 0px;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
-    color: ${text1};
+    color: var(--text1);
   }
 
   p {
@@ -92,7 +91,7 @@ const SavesListContainer = styled.div`
     margin-top: 0px;
     margin-bottom: 1rem;
     font-size: 1rem;
-    color: ${text2};
+    color: var(--text2);
   }
 
   section {
@@ -101,11 +100,11 @@ const SavesListContainer = styled.div`
     justify-content: space-between;
 
     .time {
-      color: ${text3};
+      color: var(--text3);
     }
 
     button {
-      color: ${text1};
+      color: var(--text1);
 
       &:hover {
         color: rgb(250, 82, 82);

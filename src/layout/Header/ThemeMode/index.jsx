@@ -3,10 +3,15 @@ import { darkMode, lightMode } from '../../../store/modules/header';
 import { HiMoon } from 'react-icons/hi';
 import { BsFillSunFill } from 'react-icons/bs';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 const ThemeMode = () => {
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    isDarkMode ? dispatch(darkMode()) : dispatch(lightMode());
+  }, []);
 
   const changeTheme = e => {
     e.target.className = 'theme-mode-change setting-hover';

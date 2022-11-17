@@ -9,10 +9,12 @@ const themeModeSlice = createSlice({
     darkMode: state => {
       localStorage.setItem('isDarkMode', true);
       state.isDarkMode = true;
+      document.body.dataset.theme = 'dark';
     },
     lightMode: state => {
       localStorage.setItem('isDarkMode', false);
       state.isDarkMode = false;
+      document.body.dataset.theme = 'light';
     },
   },
 });

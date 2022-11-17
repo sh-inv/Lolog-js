@@ -35,7 +35,7 @@ const InputWrapper = styled.div`
   transition: all 0.125s ease-in 0s;
 
   :focus-within {
-    border-color: var(--text);
+    border-color: var(--text1);
   }
 
   svg {
@@ -61,7 +61,7 @@ const SearchInput = styled.input`
   line-height: 2rem;
   font-size: 1.5rem;
   border: none;
-  color: var(--text);
+  color: var(--text1);
   background-color: transparent;
   cursor: text;
 

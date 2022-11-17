@@ -21,7 +21,7 @@ const ToggleMenuListContainer = styled.div`
   width: 12rem;
   margin-top: 0.3rem;
   margin-left: auto;
-  background-color: var(--toggle-background);
+  background-color: var(--bg-element1);
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
 
   .link-tag {
@@ -37,8 +37,8 @@ const ToggleMenuListContainer = styled.div`
     }
 
     :hover {
-      color: var(--a-tag-hover-text);
-      background-color: var(--a-tag-hover-background);
+      color: var(--primary1);
+      background-color: var(--bg-element2);
     }
   }
 `;

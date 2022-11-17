@@ -1,6 +1,5 @@
 import Button from '../Button';
 import styled from 'styled-components';
-import { backgroundElement1, backgroundElement10, text1, text2, opaqueLayer, buttonText, primary1, primary2 } from '../../styles/color';
 
 const ConfirmModal = ({ title, message, onClose }) => {
   return (
@@ -28,7 +27,7 @@ const Background = styled.div`
   left: 0px;
   width: 100%;
   height: 100%;
-  background: ${opaqueLayer};
+  background: var(--opaque-layer);
   z-index: 10;
   animation: 0.25s ease 0s 1 normal forwards running cJoqxJ;
 `;
@@ -50,7 +49,7 @@ const Modal = styled.div`
 const ModalContainer = styled.div`
   width: 25rem;
   border-radius: 4px;
-  background: ${backgroundElement1};
+  background: var(--bg-element1);
   padding: 2rem 1.5rem;
   box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
   animation: 0.4s ease-in-out 0s 1 normal forwards running cptskd;
@@ -58,7 +57,7 @@ const ModalContainer = styled.div`
   h3 {
     margin: 0px;
     font-size: 1.5rem;
-    color: ${text1};
+    color: var(--text1);
     line-height: 1.5;
     font-weight: bold;
   }
@@ -68,7 +67,7 @@ const ModalContainer = styled.div`
     margin-bottom: 1rem;
     line-height: 1.5;
     font-size: 1rem;
-    color: ${text2};
+    color: var(--text2);
     white-space: pre-wrap;
   }
 
@@ -84,19 +83,19 @@ const ModalContainer = styled.div`
 
     .cancel {
       background: none;
-      color: ${primary1};
+      color: var(--primary1);
 
       &:hover {
-        background: ${backgroundElement10};
+        background: white;
       }
     }
 
     .confirm {
-      background: ${primary1};
-      color: ${buttonText};
+      background: var(--primary1);
+      color: var(--button-text);
 
       &:hover {
-        background: ${primary2};
+        background: var(--primary2);
       }
     }
   }

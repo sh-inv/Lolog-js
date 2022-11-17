@@ -1,12 +1,12 @@
+import UserProfileImage from './UserProfileImage';
 import Button from '../../Button';
-import profile from '../../../assets/profile.png';
 import styled from 'styled-components';
-import { buttonText, primary1, primary2, slightLayer } from '../../../styles/color';
+import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
     <UserProfileContainer>
-      <img alt='profile' src={profile} />
+      <UserProfileImage />
       <Button text='이미지 업로드' className='upload' />
       <Button text='이미지 제거' className='remove' />
     </UserProfileContainer>
@@ -18,56 +18,34 @@ const UserProfileContainer = styled.div`
   flex-direction: column;
   padding-right: 1.5rem;
 
-  img {
-    object-fit: cover;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-    display: block;
-    margin-bottom: 1.25rem;
-
-    @media screen and (max-width: 768px) {
-      width: 6rem;
-      height: 6rem;
-      margin-bottom: 1rem;
-    }
-  }
+  ${settingProfileMaxWidth768px};
 
   button {
-    @media screen and (max-width: 768px) {
-      width: 10rem;
-    }
+    ${settingProfileButtonMaxWidth768px};
   }
 
   .upload {
-    background: ${primary1};
-    color: ${buttonText};
+    background: var(--primary1);
+    color: var(--button-text);
 
     &:hover {
-      background: ${primary2};
+      background: var(--primary2);
     }
   }
 
   .remove {
     background: transparent;
-    color: ${primary1};
+    color: var(--primary1);
 
     &:hover {
-      background: ${slightLayer};
-      color: ${primary2};
+      background: var(--slight-layer);
+      color: var(--primary2);
     }
   }
 
   button + button {
     margin-top: 0.5rem;
     margin-left: 0px;
-  }
-
-  @media (max-width: 768px) {
-    -webkit-box-align: center;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    padding-right: 0px;
   }
 `;
 

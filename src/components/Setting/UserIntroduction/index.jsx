@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import EditButton from '../../EditButton';
 import Button from '../../Button';
 import styled from 'styled-components';
-import { backgroundElement1, border1, border3, border4, buttonText, primary1, primary2, text2, text3 } from '../../../styles/color';
+import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../styles/media';
 
-const UserInfo = () => {
+const UserIntroduction = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
@@ -30,7 +30,7 @@ const UserInfo = () => {
   };
 
   return (
-    <UserInfoContainer>
+    <UserIntroContainer>
       {isModify ? (
         <>
           <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
@@ -45,44 +45,37 @@ const UserInfo = () => {
         </>
       ) : (
         <>
-          <h2>Eden</h2>
-          <p>one part.</p>
+          <h2>{user}</h2>
+          <p>{introduction}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}
-    </UserInfoContainer>
+    </UserIntroContainer>
   );
 };
 
-const UserInfoContainer = styled.div`
+const UserIntroContainer = styled.div`
   flex: 1 1 0%;
   padding-left: 1.5rem;
-  border-left: 1px solid ${border4};
+  border-left: 1px solid var(--border4);
 
-  @media screen and (max-width: 768px) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-top: 1px solid ${border4};
-    border-bottom: 1px solid ${border4};
-    border-left: none;
-    padding-left: 0px;
-  }
+  ${UserIntroMaxWidth768px};
 
   .modify-input {
     display: block;
     width: 100%;
     padding: 0.5rem;
 
-    border: 1px solid ${border3};
+    border: 1px solid var(--border3);
     border-radius: 4px;
-    background: ${backgroundElement1};
-    color: ${text2};
+    background: var(--bg-element1);
+    color: var(--text2);
     font-size: 1rem;
     line-height: 1rem;
     outline: none;
 
     :focus {
-      border: 1px solid ${border1};
+      border: 1px solid var(--border1);
     }
   }
 
@@ -96,11 +89,11 @@ const UserInfoContainer = styled.div`
   }
 
   .confirm-button {
-    background: ${primary1};
-    color: ${buttonText};
+    background: var(--primary1);
+    color: var(--button-text);
 
     &:hover {
-      background: ${primary2};
+      background: var(--primary2);
     }
   }
 
@@ -109,9 +102,7 @@ const UserInfoContainer = styled.div`
     line-height: 1.5;
     font-size: 2.25rem;
 
-    @media screen and (max-width: 768px) {
-      font-size: 1.25rem;
-    }
+    ${UserIntroTitleMaxWidth768px};
   }
 
   p {
@@ -119,8 +110,8 @@ const UserInfoContainer = styled.div`
     margin-bottom: 0.5rem;
     line-height: 1.5;
     font-size: 1rem;
-    color: ${text3};
+    color: var(--text3);
   }
 `;
 
-export default UserInfo;
+export default UserIntroduction;

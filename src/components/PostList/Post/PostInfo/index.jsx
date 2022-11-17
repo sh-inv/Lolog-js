@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { text2 } from '../../../../styles/color';
 import { getPostDate } from '../../../../utils/getpostdate';
 
 const PostInfo = () => {
@@ -32,7 +31,7 @@ const PostInfoContainer = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: var(--text);
+    color: var(--text1);
   }
 
   .main-text {
@@ -46,13 +45,13 @@ const PostInfoContainer = styled.div`
     line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${text2};
+    color: var(--text2);
   }
 
   .sub-info {
     font-size: 0.75rem;
     line-height: 1.5;
-    color: ${text2};
+    color: var(--text2);
   }
 `;
 
