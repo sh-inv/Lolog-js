@@ -1,30 +1,32 @@
-import { useState } from 'react';
-import ModifyAbout from './ModifyAbout';
+import { useState, useEffect } from 'react';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
 
 const About = () => {
+  const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
     isModify ? setIsModify(false) : setIsModify(true);
   };
 
+  const getIntro = e => {
+    setIntroduction(e.target.value);
+  };
+
+  useEffect(() => {
+    const intro = {
+      intro: "It's just one part of me, that you know of. 😀",
+    };
+    setIntroduction(intro.intro);
+  }, []);
+
   return (
     <AboutContainer>
       <div className='button-wrapper'>
         <Button text={isModify ? '저장하기' : '수정하기'} onClick={onModify} />
       </div>
-      <div className='intro-wrapper'>
-        {isModify ? (
-          <ModifyAbout />
-        ) : (
-          <p>
-            It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of
-            me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.
-          </p>
-        )}
-      </div>
+      <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={introduction}></textarea> : <p>{introduction}</p>}</div>
     </AboutContainer>
   );
 };
@@ -54,6 +56,17 @@ const AboutContainer = styled.div`
     letter-spacing: -0.004em;
     word-break: keep-all;
     overflow-wrap: break-word;
+
+    textarea {
+      width: 100%;
+      height: 10rem;
+      background: transparent;
+      border: none;
+      outline: none;
+      overflow: hidden;
+      resize: none;
+      font-size: inherit;
+    }
 
     p {
       display: block;
