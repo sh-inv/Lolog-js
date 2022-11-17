@@ -1,4 +1,4 @@
-import SavesList from '../../components/SavesList';
+import SavesList from './SavesList';
 import styled from 'styled-components';
 
 const Saves = () => {

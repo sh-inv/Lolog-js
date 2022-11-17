@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import EditButton from '../EditButton';
-import ConfirmModal from '../ConfirmModal';
+import EditButton from '../../../components/EditButton';
+import ConfirmModal from '../../../components/ConfirmModal';
 import styled from 'styled-components';
 
 const SavesList = () => {
