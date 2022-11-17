@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const TagList = () => {
+const MinWidth1200pxTagList = () => {
   const list = [
     {
       name: '전체보기',
@@ -46,7 +46,7 @@ const TagList = () => {
   ];
 
   return (
-    <TagListContainer>
+    <MinWidth1200pxTagListContainer>
       <div className='tag-list'>태그 목록</div>
       <ul>
         {list.map(tag => (
@@ -58,11 +58,11 @@ const TagList = () => {
           </li>
         ))}
       </ul>
-    </TagListContainer>
+    </MinWidth1200pxTagListContainer>
   );
 };
 
-const TagListContainer = styled.div`
+const MinWidth1200pxTagListContainer = styled.div`
   position: absolute;
   left: -13.5rem;
   width: 11.5rem;
@@ -105,4 +105,4 @@ const TagListContainer = styled.div`
   }
 `;
 
-export default TagList;
+export default MinWidth1200pxTagList;
