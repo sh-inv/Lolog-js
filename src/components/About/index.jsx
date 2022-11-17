@@ -1,17 +1,31 @@
+import { useState } from 'react';
+import ModifyAbout from './ModifyAbout';
 import Button from '../Button';
 import styled from 'styled-components';
 
 const About = () => {
+  const [isModify, setIsModify] = useState(false);
+
+  const onModify = () => {
+    isModify ? setIsModify(false) : setIsModify(true);
+  };
+
   return (
     <AboutContainer>
       <div className='button-wrapper'>
-        <Button text='수정하기' />
+        <Button text={isModify ? '저장하기' : '수정하기'} onClick={onModify} />
       </div>
       <div className='intro-wrapper'>
-        <p>
-          It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me,
-          that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.
-        </p>
+        {isModify ? (
+          <>
+            <ModifyAbout />
+          </>
+        ) : (
+          <p>
+            It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of
+            me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.
+          </p>
+        )}
       </div>
     </AboutContainer>
   );
