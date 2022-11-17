@@ -1,9 +1,6 @@
-import { Link } from 'react-router-dom';
 import { MdOutlineClose } from 'react-icons/md';
-import { AiOutlineGithub } from 'react-icons/ai';
-import { FcGoogle } from 'react-icons/fc';
-import { FaFacebookF } from 'react-icons/fa';
-import Button from '../Button';
+import LoginForm from './LoginForm';
+import SocialLogin from './SocialLogin';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
@@ -25,25 +22,11 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
               <h2>{title}</h2>
               <section>
                 <h4>이메일로 {title}</h4>
-                <form>
-                  <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
-                  <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
-                  <Button className='login-button' text={title} tabIndex='4' />
-                </form>
+                <LoginForm title={title} />
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
-                <div className='social'>
-                  <Link className='github' tabIndex='5'>
-                    <AiOutlineGithub />
-                  </Link>
-                  <Link className='google' tabIndex='6'>
-                    <FcGoogle />
-                  </Link>
-                  <Link className='facebook' tabIndex='7'>
-                    <FaFacebookF />
-                  </Link>
-                </div>
+                <SocialLogin />
               </section>
             </div>
             <div className='foot'>
@@ -157,110 +140,10 @@ const LoginContainer = styled.div`
       section {
         display: block;
 
-        form {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-
-          input {
-            flex: 1 1 0%;
-            padding: 1rem;
-            background: var(--bg-element1);
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
-            border: 0.5px solid var(--border4);
-            outline: none;
-            font-size: 1rem;
-            color: var(--text1);
-
-            :focus {
-              border: 1px solid var(--primary1);
-            }
-          }
-
-          input + input {
-            margin-top: 0.25rem;
-          }
-
-          button {
-            height: 3rem;
-            margin-top: 0.5rem;
-            background: var(--primary1);
-            outline: none;
-            border: none;
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
-            color: var(--button-text);
-            font-size: 1rem;
-            font-weight: bold;
-            word-break: keep-all;
-            cursor: pointer;
-          }
-        }
-
         h4 {
           margin-top: 1rem;
           margin-bottom: 1rem;
           color: var(--text3);
-        }
-
-        .social {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 1.5rem;
-
-          svg {
-            font-size: 20px;
-          }
-
-          .github {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            width: 3rem;
-            height: 3rem;
-
-            background: rgb(39, 46, 51);
-            border-radius: 1.5rem;
-            outline: none;
-            transition: all 0.125s ease-in 0s;
-            color: #fff;
-          }
-
-          .google {
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            width: 3rem;
-            height: 3rem;
-
-            background: #fff;
-            border-radius: 1.5rem;
-            outline: none;
-            transition: all 0.125s ease-in 0s;
-            color: fff;
-            border: 1px solid var(--border3);
-          }
-        }
-
-        .facebook {
-          display: flex;
-          -webkit-box-align: center;
-          align-items: center;
-          -webkit-box-pack: center;
-          justify-content: center;
-          width: 3rem;
-          height: 3rem;
-
-          background: rgb(59, 89, 152);
-          border-radius: 1.5rem;
-          outline: none;
-          transition: all 0.125s ease-in 0s;
-          color: #fff;
         }
       }
 
