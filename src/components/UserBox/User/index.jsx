@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import UserProfileImage from '../../Setting/UserProfile/UserProfileImage';
+import UserProfileImage from '../../UserProfileImage';
 import styled from 'styled-components';
 
 const User = () => {
