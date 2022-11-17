@@ -11,7 +11,7 @@ const Posts = () => {
       <MinWidth1200pxTagList />
       <MaxWidth1199pxTagList />
       {arr.map((_, i) => (
-        <Post />
+        <Post key={i} />
       ))}
       <NoPost />
     </PostsContainer>
