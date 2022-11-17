@@ -3,8 +3,8 @@ import { MdOutlineClose } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
-import Button from '../../Button';
-import welcome from '../../../assets/welcome.png';
+import Button from '../Button';
+import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
 const LoginModal = ({ title, message, link, onClose, onChange }) => {

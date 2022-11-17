@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LoginModal from './LoginModal';
+import LoginModal from '../LoginModal';
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
   const [isJoinModal, setIsJoinModal] = useState(false);
