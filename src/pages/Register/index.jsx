@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { MdLockOutline } from 'react-icons/md';
 import Button from '../../components/Button';
 import styled from 'styled-components';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   return (
     <RegisterContainer>
       <h1>환영합니다!</h1>
@@ -36,7 +39,7 @@ const Register = () => {
       </div>
       <div className='form-bottom'>
         <div className='button-wrapper'>
-          <Button className='cancel' text='취소' />
+          <Button className='cancel' text='취소' onClick={() => navigate('/')} />
           <Button className='next' text='다음' />
         </div>
       </div>
