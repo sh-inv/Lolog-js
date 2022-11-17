@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { closeToggle } from '../../../utils/closetoggle';
 import { FiMoreVertical } from 'react-icons/fi';
 import { tabStyle } from '../../../styles/postlistnavbar';
 
