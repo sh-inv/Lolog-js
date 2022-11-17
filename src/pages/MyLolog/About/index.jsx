@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ModifyAbout from './ModifyAbout';
-import Button from '../Button';
+import Button from '../../../components/Button';
 import styled from 'styled-components';
 
 const About = () => {
@@ -17,9 +17,7 @@ const About = () => {
       </div>
       <div className='intro-wrapper'>
         {isModify ? (
-          <>
-            <ModifyAbout />
-          </>
+          <ModifyAbout />
         ) : (
           <p>
             It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of me, that you know of.It's just one part of
