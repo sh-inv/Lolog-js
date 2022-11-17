@@ -7,8 +7,9 @@ import Search from './pages/Search';
 import Setting from './pages/Setting';
 import Saves from './pages/Saves';
 import MyLolog from './pages/MyLolog';
-import Series from './components/Series';
 import Posts from './pages/MyLolog/Posts';
+import Series from './components/Series';
+import About from './pages/MyLolog/About';
 
 const App = () => {
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
@@ -26,7 +27,7 @@ const App = () => {
         <Route path='/id' element={<MyLolog />}>
           <Route index element={<Posts />} />
           <Route path='series' element={<Series />} />
-          <Route path='about' element={<Series />} />
+          <Route path='about' element={<About />} />
         </Route>
       </Routes>
     </>
