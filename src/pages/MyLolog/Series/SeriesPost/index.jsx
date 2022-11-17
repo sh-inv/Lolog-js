@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import Thumbnail from '../../Thumbnail';
+import Thumbnail from '../../../../components/Thumbnail';
 import SeriesInfo from './SeriesInfo';
 import styled from 'styled-components';
-import { SeriesPostMaxWidth768px } from '../../../styles/media';
+import { SeriesPostMaxWidth768px } from '../../../../styles/media';
 
 const SeriesPost = ({ src, title, update }) => {
   return (

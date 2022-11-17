@@ -8,7 +8,7 @@ import Setting from './pages/Setting';
 import Saves from './pages/Saves';
 import MyLolog from './pages/MyLolog';
 import Posts from './pages/MyLolog/Posts';
-import Series from './components/Series';
+import Series from './pages/MyLolog/Series';
 import About from './pages/MyLolog/About';
 
 const App = () => {
