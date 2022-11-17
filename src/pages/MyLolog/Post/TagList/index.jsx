@@ -49,9 +49,9 @@ const TagList = () => {
     <TagListContainer>
       <div className='tag-list'>태그 목록</div>
       <ul>
-        {list.map((tag, i) => (
-          <li className='tag' key={i}>
-            <NavLink to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`} className='tag-link' end>
+        {list.map(tag => (
+          <li className='tag' key={tag.name}>
+            <NavLink to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`} className='tag-link'>
               {tag.name}
             </NavLink>
             <span className='tag-post-count'>({tag.post})</span>
@@ -84,6 +84,10 @@ const TagListContainer = styled.div`
 
     .tag-link {
       color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .active {
@@ -94,6 +98,10 @@ const TagListContainer = styled.div`
       margin-left: 0.5rem;
       color: var(--text3);
     }
+  }
+
+  @media screen and (max-width: 1200px) {
+    display: none;
   }
 `;
 
