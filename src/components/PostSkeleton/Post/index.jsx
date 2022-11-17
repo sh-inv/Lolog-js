@@ -2,11 +2,14 @@ import PostInfo from './PostInfo';
 import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import { postMaxWidth1056px, postMaxWidth767px } from '../../../styles/media';
+import Thumbnail from './Thumbnail';
 
 const Post = () => {
   return (
     <PostBox>
-      <div to='' className='thumbnail-box' />
+      <div className='thumbnail-box'>
+        <Thumbnail />
+      </div>
       <PostInfo />
       <UserInfo />
     </PostBox>
@@ -14,7 +17,6 @@ const Post = () => {
 };
 
 const PostBox = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 20rem;
@@ -31,7 +33,6 @@ const PostBox = styled.div`
 
   .thumbnail-box {
     height: 167px;
-    background-color: var(--bg-element4);
   }
 `;
 

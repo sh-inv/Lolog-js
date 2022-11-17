@@ -3,12 +3,13 @@ import PostInfo from './PostInfo';
 import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import { postMaxWidth1056px, postMaxWidth767px } from '../../../styles/media';
+import Thumbnail from '../../Thumbnail';
 
 const Post = () => {
   return (
     <PostBox>
       <Link to='' className='thumbnail-box'>
-        <img className='post-thumbnail-img' src='https://velog.velcdn.com/images/s2ksh77/post/442c7442-0de4-4730-a447-d8a40bf5d074/image.png' alt='' />
+        <Thumbnail src={'https://velog.velcdn.com/images/s2ksh77/post/442c7442-0de4-4730-a447-d8a40bf5d074/image.png'} />
       </Link>
       <PostInfo />
       <UserInfo />
@@ -17,7 +18,6 @@ const Post = () => {
 };
 
 const PostBox = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 20rem;
@@ -31,12 +31,13 @@ const PostBox = styled.div`
   // 반응형
   ${postMaxWidth1056px}
   ${postMaxWidth767px}
-
+  
   &:hover {
     transform: translate(0, -8px);
   }
 
   .thumbnail-box {
+    position: relative;
     height: 167px;
     .post-thumbnail-img {
       width: 100%;

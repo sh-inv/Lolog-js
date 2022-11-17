@@ -86,3 +86,9 @@ export const SeriesPostMaxWidth768px = `@media screen and (max-width: 768px) {
 export const SeriesInfoMaxWidth768px = `@media screen and (max-width: 768px) {
   line-height: 1;
 }`;
+
+//about 반응형
+export const AboutMaxWidth768px = `@media screen and (max-width: 768px) {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}`;

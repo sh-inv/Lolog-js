@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
+import { AboutMaxWidth768px, settingMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
   const [introduction, setIntroduction] = useState('');
@@ -32,6 +33,8 @@ const About = () => {
 };
 
 const AboutContainer = styled.div`
+  ${AboutMaxWidth768px};
+
   .button-wrapper {
     display: flex;
     margin-bottom: 1.5rem;
