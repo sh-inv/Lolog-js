@@ -38,7 +38,6 @@ const PostInfoContainer = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    /* height: 3.9375rem; */
     margin-bottom: 1.5rem;
     overflow-wrap: break-word;
     font-size: 0.875rem;
