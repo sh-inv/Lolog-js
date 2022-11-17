@@ -1,5 +1,5 @@
-import UserProfileImage from '../../UserProfileImage';
-import Button from '../../Button';
+import UserProfileImage from '../../../components/UserProfileImage';
+import Button from '../../../components/Button';
 import styled from 'styled-components';
 import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
 

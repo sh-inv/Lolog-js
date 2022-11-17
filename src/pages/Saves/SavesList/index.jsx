@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import EditButton from '../EditButton';
-import ConfirmModal from '../ConfirmModal';
+import EditButton from '../../../components/EditButton';
+import ConfirmModal from '../../../components/ConfirmModal';
 import styled from 'styled-components';
 
 const SavesList = () => {
@@ -43,17 +43,17 @@ const SavesList = () => {
   };
 
   return (
-    <>
+    <SaveListContainer>
       {list.map(saves => {
         return (
-          <SavesListContainer key={saves.title}>
+          <SavesContainer key={saves.title}>
             <h3>{saves.title}</h3>
             <p>{saves.contents}</p>
             <section>
               <div className='time'>{saves.created_at}</div>
               <EditButton text='삭제' onClick={onModal} />
             </section>
-          </SavesListContainer>
+          </SavesContainer>
         );
       })}
       {isModal && (
@@ -65,11 +65,13 @@ const SavesList = () => {
           }}
         />
       )}
-    </>
+    </SaveListContainer>
   );
 };
 
-const SavesListContainer = styled.div`
+const SaveListContainer = styled.div``;
+
+const SavesContainer = styled.div`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   line-height: 1.5;

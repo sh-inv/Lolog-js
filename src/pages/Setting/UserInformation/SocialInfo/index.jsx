@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
-import EditButton from '../../../EditButton';
-import Button from '../../../Button';
+import EditButton from '../../../../components/EditButton';
+import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const SocialInfo = () => {

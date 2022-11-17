@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Button from '../../../Button';
-import ConfirmModal from '../../../ConfirmModal';
+import Button from '../../../../components/Button';
+import ConfirmModal from '../../../../components/ConfirmModal';
 import styled from 'styled-components';
 
 const Withdrawal = () => {

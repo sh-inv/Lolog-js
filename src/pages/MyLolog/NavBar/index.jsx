@@ -1,7 +1,7 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MyLogNavBar = () => {
+const NavBar = () => {
   const location = useLocation();
   const myNav = [
     {
@@ -22,7 +22,7 @@ const MyLogNavBar = () => {
   ];
 
   return (
-    <MyLogNavBarContainer>
+    <NavContainer>
       <div className='nav'>
         {myNav.map(nav => {
           return (
@@ -33,11 +33,11 @@ const MyLogNavBar = () => {
         })}
         <SlideBorder location={location} />
       </div>
-    </MyLogNavBarContainer>
+    </NavContainer>
   );
 };
 
-const MyLogNavBarContainer = styled.div`
+const NavContainer = styled.div`
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
@@ -89,4 +89,4 @@ const SlideBorder = styled.div`
   transition: left 0.25s ease-in-out 0s;
 `;
 
-export default MyLogNavBar;
+export default NavBar;

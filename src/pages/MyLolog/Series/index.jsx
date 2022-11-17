@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import SeriesPost from './SeriesPost';
 import styled from 'styled-components';
-import { SeriesMaxWidth768px } from '../../styles/media';
+import { SeriesMaxWidth768px } from '../../../styles/media';
 
 const Series = () => {
   const [seriesList, setSeriesList] = useState([]);

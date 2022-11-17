@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import EditButton from '../../../EditButton';
-import Button from '../../../Button';
+import EditButton from '../../../../components/EditButton';
+import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const Title = () => {

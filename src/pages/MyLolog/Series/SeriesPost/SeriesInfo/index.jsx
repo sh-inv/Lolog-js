@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { SeriesInfoMaxWidth768px } from '../../../../styles/media';
+import { SeriesInfoMaxWidth768px } from '../../../../../styles/media';
 
 const SeriesInfo = ({ title, update }) => {
   return (

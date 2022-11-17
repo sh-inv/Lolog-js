@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import UserBox from '../../components/UserBox';
-import MyLogNav from '../../components/MyLogNavBar';
+import NavBar from './NavBar';
 import styled from 'styled-components';
 
 const MyLolog = () => {
   return (
     <MyLologContainer>
       <UserBox />
-      <MyLogNav />
+      <NavBar />
       <Outlet />
     </MyLologContainer>
   );
