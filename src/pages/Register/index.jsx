@@ -20,7 +20,14 @@ const Register = () => {
         <div className='wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' className='email' disabled value='me@email.me' />
+            <input type='text' disabled value='me@email.me' />
+            <MdLockOutline />
+          </div>
+        </div>
+        <div className='wrapper'>
+          <label>비밀번호</label>
+          <div className='input-wrapper'>
+            <input type='password' disabled value='1234qwer' />
             <MdLockOutline />
           </div>
         </div>
