@@ -1,27 +1,35 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { AiFillGithub, AiOutlineTwitter, AiFillHome } from 'react-icons/ai';
 import { ImFacebook2 } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
 
 const Social = () => {
+  const [socialInfo, setSocialInfo] = useState({
+    email: '',
+    github: 'daydreamplace',
+    twitter: 'daydreamplace',
+    facebook: 'daydreamplace',
+    url: 'https://www.naver.com/',
+  });
+
   return (
     <SocialContainer>
-      <Link to='' className='social-link'>
+      <a href={`https://github.com/${socialInfo.github}`} target='_blank' className='social-link'>
         <AiFillGithub className='icon' />
-      </Link>
-      <Link className='social-link'>
+      </a>
+      <a href={`https://twitter.com/${socialInfo.twitter}`} target='_blank' className='social-link'>
         <AiOutlineTwitter className='icon' />
-      </Link>
-      <Link className='social-link'>
+      </a>
+      <a href={`https://www.facebook.com/${socialInfo.facebook}`} target='_blank' className='social-link'>
         <ImFacebook2 className='icon' />
-      </Link>
-      <Link className='social-link'>
+      </a>
+      <a href={socialInfo.url} target='_blank' className='social-link'>
         <AiFillHome className='icon' />
-      </Link>
-      <Link className='social-link'>
+      </a>
+      <a className='social-link'>
         <MdEmail className='icon' />
-      </Link>
+      </a>
     </SocialContainer>
   );
 };
