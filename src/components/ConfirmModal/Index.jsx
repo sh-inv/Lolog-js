@@ -86,7 +86,7 @@ const ModalContainer = styled.div`
       color: var(--primary1);
 
       &:hover {
-        background: white;
+        background: var(--slight-layer);
       }
     }
 
