@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import LoginModal from '../LoginModal';
+import Join from '../Join';
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
   const [isJoinModal, setIsJoinModal] = useState(false);
@@ -20,20 +21,7 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
           }}
         />
       )}
-      {isJoinModal && (
-        <LoginModal
-          title='회원가입'
-          message='계정이 이미 있으신가요?'
-          link='로그인'
-          onClose={() => {
-            setIsJoinModal(false);
-          }}
-          onChange={() => {
-            setIsJoinModal(false);
-            setIsLoginModal(true);
-          }}
-        />
-      )}
+      {isJoinModal && <Join setIsLoginModal={setIsLoginModal} setIsJoinModal={setIsJoinModal} />}
     </>
   );
 };

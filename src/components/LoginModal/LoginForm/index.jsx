@@ -1,12 +1,12 @@
 import Button from '../../Button';
 import styled from 'styled-components';
 
-const LoginForm = ({ title }) => {
+const LoginForm = ({ title, onClick }) => {
   return (
     <LoginFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
       <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
-      <Button className='login-button' text={title} tabIndex='4' />
+      <Button className='login-button' text={title} onClick={onClick} tabIndex='4' />
     </LoginFormContainer>
   );
 };

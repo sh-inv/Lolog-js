@@ -4,7 +4,7 @@ import SocialLogin from './SocialLogin';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
-const LoginModal = ({ title, message, link, onClose, onChange }) => {
+const LoginModal = ({ title, message, link, onClose, onChange, onClick }) => {
   return (
     <>
       <Background />
@@ -22,7 +22,7 @@ const LoginModal = ({ title, message, link, onClose, onChange }) => {
               <h2>{title}</h2>
               <section>
                 <h4>이메일로 {title}</h4>
-                <LoginForm title={title} />
+                <LoginForm title={title} onClick={onClick} />
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
