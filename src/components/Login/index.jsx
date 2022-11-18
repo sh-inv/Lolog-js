@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginModal from '../LoginModal';
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
   const [isJoinModal, setIsJoinModal] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -32,6 +34,7 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
             setIsJoinModal(false);
             setIsLoginModal(true);
           }}
+          onClick={() => navigate('/register')}
         />
       )}
     </>
