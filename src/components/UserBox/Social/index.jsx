@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const Social = () => {
   return (
     <SocialContainer>
-      <Link className='social-link'>
+      <Link to='' className='social-link'>
         <AiFillGithub className='icon' />
       </Link>
       <Link className='social-link'>
@@ -37,6 +37,10 @@ const SocialContainer = styled.div`
     .icon {
       font-size: 2rem;
       cursor: pointer;
+
+      :hover {
+        color: var(--text1);
+      }
     }
   }
 
