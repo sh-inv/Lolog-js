@@ -1,17 +1,16 @@
-import { useState } from 'react';
 import { AiFillGithub, AiOutlineTwitter, AiFillHome } from 'react-icons/ai';
 import { ImFacebook2 } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
 
 const Social = () => {
-  const [socialInfo, setSocialInfo] = useState({
-    email: '',
+  const socialInfo = {
+    email: 'you8inpark@gmail.com',
     github: 'daydreamplace',
     twitter: 'daydreamplace',
     facebook: 'daydreamplace',
     url: 'https://www.naver.com/',
-  });
+  };
 
   return (
     <SocialContainer>
@@ -27,7 +26,7 @@ const Social = () => {
       <a href={socialInfo.url} target='_blank' className='social-link'>
         <AiFillHome className='icon' />
       </a>
-      <a className='social-link'>
+      <a href={`mailto:${socialInfo.email}`} className='social-link'>
         <MdEmail className='icon' />
       </a>
     </SocialContainer>
