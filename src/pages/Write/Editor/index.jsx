@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import ToolBar from './ToolBar';
 
 const Editor = () => {
   return (
     <EditorContainer>
-      <div className='toolbar'></div>
+      <ToolBar />
       <div className='write-zone'>
         <pre>당신의 이야기를 적어보세요...</pre>
       </div>

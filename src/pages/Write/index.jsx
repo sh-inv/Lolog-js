@@ -17,6 +17,7 @@ const Write = () => {
 
 const WriteContainer = styled.div`
   padding-bottom: 4rem;
+  height: 100%;
 
   .title {
     padding: 0px;
