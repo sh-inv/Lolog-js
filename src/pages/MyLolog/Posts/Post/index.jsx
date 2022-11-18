@@ -34,7 +34,7 @@ const Post = () => {
 
 const PostContainer = styled.div`
   border-top: 1px solid var(--border4);
-  padding: 4rem 0;
+  padding-bottom: 4rem;
   line-height: 1.5;
 
   .thumbnail {
@@ -90,6 +90,43 @@ const PostContainer = styled.div`
 
     .icon {
       margin: 0 0.2rem 0 0.4rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-bottom: 2rem;
+
+    .title {
+      font-size: 1rem;
+    }
+
+    .txt {
+      margin: 0.5rem 0 1.5rem 0;
+      font-size: 0.875rem;
+    }
+
+    .sub-info {
+      font-size: 0.75rem;
+    }
+
+    .tags {
+      margin-bottom: -0.5rem;
+
+      .tag {
+        padding: 0 0.75rem;
+        height: 1.5rem;
+        border-radius: 0.75rem;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        background: var(--bg-element3);
+        color: var(--primary1);
+        font-weight: 500;
+        font-size: 1rem;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
     }
   }
 `;
