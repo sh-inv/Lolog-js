@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 import { SeriesInfoMaxWidth768px } from '../../../../../styles/media';
 
@@ -11,7 +12,7 @@ const SeriesInfo = ({ title, update }) => {
       <div className='info'>
         <span className='count'>0개의 포스트</span>
         <span className='dot'>·</span>
-        마지막 업데이트 <span>{update}</span>
+        마지막 업데이트 <GetPostDate postDate={update} />
       </div>
     </SeriesInfoContainer>
   );

@@ -5,7 +5,7 @@ const ConfirmModal = ({ title, message, onClose }) => {
   return (
     <>
       <Background />
-      <Modal>
+      <Positioner>
         <ModalContainer>
           <div>
             <h3>{title}</h3>
@@ -16,7 +16,7 @@ const ConfirmModal = ({ title, message, onClose }) => {
             </div>
           </div>
         </ModalContainer>
-      </Modal>
+      </Positioner>
     </>
   );
 };
@@ -32,7 +32,7 @@ const Background = styled.div`
   animation: 0.25s ease 0s 1 normal forwards running cJoqxJ;
 `;
 
-const Modal = styled.div`
+const Positioner = styled.div`
   position: fixed;
   top: 0px;
   left: 0px;
@@ -86,7 +86,7 @@ const ModalContainer = styled.div`
       color: var(--primary1);
 
       &:hover {
-        background: white;
+        background: var(--slight-layer);
       }
     }
 

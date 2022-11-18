@@ -11,32 +11,32 @@ const Series = () => {
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
         title: 'TIL',
-        update: '2022년 11월 22일',
+        update: 'November 18, 2022 11:08:00',
       },
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/247f0904-74f6-4fde-9132-b49f7256e71f/image.png',
         title: 'Javascript',
-        update: '2022년 5월 22일',
+        update: 'April 16, 2022 11:08:00',
       },
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/33f15afc-5b41-4f6d-9ed4-a7b53d7958a4/image.png',
         title: 'React',
-        update: '2022년 1월 22일',
+        update: 'November 16, 2022 11:08:00',
       },
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
-        title: 'ddddd111111sssssssssssss1ssssssssssss1ssssssssssss1ssssssssssss',
-        update: '2022년 3월 22일',
+        title: 'ddddd111111sssssssssssss1sssssdadasssssafadasss1ssssdsfsasssss',
+        update: 'November 16, 2022 11:08:00',
       },
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/5cff9b8b-c1a2-4a34-a637-1e21e7e0e417/image.png',
         title: '회고록',
-        update: '2022년 9월 22일',
+        update: 'May 28, 2022 11:08:00',
       },
       {
         src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
         title: '회고록2',
-        update: '2022년 7월 22일',
+        update: 'July 16, 2022 11:08:00',
       },
     ];
 
