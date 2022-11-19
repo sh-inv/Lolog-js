@@ -113,7 +113,16 @@ const MaxWidth1199pxTagList = () => {
     <MaxWidth1199pxTagListContainer>
       <ul className='tag-list'>
         {list.map(tag => (
-          <NavLink to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`} key={tag.name} className='tag-link' end>
+          <NavLink
+            to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
+            key={tag.name}
+            className={() => {
+              const params = new URLSearchParams(location.search);
+              const getTag = params.get('tag');
+              if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
+              else return 'tag-link';
+            }}
+          >
             {tag.name}
             <span className='tag-post-count'>({tag.post})</span>
           </NavLink>

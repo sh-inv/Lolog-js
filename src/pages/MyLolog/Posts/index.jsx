@@ -10,9 +10,11 @@ const Posts = () => {
     <PostsContainer>
       <MinWidth1200pxTagList />
       <MaxWidth1199pxTagList />
-      {arr.map((_, i) => (
-        <Post key={i} />
-      ))}
+      <div className='post-padding'>
+        {arr.map((_, i) => (
+          <Post key={i} />
+        ))}
+      </div>
       <NoPost />
     </PostsContainer>
   );
@@ -20,6 +22,12 @@ const Posts = () => {
 
 const PostsContainer = styled.div`
   position: relative;
+
+  .post-padding {
+    @media screen and (max-width: 768px) {
+      padding: 0 1rem;
+    }
+  }
 `;
 
 export default Posts;
