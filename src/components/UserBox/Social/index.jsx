@@ -45,6 +45,10 @@ const SocialContainer = styled.div`
       font-size: 2rem;
       cursor: pointer;
 
+      @media screen and (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+
       :hover {
         color: var(--text1);
       }
