@@ -11,7 +11,7 @@ const EditorFooter = () => {
           <span>나가기</span>
         </div>
         <div className='export'>
-          <Button text='임시저장' className='remove' />
+          <Button text='임시저장' className='temporary-storage' />
           <Button text='출간하기' className='upload' />
         </div>
       </EditorFooterContainer>
@@ -22,6 +22,7 @@ const EditorFooter = () => {
 const Positioner = styled.div`
   display: fixed;
   bottom: 0px;
+  transform: translateY(100%);
   z-index: 10;
 `;
 
@@ -52,11 +53,12 @@ const EditorFooterContainer = styled.div`
     }
 
     .arrow-icon {
-      font-size: 1.25rem;
       margin-right: 0.5rem;
+      font-size: 1.25rem;
     }
 
     span {
+      padding-top: 3px;
       font-size: 1.125rem;
     }
   }
@@ -68,7 +70,7 @@ const EditorFooterContainer = styled.div`
       font-weight: 600;
     }
 
-    .remove {
+    .temporary-storage {
       background: transparent;
       color: var(--primary1);
 

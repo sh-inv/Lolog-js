@@ -16,7 +16,8 @@ const ToolBarBtnWrapperContainer = styled.button`
   }
 
   .quote,
-  .link {
+  .link,
+  .code {
     font-size: 1.5rem;
   }
 

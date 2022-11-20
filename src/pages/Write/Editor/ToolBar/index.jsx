@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FaBold, FaItalic, FaRemoveFormat } from 'react-icons/fa';
 import { MdFormatQuote } from 'react-icons/md';
-import { FiLink2 } from 'react-icons/fi';
+import { FiLink2, FiCode } from 'react-icons/fi';
 import { SlPicture } from 'react-icons/sl';
 import ToolBarHTagWrapper from './ToolBarHTagWrapper';
 import ToolBarBtnWrapper from './ToolBarBtnWrapper';
@@ -18,6 +18,7 @@ const ToolBar = () => {
     { type: 'quote', reactIcon: <MdFormatQuote /> },
     { type: 'link', reactIcon: <FiLink2 /> },
     { type: 'picture', reactIcon: <SlPicture /> },
+    { type: 'code', reactIcon: <FiCode /> },
   ];
 
   return (
