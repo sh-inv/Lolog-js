@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
+import { IoChevronDown } from 'react-icons/io5';
 import EditButton from '../../components/EditButton';
+import FillterButton from '../../components/FillterButton';
+import styled from 'styled-components';
 
 const PostList = () => {
   useEffect(() => {}, []);
@@ -8,11 +10,14 @@ const PostList = () => {
   return (
     <PostListContainer>
       <label>시리즈</label>
-      <h1>TIL</h1>
+      <h1>TITLE</h1>
       <div className='border' />
       <div className='edit-wrapper'>
         <EditButton text='수정' />
         <EditButton text='삭제' />
+      </div>
+      <div className='fillter-wrapper'>
+        <FillterButton icon={<IoChevronDown />} text='오름차순' />
       </div>
     </PostListContainer>
   );
@@ -41,6 +46,7 @@ const PostListContainer = styled.div`
     line-height: 1.5;
     font-size: 2.5rem;
     outline: none;
+    overflow: hidden;
   }
 
   .border {
@@ -61,10 +67,42 @@ const PostListContainer = styled.div`
     button {
       color: var(--text3);
       text-decoration: none;
+
+      &:hover {
+        color: var(--text1);
+      }
     }
 
     button + button {
       margin-left: 0.5rem;
+    }
+  }
+
+  .fillter-wrapper {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    margin-top: 1rem;
+
+    button {
+      display: inline-flex;
+      height: 2rem;
+      padding-left: 0.5rem;
+      padding-right: 0.75rem;
+      -webkit-box-align: center;
+      align-items: center;
+      cursor: pointer;
+      background: var(--bg-element2);
+      border-radius: 4px;
+      border: none;
+      outline: none;
+
+      span {
+        margin-left: 0.25rem;
+        font-size: 1rem;
+        color: var(--text1);
+        line-height: 1;
+      }
     }
   }
 `;

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin-top: 4rem;
-    background: var(--bg-page1);
+    background: var(--bg-page2);
     color: var(--text1);
     transition: background-color 0.2s;
   }
@@ -24,6 +24,16 @@ const GlobalStyle = createGlobalStyle`
   body[data-theme='dark'] {
     ${darkTheme};
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+  font-size: 100%;
+  font-weight: 700;
+}
 
   a {
     text-decoration: none;
