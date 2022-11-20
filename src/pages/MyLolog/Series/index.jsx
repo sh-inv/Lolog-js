@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import SeriesList from './SeriesList';
 import styled from 'styled-components';
 import { SeriesMaxWidth768px } from '../../../styles/media';

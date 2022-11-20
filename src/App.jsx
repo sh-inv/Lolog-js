@@ -1,5 +1,5 @@
 import GlobalStyle from './GlobalStyle';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Main from './pages/Main';
 import { Header } from './layout';
@@ -9,6 +9,7 @@ import Saves from './pages/Saves';
 import MyLolog from './pages/MyLolog';
 import Posts from './pages/MyLolog/Posts';
 import Series from './pages/MyLolog/Series';
+import PostList from './pages/Postlist';
 import About from './pages/MyLolog/About';
 import Register from './pages/Register';
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='series' element={<Series />} />
           <Route path='about' element={<About />} />
         </Route>
+        <Route path='/id/series/:title' element={<PostList />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </>
