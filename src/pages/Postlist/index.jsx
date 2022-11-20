@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { IoChevronDown } from 'react-icons/io5';
+import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 import EditButton from '../../components/EditButton';
 import FillterButton from '../../components/FillterButton';
+import Post from './Post';
 import styled from 'styled-components';
 
 const PostList = () => {
@@ -18,6 +19,9 @@ const PostList = () => {
       </div>
       <div className='fillter-wrapper'>
         <FillterButton icon={<IoChevronDown />} text='오름차순' />
+      </div>
+      <div className='post-list'>
+        <Post />
       </div>
     </PostListContainer>
   );
@@ -104,6 +108,10 @@ const PostListContainer = styled.div`
         line-height: 1;
       }
     }
+  }
+
+  .post-list {
+    margin-top: 4rem;
   }
 `;
 
