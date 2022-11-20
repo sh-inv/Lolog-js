@@ -1,5 +1,5 @@
 import GlobalStyle from './GlobalStyle';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Main from './pages/Main';
 import { Header } from './layout';
