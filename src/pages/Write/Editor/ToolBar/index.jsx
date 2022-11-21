@@ -6,7 +6,7 @@ import { SlPicture } from 'react-icons/sl';
 import ToolBarHTagWrapper from './ToolBarHTagWrapper';
 import ToolBarBtnWrapper from './ToolBarBtnWrapper';
 
-const ToolBar = ({ setSelectedTool }) => {
+const ToolBar = ({ setSelectedTool, imageFileInput }) => {
   const ToolBarHTagList = ['H1', 'H2', 'H3', 'H4'];
   const ToolBarBtnLIstMid = [
     { type: 'bold', reactIcon: <FaBold /> },
@@ -17,7 +17,7 @@ const ToolBar = ({ setSelectedTool }) => {
   const ToolBarBtnListRight = [
     { type: 'quote', reactIcon: <MdFormatQuote /> },
     { type: 'link', reactIcon: <FiLink2 /> },
-    { type: 'picture', reactIcon: <SlPicture /> },
+    { type: 'image', reactIcon: <SlPicture /> },
     { type: 'code', reactIcon: <FiCode /> },
   ];
 

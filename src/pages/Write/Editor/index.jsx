@@ -8,7 +8,7 @@ import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
 
 const Editor = () => {
-  const { title, content } = useSelector(state => state.writeContent);
+  const { title, content, imageFileUrl } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const [selectedTool, setSelectedTool] = useState(null);
@@ -26,11 +26,21 @@ const Editor = () => {
         setSelectedTool(null);
         return;
       }
+      if (selectedTool === 'image') return;
 
       dispatch(setContent(updateContent));
       setSelectedTool(null);
     }
   }, [selectedTool]);
+
+  useEffect(() => {
+    if (imageFileUrl) {
+      let copy = content;
+      const toolToValue = ` ![](${imageFileUrl})`;
+      const updateContent = copy + toolToValue;
+      dispatch(setContent(updateContent));
+    }
+  }, [imageFileUrl]);
 
   const hTagToolHandler = (currentContent, tool) => {
     let toolToValue = '';
