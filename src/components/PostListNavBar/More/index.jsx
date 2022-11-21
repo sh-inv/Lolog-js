@@ -13,16 +13,16 @@ const More = () => {
   const [moreContentList, setMoreContentList] = useState([]);
 
   useEffect(() => {
-    try {
-      (async () => {
+    (async () => {
+      try {
         const {
           data: { moredata },
         } = await axios.get('data/postlist/more.json');
         setMoreContentList(moredata);
-      })();
-    } catch (error) {
-      console.log('error => ', error);
-    }
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
   }, []);
 
   useEffect(() => {

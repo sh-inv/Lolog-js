@@ -13,16 +13,16 @@ const PostList = () => {
   const [pageNum, setPageNum] = useState(1);
 
   const getPostData = () => {
-    try {
-      (async () => {
+    (async () => {
+      try {
         const {
           data: { data },
         } = await axios.get('data/postlist/data.json');
         setPostData([...postData, ...data]);
-      })();
-    } catch (error) {
-      console.log('error => ', error);
-    }
+      } catch (error) {
+        console.log('error => ', error);
+      }
+    })();
   };
 
   useEffect(getPostData, [pageNum]);
