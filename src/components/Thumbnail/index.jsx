@@ -1,7 +1,8 @@
+import thumbnail from '../../assets/thumbnail.png';
 import styled from 'styled-components';
 
 const Thumbnail = ({ src }) => {
-  return <ThumbnailImage alt='thumbnail' src={src} />;
+  return <ThumbnailImage alt='thumbnail' src={src ? src : thumbnail} />;
 };
 
 const ThumbnailImage = styled.img`
