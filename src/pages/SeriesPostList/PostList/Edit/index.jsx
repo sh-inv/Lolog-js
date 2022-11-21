@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import EditButton from '../../../../components/EditButton';
 import ConfirmModal from '../../../../components/ConfirmModal';
 import styled from 'styled-components';
 
 const Edit = () => {
+  const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
 
   const onModal = () => {
@@ -22,6 +24,7 @@ const Edit = () => {
           message={`시리즈를 정말 삭제하시겠습니까?\n시리즈 안에 들어있는 포스트들은 삭제되지 않습니다.`}
           onClose={() => {
             setIsModal(false);
+            navigate('/id/series');
           }}
         />
       )}
