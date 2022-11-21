@@ -14,7 +14,7 @@ const Post = ({ title, src, contents, date, className }) => {
       </h2>
       <section>
         <Link to='' className='thumbnail-wrapper'>
-          <Thumbnail src={src} />
+          <Thumbnail src={src} className={'no-thumbnail'} />
         </Link>
         <div className='post-info'>
           <p className='summary'>{contents}</p>
@@ -72,6 +72,12 @@ const PostContainer = styled.div`
         @media screen and (max-width: 768px) {
           width: 100%;
           height: 100%;
+        }
+      }
+
+      .no-thumbnail {
+        @media screen and (max-width: 768px) {
+          display: none;
         }
       }
     }
