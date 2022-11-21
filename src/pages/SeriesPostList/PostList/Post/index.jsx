@@ -41,6 +41,7 @@ const PostContainer = styled.div`
     .title {
       color: inherit;
       text-decoration: none;
+      word-break: break-all;
       transition: color 0.125s ease-in 0s;
     }
   }
