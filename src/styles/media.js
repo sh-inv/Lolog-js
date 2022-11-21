@@ -71,3 +71,29 @@ export const UserContentsBoxMaxWidth768px = `@media screen and (max-width: 768px
 export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768px) {
   margin-bottom: 0.5rem;
 }`;
+
+//write 반응형
+export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 3rem 0 3rem;
+
+  .editor-container {
+    width: 50%;
+    height: 100%;
+  }
+  .preview-container {
+    width: 50%;
+    height: 100%;
+  }
+}`;
+export const writeMaxWidth1440px = `@media screen and (max-width: 1440px) {
+  width: 1024px;
+}`;
+export const writeMaxWidth1056px = `@media screen and (max-width: 1056px) {
+  width: calc(100% - 2rem);
+  margin: 0 auto;
+}`;
+export const writeMinWidth250px = `@media screen and (max-width: 250px) {
+  width: 250px;
+}`;

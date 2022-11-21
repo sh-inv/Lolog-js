@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
-import Button from '../../../components/Button';
+import Button from '../../../../components/Button';
 
 const EditorFooter = () => {
   return (
@@ -20,10 +20,11 @@ const EditorFooter = () => {
 };
 
 const Positioner = styled.div`
-  display: fixed;
+  position: fixed;
+  left: 0;
   bottom: 0px;
-  transform: translateY(100%);
   z-index: 10;
+  width: 50%;
 `;
 
 const EditorFooterContainer = styled.div`
