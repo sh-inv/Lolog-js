@@ -15,6 +15,7 @@ const Editor = () => {
       let updateContent = '';
 
       if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
+      if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote') updateContent = textEffectHandler(copy, selectedTool);
 
       setContent(updateContent);
       setSelectedTool(null);
@@ -49,6 +50,43 @@ const Editor = () => {
       updateContent = result.join('');
     } else {
       updateContent = toolToValue + currentContent;
+    }
+
+    return updateContent;
+  };
+
+  const textEffectHandler = (currentContent, tool) => {
+    let toolToValue = '';
+    let updateContent = '';
+    const isAlreadyQuote = currentContent.split(' ')[0].includes('>');
+
+    switch (tool) {
+      case 'bold':
+        toolToValue = '**텍스트**';
+        break;
+      case 'italic':
+        toolToValue = '_텍스트_';
+        break;
+      case 'remove':
+        toolToValue = '~~텍스트~~';
+        break;
+      case 'quote':
+        toolToValue = '> ';
+        break;
+      default:
+        break;
+    }
+
+    if (toolToValue === '> ') {
+      if (isAlreadyQuote) {
+        let result = currentContent.split(' ');
+        result[0] = '';
+        updateContent = result.join('');
+      } else {
+        updateContent = toolToValue + currentContent;
+      }
+    } else {
+      updateContent = currentContent + toolToValue;
     }
 
     return updateContent;
