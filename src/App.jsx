@@ -9,7 +9,7 @@ import Saves from './pages/Saves';
 import MyLolog from './pages/MyLolog';
 import Posts from './pages/MyLolog/Posts';
 import Series from './pages/MyLolog/Series';
-import PostList from './pages/Postlist';
+import SeriesPostList from './pages/SeriesPostList';
 import About from './pages/MyLolog/About';
 import Register from './pages/Register';
 
@@ -31,7 +31,7 @@ const App = () => {
           <Route path='series' element={<Series />} />
           <Route path='about' element={<About />} />
         </Route>
-        <Route path='/id/series/:title' element={<PostList />} />
+        <Route path='/id/series/:title' element={<SeriesPostList />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </>

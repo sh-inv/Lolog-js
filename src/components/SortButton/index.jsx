@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-const FillterButton = ({ icon, text, onClick }) => {
+const SortButton = ({ icon, text, onClick }) => {
   return (
-    <FillterButtonContainer text={text} onClick={onClick}>
+    <SortButtonContainer text={text} onClick={onClick}>
       {icon}
       <span>{text}</span>
-    </FillterButtonContainer>
+    </SortButtonContainer>
   );
 };
 
-const FillterButtonContainer = styled.button`
+const SortButtonContainer = styled.button`
   display: inline-flex;
   -webkit-box-align: center;
   align-items: center;
@@ -37,4 +37,4 @@ const FillterButtonContainer = styled.button`
   }
 `;
 
-export default FillterButton;
+export default SortButton;

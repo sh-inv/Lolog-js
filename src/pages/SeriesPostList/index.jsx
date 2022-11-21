@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 import EditButton from '../../components/EditButton';
-import FillterButton from '../../components/FillterButton';
-import Post from './Post';
+import SortButton from '../../components/SortButton';
+import PostList from './PostList';
 import styled from 'styled-components';
 
-const PostList = () => {
+const SeriesPostList = () => {
   useEffect(() => {}, []);
 
   return (
-    <PostListContainer>
+    <SeriesPostListContainer>
       <label>시리즈</label>
       <h1>TITLE</h1>
       <div className='border' />
@@ -18,16 +18,14 @@ const PostList = () => {
         <EditButton text='삭제' />
       </div>
       <div className='fillter-wrapper'>
-        <FillterButton icon={<IoChevronDown />} text='오름차순' />
+        <SortButton icon={<IoChevronDown />} text='오름차순' />
       </div>
-      <div className='post-list'>
-        <Post />
-      </div>
-    </PostListContainer>
+      <PostList />
+    </SeriesPostListContainer>
   );
 };
 
-const PostListContainer = styled.div`
+const SeriesPostListContainer = styled.div`
   width: 768px;
   margin-top: 90px;
   margin-left: auto;
@@ -109,10 +107,6 @@ const PostListContainer = styled.div`
       }
     }
   }
-
-  .post-list {
-    margin-top: 4rem;
-  }
 `;
 
-export default PostList;
+export default SeriesPostList;
