@@ -1,34 +1,12 @@
+import { useState } from 'react';
+import Tags from './Tags';
 import ToolBar from './ToolBar';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
-import Tags from './Tags';
-import { useEffect, useState } from 'react';
 
 const Editor = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [onUpload, setOnUpload] = useState(false);
-  const [onSave, setOnSave] = useState(false);
-
-  useEffect(() => {
-    if (onSave && title && content) {
-      console.log('save');
-      console.log('title', title);
-      console.log('content', content);
-    } else {
-      setOnSave(false);
-    }
-  }, [onSave]);
-
-  useEffect(() => {
-    if (onUpload && title && content) {
-      console.log('uplooad');
-      console.log('title', title);
-      console.log('content', content);
-    } else {
-      setOnUpload(false);
-    }
-  }, [onUpload]);
 
   return (
     <EditorContainer className='editor-container'>
@@ -39,7 +17,7 @@ const Editor = () => {
       <pre className='write-zone'>
         <textarea placeholder='당신의 이야기를 적어보세요...' onChange={e => setContent(e.target.value)} />
       </pre>
-      <EditorFooter setOnUpload={setOnUpload} setOnSave={setOnSave} />
+      <EditorFooter title={title} content={content} />
     </EditorContainer>
   );
 };

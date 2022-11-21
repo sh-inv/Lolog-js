@@ -1,8 +1,32 @@
 import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 import Button from '../../../../components/Button';
+import { useState, useEffect } from 'react';
 
-const EditorFooter = ({ setOnUpload, setOnSave }) => {
+const EditorFooter = ({ title, content }) => {
+  const [onUpload, setOnUpload] = useState(false);
+  const [onSave, setOnSave] = useState(false);
+
+  useEffect(() => {
+    if (onSave && title && content) {
+      console.log('save');
+      console.log('title', title);
+      console.log('content', content);
+    } else {
+      setOnSave(false);
+    }
+  }, [onSave]);
+
+  useEffect(() => {
+    if (onUpload && title && content) {
+      console.log('uplooad');
+      console.log('title', title);
+      console.log('content', content);
+    } else {
+      setOnUpload(false);
+    }
+  }, [onUpload]);
+
   return (
     <Positioner>
       <EditorFooterContainer>
