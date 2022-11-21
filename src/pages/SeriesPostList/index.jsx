@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
+import Title from './Title';
+import Edit from './PostList/Edit';
 import EditButton from '../../components/EditButton';
 import Sort from './PostList/Sort';
 import PostList from './PostList';
@@ -15,12 +17,9 @@ const SeriesPostList = () => {
   return (
     <SeriesPostListContainer>
       <label>시리즈</label>
-      <h1>TITLE</h1>
+      <Title />
       <div className='border' />
-      <div className='edit-wrapper'>
-        <EditButton text='수정' />
-        <EditButton text='삭제' />
-      </div>
+      <Edit />
       <div className='fillter-wrapper'>
         <Sort icon={isSort ? <IoChevronUp /> : <IoChevronDown />} text={isSort ? '오름차순' : '내림차순'} onClick={onSort} />
       </div>
@@ -44,44 +43,11 @@ const SeriesPostListContainer = styled.div`
     line-height: 1.5;
   }
 
-  h1 {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    color: var(--text1);
-    letter-spacing: -0.004em;
-    line-height: 1.5;
-    font-size: 2.5rem;
-    outline: none;
-    overflow: hidden;
-  }
-
   .border {
     width: 100%;
     height: 1px;
     margin-bottom: 1.5rem;
     background: var(--bg-element4);
-  }
-
-  .edit-wrapper {
-    display: flex;
-    -webkit-box-pack: end;
-    justify-content: flex-end;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 2rem;
-
-    button {
-      color: var(--text3);
-      text-decoration: none;
-
-      &:hover {
-        color: var(--text1);
-      }
-    }
-
-    button + button {
-      margin-left: 0.5rem;
-    }
   }
 
   .fillter-wrapper {
@@ -102,13 +68,6 @@ const SeriesPostListContainer = styled.div`
       border-radius: 4px;
       border: none;
       outline: none;
-
-      span {
-        margin-left: 0.25rem;
-        font-size: 1rem;
-        color: var(--text1);
-        line-height: 1;
-      }
     }
   }
 `;
