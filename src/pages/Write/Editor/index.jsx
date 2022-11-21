@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
 import EditorFooter from './EditorFooter';
@@ -6,16 +6,54 @@ import styled from 'styled-components';
 
 const Editor = () => {
   const [title, setTitle] = useState('');
+  const [selectedTool, setSelectedTool] = useState(null);
   const [content, setContent] = useState('');
+
+  useEffect(() => {
+    if (selectedTool) {
+      let copy = content;
+      let toolToValue = '';
+      let updateContent = '';
+
+      switch (selectedTool) {
+        case 'H1':
+          toolToValue = '# ';
+          break;
+        case 'H2':
+          toolToValue = '## ';
+          break;
+        case 'H3':
+          toolToValue = '### ';
+          break;
+        case 'H4':
+          toolToValue = '#### ';
+          break;
+        default:
+          break;
+      }
+
+      const isAlreadyHashtag = copy.split(' ')[0].includes('#');
+
+      if (isAlreadyHashtag) {
+        let result = copy.split(' ');
+        result[0] = toolToValue;
+        updateContent = result.join('');
+      } else {
+        updateContent = toolToValue + copy;
+      }
+      setContent(updateContent);
+      setSelectedTool(null);
+    }
+  }, [selectedTool]);
 
   return (
     <EditorContainer className='editor-container'>
       <textarea className='title' placeholder='제목을 입력하세요' onChange={e => setTitle(e.target.value)} />
       <div className='dividing-line' />
       <Tags />
-      <ToolBar />
+      <ToolBar setSelectedTool={setSelectedTool} />
       <pre className='write-zone'>
-        <textarea placeholder='당신의 이야기를 적어보세요...' onChange={e => setContent(e.target.value)} />
+        <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => setContent(e.target.value)} />
       </pre>
       <EditorFooter title={title} content={content} />
     </EditorContainer>

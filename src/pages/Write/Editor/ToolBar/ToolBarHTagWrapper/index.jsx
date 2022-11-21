@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ToolBarHTagWrapper = ({ type }) => {
+const ToolBarHTagWrapper = ({ type, setSelectedTool }) => {
   return (
-    <ToolBarHTagWrapperContainer>
+    <ToolBarHTagWrapperContainer onClick={() => setSelectedTool(type)}>
       <div>
         H<span>{type[1]}</span>
       </div>

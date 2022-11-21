@@ -6,7 +6,7 @@ import { SlPicture } from 'react-icons/sl';
 import ToolBarHTagWrapper from './ToolBarHTagWrapper';
 import ToolBarBtnWrapper from './ToolBarBtnWrapper';
 
-const ToolBar = () => {
+const ToolBar = ({ setSelectedTool }) => {
   const ToolBarHTagList = ['H1', 'H2', 'H3', 'H4'];
   const ToolBarBtnLIstMid = [
     { type: 'bold', reactIcon: <FaBold /> },
@@ -24,12 +24,12 @@ const ToolBar = () => {
   return (
     <ToolBarWrapper>
       {ToolBarHTagList.map(tag => {
-        return <ToolBarHTagWrapper key={tag} type={tag} />;
+        return <ToolBarHTagWrapper key={tag} type={tag} setSelectedTool={setSelectedTool} />;
       })}
       <div className='vertical-line' />
       {ToolBarBtnLIstMid.map(btn => {
         return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
+          <ToolBarBtnWrapper key={btn.type} type={btn.type} setSelectedTool={setSelectedTool}>
             {btn.reactIcon}
           </ToolBarBtnWrapper>
         );
@@ -37,7 +37,7 @@ const ToolBar = () => {
       <div className='vertical-line' />
       {ToolBarBtnListRight.map(btn => {
         return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
+          <ToolBarBtnWrapper key={btn.type} type={btn.type} setSelectedTool={setSelectedTool}>
             {btn.reactIcon}
           </ToolBarBtnWrapper>
         );

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ToolBarBtnWrapper = ({ type, children }) => {
+const ToolBarBtnWrapper = ({ type, children, setSelectedTool }) => {
   return (
-    <ToolBarBtnWrapperContainer>
+    <ToolBarBtnWrapperContainer onClick={() => setSelectedTool(type)}>
       <div className={type}>{children}</div>
     </ToolBarBtnWrapperContainer>
   );
