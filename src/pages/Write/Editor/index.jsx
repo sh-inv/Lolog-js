@@ -12,39 +12,47 @@ const Editor = () => {
   useEffect(() => {
     if (selectedTool) {
       let copy = content;
-      let toolToValue = '';
       let updateContent = '';
 
-      switch (selectedTool) {
-        case 'H1':
-          toolToValue = '# ';
-          break;
-        case 'H2':
-          toolToValue = '## ';
-          break;
-        case 'H3':
-          toolToValue = '### ';
-          break;
-        case 'H4':
-          toolToValue = '#### ';
-          break;
-        default:
-          break;
-      }
+      if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
 
-      const isAlreadyHashtag = copy.split(' ')[0].includes('#');
-
-      if (isAlreadyHashtag) {
-        let result = copy.split(' ');
-        result[0] = toolToValue;
-        updateContent = result.join('');
-      } else {
-        updateContent = toolToValue + copy;
-      }
       setContent(updateContent);
       setSelectedTool(null);
     }
   }, [selectedTool]);
+
+  const hTagToolHandler = (currentContent, tool) => {
+    let toolToValue = '';
+    let updateContent = '';
+    const isAlreadyHashtag = currentContent.split(' ')[0].includes('#');
+
+    switch (tool) {
+      case 'H1':
+        toolToValue = '# ';
+        break;
+      case 'H2':
+        toolToValue = '## ';
+        break;
+      case 'H3':
+        toolToValue = '### ';
+        break;
+      case 'H4':
+        toolToValue = '#### ';
+        break;
+      default:
+        break;
+    }
+
+    if (isAlreadyHashtag) {
+      let result = currentContent.split(' ');
+      result[0] = toolToValue;
+      updateContent = result.join('');
+    } else {
+      updateContent = toolToValue + currentContent;
+    }
+
+    return updateContent;
+  };
 
   return (
     <EditorContainer className='editor-container'>
