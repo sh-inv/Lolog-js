@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
+import LinkModal from './LinkModal';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
 
@@ -98,6 +99,7 @@ const Editor = () => {
       <div className='dividing-line' />
       <Tags />
       <ToolBar setSelectedTool={setSelectedTool} />
+      <LinkModal />
       <pre className='write-zone'>
         <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => setContent(e.target.value)} />
       </pre>
