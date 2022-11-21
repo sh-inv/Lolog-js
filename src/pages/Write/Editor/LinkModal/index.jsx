@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-const LinkModal = () => {
+const LinkModal = ({ linkHandler }) => {
+  const [linkValue, setLinkValue] = useState('');
+
   return (
     <Positioner>
       <LinkModalContainer>
         <div className='link-modal-title'>링크 등록</div>
         <form className='link-modal-register'>
-          <input type='text' placeholder='URL 을 입력하세요' />
-          <button type='button'>확인</button>
+          <input type='text' placeholder='URL 을 입력하세요' onChange={e => setLinkValue(e.target.value)} />
+          <button type='button' value={linkValue} onClick={e => linkHandler(e.target.value)}>
+            확인
+          </button>
         </form>
       </LinkModalContainer>
     </Positioner>

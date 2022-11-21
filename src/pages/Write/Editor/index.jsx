@@ -8,6 +8,7 @@ import styled from 'styled-components';
 const Editor = () => {
   const [title, setTitle] = useState('');
   const [selectedTool, setSelectedTool] = useState(null);
+  const [isLinkModal, setIsLinkModal] = useState(false);
   const [content, setContent] = useState('');
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const Editor = () => {
 
       if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
       if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote') updateContent = textEffectHandler(copy, selectedTool);
+      if (selectedTool === 'link') setIsLinkModal(true);
 
       setContent(updateContent);
       setSelectedTool(null);
@@ -93,13 +95,21 @@ const Editor = () => {
     return updateContent;
   };
 
+  const linkHandler = linkValue => {
+    let copy = content;
+    const toolToValue = `[링크텍스트](${linkValue})`;
+    const updateContent = copy + toolToValue;
+    setContent(updateContent);
+    setIsLinkModal(false);
+  };
+
   return (
     <EditorContainer className='editor-container'>
       <textarea className='title' placeholder='제목을 입력하세요' onChange={e => setTitle(e.target.value)} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar setSelectedTool={setSelectedTool} />
-      <LinkModal />
+      {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
       <pre className='write-zone'>
         <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => setContent(e.target.value)} />
       </pre>
