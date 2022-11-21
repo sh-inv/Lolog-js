@@ -3,7 +3,7 @@ import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import styled from 'styled-components';
 
-const Post = ({ title, contents, date, className }) => {
+const Post = ({ title, src, contents, date, className }) => {
   return (
     <PostContainer className={className}>
       <h2>
@@ -14,7 +14,7 @@ const Post = ({ title, contents, date, className }) => {
       </h2>
       <section>
         <Link to='' className='thumbnail-wrapper'>
-          <Thumbnail src={'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png'} />
+          <Thumbnail src={src} />
         </Link>
         <div className='post-info'>
           <p className='summary'>{contents}</p>
@@ -54,17 +54,24 @@ const PostContainer = styled.div`
     margin-top: 1rem;
     letter-spacing: -0.004em;
 
-    .thumbnail-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 52.6316%;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      height: auto;
+    }
 
+    .thumbnail-wrapper {
       img {
+        position: inherit;
         margin-right: 1rem;
         width: 12rem;
         height: 6.25rem;
         object-fit: cover;
         box-shadow: rgb(0 0 0 / 15%) 0px 0px 1px 0px;
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
 
@@ -90,6 +97,10 @@ const PostContainer = styled.div`
       span {
         color: var(--text3);
         font-size: 0.875rem;
+
+        @media screen and (max-width: 768px) {
+          margin-top: 1rem;
+        }
       }
     }
   }

@@ -23,6 +23,16 @@ const SeriesPostListContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
 
+  @media screen and (max-width: 1024px) {
+    margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
   label {
     display: inline-flex;
     border-bottom: 4px solid var(--primary2);
