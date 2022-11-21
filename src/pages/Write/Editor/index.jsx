@@ -20,7 +20,7 @@ const Editor = () => {
       let updateContent = '';
 
       if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
-      if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote') updateContent = textEffectHandler(copy, selectedTool);
+      if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote' || selectedTool === 'code') updateContent = textEffectHandler(copy, selectedTool);
       if (selectedTool === 'link') {
         setIsLinkModal(true);
         setSelectedTool(null);
@@ -92,6 +92,11 @@ const Editor = () => {
         break;
       case 'quote':
         toolToValue = '> ';
+        break;
+      case 'code':
+        toolToValue = `${'```'}
+코드를 입력하세요
+${'```'}`;
         break;
       default:
         break;
