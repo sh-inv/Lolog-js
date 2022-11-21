@@ -8,12 +8,12 @@ const Post = ({ title, src, contents, date, className }) => {
     <PostContainer className={className}>
       <h2>
         <span className='number'>1. </span>
-        <Link to='' className='title'>
+        <Link to={`/id/${title}`} className='title'>
           {title}
         </Link>
       </h2>
       <section>
-        <Link to='' className='thumbnail-wrapper'>
+        <Link to={`/id/${title}`} className='thumbnail-wrapper'>
           <Thumbnail src={src} className={'no-thumbnail'} />
         </Link>
         <div className='post-info'>
