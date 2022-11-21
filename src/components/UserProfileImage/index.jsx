@@ -1,20 +1,16 @@
 import profile from '../../assets/profile.png';
 import styled from 'styled-components';
-import { UserProfileImageMaxWidth768px } from '../../styles/media';
 
-const UserProfileImage = () => {
-  return <UserProfileImageContainer alt='profile' src={profile} />;
+const UserProfileImage = ({ source }) => {
+  return <UserProfileImageContainer alt='profile' src={source ? source : profile} />;
 };
 
 const UserProfileImageContainer = styled.img`
   display: block;
-  width: 8rem;
-  height: 8rem;
-  margin-bottom: 1.25rem;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-
-  ${UserProfileImageMaxWidth768px};
 `;
 
 export default UserProfileImage;
