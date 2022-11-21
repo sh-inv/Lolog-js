@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 import Button from '../../../../components/Button';
 
-const EditorFooter = () => {
+const EditorFooter = ({ setOnUpload, setOnSave }) => {
   return (
     <Positioner>
       <EditorFooterContainer>
@@ -11,8 +11,8 @@ const EditorFooter = () => {
           <span>나가기</span>
         </div>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' />
-          <Button text='출간하기' className='upload' />
+          <Button text='임시저장' className='temporary-storage' onClick={() => setOnSave(true)} />
+          <Button text='출간하기' className='upload' onClick={() => setOnUpload(true)} />
         </div>
       </EditorFooterContainer>
     </Positioner>

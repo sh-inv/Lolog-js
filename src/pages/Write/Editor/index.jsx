@@ -2,18 +2,44 @@ import ToolBar from './ToolBar';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
 import Tags from './Tags';
+import { useEffect, useState } from 'react';
 
 const Editor = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [onUpload, setOnUpload] = useState(false);
+  const [onSave, setOnSave] = useState(false);
+
+  useEffect(() => {
+    if (onSave && title && content) {
+      console.log('save');
+      console.log('title', title);
+      console.log('content', content);
+    } else {
+      setOnSave(false);
+    }
+  }, [onSave]);
+
+  useEffect(() => {
+    if (onUpload && title && content) {
+      console.log('uplooad');
+      console.log('title', title);
+      console.log('content', content);
+    } else {
+      setOnUpload(false);
+    }
+  }, [onUpload]);
+
   return (
     <EditorContainer className='editor-container'>
-      <textarea className='title' placeholder='제목을 입력하세요' />
+      <textarea className='title' placeholder='제목을 입력하세요' onChange={e => setTitle(e.target.value)} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />
       <pre className='write-zone'>
-        <textarea placeholder='당신의 이야기를 적어보세요...' />
+        <textarea placeholder='당신의 이야기를 적어보세요...' onChange={e => setContent(e.target.value)} />
       </pre>
-      <EditorFooter />
+      <EditorFooter setOnUpload={setOnUpload} setOnSave={setOnSave} />
     </EditorContainer>
   );
 };
