@@ -43,6 +43,10 @@ const PostContainer = styled.div`
       text-decoration: none;
       word-break: break-all;
       transition: color 0.125s ease-in 0s;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
