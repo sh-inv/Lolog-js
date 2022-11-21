@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 import EditButton from '../../components/EditButton';
-import SortButton from '../../components/SortButton';
+import Sort from './PostList/Sort';
 import PostList from './PostList';
 import styled from 'styled-components';
 
 const SeriesPostList = () => {
-  useEffect(() => {}, []);
+  const [isSort, setIsSort] = useState(true);
+
+  const onSort = () => {
+    setIsSort(!isSort);
+  };
 
   return (
     <SeriesPostListContainer>
@@ -18,7 +22,7 @@ const SeriesPostList = () => {
         <EditButton text='삭제' />
       </div>
       <div className='fillter-wrapper'>
-        <SortButton icon={<IoChevronDown />} text='오름차순' />
+        <Sort icon={isSort ? <IoChevronUp /> : <IoChevronDown />} text={isSort ? '오름차순' : '내림차순'} onClick={onSort} />
       </div>
       <PostList />
     </SeriesPostListContainer>
