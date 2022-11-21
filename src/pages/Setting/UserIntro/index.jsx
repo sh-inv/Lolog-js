@@ -4,7 +4,7 @@ import Button from '../../../components/Button';
 import styled from 'styled-components';
 import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../styles/media';
 
-const UserIntroduction = () => {
+const UserIntro = () => {
   const [user, setUser] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
@@ -114,4 +114,4 @@ const UserIntroContainer = styled.div`
   }
 `;
 
-export default UserIntroduction;
+export default UserIntro;

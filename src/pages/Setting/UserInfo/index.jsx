@@ -6,7 +6,7 @@ import Withdrawal from './Withdrawal';
 import styled from 'styled-components';
 import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTitleMaxWidth768px } from '../../../styles/media';
 
-const UserInformation = () => {
+const UserInfo = () => {
   return (
     <UserInformationContainer>
       <div className='contents-box'>
@@ -108,4 +108,4 @@ const UserInformationContainer = styled.section`
   }
 `;
 
-export default UserInformation;
+export default UserInfo;
