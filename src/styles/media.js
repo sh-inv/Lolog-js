@@ -75,7 +75,7 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 //write 반응형
 export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 2rem 3rem 0 3rem;
 
   .editor-container {
