@@ -7,56 +7,33 @@ import styled from 'styled-components';
 import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTitleMaxWidth768px } from '../../../styles/media';
 
 const UserInfo = () => {
+  const infoData = [
+    { id: 1, title: '벨로그 제목', component: <Title />, description: '개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.' },
+    { id: 2, title: '소셜 정보', component: <SocialInfo />, description: '포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.' },
+    { id: 3, title: '이메일 주소', component: <Email />, description: '회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.' },
+    {
+      id: 4,
+      title: '이메일 수신 설정',
+      component: <EmailReceiveSetting />,
+    },
+    { id: 5, title: '회원 탈퇴', component: <Withdrawal />, description: '탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.' },
+  ];
+
   return (
     <UserInformationContainer>
-      <div className='contents-box'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>벨로그 제목</h3>
+      {infoData.map(info => {
+        return (
+          <div key={info.id} className='contents-box'>
+            <div className='wrapper'>
+              <div className='title-wrapper'>
+                <h3>{info.title}</h3>
+              </div>
+              <div className='interval'>{info.component}</div>
+            </div>
+            {info.id === 4 ? null : <div className='desc'>{info.description}</div>}
           </div>
-          <div className='interval'>
-            <Title />
-          </div>
-        </div>
-        <div className='desc'>개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</div>
-      </div>
-      <div className='contents-box'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>소셜 정보</h3>
-          </div>
-          <div className='interval'>
-            <SocialInfo />
-          </div>
-        </div>
-        <div className='desc'>포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.</div>
-      </div>
-      <div className='contents-box'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>이메일 주소</h3>
-          </div>
-          <Email />
-        </div>
-        <div className='desc'>회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.</div>
-      </div>
-      <div className='contents-box'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>이메일 수신 설정</h3>
-          </div>
-          <EmailReceiveSetting />
-        </div>
-      </div>
-      <div className='contents-box'>
-        <div className='wrapper'>
-          <div className='title-wrapper'>
-            <h3>회원 탈퇴</h3>
-          </div>
-          <Withdrawal />
-        </div>
-        <div className='desc'>탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
-      </div>
+        );
+      })}
     </UserInformationContainer>
   );
 };
