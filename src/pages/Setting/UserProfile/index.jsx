@@ -1,7 +1,7 @@
 import UserProfileImage from '../../../components/UserProfileImage';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
-import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
+import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px, UserProfileImageMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
@@ -19,6 +19,14 @@ const UserProfileContainer = styled.div`
   padding-right: 1.5rem;
 
   ${settingProfileMaxWidth768px};
+
+  img {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1.25rem;
+
+    ${UserProfileImageMaxWidth768px};
+  }
 
   button {
     ${settingProfileButtonMaxWidth768px};
