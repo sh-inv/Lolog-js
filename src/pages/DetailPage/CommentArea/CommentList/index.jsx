@@ -1,37 +1,33 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Comment from './Comment';
 
 const CommentList = () => {
-  const [commentData, setCommentData] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('public/data/detailpage/comments.json');
-        setCommentData(data);
+        const { data } = await axios.get('/public/data/detailpage/comments.json');
+        setComments(data.commentdata);
       } catch (error) {
-        console.log(error);
+        console.log('comment list error => ', error);
       }
     })();
   }, []);
 
-  console.log(commentData);
-
   return (
     <CommentListContainer>
-      <div>asdfasdfasdf</div>
+      {comments.map(comment => (
+        <Comment key={comment.comment_id} comment={comment} />
+      ))}
     </CommentListContainer>
   );
 };
 
 const CommentListContainer = styled.div`
   margin-top: 2.5rem;
-
-  div {
-    height: 100px;
-    border: 1px solid red;
-  }
 `;
 
 export default CommentList;
