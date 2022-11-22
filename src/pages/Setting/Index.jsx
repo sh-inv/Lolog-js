@@ -7,7 +7,7 @@ import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px }
 const Setting = () => {
   return (
     <SettingPage>
-      <section className='setting-user'>
+      <section className='setting-top'>
         <UserProfile />
         <UserIntro />
       </section>
@@ -26,7 +26,7 @@ const SettingPage = styled.div`
   ${settingMaxWidth1024px};
   ${settingMaxWidth768px};
 
-  .setting-user {
+  .setting-top {
     display: flex;
     height: 13.75rem;
 
