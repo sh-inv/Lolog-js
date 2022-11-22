@@ -24,6 +24,9 @@ const Withdrawal = () => {
           message='정말로 탈퇴 하시겠습니까?'
           onClose={() => {
             setIsModal(false);
+          }}
+          onMove={() => {
+            setIsModal(false);
             navigate('/');
           }}
         />
