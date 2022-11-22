@@ -7,6 +7,7 @@ import Search from './pages/Search';
 import Setting from './pages/Setting';
 import Saves from './pages/Saves';
 import MyLolog from './pages/MyLolog';
+import Write from './pages/Write';
 import Posts from './pages/MyLolog/Posts';
 import Series from './pages/MyLolog/Series';
 import SeriesPostList from './pages/SeriesPostList';
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='/' element={<Main />} />
         <Route path='/recent' element={<Main />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/write' element={<Write />} />
         <Route path='/setting' element={<Setting />} />
         <Route path='/saves' element={<Saves />} />
         <Route path='/id' element={<MyLolog />}>
