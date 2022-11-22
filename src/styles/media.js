@@ -76,16 +76,14 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 100%;
   height: 100vh;
-  padding: 2rem 3rem 0 3rem;
 
-  .editor-container {
-    width: 50%;
-    height: 100%;
-  }
+  .editor-container,
   .preview-container {
     width: 50%;
     height: 100%;
+    padding: 2rem 3rem 4rem 3rem;
   }
+  
 }`;
 export const writeMaxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;

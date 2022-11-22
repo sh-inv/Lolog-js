@@ -5,7 +5,9 @@ const Preview = () => {
 };
 
 const PreviewContainer = styled.div`
-  background-color: white;
+  padding: 3rem;
+  background-color: var(--bg-element8);
+  color: var(--text1);
 `;
 
 export default Preview;
