@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setContent } from '../../../store/modules/write';
+import { setTitle, setContent, setSelectedTool } from '../../../store/modules/write';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
 import LinkModal from './LinkModal';
@@ -8,10 +8,9 @@ import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
 
 const Editor = () => {
-  const { title, content, imageFileUrl } = useSelector(state => state.writeContent);
+  const { title, content, imageFileUrl, selectedTool } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
-  const [selectedTool, setSelectedTool] = useState(null);
   const [isLinkModal, setIsLinkModal] = useState(false);
 
   useEffect(() => {
@@ -23,13 +22,13 @@ const Editor = () => {
       if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote' || selectedTool === 'code') updateContent = textEffectHandler(copy, selectedTool);
       if (selectedTool === 'link') {
         setIsLinkModal(true);
-        setSelectedTool(null);
+        dispatch(setSelectedTool(null));
         return;
       }
       if (selectedTool === 'image') return;
 
       dispatch(setContent(updateContent));
-      setSelectedTool(null);
+      dispatch(setSelectedTool(null));
     }
   }, [selectedTool]);
 
@@ -94,7 +93,8 @@ const Editor = () => {
         toolToValue = '> ';
         break;
       case 'code':
-        toolToValue = `${'```'}
+        toolToValue = `
+${'```'}
 코드를 입력하세요
 ${'```'}`;
         break;
@@ -130,7 +130,7 @@ ${'```'}`;
       <textarea className='title' placeholder='제목을 입력하세요' onChange={e => dispatch(setTitle(e.target.value))} />
       <div className='dividing-line' />
       <Tags />
-      <ToolBar setSelectedTool={setSelectedTool} />
+      <ToolBar />
       {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
       <pre className='write-zone'>
         <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => dispatch(setContent(e.target.value))} />

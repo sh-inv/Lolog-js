@@ -1,15 +1,15 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setImageFileUrl } from '../../../../../store/modules/write';
+import { setImageFileUrl, setSelectedTool } from '../../../../../store/modules/write';
 import styled from 'styled-components';
 
-const ToolBarBtnWrapper = ({ type, children, setSelectedTool }) => {
+const ToolBarBtnWrapper = ({ type, children }) => {
   const dispatch = useDispatch();
   const photoInput = useRef();
 
   const handleClick = () => {
     if (type === 'image') photoInput.current.click();
-    setSelectedTool(type);
+    dispatch(setSelectedTool(type));
   };
 
   const saveFileImage = e => {

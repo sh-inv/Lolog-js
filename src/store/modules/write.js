@@ -6,6 +6,7 @@ const writeContentSlice = createSlice({
     title: '',
     content: '',
     imageFileUrl: null,
+    selectedTool: null,
   },
   reducers: {
     setTitle: (state, action) => {
@@ -17,8 +18,11 @@ const writeContentSlice = createSlice({
     setImageFileUrl: (state, action) => {
       state.imageFileUrl = action.payload;
     },
+    setSelectedTool: (state, action) => {
+      state.selectedTool = action.payload;
+    },
   },
 });
 
-export const { setTitle, setContent, setImageFileUrl } = writeContentSlice.actions;
+export const { setTitle, setContent, setImageFileUrl, setSelectedTool } = writeContentSlice.actions;
 export const writeContentReducer = writeContentSlice.reducer;

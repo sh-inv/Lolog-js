@@ -1,12 +1,12 @@
-import styled from 'styled-components';
 import { FaBold, FaItalic, FaRemoveFormat } from 'react-icons/fa';
 import { MdFormatQuote } from 'react-icons/md';
 import { FiLink2, FiCode } from 'react-icons/fi';
 import { SlPicture } from 'react-icons/sl';
 import ToolBarHTagWrapper from './ToolBarHTagWrapper';
 import ToolBarBtnWrapper from './ToolBarBtnWrapper';
+import styled from 'styled-components';
 
-const ToolBar = ({ setSelectedTool, imageFileInput }) => {
+const ToolBar = ({ imageFileInput }) => {
   const ToolBarHTagList = ['H1', 'H2', 'H3', 'H4'];
   const ToolBarBtnLIstMid = [
     { type: 'bold', reactIcon: <FaBold /> },
@@ -24,12 +24,12 @@ const ToolBar = ({ setSelectedTool, imageFileInput }) => {
   return (
     <ToolBarWrapper>
       {ToolBarHTagList.map(tag => {
-        return <ToolBarHTagWrapper key={tag} type={tag} setSelectedTool={setSelectedTool} />;
+        return <ToolBarHTagWrapper key={tag} type={tag} />;
       })}
       <div className='vertical-line' />
       {ToolBarBtnLIstMid.map(btn => {
         return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type} setSelectedTool={setSelectedTool}>
+          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
             {btn.reactIcon}
           </ToolBarBtnWrapper>
         );
@@ -37,7 +37,7 @@ const ToolBar = ({ setSelectedTool, imageFileInput }) => {
       <div className='vertical-line' />
       {ToolBarBtnListRight.map(btn => {
         return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type} setSelectedTool={setSelectedTool}>
+          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
             {btn.reactIcon}
           </ToolBarBtnWrapper>
         );

@@ -1,8 +1,12 @@
+import { useDispatch } from 'react-redux';
+import { setSelectedTool } from '../../../../../store/modules/write';
 import styled from 'styled-components';
 
-const ToolBarHTagWrapper = ({ type, setSelectedTool }) => {
+const ToolBarHTagWrapper = ({ type }) => {
+  const dispatch = useDispatch();
+
   return (
-    <ToolBarHTagWrapperContainer onClick={() => setSelectedTool(type)}>
+    <ToolBarHTagWrapperContainer onClick={() => dispatch(setSelectedTool(type))}>
       <div>
         H<span>{type[1]}</span>
       </div>
