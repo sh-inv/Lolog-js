@@ -83,7 +83,6 @@ export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
     height: 100%;
     padding: 2rem 3rem 4rem 3rem;
   }
-  
 }`;
 export const writeMaxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;
@@ -94,4 +93,25 @@ export const writeMaxWidth1056px = `@media screen and (max-width: 1056px) {
 }`;
 export const writeMinWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
+}`;
+
+//series 반응형
+export const SeriesMaxWidth768px = `@media screen and (max-width: 768px) {
+  margin: 0px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}`;
+export const SeriesPostMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  padding: 0px;
+  margin-bottom: 3rem;
+}`;
+export const SeriesInfoMaxWidth768px = `@media screen and (max-width: 768px) {
+  line-height: 1;
+}`;
+
+//about 반응형
+export const AboutMaxWidth768px = `@media screen and (max-width: 768px) {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }`;

@@ -21,14 +21,14 @@ const UserInfoContainer = styled.div`
     height: 1.5rem;
     border-radius: 50%;
     margin-right: 0.5rem;
-    background: #2a2a2a;
+    background-color: var(--bg-element4);
   }
 
   .user-by {
     width: 6rem;
     height: 1rem;
     border-radius: 4px;
-    background: #2a2a2a;
+    background-color: var(--bg-element4);
   }
 `;
 

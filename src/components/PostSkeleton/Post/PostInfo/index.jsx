@@ -20,7 +20,7 @@ const PostInfoContainer = styled.div`
     width: 100%;
     height: 1rem;
     border-radius: 4px;
-    background: #2a2a2a;
+    background-color: var(--bg-element4);
 
     :nth-last-child(1) {
       margin-bottom: 0;

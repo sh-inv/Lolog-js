@@ -97,26 +97,6 @@ const SlideBorder = styled.div`
   height: 2px;
   background: #fff;
   transition: ease all 0.3s;
-
-  /* .ani {
-    animation: boxAni 0.3s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-direction: alternate;
-    animation-delay: 1s;
-  }
-
-  @keyframes boxAni {
-    0% {
-      left: ${({ location }) => (location.pathname === '/' ? '50%' : '0')};
-    }
-    80% {
-      left: ${({ location }) => (location.pathname === '/' ? '-5%' : '55%')};
-    }
-    100% {
-      left: ${({ location }) => (location.pathname === '/' ? '0' : '50%')};
-    }
-  } */
 `;
 
 export default PostListNavBar;
