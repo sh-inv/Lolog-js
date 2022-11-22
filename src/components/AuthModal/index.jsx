@@ -1,5 +1,6 @@
 import { MdOutlineClose } from 'react-icons/md';
 import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 import SocialAuth from './SocialAuth';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
@@ -23,6 +24,7 @@ const AuthModal = ({ title, message, link, onClose, onChange, onClick }) => {
               <section>
                 <h4>이메일로 {title}</h4>
                 <LoginForm title={title} onClick={onClick} />
+                {/* <SignUpForm title={title} onClick={onClick} /> */}
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
