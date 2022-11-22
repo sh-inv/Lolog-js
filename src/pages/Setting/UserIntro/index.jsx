@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import EditButton from '../../../components/EditButton';
 import Button from '../../../components/Button';
 import styled from 'styled-components';

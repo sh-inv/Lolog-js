@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { settingProfileButtonMaxWidth768px } from '../../../../styles/media';
 
 const UploadImage = () => {
+  const [imageFile, setImageFile] = useState(null);
   const imageRef = useRef(null);
 
   const onUploadImage = e => {
@@ -14,6 +15,7 @@ const UploadImage = () => {
     if (!imageRef.current) return;
     imageRef.current.click();
   };
+
   return (
     <UploadContainer>
       <input type='file' accept='image/*' ref={imageRef} onChange={onUploadImage} onClick={e => e.target.value === null} />
