@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LoginModal from '../LoginModal';
+import AuthModal from '../AuthModal';
 import Join from '../Join';
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
@@ -8,7 +8,7 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
   return (
     <>
       {isLoginModal && (
-        <LoginModal
+        <AuthModal
           title='로그인'
           message='아직 회원이 아니신가요?'
           link='회원가입'

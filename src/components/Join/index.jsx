@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import LoginModal from '../LoginModal';
+import AuthModal from '../AuthModal';
 
 const Join = ({ setIsLoginModal, setIsJoinModal }) => {
   const navigate = useNavigate();
 
   return (
-    <LoginModal
+    <AuthModal
       title='회원가입'
       message='계정이 이미 있으신가요?'
       link='로그인'

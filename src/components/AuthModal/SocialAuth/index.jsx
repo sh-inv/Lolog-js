@@ -4,9 +4,9 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 import styled from 'styled-components';
 
-const SocialLogin = () => {
+const SocialAuth = () => {
   return (
-    <SocialLoginContainer>
+    <SocialAuthContainer>
       <Link className='github' tabIndex='5'>
         <AiOutlineGithub />
       </Link>
@@ -16,11 +16,11 @@ const SocialLogin = () => {
       <Link className='facebook' tabIndex='7'>
         <FaFacebookF />
       </Link>
-    </SocialLoginContainer>
+    </SocialAuthContainer>
   );
 };
 
-const SocialLoginContainer = styled.div`
+const SocialAuthContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 1.5rem;
@@ -79,4 +79,4 @@ const SocialLoginContainer = styled.div`
   }
 `;
 
-export default SocialLogin;
+export default SocialAuth;

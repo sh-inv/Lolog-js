@@ -1,10 +1,10 @@
 import { MdOutlineClose } from 'react-icons/md';
 import LoginForm from './LoginForm';
-import SocialLogin from './SocialLogin';
+import SocialAuth from './SocialAuth';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
-const LoginModal = ({ title, message, link, onClose, onChange, onClick }) => {
+const AuthModal = ({ title, message, link, onClose, onChange, onClick }) => {
   return (
     <>
       <Background />
@@ -26,7 +26,7 @@ const LoginModal = ({ title, message, link, onClose, onChange, onClick }) => {
               </section>
               <section>
                 <h4>소셜 계정으로 {title}</h4>
-                <SocialLogin />
+                <SocialAuth />
               </section>
             </div>
             <div className='foot'>
@@ -169,4 +169,4 @@ const LoginContainer = styled.div`
   }
 `;
 
-export default LoginModal;
+export default AuthModal;
