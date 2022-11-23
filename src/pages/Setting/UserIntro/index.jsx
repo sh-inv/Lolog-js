@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import EditButton from '../../../components/EditButton';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
@@ -22,9 +23,6 @@ const UserIntro = () => {
     // fetch =>user info
     const profile = { user: 'Eden', introduction: 'one part' };
 
-    // setUser(profile.user);
-    // setIntroduction(profile.introduction);
-
     dispatch(setName(profile.user));
     dispatch(setIntro(profile.introduction));
   }, []);
@@ -34,7 +32,7 @@ const UserIntro = () => {
   };
 
   const getIntro = e => {
-    setIntroduction(e.target.value);
+    dispatch(setIntro(setIntroduction(e.target.value)));
   };
 
   return (
