@@ -1,31 +1,39 @@
-import styled from 'styled-components';
-import { BiArrowBack } from 'react-icons/bi';
-import Button from '../../../../components/Button';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Button from '../../../../components/Button';
+import { BiArrowBack } from 'react-icons/bi';
+import styled from 'styled-components';
 
 const EditorFooter = ({ title, content }) => {
-  const [onUpload, setOnUpload] = useState(false);
-  const [onSave, setOnSave] = useState(false);
-
-  useEffect(() => {
-    if (onSave && title && content) {
-      console.log('save');
-      console.log('title', title);
-      console.log('content', content);
-    } else {
-      setOnSave(false);
+  const onSave = async () => {
+    if (title && content) {
+      try {
+        const response = await axios.put(`http://localhost:8000/posts?status=3`, {
+          title: title,
+          content: content,
+          thumbnail: '',
+          tags: [],
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [onSave]);
+  };
 
-  useEffect(() => {
-    if (onUpload && title && content) {
-      console.log('uplooad');
-      console.log('title', title);
-      console.log('content', content);
-    } else {
-      setOnUpload(false);
+  const onUpload = async () => {
+    if (title && content) {
+      try {
+        const response = await axios.put(`http://localhost:8000/posts?status=1`, {
+          title: title,
+          content: content,
+          thumbnail: '',
+          tags: [],
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [onUpload]);
+  };
 
   return (
     <Positioner>
@@ -35,8 +43,8 @@ const EditorFooter = ({ title, content }) => {
           <span>나가기</span>
         </div>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' onClick={() => setOnSave(true)} />
-          <Button text='출간하기' className='upload' onClick={() => setOnUpload(true)} />
+          <Button text='임시저장' className='temporary-storage' onClick={onSave} />
+          <Button text='출간하기' className='upload' onClick={onUpload} />
         </div>
       </EditorFooterContainer>
     </Positioner>
