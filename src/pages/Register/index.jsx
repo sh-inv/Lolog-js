@@ -29,13 +29,21 @@ const Register = () => {
       setNameMessage('이름을 입력해주세요');
       setIsName(false);
     } else {
-      setNameMessage('');
+      setNameMessage('멋있는 이름이에요 😎');
       setIsName(true);
     }
   };
   const handlePassword = e => {
-    const passwordRegex = setPassword(e.target.value);
-    //  if ()
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPasswordMessage('숫자+영문자 조합으로 8자 이상 입력해주세요!');
+      setIsPassword(false);
+    } else {
+      setPasswordMessage('안전한 비밀번호예요 :)');
+      setIsPassword(true);
+    }
   };
   const handlePasswordConfirm = e => setPasswordConfrim(e.target.value);
   const handleId = e => setId(e.target.value);
@@ -59,19 +67,18 @@ const Register = () => {
             <input type='text' disabled value='me@email.me' />
             <MdLockOutline />
           </div>
-          <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
         <div className='wrapper'>
           <label>비밀번호</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} />
+            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} maxLength='16' />
           </div>
-          <div className='validation'>유효성 검사 문구가 나갑니다</div>
+          <div className='validation'>{passwordMessage}</div>
         </div>
         <div className='wrapper'>
           <label>비밀번호 확인</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} />
+            <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} maxLength='16' />
           </div>
           <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
