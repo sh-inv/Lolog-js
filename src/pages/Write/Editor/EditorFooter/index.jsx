@@ -16,9 +16,12 @@ const EditorFooter = ({ title, content }) => {
           thumbnail: '',
           tags: [],
         });
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
+    } else {
+      alert('제목 또는 내용이 비어있습니다.');
     }
   };
 
@@ -31,9 +34,12 @@ const EditorFooter = ({ title, content }) => {
           thumbnail: '',
           tags: [],
         });
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
+    } else {
+      alert('제목 또는 내용이 비어있습니다.');
     }
   };
 
