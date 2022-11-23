@@ -6,7 +6,7 @@ import SocialAuth from './SocialAuth';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
-const AuthModal = ({ isLoginModal, setIsLoginModal, title, message, onClose, onChange, onClick }) => {
+const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
   const [isSignInModal, setIsSignInModal] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title, message, onClose, onC
               <h2>{isSignInModal ? '회원가입' : '로그인'}</h2>
               <section>
                 <h4>이메일로 {isLoginModal ? '로그인' : '회원가입'}</h4>
-                {isSignInModal ? <SignUpForm title={title} onClick={onClick} isSignInModal={isSignInModal} /> : <LoginForm title={title} onClick={onClick} isSignInModal={isSignInModal} />}
+                {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} />}
               </section>
               <section>
                 <h4>소셜 계정으로 {isSignInModal ? '회원가입' : '로그인'}</h4>
@@ -42,7 +42,7 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title, message, onClose, onC
                 }}
                 tabIndex='8'
               >
-                {isSignInModal ? '회원가입' : '로그인'}
+                {isSignInModal ? '로그인' : '회원가입'}
               </div>
             </div>
           </div>

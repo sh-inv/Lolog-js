@@ -1,11 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../Button';
 import styled from 'styled-components';
 
-const SignUpForm = ({ onClick }) => {
+const SignUpForm = () => {
+  const navigate = useNavigate();
   return (
     <SignUpFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
-      <Button className='sign-up-button' text='회원가입' onClick={onClick} tabIndex='4' />
+      <Button
+        className='sign-up-button'
+        text='중복확인'
+        onClick={() => {
+          navigate('/register');
+        }}
+        tabIndex='4'
+      />
     </SignUpFormContainer>
   );
 };
@@ -32,7 +41,7 @@ const SignUpFormContainer = styled.form`
     }
   }
 
-  button {
+  .sign-up-button {
     background: var(--primary1);
     color: var(--button-text);
     font-size: 1rem;

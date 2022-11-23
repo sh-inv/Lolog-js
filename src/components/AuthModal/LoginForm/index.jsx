@@ -1,7 +1,7 @@
 import Button from '../../Button';
 import styled from 'styled-components';
 
-const LoginForm = ({ title, onClick }) => {
+const LoginForm = ({ onClick }) => {
   return (
     <LoginFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
