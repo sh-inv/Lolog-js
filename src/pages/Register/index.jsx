@@ -9,7 +9,7 @@ const Register = () => {
   //이름, 이메일, 비밀번호, 아이디(롤로그 제목), 소개글 확인
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfrim, setPasswordConfrim] = useState('');
+  const [passwordConfirm, setPasswordConfrim] = useState('');
   const [id, setId] = useState('');
   const [intro, setIntro] = useState('');
   //오류메세지 상태저장
@@ -17,7 +17,29 @@ const Register = () => {
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfrimMessage, setPasswordConfrimMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
-  const [introMessage, setIntroMessage] = useState('');
+  //유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [isId, setIsId] = useState(false);
+
+  const handleName = e => {
+    setName(e.target.value);
+    if (e.target.value.length < 1) {
+      setNameMessage('이름을 입력해주세요');
+      setIsName(false);
+    } else {
+      setNameMessage('');
+      setIsName(true);
+    }
+  };
+  const handlePassword = e => {
+    const passwordRegex = setPassword(e.target.value);
+    //  if ()
+  };
+  const handlePasswordConfirm = e => setPasswordConfrim(e.target.value);
+  const handleId = e => setId(e.target.value);
+  const handleIntro = e => setIntro(e.target.value);
 
   return (
     <RegisterContainer>
@@ -27,9 +49,9 @@ const Register = () => {
         <div className='wrapper'>
           <label>이름</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='이름을 입력하세요' />
+            <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' />
           </div>
-          <p>유효성 검사 문구가 나갑니다</p>
+          <div className='validation'>{nameMessage}</div>
         </div>
         <div className='wrapper'>
           <label>이메일</label>
@@ -37,37 +59,37 @@ const Register = () => {
             <input type='text' disabled value='me@email.me' />
             <MdLockOutline />
           </div>
-          <p>유효성 검사 문구가 나갑니다</p>
+          <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
         <div className='wrapper'>
           <label>비밀번호</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 입력하세요' />
+            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} />
           </div>
-          <p>유효성 검사 문구가 나갑니다</p>
+          <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
         <div className='wrapper'>
           <label>비밀번호 확인</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 한번 더 입력하세요' />
+            <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} />
           </div>
-          <p>유효성 검사 문구가 나갑니다</p>
+          <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
         <div className='wrapper'>
           <label>아이디</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' />
+            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
           </div>
-          <p>유효성 검사 문구가 나갑니다</p>
+          <div className='validation'>유효성 검사 문구가 나갑니다</div>
         </div>
         <div className='wrapper'>
           <label>한 줄 소개</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='당신을 한 줄로 소개해보세요' />
+            <input type='text' placeholder='당신을 한 줄로 소개해보세요' onChange={handleIntro} value={intro} />
           </div>
         </div>
       </div>
-      <p>유효성 검사 문구가 나갑니다</p>
+      <div className='validation'>유효성 검사 문구가 나갑니다</div>
       <div className='form-bottom'>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' onClick={() => navigate('/')} />
@@ -101,6 +123,20 @@ const RegisterContainer = styled.div`
 
     .wrapper {
       margin-bottom: 1.5rem;
+
+      &:active {
+        label {
+          color: var(--primary2);
+        }
+
+        .input-wrapper {
+          border-bottom: 1px solid var(--primary2);
+
+          input {
+            color: var(--primary2);
+          }
+        }
+      }
 
       label {
         display: block;
@@ -139,6 +175,14 @@ const RegisterContainer = styled.div`
           font-size: 1.5rem;
           color: var(--text3);
         }
+      }
+
+      .validation {
+        margin: 0.25rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: rgb(255, 107, 107);
+        font-weight: bold;
       }
     }
   }
