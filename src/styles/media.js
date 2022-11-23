@@ -85,6 +85,9 @@ export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   }
 }`;
 export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  .reverse-position-btn-container {
+    display: none;
+  }
   .editor-container {
     width: 100%;
     height: 100%;

@@ -7,7 +7,7 @@ const ReversePositionBtn = () => {
   const dispatch = useDispatch();
 
   return (
-    <ReversePositionBtnContainer>
+    <ReversePositionBtnContainer className='reverse-position-btn-container'>
       <FaExchangeAlt onClick={() => dispatch(reversePosition())} />
     </ReversePositionBtnContainer>
   );
