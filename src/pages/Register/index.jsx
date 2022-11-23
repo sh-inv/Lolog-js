@@ -45,7 +45,18 @@ const Register = () => {
       setIsPassword(true);
     }
   };
-  const handlePasswordConfirm = e => setPasswordConfrim(e.target.value);
+  const handlePasswordConfirm = e => {
+    const passwordConfirmCurrent = e.target.value;
+    setPasswordConfrim(passwordConfirmCurrent);
+
+    if (password === passwordConfirmCurrent) {
+      setPasswordConfrimMessage('비밀번호가 일치합니다!');
+      setIsPasswordConfirm(true);
+    } else {
+      setPasswordConfrimMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요!');
+      setIsPasswordConfirm(false);
+    }
+  };
   const handleId = e => setId(e.target.value);
   const handleIntro = e => setIntro(e.target.value);
 
@@ -80,7 +91,7 @@ const Register = () => {
           <div className='input-wrapper'>
             <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} maxLength='16' />
           </div>
-          <div className='validation'>유효성 검사 문구가 나갑니다</div>
+          <div className='validation'>{passwordConfrimMessage}</div>
         </div>
         <div className='wrapper'>
           <label>아이디</label>
