@@ -6,7 +6,7 @@ const LoginForm = ({ title, onClick }) => {
     <LoginFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
       <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
-      <Button className='login-button' text={title} onClick={onClick} tabIndex='4' />
+      <Button className='login-button' text='로그인' onClick={onClick} tabIndex='4' />
     </LoginFormContainer>
   );
 };

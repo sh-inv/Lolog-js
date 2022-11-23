@@ -1,11 +1,11 @@
 import Button from '../../Button';
 import styled from 'styled-components';
 
-const SignUpForm = ({ title, onClick }) => {
+const SignUpForm = ({ onClick }) => {
   return (
     <SignUpFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
-      <Button className='sign-up-button' text={title} onClick={onClick} tabIndex='4' />
+      <Button className='sign-up-button' text='회원가입' onClick={onClick} tabIndex='4' />
     </SignUpFormContainer>
   );
 };
