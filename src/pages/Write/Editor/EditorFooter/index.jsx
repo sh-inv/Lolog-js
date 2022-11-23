@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
 import styled from 'styled-components';
 
 const EditorFooter = ({ title, content }) => {
+  const isReverse = useSelector(state => state.writeContent.isReverse);
+
   const onSave = async () => {
     if (title && content) {
       try {
@@ -36,7 +38,7 @@ const EditorFooter = ({ title, content }) => {
   };
 
   return (
-    <Positioner className='editor-footer-positioner'>
+    <Positioner className='editor-footer-positioner' isReverse={isReverse}>
       <EditorFooterContainer>
         <div className='exit'>
           <BiArrowBack className='arrow-icon' />
@@ -53,7 +55,7 @@ const EditorFooter = ({ title, content }) => {
 
 const Positioner = styled.div`
   position: fixed;
-  left: 0;
+  left: ${props => (props.isReverse ? '50%' : '0')};
   bottom: 0px;
   z-index: 10;
   width: 50%;

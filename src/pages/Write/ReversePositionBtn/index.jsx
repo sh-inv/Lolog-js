@@ -1,10 +1,14 @@
+import { useDispatch } from 'react-redux';
+import { reversePosition } from '../../../store/modules/write';
 import { FaExchangeAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const ReversePositionBtn = () => {
+  const dispatch = useDispatch();
+
   return (
     <ReversePositionBtnContainer>
-      <FaExchangeAlt />
+      <FaExchangeAlt onClick={() => dispatch(reversePosition())} />
     </ReversePositionBtnContainer>
   );
 };
