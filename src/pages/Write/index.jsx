@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { writeMaxWidth1920px } from '../../styles/media';
+import { writeMaxWidth1024px, writeMaxWidth1920px, writeMaxWidth768px } from '../../styles/media';
 import Editor from './Editor';
 import Preview from './Preview';
 
@@ -16,6 +16,8 @@ const WriteContainer = styled.div`
   display: flex;
 
   ${writeMaxWidth1920px}
+  ${writeMaxWidth1024px}
+  ${writeMaxWidth768px}
 `;
 
 export default Write;

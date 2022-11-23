@@ -127,7 +127,7 @@ ${'```'}`;
 
   return (
     <EditorContainer className='editor-container'>
-      <textarea className='title' placeholder='제목을 입력하세요' onChange={e => dispatch(setTitle(e.target.value))} />
+      <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setTitle(e.target.value))} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />
@@ -141,7 +141,7 @@ ${'```'}`;
 };
 
 const EditorContainer = styled.div`
-  .title,
+  .editor-title,
   textarea {
     padding: 0px;
     width: 100%;

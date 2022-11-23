@@ -36,7 +36,7 @@ const EditorFooter = ({ title, content }) => {
   };
 
   return (
-    <Positioner>
+    <Positioner className='editor-footer-positioner'>
       <EditorFooterContainer>
         <div className='exit'>
           <BiArrowBack className='arrow-icon' />
@@ -57,6 +57,7 @@ const Positioner = styled.div`
   bottom: 0px;
   z-index: 10;
   width: 50%;
+  min-width: 340px;
 `;
 
 const EditorFooterContainer = styled.div`
