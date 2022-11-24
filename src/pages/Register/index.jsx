@@ -24,7 +24,7 @@ const Register = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
-  const [isIdDuplicateCheck, setIsIdDuplcateCheck] = useState(false);
+  const [isIdDuplicateCheck, setIsIdDuplicateCheck] = useState(false);
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -42,11 +42,11 @@ const Register = () => {
     const idCurrent = e.target.value;
     setId(idCurrent);
     if (!idRegax.test(idCurrent)) {
-      setIdMessage('아이디 형식이 틀렸습니다. 다시 한번 확인해주세요');
+      setIdMessage('아이디 형식이 틀렸습니다. 영어와 숫자로 구성해야합니다. 다시 한번 확인해주세요');
       setIsId(false);
-    } else if (idCurrent.length >= 4) {
-      setIdMessage('아이디 중복 여부를 확인 해주세요');
-      setIsId(false);
+      // } else if (idCurrent.length >= 4) {
+      //   setIdMessage('아이디 중복 여부를 확인 해주세요');
+      //   setIsId(false);
     } else {
       setIdMessage('');
       setIsId(true);
@@ -57,7 +57,7 @@ const Register = () => {
     const passwordCurrent = e.target.value;
     setPassword(passwordCurrent);
     if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage('숫자+영문자 조합으로 8자 이상 입력해주세요!');
+      setPasswordMessage('숫자 + 영문자 조합으로 8자 이상 입력해주세요!');
       setIsPassword(false);
     } else {
       setPasswordMessage('');
@@ -76,6 +76,10 @@ const Register = () => {
     }
   };
   const handleIntro = e => setIntro(e.target.value);
+
+  const onDuplicateCheck = () => {
+    setIsIdDuplicateCheck(true);
+  };
 
   return (
     <RegisterContainer>
@@ -102,7 +106,7 @@ const Register = () => {
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
-            <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} />
+            <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} onClick={onDuplicateCheck} />
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
