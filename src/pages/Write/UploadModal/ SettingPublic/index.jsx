@@ -1,4 +1,6 @@
 import ContentWrapper from '../ContentWrapper';
+import { IoEarth } from 'react-icons/io5';
+import { IoIosLock } from 'react-icons/io';
 import styled from 'styled-components';
 
 const SettingPublic = () => {
@@ -6,8 +8,14 @@ const SettingPublic = () => {
     <ContentWrapper contentTitle={'공개 설정'}>
       <SettingPublicContainer>
         <div className='btn-container'>
-          <button className='public-btn'>전체 공개</button>
-          <button className='private-btn'>비공개</button>
+          <button className='public-btn'>
+            <IoEarth className='icon' />
+            전체 공개
+          </button>
+          <button className='private-btn'>
+            <IoIosLock className='icon' />
+            비공개
+          </button>
         </div>
       </SettingPublicContainer>
     </ContentWrapper>
@@ -33,6 +41,7 @@ const SettingPublicContainer = styled.div`
       box-shadow: rgb(0 0 0 / 5%) 0px 0px 4px 0px;
       background: var(--bg-element7);
       color: var(--text3);
+      line-height: 1.125rem;
       font-size: 1.125rem;
       font-weight: bold;
 
@@ -41,6 +50,11 @@ const SettingPublicContainer = styled.div`
         /* border: solid 1px var(--primary2); */
         /* color: var(--primary2); */
         cursor: pointer;
+      }
+
+      .icon {
+        font-size: 1.6rem;
+        margin-right: 2rem;
       }
     }
 

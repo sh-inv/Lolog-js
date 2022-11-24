@@ -1,4 +1,5 @@
 import ContentWrapper from '../ContentWrapper';
+import { MdPlaylistAdd } from 'react-icons/md';
 import styled from 'styled-components';
 
 const SettingSeries = () => {
@@ -6,7 +7,10 @@ const SettingSeries = () => {
     <ContentWrapper contentTitle={'시리즈 설정'}>
       <SettingSeriesContainer>
         <div className='add-series-container'>
-          <div>시리즈에 추가하기</div>
+          <div>
+            <MdPlaylistAdd className='icon' />
+            시리즈에 추가하기
+          </div>
         </div>
       </SettingSeriesContainer>
     </ContentWrapper>
@@ -34,6 +38,19 @@ const SettingSeriesContainer = styled.div`
     &:hover {
       opacity: 0.7;
       cursor: pointer;
+    }
+
+    div {
+      display: flex;
+      flex: 1 1 0%;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      .icon {
+        font-size: 1.6rem;
+        margin-right: 1rem;
+      }
     }
   }
 `;
