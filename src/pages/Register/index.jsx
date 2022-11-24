@@ -88,7 +88,15 @@ const Register = () => {
         기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
       </div>
       <div className='contents'>
-        <div className='wrapper'>
+        <div
+          className='wrapper'
+          onFocus={e => {
+            console.log('f', e);
+          }}
+          onBlur={e => {
+            console.log('b', e);
+          }}
+        >
           <label>이름 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' />
@@ -170,7 +178,7 @@ const RegisterContainer = styled.div`
     .wrapper {
       margin-bottom: 1.5rem;
 
-      &:active {
+      &:focus {
         label {
           color: var(--primary2);
         }
