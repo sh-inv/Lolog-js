@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import Post from '../PostList/Post';
 import styled from 'styled-components';
 
@@ -8,6 +10,7 @@ const EditPostList = () => {
   useEffect(() => {
     const postData = [
       {
+        id: 1,
         title: '포스트 제목 ddddddd1112 12341415151515115151515',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
@@ -15,6 +18,7 @@ const EditPostList = () => {
         created_at: 'November 16, 2022 11:08:00',
       },
       {
+        id: 2,
         title: '포스트 제목포스트 제목포스트 제목포스트 제목포스트 제목포스트 제목',
         src: '',
         contents:
@@ -22,6 +26,7 @@ const EditPostList = () => {
         created_at: 'November 16, 2022 11:08:00',
       },
       {
+        id: 3,
         title: '포스트 제목 ddddd11121234145151515',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
@@ -29,6 +34,7 @@ const EditPostList = () => {
         created_at: 'May 16, 2022 11:08:00',
       },
       {
+        id: 4,
         title: '111111111',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
