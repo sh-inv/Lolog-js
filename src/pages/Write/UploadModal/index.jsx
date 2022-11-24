@@ -4,6 +4,7 @@ import SettingThumbnail from './SettingThumbnail';
 import SettingPublic from './ SettingPublic';
 import SettingUrl from './SettingUrl';
 import SettingSeries from './SettingSeries';
+import ModalBtns from './ModalBtns';
 
 const UploadModal = () => {
   return (
@@ -19,10 +20,7 @@ const UploadModal = () => {
             <SettingUrl />
             <SettingSeries />
           </div>
-          <div className='right-section-btn'>
-            <Button text='취소' className='' />
-            <Button text='출간하기' className='' />
-          </div>
+          <ModalBtns />
         </div>
       </div>
     </UploadModalContainer>
@@ -67,16 +65,6 @@ const UploadModalContainer = styled.div`
       flex-direction: column;
       -webkit-box-pack: justify;
       justify-content: space-between;
-
-      .right-section-btn {
-        display: flex;
-        -webkit-box-pack: end;
-        justify-content: flex-end;
-
-        button + button {
-          margin-left: 0.875rem;
-        }
-      }
     }
   }
 

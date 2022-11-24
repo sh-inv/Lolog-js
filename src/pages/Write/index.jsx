@@ -2,12 +2,12 @@ import { useSelector } from 'react-redux';
 import Editor from './Editor';
 import Preview from './Preview';
 import ReversePositionBtn from './ReversePositionBtn';
+import UploadModal from './UploadModal';
 import styled from 'styled-components';
 import { writeMaxWidth1024px, writeMaxWidth1920px, writeMaxWidth768px } from '../../styles/media';
-import UploadModal from './UploadModal';
 
 const Write = () => {
-  const isReverse = useSelector(state => state.writeContent.isReverse);
+  const { isReverse, isUploadModal } = useSelector(state => state.writeContent);
 
   return (
     <WriteContainer>
@@ -23,7 +23,7 @@ const Write = () => {
           <Preview />
         </>
       )}
-      <UploadModal />
+      {isUploadModal && <UploadModal />}
     </WriteContainer>
   );
 };
