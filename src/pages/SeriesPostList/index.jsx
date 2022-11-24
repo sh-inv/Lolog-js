@@ -1,6 +1,6 @@
 import Title from './Title';
-import Edit from './PostList/Edit';
-import Sort from './PostList/Sort';
+import Edit from './Edit';
+import Sort from './Sort';
 import PostList from './PostList';
 import styled from 'styled-components';
 
