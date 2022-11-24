@@ -6,7 +6,7 @@ import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
-import Login from '../../components/Login';
+import AuthModal from '../../components/AuthModal';
 import styled from 'styled-components';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 
@@ -72,7 +72,7 @@ const Header = () => {
         </Content>
         {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
       </Positioner>
-      <Login isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} onLoginModal={onLoginModal} />
+      {isLoginModal ? <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} /> : null}
     </>
   );
 };
