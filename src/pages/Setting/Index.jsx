@@ -12,10 +12,10 @@ const Setting = () => {
   const dispatch = useDispatch();
   const { name, intro } = useSelector(state => state.user);
 
-  useEffect(async () => {
-    const response = await apiClient.get('user?type=name').then(res => dispatch(setName(response.data.name)));
-    console.log(response);
-  }, []);
+  // useEffect(async () => {
+  //   const response = await apiClient.get('user?type=name').then(res => dispatch(setName(response.data.name)));
+  //   console.log(response);
+  // }, []);
 
   return (
     <SettingPage>
