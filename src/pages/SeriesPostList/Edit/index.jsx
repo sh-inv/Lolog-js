@@ -5,10 +5,9 @@ import EditButton from '../../../components/EditButton';
 import ConfirmModal from '../../../components/ConfirmModal';
 import styled from 'styled-components';
 
-const Edit = () => {
+const Edit = ({ isModify, setIsModify }) => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
-  const [isModify, setIsModify] = useState(false);
 
   const onModal = () => {
     setIsModal(true);
