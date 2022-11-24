@@ -17,6 +17,7 @@ const Register = () => {
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfrimMessage, setPasswordConfrimMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
+  const [confirmMessage, setConfirmMessage] = useState('');
   //유효성 검사
   const [isName, setIsName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
@@ -57,7 +58,18 @@ const Register = () => {
       setIsPasswordConfirm(false);
     }
   };
-  const handleId = e => setId(e.target.value);
+  const handleId = e => {
+    const idRegax = /^[a-zA-Z0-9]{4,12}$/;
+    const idCurrent = e.target.value;
+    setId(idCurrent);
+    if (!idRegax.test(idCurrent)) {
+      setIdMessage('아이디 형식이 틀렸습니다. 다시 한번 확인해주세요');
+      setIsId(false);
+    } else {
+      setIdMessage('');
+      setIsId(true);
+    }
+  };
   const handleIntro = e => setIntro(e.target.value);
 
   return (
@@ -98,7 +110,7 @@ const Register = () => {
           <div className='input-wrapper'>
             <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
           </div>
-          <div className='validation'>유효성 검사 문구가 나갑니다</div>
+          <div className='validation'>{idMessage}</div>
         </div>
         <div className='wrapper'>
           <label>한 줄 소개</label>
@@ -107,11 +119,11 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className='validation'>유효성 검사 문구가 나갑니다</div>
+      <div className='validation'>{}</div>
       <div className='form-bottom'>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' />
+          <Button className='next' text='다음' disabled={isName && isPassword && isPasswordConfirm && isId} />
         </div>
       </div>
     </RegisterContainer>
