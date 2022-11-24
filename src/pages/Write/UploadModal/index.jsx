@@ -47,7 +47,6 @@ const UploadModalContainer = styled.div`
   .upload-modal-content {
     display: flex;
     width: 768px;
-    height: 100%;
 
     .left-section,
     .right-section {
