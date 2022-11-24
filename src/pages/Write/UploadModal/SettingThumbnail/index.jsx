@@ -4,9 +4,12 @@ import { setThmbnail } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import { SlPicture } from 'react-icons/sl';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const SettingThumbnail = () => {
-  const thumbnail = useSelector(state => state.writeContent.thumbnail);
+  const { title, thumbnail } = useSelector(state => state.writeContent);
+  const [summaryValue, setSummaryValue] = useState('');
+  const summaryLenght = summaryValue.replace(/<br\s*\/?>/gm, '\n').length;
   const dispatch = useDispatch();
   const thumbnailInput = useRef();
 
@@ -50,9 +53,9 @@ const SettingThumbnail = () => {
           )}
         </div>
         <div className='summary-container'>
-          <h4>title</h4>
-          <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' />
-          <p>0/150</p>
+          <h4>{title}</h4>
+          <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' value={summaryValue} onChange={e => setSummaryValue(e.target.value)} maxLength={150} />
+          <p style={{ color: summaryLenght >= 150 ? 'var(--prism-code-3)' : 'var(--text1)' }}>{summaryLenght}/150</p>
         </div>
       </ContentWrapper>
     </SettingThumbnailContainer>
