@@ -34,7 +34,7 @@ const SettingThumbnailContainer = styled.div`
     background: var(--bg-element3);
 
     .thumbnail-icon {
-      font-size: 5rem;
+      font-size: 6rem;
       color: var(--text4);
     }
 
