@@ -1,20 +1,18 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThmbnail } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import { SlPicture } from 'react-icons/sl';
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const SettingThumbnail = () => {
   const { title, thumbnail } = useSelector(state => state.writeContent);
-  const [summaryValue, setSummaryValue] = useState('');
-  const summaryLenght = summaryValue.replace(/<br\s*\/?>/gm, '\n').length;
   const dispatch = useDispatch();
   const thumbnailInput = useRef();
+  const [summaryValue, setSummaryValue] = useState('');
+  const summaryLenght = summaryValue.replace(/<br\s*\/?>/gm, '\n').length;
 
   const handleClick = () => {
-    console.log(thumbnailInput.current);
     thumbnailInput.current.click();
   };
 
