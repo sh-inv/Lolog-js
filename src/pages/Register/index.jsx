@@ -34,6 +34,20 @@ const Register = () => {
       setIsName(true);
     }
   };
+  const handleId = e => {
+    const idRegax = /^[a-zA-Z0-9]{4,15}$/;
+    const idCurrent = e.target.value;
+    setId(idCurrent);
+    if (!idRegax.test(idCurrent)) {
+      setIdMessage('아이디 형식이 틀렸습니다. 다시 한번 확인해주세요');
+      setIsId(false);
+    } else if (idCurrent.length >= 4) {
+      setIdMessage('아이디 중복 여부를 확인 해주세요');
+    } else {
+      setIdMessage('');
+      setIsId(true);
+    }
+  };
   const handlePassword = e => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
     const passwordCurrent = e.target.value;
@@ -56,18 +70,6 @@ const Register = () => {
     } else {
       setPasswordConfrimMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요!');
       setIsPasswordConfirm(false);
-    }
-  };
-  const handleId = e => {
-    const idRegax = /^[a-zA-Z0-9]{4,12}$/;
-    const idCurrent = e.target.value;
-    setId(idCurrent);
-    if (!idRegax.test(idCurrent)) {
-      setIdMessage('아이디 형식이 틀렸습니다. 다시 한번 확인해주세요');
-      setIsId(false);
-    } else {
-      setIdMessage('');
-      setIsId(true);
     }
   };
   const handleIntro = e => setIntro(e.target.value);
