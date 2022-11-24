@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdLockOutline } from 'react-icons/md';
+import { TfiCheckBox } from 'react-icons/tfi';
 import Button from '../../components/Button';
 import styled from 'styled-components';
 
 const Register = () => {
   const navigate = useNavigate();
-  //이름, 이메일, 비밀번호, 아이디(롤로그 제목), 소개글 확인
+  //이름, 이메일, 아이디(롤로그 제목), 비밀번호, 소개글 확인
   const [name, setName] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfrim] = useState('');
-  const [id, setId] = useState('');
   const [intro, setIntro] = useState('');
   //오류메세지 상태저장
   const [nameMessage, setNameMessage] = useState('');
+  const [idMessage, setIdMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfrimMessage, setPasswordConfrimMessage] = useState('');
-  const [idMessage, setIdMessage] = useState('');
-  const [confirmMessage, setConfirmMessage] = useState('');
   //유효성 검사
   const [isName, setIsName] = useState(false);
+  const [isId, setIsId] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
-  const [isId, setIsId] = useState(false);
 
   const handleName = e => {
     setName(e.target.value);
@@ -30,7 +30,7 @@ const Register = () => {
       setNameMessage('이름을 입력해주세요');
       setIsName(false);
     } else {
-      setNameMessage('멋있는 이름이에요 😎');
+      setNameMessage('');
       setIsName(true);
     }
   };
@@ -42,7 +42,7 @@ const Register = () => {
       setPasswordMessage('숫자+영문자 조합으로 8자 이상 입력해주세요!');
       setIsPassword(false);
     } else {
-      setPasswordMessage('안전한 비밀번호예요 :)');
+      setPasswordMessage('');
       setIsPassword(true);
     }
   };
@@ -75,42 +75,45 @@ const Register = () => {
   return (
     <RegisterContainer>
       <h1>환영합니다!</h1>
-      <div className='description'>기본 회원 정보를 등록해주세요.</div>
+      <div className='description'>
+        기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
+      </div>
       <div className='contents'>
         <div className='wrapper'>
-          <label>이름</label>
+          <label>이름 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' />
           </div>
           <div className='validation'>{nameMessage}</div>
         </div>
-        <div className='wrapper'>
+        <div className='wrapper  email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' disabled value='me@email.me' />
+            <input type='text' disabled value='lolog@email.com' />
             <MdLockOutline />
           </div>
         </div>
         <div className='wrapper'>
-          <label>비밀번호</label>
+          <label>아이디 ﹡</label>
+          <div className='input-wrapper'>
+            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
+            <Button className='duplicate' text={<TfiCheckBox />} />
+          </div>
+          <div className='validation'>{idMessage}</div>
+        </div>
+        <div className='wrapper'>
+          <label>비밀번호 ﹡</label>
           <div className='input-wrapper'>
             <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} maxLength='16' />
           </div>
           <div className='validation'>{passwordMessage}</div>
         </div>
         <div className='wrapper'>
-          <label>비밀번호 확인</label>
+          <label>비밀번호 확인 ﹡</label>
           <div className='input-wrapper'>
             <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} maxLength='16' />
           </div>
           <div className='validation'>{passwordConfrimMessage}</div>
-        </div>
-        <div className='wrapper'>
-          <label>아이디</label>
-          <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
-          </div>
-          <div className='validation'>{idMessage}</div>
         </div>
         <div className='wrapper'>
           <label>한 줄 소개</label>
@@ -119,11 +122,11 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className='validation'>{}</div>
       <div className='form-bottom'>
+        <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' disabled={isName && isPassword && isPasswordConfirm && isId} />
+          <Button className='next' text='다음' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={() => navigate('/')} />
         </div>
       </div>
     </RegisterContainer>
@@ -145,6 +148,10 @@ const RegisterContainer = styled.div`
   .description {
     font-size: 1.5rem;
     color: var(--text1);
+
+    span {
+      font-size: 1rem;
+    }
   }
 
   .contents {
@@ -207,6 +214,12 @@ const RegisterContainer = styled.div`
         }
       }
 
+      .duplicate {
+        padding: 0;
+        background: none;
+        color: var(--text3);
+      }
+
       .validation {
         margin: 0.25rem 0;
         font-size: 1rem;
@@ -215,10 +228,21 @@ const RegisterContainer = styled.div`
         font-weight: bold;
       }
     }
+
+    .email-wrapper {
+      pointer-events: none;
+    }
   }
 
   .form-bottom {
-    margin-top: 6rem;
+    margin-top: 3rem;
+
+    .all-valid {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: rgb(255, 107, 107);
+      font-weight: bold;
+    }
 
     .button-wrapper {
       button {
@@ -243,6 +267,10 @@ const RegisterContainer = styled.div`
       .next {
         background: var(--primary1);
         color: var(--button-text);
+
+        :disabled {
+          opacity: 0.5;
+        }
       }
     }
   }
