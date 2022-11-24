@@ -15,8 +15,13 @@ const SeriesPostList = () => {
       <Title />
       <div className='border' />
       <Edit isModify={isModify} setIsModify={setIsModify} />
-      <Sort />
-      {isModify ? <EditPostList /> : <PostList />}
+      {isModify ? (
+        <EditPostList />
+      ) : (
+        <>
+          <Sort /> <PostList />
+        </>
+      )}
     </SeriesPostListContainer>
   );
 };

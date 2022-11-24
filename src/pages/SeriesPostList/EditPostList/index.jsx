@@ -1,6 +1,10 @@
+import { useState, useEffect } from 'react';
+import Post from '../PostList/Post';
 import styled from 'styled-components';
 
 const EditPostList = () => {
+  const [postList, setPostList] = useState([]);
+
   useEffect(() => {
     const postData = [
       {
@@ -35,17 +39,35 @@ const EditPostList = () => {
     setPostList(postData);
   }, []);
 
-  return <EditPostListContainer></EditPostListContainer>;
+  return (
+    <EditPostListContainer>
+      {postList.map(post => {
+        return (
+          <div className='edit-post-wrapper'>
+            <Post key={post.title} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='edit-post' />
+          </div>
+        );
+      })}
+    </EditPostListContainer>
+  );
 };
 
 const EditPostListContainer = styled.div`
-  margin-top: 4rem;
+  margin-top: 3rem;
+  padding: 1.5rem 1.5rem 0.5rem;
+  background: rgb(248, 249, 250);
+  border-radius: 4px;
 
-  .post + .post {
-    margin-top: 4rem;
+  .edit-post-wrapper {
+    user-select: none;
+    opacity: 1;
+    margin-bottom: 1rem;
 
-    @media screen and (max-width: 768px) {
-      margin-top: 6rem;
+    .edit-post {
+      padding: 1rem;
+      background: var(--bg-element1);
+      border-radius: 4px;
+      box-shadow: rgb(0 0 0 / 6%) 0px 0px 2px;
     }
   }
 `;
