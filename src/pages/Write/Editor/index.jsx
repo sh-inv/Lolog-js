@@ -168,8 +168,6 @@ const EditorContainer = styled.div`
 
   .write-zone {
     textarea {
-      height: 50vh;
-      overflow: scroll;
       font-size: 1rem;
       font-weight: 500;
       color: var(--text3);

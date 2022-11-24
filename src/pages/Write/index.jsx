@@ -4,6 +4,7 @@ import Preview from './Preview';
 import ReversePositionBtn from './ReversePositionBtn';
 import styled from 'styled-components';
 import { writeMaxWidth1024px, writeMaxWidth1920px, writeMaxWidth768px } from '../../styles/media';
+import UploadModal from './UploadModal';
 
 const Write = () => {
   const isReverse = useSelector(state => state.writeContent.isReverse);
@@ -22,6 +23,7 @@ const Write = () => {
           <Preview />
         </>
       )}
+      <UploadModal />
     </WriteContainer>
   );
 };
