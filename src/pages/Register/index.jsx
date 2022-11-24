@@ -24,9 +24,12 @@ const Register = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
+  const [isIdDuplicateCheck, setIsIdDuplcateCheck] = useState(false);
+
   const handleName = e => {
-    setName(e.target.value);
-    if (e.target.value.length < 1) {
+    const nameCurrent = e.target.value;
+    setName(nameCurrent);
+    if (nameCurrent.length < 1) {
       setNameMessage('이름을 입력해주세요');
       setIsName(false);
     } else {
@@ -43,6 +46,7 @@ const Register = () => {
       setIsId(false);
     } else if (idCurrent.length >= 4) {
       setIdMessage('아이디 중복 여부를 확인 해주세요');
+      setIsId(false);
     } else {
       setIdMessage('');
       setIsId(true);
@@ -63,7 +67,6 @@ const Register = () => {
   const handlePasswordConfirm = e => {
     const passwordConfirmCurrent = e.target.value;
     setPasswordConfrim(passwordConfirmCurrent);
-
     if (password === passwordConfirmCurrent) {
       setPasswordConfrimMessage('비밀번호가 일치합니다!');
       setIsPasswordConfirm(true);
@@ -99,7 +102,7 @@ const Register = () => {
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
-            <Button className='duplicate' text={<TfiCheckBox />} />
+            <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} />
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
@@ -213,6 +216,10 @@ const RegisterContainer = styled.div`
         svg {
           font-size: 1.5rem;
           color: var(--text3);
+        }
+
+        .checked-icon {
+          color: var(--primary2);
         }
       }
 
