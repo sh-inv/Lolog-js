@@ -1,22 +1,29 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
 import styled from 'styled-components';
+import { setContent, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 
 const EditorFooter = ({ title, content }) => {
   const isReverse = useSelector(state => state.writeContent.isReverse);
+  const dispatch = useDispatch();
 
   const onSave = async () => {
     if (title && content) {
       try {
-        const response = await axios.put(`http://localhost:8000/posts?status=3`, {
-          title: title,
-          content: content,
-          thumbnail: '',
-          tags: [],
-        });
-        console.log(response);
+        dispatch(setTitle(title));
+        dispatch(setContent(content));
+        dispatch(setUploadType('3'));
+        dispatch(setUploadUrl(title));
+
+        // const response = await axios.put(`http://localhost:8000/posts?status=3`, {
+        //   title: title,
+        //   content: content,
+        //   thumbnail: '',
+        //   tags: [],
+        // });
+        // console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -28,13 +35,18 @@ const EditorFooter = ({ title, content }) => {
   const onUpload = async () => {
     if (title && content) {
       try {
-        const response = await axios.put(`http://localhost:8000/posts?status=1`, {
-          title: title,
-          content: content,
-          thumbnail: '',
-          tags: [],
-        });
-        console.log(response);
+        dispatch(setTitle(title));
+        dispatch(setContent(content));
+        dispatch(setUploadType('1'));
+        dispatch(setUploadUrl(title));
+
+        // const response = await axios.put(`http://localhost:8000/posts?status=1`, {
+        //   title: title,
+        //   content: content,
+        //   thumbnail: '',
+        //   tags: [],
+        // });
+        // console.log(response);
       } catch (error) {
         console.log(error);
       }
