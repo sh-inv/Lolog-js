@@ -5,6 +5,7 @@ const writeContentSlice = createSlice({
   initialState: {
     title: '',
     content: '',
+    thumbnail: '',
     imageFileUrl: null,
     selectedTool: null,
     isReverse: false,
@@ -15,6 +16,9 @@ const writeContentSlice = createSlice({
     },
     setContent: (state, action) => {
       state.content = action.payload;
+    },
+    setThmbnail: (state, action) => {
+      state.thumbnail = action.payload;
     },
     setImageFileUrl: (state, action) => {
       state.imageFileUrl = action.payload;
@@ -28,5 +32,5 @@ const writeContentSlice = createSlice({
   },
 });
 
-export const { setTitle, setContent, setImageFileUrl, setSelectedTool, reversePosition } = writeContentSlice.actions;
+export const { setTitle, setContent, setThmbnail, setImageFileUrl, setSelectedTool, reversePosition } = writeContentSlice.actions;
 export const writeContentReducer = writeContentSlice.reducer;
