@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import Post from '../PostList/Post';
+import { useState, useEffect, useCallback } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import EditPost from './EditPost';
 import styled from 'styled-components';
 
 const EditPostList = () => {
@@ -43,16 +45,32 @@ const EditPostList = () => {
     setPostList(postData);
   }, []);
 
+  const movePost = useCallback((dragIndex, hoverIndex) => {
+    setPostList(prevPosts =>
+      update(prevPosts, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevPosts[dragIndex]],
+        ],
+      })
+    );
+  }, []);
+  const renderPost = useCallback(post => {
+    return <EditPost key={post.id} index={post.id} id={post.id} title={post.title} src={post.src} date={post.created_at} contents={post.contents} moveCard={movePost} />;
+  }, []);
+
   return (
-    <EditPostListContainer>
-      {postList.map(post => {
-        return (
-          <div className='edit-post-wrapper'>
-            <Post key={post.title} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='edit-post' />
-          </div>
-        );
-      })}
-    </EditPostListContainer>
+    <DndProvider backend={HTML5Backend}>
+      <EditPostListContainer>
+        {postList.map(post => {
+          return (
+            <div className='edit-post-wrapper'>
+              <div className='edit-post'>{postList.map((post, i) => renderPost(post, i))}</div>
+            </div>
+          );
+        })}
+      </EditPostListContainer>
+    </DndProvider>
   );
 };
 

@@ -8,6 +8,7 @@ const PostList = () => {
   useEffect(() => {
     const postData = [
       {
+        id: 1,
         title: '포스트 제목 ddddddd1112 12341415151515115151515',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
@@ -15,6 +16,7 @@ const PostList = () => {
         created_at: 'November 16, 2022 11:08:00',
       },
       {
+        id: 2,
         title: '포스트 제목포스트 제목포스트 제목포스트 제목포스트 제목포스트 제목',
         src: '',
         contents:
@@ -22,6 +24,7 @@ const PostList = () => {
         created_at: 'November 16, 2022 11:08:00',
       },
       {
+        id: 3,
         title: '포스트 제목 ddddd11121234145151515',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
@@ -29,6 +32,7 @@ const PostList = () => {
         created_at: 'May 16, 2022 11:08:00',
       },
       {
+        id: 4,
         title: '111111111',
         src: 'https://velog.velcdn.com/images/daydreamplace/post/3efb2dc0-8fb0-4c92-bf42-17c006e5ee62/image.png',
         contents:
@@ -42,7 +46,7 @@ const PostList = () => {
   return (
     <PostListContainer>
       {postList.map(post => {
-        return <Post key={post.title} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='post' />;
+        return <Post key={post.title} id={post.id} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='post' />;
       })}
     </PostListContainer>
   );

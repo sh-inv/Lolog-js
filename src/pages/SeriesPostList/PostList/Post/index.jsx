@@ -3,11 +3,11 @@ import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import styled from 'styled-components';
 
-const Post = ({ title, src, contents, date, className }) => {
+const Post = ({ id, title, src, contents, date, className }) => {
   return (
     <PostContainer className={className}>
       <h2>
-        <span className='number'>1. </span>
+        <span className='number'>{id}. </span>
         <Link to={`/id/${title}`} className='title'>
           {title}
         </Link>

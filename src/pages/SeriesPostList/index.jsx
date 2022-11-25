@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import Title from './Title';
 import Edit from './Edit';
 import Sort from './Sort';
@@ -18,9 +16,7 @@ const SeriesPostList = () => {
       <div className='border' />
       <Edit isModify={isModify} setIsModify={setIsModify} />
       {isModify ? (
-        <DndProvider backend={HTML5Backend}>
-          <EditPostList />
-        </DndProvider>
+        <EditPostList />
       ) : (
         <>
           <Sort /> <PostList />
