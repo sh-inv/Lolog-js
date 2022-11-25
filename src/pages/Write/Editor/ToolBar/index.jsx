@@ -22,7 +22,7 @@ const ToolBar = ({ imageFileInput }) => {
   ];
 
   return (
-    <ToolBarWrapper>
+    <ToolBarContainer className='toolbar-container'>
       {ToolBarHTagList.map(tag => {
         return <ToolBarHTagWrapper key={tag} type={tag} />;
       })}
@@ -42,13 +42,14 @@ const ToolBar = ({ imageFileInput }) => {
           </ToolBarBtnWrapper>
         );
       })}
-    </ToolBarWrapper>
+    </ToolBarContainer>
   );
 };
 
-const ToolBarWrapper = styled.div`
+const ToolBarContainer = styled.div`
   display: flex;
   align-items: center;
+  min-width: 340px;
 
   button {
     display: flex;
