@@ -8,10 +8,10 @@
       "comment_id": 4,
       "content": "댓글1",
       "depth": 0,
-      "create_at": "2022-11-21T04:48:06.087Z",
+      "create_at": "2022-11-01T04:48:06.087Z",
       "update_at": "2022-11-21T04:48:06.087Z",
       "nested_comments": null,
-      "comments_is_writer": "true"
+      "comments_is_writer": "false"
     },
     {
       "post_id": 8,
@@ -107,7 +107,7 @@
           "nested_comment_create_at": "2022-11-21 14:29:22.990489",
           "nested_comment_update_at": "2022-11-21 15:16:58.715954",
           "nested_comments_is_writer": "false",
-          "nested_comment_profile_image": " "
+          "nested_comment_profile_image": null
         }
       ],
       "comments_is_writer": "true"

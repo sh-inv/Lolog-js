@@ -1,72 +1,93 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import UserProfileImage from '../../../../components/UserProfileImage';
-import GetPostDate from '../../../../components/GetPostDate';
-const Comment = ({ comment }) => {
-  const { comment_profile_image, content, create_at, comment_login_id, nested_comments, comments_is_writer } = comment;
+import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi';
+import { useState } from 'react';
+import CommentContent from '../../../../components/Comment/CommentContent';
+
+const Comment = ({ commentData }) => {
+  const { comment_profile_image, content, create_at, comment_login_id, nested_comments, comments_is_writer } = commentData;
+  const [isNestedCommentsOpen, setIsNestedCommentsOpen] = useState(false);
+  const nestedCommentsBtnHandler = () => {
+    setIsNestedCommentsOpen(!isNestedCommentsOpen);
+  };
+  const nestedCommentJSX = () => {
+    if (isNestedCommentsOpen) {
+      if (nested_comments) {
+        return (
+          <div className='nested-comments-list-box'>
+            {nested_comments.map(nested_comment => (
+              <CommentContent
+                key={nested_comment.nested_comment_id}
+                isNested={true}
+                profile_img={nested_comment.nested_comment_profile_image}
+                create_at={nested_comment.nested_comment_create_at}
+                user_id={nested_comment.nested_comment_user_id}
+                is_writer={nested_comment.nested_comments_is_writer}
+                content={nested_comment.nested_comment_content}
+              />
+            ))}
+          </div>
+        );
+      } else {
+        return;
+      }
+    }
+    return;
+  };
 
   return (
     <CommentContainer>
-      <div className='profile-box'>
-        <Link to='' className='profile-img'>
-          <UserProfileImage source={comment_profile_image} />
-        </Link>
-        <div className='profile-info'>
-          <Link to='' className='user-id'>
-            {comment_login_id}
-          </Link>
-          <div className='create-at'>
-            <GetPostDate postDate={create_at} />
-          </div>
-        </div>
+      <CommentContent profile_img={comment_profile_image} create_at={create_at} user_id={comment_login_id} is_writer={comments_is_writer} content={content} />
+      <div className='nested-comments-box'>
+        <span className='open-btn' onClick={nestedCommentsBtnHandler}>
+          {isNestedCommentsOpen ? (
+            <>
+              <FiMinusSquare className='icon' />
+              <span>숨기기</span>
+            </>
+          ) : (
+            <>
+              <FiPlusSquare className='icon' />
+              <span>{nested_comments ? `${nested_comments.length}개의 댓글` : '댓글 달기'}</span>
+            </>
+          )}
+        </span>
+        {nestedCommentJSX()}
       </div>
-      <p className='text'>{content}</p>
-      <div className='nested-comments'></div>
     </CommentContainer>
   );
 };
 
 const CommentContainer = styled.div`
   padding: 1.5rem 0;
-  border: 1px solid red;
+  border-bottom: 1px solid var(--border4);
 
-  .profile-box {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-
-    .profile-img {
-      width: 3.375rem;
-      height: 3.375rem;
-    }
-
-    .profile-info {
-      margin-left: 1rem;
-      line-height: 1;
-
-      .user-id {
-        font-size: 1rem;
-        font-weight: bold;
-        color: var(--text1);
-      }
-
-      .create-at {
-        margin-top: 0.5rem;
-        color: var(--text3);
-        font-size: 0.875rem;
-      }
-    }
+  :nth-last-child(1) {
+    border-top: none;
   }
 
-  .text {
-    display: block;
-    margin: 1em 0;
-    font-size: 1.125rem;
-    color: var(--text1);
-    line-height: 1.7;
-    letter-spacing: -0.004em;
-    word-break: keep-all;
-    overflow-wrap: break-word;
+  .nested-comments-box {
+    margin-top: 2rem;
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      color: var(--primary1);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--primary2);
+      }
+
+      .icon {
+        margin-right: 0.5rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+
+    .nested-comments-list-box {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      margin-top: 1.3125rem;
+    }
   }
 `;
 
