@@ -15,7 +15,6 @@ const Preview = () => {
 };
 
 const PreviewContainer = styled.div`
-  padding: 3rem;
   background-color: var(--bg-element8);
   color: var(--text1);
 
