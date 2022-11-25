@@ -3,6 +3,7 @@ import { setIsUploadModal } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const ModalBtns = () => {
   const { title, content, thumbnail, uploadType } = useSelector(state => state.writeContent);
@@ -25,6 +26,12 @@ const ModalBtns = () => {
       alert('제목 또는 내용이 비어있습니다.');
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(setIsUploadModal(false));
+    };
+  }, []);
 
   return (
     <ModalBtnsContainer>

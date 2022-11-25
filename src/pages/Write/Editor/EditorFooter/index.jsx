@@ -43,8 +43,8 @@ const EditorFooter = ({ title, content }) => {
           <span>나가기</span>
         </div>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' onClick={onSave} />
-          <Button text='출간하기' className='upload' onClick={onUploadModal} />
+          <Button text='임시저장' className='temporary-storage' color="transparent" onClick={onSave} />
+          <Button text='출간하기' className='upload' color="teal" onClick={onUploadModal} />
         </div>
       </EditorFooterContainer>
     </Positioner>
