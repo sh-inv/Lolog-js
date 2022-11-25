@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
 import EditPost from './EditPost';
 import styled from 'styled-components';
 
@@ -55,21 +56,13 @@ const EditPostList = () => {
       })
     );
   }, []);
-  const renderPost = useCallback(post => {
-    return <EditPost key={post.id} index={post.id} id={post.id} title={post.title} src={post.src} date={post.created_at} contents={post.contents} moveCard={movePost} />;
+  const renderPost = useCallback((post, index) => {
+    return <EditPost key={post.id} index={index} id={post.id} title={post.title} src={post.src} date={post.created_at} contents={post.contents} moveCard={movePost} />;
   }, []);
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <EditPostListContainer>
-        {postList.map(post => {
-          return (
-            <div className='edit-post-wrapper'>
-              <div className='edit-post'>{postList.map((post, i) => renderPost(post, i))}</div>
-            </div>
-          );
-        })}
-      </EditPostListContainer>
+      <EditPostListContainer>{postList.map((post, i) => renderPost(post, i))}</EditPostListContainer>
     </DndProvider>
   );
 };
@@ -79,19 +72,6 @@ const EditPostListContainer = styled.div`
   padding: 1.5rem 1.5rem 0.5rem;
   background: rgb(248, 249, 250);
   border-radius: 4px;
-
-  .edit-post-wrapper {
-    user-select: none;
-    opacity: 1;
-    margin-bottom: 1rem;
-
-    .edit-post {
-      padding: 1rem;
-      background: var(--bg-element1);
-      border-radius: 4px;
-      box-shadow: rgb(0 0 0 / 6%) 0px 0px 2px;
-    }
-  }
 `;
 
 export default EditPostList;
