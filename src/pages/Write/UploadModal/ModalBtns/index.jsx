@@ -34,7 +34,7 @@ const ModalBtns = () => {
   }, []);
 
   return (
-    <ModalBtnsContainer>
+    <ModalBtnsContainer className='modal-btns-container'>
       <Button text='취소' color='transparent' onClick={() => dispatch(setIsUploadModal(false))} />
       <Button text='출간하기' color='teal' onClick={onUpload} />
     </ModalBtnsContainer>

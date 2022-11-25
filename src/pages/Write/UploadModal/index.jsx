@@ -8,7 +8,7 @@ import ModalBtns from './ModalBtns';
 
 const UploadModal = () => {
   return (
-    <UploadModalContainer>
+    <UploadModalContainer className='upload-modal-container'>
       <div className='upload-modal-content'>
         <div className='left-section'>
           <SettingThumbnail />
@@ -39,12 +39,13 @@ const UploadModalContainer = styled.div`
   width: 100%;
   height: 100%;
   background: var(--bg-element2);
-  z-index: 15;
+  z-index: 100;
   animation: 0.25s ease-in 0s 1 normal forwards running bpwQty;
 
   .upload-modal-content {
     display: flex;
     width: 768px;
+    min-width: 340px;
 
     .left-section,
     .right-section {

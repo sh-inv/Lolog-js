@@ -98,6 +98,15 @@ export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
   .preview-container {
     display: none;
   }
+  .upload-modal-container {
+    align-items: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: auto;
+    .upload-modal-content {
+      width: 704px;
+    }
+  }
 }`;
 export const writeMaxWidth768px = `@media screen and (max-width: 768px) {
   .editor-container {
@@ -126,6 +135,20 @@ export const writeMaxWidth768px = `@media screen and (max-width: 768px) {
     .write-zone {
       textarea {
         font-size: 0.875rem;
+      }
+    }
+  }
+  .upload-modal-container {
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    overflow: auto;
+    .upload-modal-content {
+      flex-direction: column;
+      .upload-modal-dividing-line {
+        display: none;
+      }
+      .modal-btns-container {
+        margin-top: 2rem;
       }
     }
   }

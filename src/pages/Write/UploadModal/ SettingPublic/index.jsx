@@ -47,7 +47,7 @@ const SettingPublic = () => {
             return (
               <button key={btn.type} className={btn.isActive ? `${btn.type} active` : btn.type} onClick={changePublic}>
                 {btn.icon}
-                {btn.text}
+                <div className='text'>{btn.text}</div>
               </button>
             );
           })}
@@ -87,8 +87,16 @@ const SettingPublicContainer = styled.div`
 
       .icon {
         font-size: 1.6rem;
-        margin-right: 2rem;
         pointer-events: none;
+      }
+
+      .text {
+        flex: 1 1 0%;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
       }
     }
     .active {
