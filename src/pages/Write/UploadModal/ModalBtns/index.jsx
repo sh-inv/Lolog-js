@@ -28,8 +28,8 @@ const ModalBtns = () => {
 
   return (
     <ModalBtnsContainer>
-      <Button text='취소' className='' onClick={() => dispatch(setIsUploadModal(false))} />
-      <Button text='출간하기' className='' onClick={onUpload} />
+      <Button text='취소' color='transparent' onClick={() => dispatch(setIsUploadModal(false))} />
+      <Button text='출간하기' color='teal' onClick={onUpload} />
     </ModalBtnsContainer>
   );
 };
