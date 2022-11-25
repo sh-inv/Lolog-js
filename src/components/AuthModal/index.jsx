@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import LoginForm from './LoginForm';
-import SocialLogin from './SocialLogin';
+import SignUpForm from './SignUpForm';
+import SocialAuth from './SocialAuth';
 import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
-const LoginModal = ({ title, message, link, onClose, onChange, onClick }) => {
+const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
+  const [isSignInModal, setIsSignInModal] = useState(false);
+
   return (
     <>
       <Background />
@@ -16,23 +20,29 @@ const LoginModal = ({ title, message, link, onClose, onChange, onClick }) => {
           </div>
           <div className='right-block'>
             <div className='exit'>
-              <MdOutlineClose className='icon' onClick={onClose} />
+              <MdOutlineClose className='icon' onClick={() => setIsLoginModal(false)} />
             </div>
             <div className='wrapper'>
-              <h2>{title}</h2>
+              <h2>{isSignInModal ? '회원가입' : '로그인'}</h2>
               <section>
-                <h4>이메일로 {title}</h4>
-                <LoginForm title={title} onClick={onClick} />
+                <h4>이메일로 {isLoginModal ? '로그인' : '회원가입'}</h4>
+                {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} />}
               </section>
               <section>
-                <h4>소셜 계정으로 {title}</h4>
-                <SocialLogin />
+                <h4>소셜 계정으로 {isSignInModal ? '회원가입' : '로그인'}</h4>
+                <SocialAuth />
               </section>
             </div>
             <div className='foot'>
-              <span>{message}</span>
-              <div className='link' onClick={onChange} tabIndex='8'>
-                {link}
+              <span>{isSignInModal ? '계정이 이미 있으신가요?' : '아직 회원이 아니신가요?'}</span>
+              <div
+                className='link'
+                onClick={() => {
+                  setIsSignInModal(!isSignInModal);
+                }}
+                tabIndex='8'
+              >
+                {isSignInModal ? '로그인' : '회원가입'}
               </div>
             </div>
           </div>
@@ -169,4 +179,4 @@ const LoginContainer = styled.div`
   }
 `;
 
-export default LoginModal;
+export default AuthModal;

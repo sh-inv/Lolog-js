@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-const Button = ({ text, onClick, className, ...props }) => {
+const Button = ({ text, onClick, className, icon, ...props }) => {
   return (
-    <ButtonContainer onClick={onClick} className={className} text={text} {...props}>
+    <ButtonContainer onClick={onClick} className={className} text={text} icon={icon} {...props}>
       {text}
+      {icon}
     </ButtonContainer>
   );
 };
