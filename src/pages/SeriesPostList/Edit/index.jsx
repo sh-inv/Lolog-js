@@ -21,7 +21,7 @@ const Edit = ({ isModify, setIsModify }) => {
     <>
       <EditContainer>
         {isModify ? (
-          <Button text='적용' onClick={handleModify} />
+          <Button text='적용' color='teal' onClick={handleModify} />
         ) : (
           <>
             <EditButton text='수정' className={'edit-button'} onClick={handleModify} />
