@@ -4,20 +4,20 @@ import SeriesInfo from './SeriesInfo';
 import styled from 'styled-components';
 import { SeriesPostMaxWidth768px } from '../../../../styles/media';
 
-const SeriesList = ({ src, title, update }) => {
+const SeriesCard = ({ src, title, update }) => {
   return (
-    <SeriesPostContainer>
+    <SeriesCardContainer>
       <ThumbnailContainer>
         <Link to={`${title}`}>
           <Thumbnail src={src} />
         </Link>
       </ThumbnailContainer>
       <SeriesInfo title={title} update={update} />
-    </SeriesPostContainer>
+    </SeriesCardContainer>
   );
 };
 
-const SeriesPostContainer = styled.div`
+const SeriesCardContainer = styled.div`
   width: 50%;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -32,4 +32,4 @@ const ThumbnailContainer = styled.div`
   padding-top: 52.6316%;
 `;
 
-export default SeriesList;
+export default SeriesCard;
