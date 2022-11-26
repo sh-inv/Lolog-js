@@ -119,6 +119,8 @@ const PostContainer = styled.div`
     }
 
     .thumbnail-wrapper {
+      width: 100%;
+
       img {
         position: inherit;
         margin-right: 1rem;
@@ -135,7 +137,8 @@ const PostContainer = styled.div`
 
       .no-thumbnail {
         @media screen and (max-width: 768px) {
-          display: none;
+          width: 100%;
+          height: auto;
         }
       }
     }
