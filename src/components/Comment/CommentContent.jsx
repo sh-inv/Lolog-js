@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import GetPostDate from '../GetPostDate';
 import UserProfileImage from '../UserProfileImage';
+import Textarea from './Textarea';
 
 const CommentContent = ({ isNested, profile_img, user_id, create_at, is_writer, content }) => {
   const [isModify, setIsModify] = useState(false);
@@ -23,7 +24,7 @@ const CommentContent = ({ isNested, profile_img, user_id, create_at, is_writer, 
             </div>
           </div>
         </div>
-        {is_writer === 'true' && !isModify && (
+        {is_writer && !isModify ? (
           <div className='actions'>
             <span
               onClick={() => {
@@ -34,15 +35,17 @@ const CommentContent = ({ isNested, profile_img, user_id, create_at, is_writer, 
             </span>
             <span>삭제</span>
           </div>
+        ) : (
+          <></>
         )}
       </div>
-      {isModify ? <textarea></textarea> : <p className='text'>{content}</p>}
+      {isModify ? <Textarea setIsModify={setIsModify} /> : <p className='text'>{content}</p>}
     </CommentContainer>
   );
 };
 
 const CommentContainer = styled.div`
-  ${({ isNested }) => isNested && 'padding: 1.5rem 0; border-bottom: 1px solid var(--border4);'}
+  ${({ isNested }) => isNested && 'padding-top: 1.5rem; border-bottom: 1px solid var(--border4);'}
 
   .profile-box {
     display: flex;
