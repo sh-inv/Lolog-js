@@ -10,6 +10,7 @@ const SignUpForm = () => {
       <Button
         className='sign-up-button'
         text='중복확인'
+        color='teal'
         onClick={() => {
           navigate('/register');
         }}
@@ -42,17 +43,10 @@ const SignUpFormContainer = styled.form`
   }
 
   .sign-up-button {
-    background: var(--primary1);
-    color: var(--button-text);
-    font-size: 1rem;
-    font-weight: bold;
-    outline: none;
-    border: none;
     border-radius: 0 2px 2px 0%;
     width: 6rem;
     height: 100%;
     word-break: keep-all;
-    cursor: pointer;
   }
 `;
 

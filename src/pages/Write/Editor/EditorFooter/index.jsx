@@ -1,42 +1,50 @@
-import styled from 'styled-components';
-import { BiArrowBack } from 'react-icons/bi';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import Button from '../../../../components/Button';
-import { useState, useEffect } from 'react';
+import { BiArrowBack } from 'react-icons/bi';
+import styled from 'styled-components';
+import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 
 const EditorFooter = ({ title, content }) => {
-  const [onUpload, setOnUpload] = useState(false);
-  const [onSave, setOnSave] = useState(false);
+  const isReverse = useSelector(state => state.writeContent.isReverse);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (onSave && title && content) {
-      console.log('save');
-      console.log('title', title);
-      console.log('content', content);
+  const onSave = async () => {
+    if (title && content) {
+      try {
+        const response = await axios.put(`http://localhost:8000/posts?status=3`, {
+          title: title,
+          content: content,
+          thumbnail: '',
+          tags: [],
+        });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      setOnSave(false);
+      alert('제목 또는 내용이 비어있습니다.');
     }
-  }, [onSave]);
+  };
 
-  useEffect(() => {
-    if (onUpload && title && content) {
-      console.log('uplooad');
-      console.log('title', title);
-      console.log('content', content);
-    } else {
-      setOnUpload(false);
-    }
-  }, [onUpload]);
+  const onUploadModal = () => {
+    dispatch(setTitle(title));
+    dispatch(setContent(content));
+    dispatch(setUploadType('1'));
+    dispatch(setUploadUrl(title));
+    dispatch(setIsUploadModal(true));
+  };
 
   return (
-    <Positioner>
+    <Positioner className='editor-footer-positioner' isReverse={isReverse}>
       <EditorFooterContainer>
         <div className='exit'>
           <BiArrowBack className='arrow-icon' />
           <span>나가기</span>
         </div>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' onClick={() => setOnSave(true)} />
-          <Button text='출간하기' className='upload' onClick={() => setOnUpload(true)} />
+          <Button text='임시저장' className='temporary-storage' color="transparent" onClick={onSave} />
+          <Button text='출간하기' className='upload' color="teal" onClick={onUploadModal} />
         </div>
       </EditorFooterContainer>
     </Positioner>
@@ -45,10 +53,11 @@ const EditorFooter = ({ title, content }) => {
 
 const Positioner = styled.div`
   position: fixed;
-  left: 0;
+  left: ${props => (props.isReverse ? '50%' : '0')};
   bottom: 0px;
   z-index: 10;
   width: 50%;
+  min-width: 340px;
 `;
 
 const EditorFooterContainer = styled.div`

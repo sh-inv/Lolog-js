@@ -75,24 +75,83 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 //write 반응형
 export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   .editor-container,
   .preview-container {
     width: 50%;
-    height: 100%;
     padding: 2rem 3rem 4rem 3rem;
   }
 }`;
-export const writeMaxWidth1440px = `@media screen and (max-width: 1440px) {
-  width: 1024px;
+export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  .reverse-position-btn-container {
+    display: none;
+  }
+  .editor-container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 3rem 4rem 3rem;
+    .editor-footer-positioner {
+      width: 100%;
+    }
+  }
+  .preview-container {
+    display: none;
+  }
+  .upload-modal-container {
+    align-items: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: auto;
+    .upload-modal-content {
+      width: 704px;
+    }
+  }
 }`;
-export const writeMaxWidth1056px = `@media screen and (max-width: 1056px) {
-  width: calc(100% - 2rem);
-  margin: 0 auto;
-}`;
-export const writeMinWidth250px = `@media screen and (max-width: 250px) {
-  width: 250px;
+export const writeMaxWidth768px = `@media screen and (max-width: 768px) {
+  .editor-container {
+    padding: 1rem;
+    .editor-title {
+      height: 43px;
+      font-size: 1.8rem;
+    }
+    .dividing-line {
+      margin-top: 1rem;
+      margin-bottom: 0.66rem;
+    }
+    .tag-input {
+      padding-bottom: 1rem;
+      line-height: 1.5rem;
+      font-size: 0.75rem;
+    }
+    .toolbar-container {
+      flex-wrap: unset;
+      overflow-x: auto;
+      button {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+    .write-zone {
+      textarea {
+        font-size: 0.875rem;
+      }
+    }
+  }
+  .upload-modal-container {
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    overflow: auto;
+    .upload-modal-content {
+      flex-direction: column;
+      .upload-modal-dividing-line {
+        display: none;
+      }
+      .modal-btns-container {
+        margin-top: 2rem;
+      }
+    }
+  }
 }`;
 
 //series 반응형
