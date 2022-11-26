@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
-import Post from './Post';
+import { useState, useEffect, useCallback } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
+import EditPost from './EditPost';
 import styled from 'styled-components';
 
-const PostList = () => {
+const EditPostList = () => {
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -43,25 +46,32 @@ const PostList = () => {
     setPostList(postData);
   }, []);
 
+  const movePost = useCallback((dragIndex, hoverIndex) => {
+    setPostList(prevPosts =>
+      update(prevPosts, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevPosts[dragIndex]],
+        ],
+      })
+    );
+  }, []);
+  const renderPost = useCallback((post, index) => {
+    return <EditPost key={post.id} index={index} id={post.id} title={post.title} src={post.src} date={post.created_at} contents={post.contents} moveCard={movePost} />;
+  }, []);
+
   return (
-    <PostListContainer>
-      {postList.map(post => {
-        return <Post key={post.title} id={post.id} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='post' />;
-      })}
-    </PostListContainer>
+    <DndProvider backend={HTML5Backend}>
+      <EditPostListContainer>{postList.map((post, i) => renderPost(post, i))}</EditPostListContainer>
+    </DndProvider>
   );
 };
 
-const PostListContainer = styled.div`
-  margin-top: 4rem;
-
-  .post + .post {
-    margin-top: 4rem;
-
-    @media screen and (max-width: 768px) {
-      margin-top: 6rem;
-    }
-  }
+const EditPostListContainer = styled.div`
+  margin-top: 3rem;
+  padding: 1.5rem 1.5rem 0.5rem;
+  background: rgb(248, 249, 250);
+  border-radius: 4px;
 `;
 
-export default PostList;
+export default EditPostList;

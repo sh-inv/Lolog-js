@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SeriesList from './SeriesList';
+import SeriesCard from './SeriesCard';
 import styled from 'styled-components';
 import { SeriesMaxWidth768px } from '../../../styles/media';
 
@@ -46,7 +46,7 @@ const Series = () => {
   return (
     <SeriesContainer>
       {seriesList.map(series => {
-        return <SeriesList key={series.title} src={series.src} title={series.title} update={series.update} />;
+        return <SeriesCard key={series.title} src={series.src} title={series.title} update={series.update} />;
       })}
     </SeriesContainer>
   );
