@@ -6,7 +6,7 @@ const LoginForm = ({ onClick }) => {
     <LoginFormContainer>
       <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
       <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
-      <Button className='login-button' text='로그인' onClick={onClick} tabIndex='4' />
+      <Button className='login-button' text='로그인' color='teal' onClick={onClick} tabIndex='4' />
     </LoginFormContainer>
   );
 };
@@ -38,16 +38,9 @@ const LoginFormContainer = styled.form`
   button {
     height: 3rem;
     margin-top: 0.5rem;
-    background: var(--primary1);
-    outline: none;
-    border: none;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
-    color: var(--button-text);
-    font-size: 1rem;
-    font-weight: bold;
     word-break: keep-all;
-    cursor: pointer;
   }
 `;
 

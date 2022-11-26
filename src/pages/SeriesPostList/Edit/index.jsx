@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditButton from '../../../../components/EditButton';
-import ConfirmModal from '../../../../components/ConfirmModal';
+import Button from '../../../components/Button';
+import EditButton from '../../../components/EditButton';
+import ConfirmModal from '../../../components/ConfirmModal';
 import styled from 'styled-components';
 
-const Edit = () => {
+const Edit = ({ isModify, setIsModify }) => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
 
@@ -12,11 +13,21 @@ const Edit = () => {
     setIsModal(true);
   };
 
+  const handleModify = () => {
+    setIsModify(!isModify);
+  };
+
   return (
     <>
       <EditContainer>
-        <EditButton text='수정' className={'edit-button'} />
-        <EditButton text='삭제' className={'edit-button'} onClick={onModal} />
+        {isModify ? (
+          <Button text='적용' color='teal' onClick={handleModify} />
+        ) : (
+          <>
+            <EditButton text='수정' className={'edit-button'} onClick={handleModify} />
+            <EditButton text='삭제' className={'edit-button'} onClick={onModal} />
+          </>
+        )}
       </EditContainer>
       {isModal && (
         <ConfirmModal

@@ -142,8 +142,8 @@ const Register = () => {
       <div className='form-bottom'>
         <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
-          <Button className='cancel' text='취소' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={() => navigate('/')} />
+          <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
+          <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={() => navigate('/')} />
         </div>
       </div>
     </RegisterContainer>
@@ -280,17 +280,13 @@ const RegisterContainer = styled.div`
         margin-left: 1rem;
       }
 
-      .cancel {
-        background: var(--bg-element4);
-        color: var(--text1);
-      }
-
       .next {
-        background: var(--primary1);
-        color: var(--button-text);
-
         :disabled {
           opacity: 0.5;
+
+          &:hover {
+            background: var(--primary1);
+          }
         }
       }
     }

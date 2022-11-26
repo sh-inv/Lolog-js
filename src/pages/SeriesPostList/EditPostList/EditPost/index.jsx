@@ -1,21 +1,66 @@
-import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import styled from 'styled-components';
 
-const Post = ({ id, title, src, contents, date, className }) => {
+const EditPost = ({ id, contents, src, title, date, index, moveCard }) => {
+  const postRef = useRef(null);
+
+  const [{ handlerId }, drop] = useDrop({
+    accept: 'Post',
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+      };
+    },
+    hover(item, monitor) {
+      if (!postRef.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      const hoverBoundingRect = postRef.current?.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      moveCard(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'Post',
+    item: () => {
+      return { id, index };
+    },
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const opacity = isDragging ? 0 : 1;
+  drag(drop(postRef));
+
   return (
-    <PostContainer className={className}>
+    <PostContainer ref={postRef} style={{ opacity }} data-handler-id={handlerId}>
       <h2>
-        <span className='number'>{id}. </span>
-        <Link to={`/id/${title}`} className='title'>
-          {title}
-        </Link>
+        <span className='number'>{index + 1}. </span>
+        <div className='title'>{title}</div>
       </h2>
       <section>
-        <Link to={`/id/${title}`} className='thumbnail-wrapper'>
+        <div className='thumbnail-wrapper'>
           <Thumbnail src={src} className={'no-thumbnail'} />
-        </Link>
+        </div>
         <div className='post-info'>
           <p className='summary'>{contents}</p>
           <GetPostDate postDate={date} />
@@ -26,7 +71,20 @@ const Post = ({ id, title, src, contents, date, className }) => {
 };
 
 const PostContainer = styled.div`
+  user-select: none;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--bg-element1);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 6%) 0px 0px 2px;
+  cursor: grab;
+
+  :active {
+    cursor: grabbing;
+  }
+
   h2 {
+    display: flex;
     margin: 0px;
     color: var(--text2);
     line-height: 1.5;
@@ -43,10 +101,6 @@ const PostContainer = styled.div`
       text-decoration: none;
       word-break: break-all;
       transition: color 0.125s ease-in 0s;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 
@@ -65,6 +119,8 @@ const PostContainer = styled.div`
     }
 
     .thumbnail-wrapper {
+      width: 100%;
+
       img {
         position: inherit;
         margin-right: 1rem;
@@ -81,7 +137,8 @@ const PostContainer = styled.div`
 
       .no-thumbnail {
         @media screen and (max-width: 768px) {
-          display: none;
+          width: 100%;
+          height: auto;
         }
       }
     }
@@ -121,4 +178,4 @@ const PostContainer = styled.div`
   }
 `;
 
-export default Post;
+export default EditPost;
