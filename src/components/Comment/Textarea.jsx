@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const Textarea = ({ setIsModify }) => {
-  const isModify = true;
+const Textarea = ({ setIsModify, isModify }) => {
   const cancelHandler = () => {
     setIsModify(false);
   };
@@ -17,9 +16,11 @@ const Textarea = ({ setIsModify }) => {
         }}
       />
       <div className='buttons-wrapper'>
-        <button className='btn cancle' onClick={cancelHandler}>
-          취소
-        </button>
+        {isModify && (
+          <button className='btn cancle' onClick={cancelHandler}>
+            취소
+          </button>
+        )}
         <button className='btn upload'>댓글 {isModify ? '수정' : '작성'}</button>
       </div>
     </TextareaContainer>

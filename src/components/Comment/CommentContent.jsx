@@ -5,7 +5,8 @@ import GetPostDate from '../GetPostDate';
 import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
-const CommentContent = ({ isNested, profile_img, user_id, create_at, is_writer, content }) => {
+const CommentContent = ({ isNested, commentData }) => {
+  const { profile_img, user_id, create_at, is_writer, content } = commentData;
   const [isModify, setIsModify] = useState(false);
 
   return (
@@ -39,7 +40,7 @@ const CommentContent = ({ isNested, profile_img, user_id, create_at, is_writer, 
           <></>
         )}
       </div>
-      {isModify ? <Textarea setIsModify={setIsModify} /> : <p className='text'>{content}</p>}
+      {isModify ? <Textarea setIsModify={setIsModify} isModify={true} /> : <p className='text'>{content}</p>}
     </CommentContainer>
   );
 };

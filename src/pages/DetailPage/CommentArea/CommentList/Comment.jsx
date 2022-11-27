@@ -2,41 +2,18 @@ import styled from 'styled-components';
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi';
 import { useState } from 'react';
 import CommentContent from '../../../../components/Comment/CommentContent';
+import Textarea from '../../../../components/Comment/Textarea';
 
 const Comment = ({ commentData }) => {
-  const { comment_profile_image, content, create_at, comment_login_id, nested_comments, comments_is_writer } = commentData;
+  const { nested_comments } = commentData;
   const [isNestedCommentsOpen, setIsNestedCommentsOpen] = useState(false);
   const nestedCommentsBtnHandler = () => {
     setIsNestedCommentsOpen(!isNestedCommentsOpen);
   };
-  const nestedCommentJSX = () => {
-    if (isNestedCommentsOpen) {
-      if (nested_comments) {
-        return (
-          <div className='nested-comments-list-box'>
-            {nested_comments.map(nested_comment => (
-              <CommentContent
-                key={nested_comment.nested_comment_id}
-                isNested={true}
-                profile_img={nested_comment.nested_comment_profile_image}
-                create_at={nested_comment.nested_comment_create_at}
-                user_id={nested_comment.nested_comment_user_id}
-                is_writer={nested_comment.nested_comments_is_writer}
-                content={nested_comment.nested_comment_content}
-              />
-            ))}
-          </div>
-        );
-      } else {
-        return;
-      }
-    }
-    return;
-  };
 
   return (
     <CommentContainer>
-      <CommentContent profile_img={comment_profile_image} create_at={create_at} user_id={comment_login_id} is_writer={comments_is_writer} content={content} />
+      <CommentContent commentData={commentData} />
       <div className='nested-comments-box'>
         <span className='open-btn' onClick={nestedCommentsBtnHandler}>
           {isNestedCommentsOpen ? (
@@ -51,7 +28,31 @@ const Comment = ({ commentData }) => {
             </>
           )}
         </span>
-        {nestedCommentJSX()}
+        {(() => {
+          if (isNestedCommentsOpen) {
+            if (nested_comments) {
+              return (
+                <>
+                  <div className='nested-comments-list-box'>
+                    {nested_comments.map(nested_comment => (
+                      <CommentContent key={nested_comment.comment_id} isNested={true} commentData={nested_comment} />
+                    ))}
+                  </div>
+                  <div className='comment-box'>
+                    <Textarea />
+                  </div>
+                </>
+              );
+            } else {
+              return (
+                <div className='comment-box'>
+                  <Textarea />
+                </div>
+              );
+            }
+          }
+          return;
+        })()}
       </div>
     </CommentContainer>
   );
@@ -86,6 +87,11 @@ const CommentContainer = styled.div`
 
     .nested-comments-list-box {
       padding: 0 1.5rem 1.5rem 1.5rem;
+      margin-top: 1.3125rem;
+    }
+
+    .comment-box {
+      padding: 1.5rem;
       margin-top: 1.3125rem;
     }
   }

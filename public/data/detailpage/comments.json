@@ -52,9 +52,8 @@
       "content": "기능 고치고 댓글 작성 테스트1111111",
       "depth": 0,
       "create_at": "2022-11-23T06:40:20.272Z",
-      "update_at": "2022-11-23T06:40:20.272Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -65,9 +64,8 @@
       "content": "기능 고치고 댓글 작성 테스트",
       "depth": 0,
       "create_at": "2022-11-23T06:39:18.421Z",
-      "update_at": "2022-11-23T06:39:18.421Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -78,9 +76,8 @@
       "content": "댓글2",
       "depth": 1,
       "create_at": "2022-11-21T05:29:22.990Z",
-      "update_at": "2022-11-21T06:16:58.715Z",
       "nested_comments": null,
-      "comments_is_writer": 0
+      "is_comments_writer": 0
     },
     {
       "post_id": 8,
@@ -91,9 +88,8 @@
       "content": "댓글2",
       "depth": 1,
       "create_at": "2022-11-21T05:27:55.461Z",
-      "update_at": "2022-11-21T05:27:55.461Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -104,9 +100,8 @@
       "content": "댓글2",
       "depth": 1,
       "create_at": "2022-11-21T05:27:16.393Z",
-      "update_at": "2022-11-21T05:27:16.393Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -117,43 +112,39 @@
       "content": "댓글2",
       "depth": 0,
       "create_at": "2022-11-21T05:21:52.135Z",
-      "update_at": "2022-11-21T05:45:06.683Z",
       "nested_comments": [
         {
-          "nested_comment_id": 10,
-          "nested_comment_depth": 1,
-          "nested_comment_content": "댓글2",
-          "nested_comment_user_id": 1,
-          "nested_comment_login_id": "hh_08",
-          "nested_comment_create_at": "2022-11-21 14:27:16.393231",
-          "nested_comment_update_at": "2022-11-21 14:27:16.393231",
-          "nested_comments_is_writer": "true",
-          "nested_comment_profile_image": null
+          "depth": 1,
+          "content": "댓글2",
+          "user_id": 1,
+          "create_at": "2022-11-21 14:27:16.393231",
+          "comment_id": 10,
+          "comment_login_id": "hh_08",
+          "is_comments_writer": "true",
+          "comment_profile_image": null
         },
         {
-          "nested_comment_id": 11,
-          "nested_comment_depth": 1,
-          "nested_comment_content": "댓글2",
-          "nested_comment_user_id": 1,
-          "nested_comment_login_id": "hh_08",
-          "nested_comment_create_at": "2022-11-21 14:27:55.461858",
-          "nested_comment_update_at": "2022-11-21 14:27:55.461858",
-          "nested_comments_is_writer": "true",
-          "nested_comment_profile_image": null
+          "depth": 1,
+          "content": "댓글2",
+          "user_id": 1,
+          "create_at": "2022-11-21 14:27:55.461858",
+          "comment_id": 11,
+          "comment_login_id": "hh_08",
+          "is_comments_writer": "true",
+          "comment_profile_image": null
         },
         {
-          "nested_comment_id": 12,
-          "nested_comment_depth": 1,
-          "nested_comment_content": "댓글2",
-          "nested_comment_user_id": 2,
-          "nested_comment_login_id": "111111",
-          "nested_comment_create_at": "2022-11-21 14:29:22.990489",
-          "nested_comment_update_at": "2022-11-21 15:16:58.715954",
-          "nested_comments_is_writer": "false",
-          "nested_comment_profile_image": null
+          "depth": 1,
+          "content": "댓글2",
+          "user_id": 2,
+          "create_at": "2022-11-21 14:29:22.990489",
+          "comment_id": 12,
+          "comment_login_id": "111111",
+          "is_comments_writer": "false",
+          "comment_profile_image": null
         }
       ],
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -164,9 +155,8 @@
       "content": "댓글2",
       "depth": 0,
       "create_at": "2022-11-21T05:14:55.418Z",
-      "update_at": "2022-11-21T06:17:07.215Z",
       "nested_comments": null,
-      "comments_is_writer": 0
+      "is_comments_writer": 0
     },
     {
       "post_id": 8,
@@ -177,9 +167,8 @@
       "content": "댓글2",
       "depth": 0,
       "create_at": "2022-11-21T05:10:37.425Z",
-      "update_at": "2022-11-21T05:10:37.425Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -190,9 +179,8 @@
       "content": "댓글2",
       "depth": 1,
       "create_at": "2022-11-21T04:54:40.171Z",
-      "update_at": "2022-11-21T04:54:40.171Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -203,9 +191,8 @@
       "content": "댓글2",
       "depth": 1,
       "create_at": "2022-11-21T04:48:11.101Z",
-      "update_at": "2022-11-21T04:48:11.101Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     },
     {
       "post_id": 8,
@@ -216,9 +203,8 @@
       "content": "댓글1",
       "depth": 0,
       "create_at": "2022-11-21T04:48:06.087Z",
-      "update_at": "2022-11-21T04:48:06.087Z",
       "nested_comments": null,
-      "comments_is_writer": 1
+      "is_comments_writer": 1
     }
   ]
 }
