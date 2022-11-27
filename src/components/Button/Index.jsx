@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 const Button = ({ text, onClick, className, icon, ...props }) => {
   return (
-    <ButtonContainer onClick={onClick} className={className} text={text} icon={icon} {...props}>
+    <ButtonContainer onClick={onClick} className={className} text={text} {...props}>
       {text}
-      {icon}
     </ButtonContainer>
   );
 };

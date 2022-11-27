@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProfileImage, setName, setIntro, setLologTitle, setSocialInfo, setEmail } from '../../store/modules/user';
 import { apiClient } from '../../api';
@@ -8,14 +8,28 @@ import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
 
+const getSettingApi = async () => {
+  const resp = await apiClient.get('/');
+  return resp.data?.data;
+};
+
 const Setting = () => {
   const dispatch = useDispatch();
+  const [settingInfo, setSettingInfo] = useState(null);
   const { name, intro } = useSelector(state => state.user);
 
-  // useEffect(async () => {
-  //   const response = await apiClient.get('user?type=name').then(res => dispatch(setName(response.data.name)));
-  //   console.log(response);
-  // }, []);
+  useEffect(() => {
+    const loader = async () => {
+      try {
+        const data = await getSettingApi();
+        setSettingInfo(data);
+      } catch (error) {
+        console.error(error);
+        setSettingInfo(null);
+      }
+    };
+    loader();
+  }, []);
 
   return (
     <SettingPage>
