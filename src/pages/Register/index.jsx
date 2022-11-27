@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { MdLockOutline } from 'react-icons/md';
 import { TfiCheckBox } from 'react-icons/tfi';
 import Button from '../../components/Button';
+import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
 
 const Register = () => {
@@ -105,6 +107,8 @@ const Register = () => {
     });
   };
 
+  const error = () => toast.error('모든 항목을 작성해주세요');
+
   return (
     <RegisterContainer>
       <h1>환영합니다!</h1>
@@ -167,9 +171,16 @@ const Register = () => {
         <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={() => navigate('/')} />
+          <Button
+            className='next'
+            text='다음'
+            color='teal'
+            // disabled={!(isName && isId && isPassword && isPasswordConfirm)}
+            onClick={error}
+          />
         </div>
       </div>
+      <Toastify />
     </RegisterContainer>
   );
 };
