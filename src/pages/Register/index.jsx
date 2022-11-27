@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { MdLockOutline } from 'react-icons/md';
 import { TfiCheckBox } from 'react-icons/tfi';
 import Button from '../../components/Button';
+import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
 
 const Register = () => {
@@ -25,6 +27,14 @@ const Register = () => {
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
   const [isIdDuplicateCheck, setIsIdDuplicateCheck] = useState(false);
+
+  const [isActiveFocus, setIsActiveFocus] = useState({
+    nameActive: false,
+    idActive: false,
+    passwordActive: false,
+    passwordConfirmActive: false,
+    introActive: false,
+  });
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -81,6 +91,24 @@ const Register = () => {
     setIsIdDuplicateCheck(true);
   };
 
+  const { nameActive, idActive, passwordActive, passwordConfirmActive, introActive } = isActiveFocus;
+
+  const handleFocus = focus => {
+    setIsActiveFocus({
+      ...isActiveFocus,
+      [focus]: true,
+    });
+  };
+
+  const handleBlur = focus => {
+    setIsActiveFocus({
+      ...isActiveFocus,
+      [focus]: false,
+    });
+  };
+
+  const error = () => toast.error('모든 항목을 작성해주세요');
+
   return (
     <RegisterContainer>
       <h1>환영합니다!</h1>
@@ -88,10 +116,10 @@ const Register = () => {
         기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
       </div>
       <div className='contents'>
-        <div className='wrapper'>
+        <div className={nameActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>이름 ﹡</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' />
+            <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' onFocus={() => handleFocus('nameActive')} onBlur={() => handleBlur('nameActive')} />
           </div>
           <div className='validation'>{nameMessage}</div>
         </div>
@@ -102,42 +130,57 @@ const Register = () => {
             <MdLockOutline />
           </div>
         </div>
-        <div className='wrapper'>
+        <div className={idActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} />
+            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
             <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} onClick={onDuplicateCheck} />
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
-        <div className='wrapper'>
+        <div className={passwordActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>비밀번호 ﹡</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} maxLength='16' />
+            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} maxLength='16' onFocus={() => handleFocus('passwordActive')} onBlur={() => handleBlur('passwordActive')} />
           </div>
           <div className='validation'>{passwordMessage}</div>
         </div>
-        <div className='wrapper'>
+        <div className={passwordConfirmActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>비밀번호 확인 ﹡</label>
           <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 한번 더 입력하세요' onChange={handlePasswordConfirm} value={passwordConfirm} maxLength='16' />
+            <input
+              type='password'
+              placeholder='비밀번호를 한번 더 입력하세요'
+              onChange={handlePasswordConfirm}
+              value={passwordConfirm}
+              maxLength='16'
+              onFocus={() => handleFocus('passwordConfirmActive')}
+              onBlur={() => handleBlur('passwordConfirmActive')}
+            />
           </div>
           <div className='validation'>{passwordConfrimMessage}</div>
         </div>
-        <div className='wrapper'>
+        <div className={introActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>한 줄 소개</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='당신을 한 줄로 소개해보세요' onChange={handleIntro} value={intro} />
+            <input type='text' placeholder='당신을 한 줄로 소개해보세요' onChange={handleIntro} value={intro} onFocus={() => handleFocus('introActive')} onBlur={() => handleBlur('introActive')} />
           </div>
         </div>
       </div>
       <div className='form-bottom'>
         <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
-          <Button className='cancel' text='취소' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={() => navigate('/')} />
+          <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
+          <Button
+            className='next'
+            text='다음'
+            color='teal'
+            // disabled={!(isName && isId && isPassword && isPasswordConfirm)}
+            onClick={error}
+          />
         </div>
       </div>
+      <Toastify />
     </RegisterContainer>
   );
 };
@@ -169,20 +212,6 @@ const RegisterContainer = styled.div`
 
     .wrapper {
       margin-bottom: 1.5rem;
-
-      &:active {
-        label {
-          color: var(--primary2);
-        }
-
-        .input-wrapper {
-          border-bottom: 1px solid var(--primary2);
-
-          input {
-            color: var(--primary2);
-          }
-        }
-      }
 
       label {
         display: block;
@@ -242,6 +271,20 @@ const RegisterContainer = styled.div`
       }
     }
 
+    .focus-wrapper {
+      label {
+        color: var(--primary2);
+      }
+
+      .input-wrapper {
+        border-bottom: 1px solid var(--primary2);
+
+        input {
+          color: var(--primary2);
+        }
+      }
+    }
+
     .email-wrapper {
       pointer-events: none;
     }
@@ -272,17 +315,13 @@ const RegisterContainer = styled.div`
         margin-left: 1rem;
       }
 
-      .cancel {
-        background: var(--bg-element4);
-        color: var(--text1);
-      }
-
       .next {
-        background: var(--primary1);
-        color: var(--button-text);
-
         :disabled {
           opacity: 0.5;
+
+          &:hover {
+            background: var(--primary1);
+          }
         }
       }
     }

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const Button = ({ text, onClick, className, icon, ...props }) => {
+const Button = ({ color, onClick, text, icon, ...props }) => {
   return (
-    <ButtonContainer onClick={onClick} className={className} text={text} {...props}>
+    <ButtonContainer color={color} onClick={onClick} {...props}>
       {text}
     </ButtonContainer>
   );
@@ -17,18 +17,26 @@ const ButtonContainer = styled.button`
   height: 2rem;
   padding: 0px 1.25rem;
 
-  background-color: var(--primary1);
   outline: none;
   border: none;
   border-radius: 4px;
-  color: var(--button-text);
+  background: ${props => props.color === 'teal' && 'var(--primary1)'};
+  background: ${props => props.color === 'transparent' && 'transparent'};
+  background: ${props => props.color === 'gray' && 'var(--bg-element4)'};
+  background: ${props => props.color === 'red' && 'var(--destructive1)'};
+  color: ${props => props.color === 'teal' && 'var(--button-text)'};
+  color: ${props => props.color === 'transparent' && 'var(--primary1)'};
+  color: ${props => props.color === 'gray' && 'var(--text1)'};
+  color: ${props => props.color === 'red' && 'var(--button-text)'};
   font-size: 1rem;
   font-weight: bold;
 
   &:hover {
+    background: ${props => props.color === 'teal' && 'var(--primary2)'};
+    background: ${props => props.color === 'transparent' && 'var(--slight-layer)'};
+    background: ${props => props.color === 'gray' && 'var(--prism-code-1)'};
+    background: ${props => props.color === 'red' && 'var(--destructive2)'};
     cursor: pointer;
-    background: var(--primary2);
-    color: var(--button-text);
   }
 `;
 

@@ -1,18 +1,27 @@
+import { useState } from 'react';
 import Title from './Title';
-import Edit from './PostList/Edit';
-import Sort from './PostList/Sort';
+import Edit from './Edit';
+import Sort from './Sort';
+import EditPostList from './EditPostList';
 import PostList from './PostList';
 import styled from 'styled-components';
 
 const SeriesPostList = () => {
+  const [isModify, setIsModify] = useState(false);
+
   return (
     <SeriesPostListContainer>
       <label>시리즈</label>
       <Title />
       <div className='border' />
-      <Edit />
-      <Sort />
-      <PostList />
+      <Edit isModify={isModify} setIsModify={setIsModify} />
+      {isModify ? (
+        <EditPostList />
+      ) : (
+        <>
+          <Sort /> <PostList />
+        </>
+      )}
     </SeriesPostListContainer>
   );
 };

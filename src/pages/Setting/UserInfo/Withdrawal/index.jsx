@@ -16,7 +16,7 @@ const Withdrawal = () => {
   return (
     <>
       <WithdrawalContainer>
-        <Button text='회원 탈퇴' onClick={onModal} className='withdrawal-button' />
+        <Button text='회원 탈퇴' className='withdrawal-button' color='red' onClick={onModal} />
       </WithdrawalContainer>
       {isModal && (
         <ConfirmModal
@@ -40,15 +40,6 @@ const WithdrawalContainer = styled.div`
   font-size: 1rem;
   color: var(--text2);
   line-height: 1.5;
-
-  .withdrawal-button {
-    background: var(--destructive1);
-    color: var(--button-text);
-
-    &:hover {
-      background: var(--destructive2);
-    }
-  }
 `;
 
 export default Withdrawal;

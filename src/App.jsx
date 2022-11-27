@@ -13,6 +13,7 @@ import Series from './pages/MyLolog/Series';
 import SeriesPostList from './pages/SeriesPostList';
 import About from './pages/MyLolog/About';
 import Register from './pages/Register';
+import DetailPage from './pages/DetailPage';
 
 const App = () => {
   const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='about' element={<About />} />
         </Route>
         <Route path='/id/series/:title' element={<SeriesPostList />} />
+        <Route path='/id/post' element={<DetailPage />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </>
