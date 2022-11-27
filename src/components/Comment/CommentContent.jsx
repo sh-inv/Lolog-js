@@ -6,7 +6,7 @@ import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
 const CommentContent = ({ isNested, commentData }) => {
-  const { profile_img, user_id, create_at, is_writer, content } = commentData;
+  const { profile_img, user_id, create_at, is_comments_writer, content } = commentData;
   const [isModify, setIsModify] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ const CommentContent = ({ isNested, commentData }) => {
             </div>
           </div>
         </div>
-        {is_writer && !isModify ? (
+        {is_comments_writer && !isModify ? (
           <div className='actions'>
             <span
               onClick={() => {
@@ -40,7 +40,14 @@ const CommentContent = ({ isNested, commentData }) => {
           <></>
         )}
       </div>
-      {isModify ? <Textarea setIsModify={setIsModify} isModify={true} /> : <p className='text'>{content}</p>}
+      {isModify ? (
+        <>
+          <Textarea setIsModify={setIsModify} isModify={true} content={content} />
+          <div style={{ height: '1.5rem' }} />
+        </>
+      ) : (
+        <p className='text'>{content}</p>
+      )}
     </CommentContainer>
   );
 };

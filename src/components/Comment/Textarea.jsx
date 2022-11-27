@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Textarea = ({ setIsModify, isModify }) => {
+const Textarea = ({ setIsModify, isModify, content }) => {
   const cancelHandler = () => {
     setIsModify(false);
   };
@@ -11,6 +11,7 @@ const Textarea = ({ setIsModify, isModify }) => {
         className='textarea'
         rows={1}
         placeholder='댓글을 작성하세요'
+        defaultValue={content}
         onChange={e => {
           e.target.style.height = e.target.scrollHeight + 'px';
         }}
