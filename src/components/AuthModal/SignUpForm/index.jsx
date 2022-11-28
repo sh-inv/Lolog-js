@@ -6,7 +6,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   return (
     <SignUpFormContainer>
-      <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
+      <input type='text' tabIndex='2' placeholder='아이디를 입력하세요.' />
       <Button
         className='sign-up-button'
         text='중복확인'

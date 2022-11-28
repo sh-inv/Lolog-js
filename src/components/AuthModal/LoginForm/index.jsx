@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
+import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../Button';
-import styled from 'styled-components';
 
 const LoginForm = ({ onClick, onClose }) => {
   const [form, setForm] = useState({
-    email: '',
+    id: '',
     password: '',
   });
 
@@ -24,17 +24,16 @@ const LoginForm = ({ onClick, onClose }) => {
     async e => {
       e.preventDefault();
       const body = {
-        login_id: form.email,
+        login_id: form.id,
         passowrd: form.password,
       };
-
       try {
         const resp = await apiClient.post('/auth/login', body);
         if (resp.status === 200) {
           const { token } = resp.data;
           localStorage.setItem('authToken', token);
           setForm({
-            email: '',
+            id: '',
             password: '',
           });
           onClose();
@@ -48,7 +47,7 @@ const LoginForm = ({ onClick, onClose }) => {
 
   return (
     <LoginFormContainer onSubmit={onSubmit}>
-      <input type='text' name='email' required tabIndex='2' placeholder='이메일을 입력하세요.' onChange={onChange} value={form.email} />
+      <input type='text' name='id' required tabIndex='2' placeholder='아이디를 입력하세요.' onChange={onChange} value={form.email} />
       <input type='password' name='password' required tabIndex='3' placeholder='비밀번호를 입력하세요.' onChange={onChange} value={form.password} />
       <Button type='submit' className='login-button' text='로그인' color='teal' tabIndex='4' />
     </LoginFormContainer>
