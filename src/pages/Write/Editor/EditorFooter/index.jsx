@@ -5,20 +5,21 @@ import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
 import styled from 'styled-components';
 
-const EditorFooter = ({ title, content }) => {
-  const isReverse = useSelector(state => state.writeContent.isReverse);
+const EditorFooter = () => {
+  const { title, content, thumbnail, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const onSave = async () => {
     if (title && content) {
       try {
-        const response = await axios.put(`http://localhost:8000/posts?status=3`, {
-          title: title,
-          content: content,
-          thumbnail: '',
-          tags: [],
-        });
-        console.log(response);
+        const config = {
+          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+        };
+        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [] };
+        const response = await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
+        if (response.data.message === 'post create success') {
+          alert('포스트 임시저장 완료');
+        }
       } catch (error) {
         console.log(error);
       }
