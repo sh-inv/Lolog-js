@@ -34,7 +34,11 @@ const MyLologContainer = styled.div`
       font-size: 0.875rem;
     }
   }
-
+  @media screen and (max-width: 1024px) {
+    .search-box-container {
+      display: none;
+    }
+  }
   @media screen and (max-width: 767px) {
     width: 100%;
     margin: 0;
