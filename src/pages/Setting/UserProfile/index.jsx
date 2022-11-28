@@ -1,14 +1,13 @@
 import UserProfileImage from '../../../components/UserProfileImage';
-import Button from '../../../components/Button';
+import UploadImage from './UploadImage';
 import styled from 'styled-components';
-import { settingProfileMaxWidth768px, settingProfileButtonMaxWidth768px } from '../../../styles/media';
+import { settingProfileMaxWidth768px, UserProfileImageMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
   return (
     <UserProfileContainer>
       <UserProfileImage />
-      <Button text='이미지 업로드' className='upload' />
-      <Button text='이미지 제거' className='remove' />
+      <UploadImage />
     </UserProfileContainer>
   );
 };
@@ -20,32 +19,12 @@ const UserProfileContainer = styled.div`
 
   ${settingProfileMaxWidth768px};
 
-  button {
-    ${settingProfileButtonMaxWidth768px};
-  }
+  img {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1.25rem;
 
-  .upload {
-    background: var(--primary1);
-    color: var(--button-text);
-
-    &:hover {
-      background: var(--primary2);
-    }
-  }
-
-  .remove {
-    background: transparent;
-    color: var(--primary1);
-
-    &:hover {
-      background: var(--slight-layer);
-      color: var(--primary2);
-    }
-  }
-
-  button + button {
-    margin-top: 0.5rem;
-    margin-left: 0px;
+    ${UserProfileImageMaxWidth768px};
   }
 `;
 
