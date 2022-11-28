@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserProfileImage from '../../UserProfileImage';
 import styled from 'styled-components';
+import { FiUserPlus, FiUserCheck } from 'react-icons/fi';
+import UserProfileImage from '../../UserProfileImage';
+import Button from '../../Button';
 
 const User = () => {
+  const [isFollow, setIsFollow] = useState(false);
+
   return (
     <>
       <UserContainer>
@@ -15,6 +20,14 @@ const User = () => {
           </div>
           <div className='description'>ben1mki가나다</div>
         </div>
+        <Button
+          icon={isFollow ? <FiUserCheck /> : <FiUserPlus />}
+          text={isFollow ? '언팔로우' : '팔로우'}
+          color={isFollow ? 'teal' : 'gray'}
+          onClick={() => {
+            setIsFollow(!isFollow);
+          }}
+        />
       </UserContainer>
       <Border />
     </>
