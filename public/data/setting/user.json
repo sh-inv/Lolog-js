@@ -1,0 +1,19 @@
+{
+  "user": [
+    {
+      "id": 14,
+      "profile_image": "https://velog.velcdn.com/images/hyunjine/post/10cf144e-852d-4344-9ecd-0c658b3f0209/image.png",
+      "name": "ubin",
+      "about_me": "i am me",
+      "title": "벨로그",
+      "email": "emailtest@gmail.com",
+      "comment_alert": 0,
+      "update_alert": 0,
+      "social_info_email": "ubin@gmail.com",
+      "social_info_github": "ubin",
+      "social_info_twitter": "ubinzzang",
+      "social_info_facebook": "ubn",
+      "social_info_url": "bn.com"
+    }
+  ]
+}

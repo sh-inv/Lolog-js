@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import Button from '../../../../components/Button';
 import styled from 'styled-components';
+import Button from '../../../../components/Button';
 import { settingProfileButtonMaxWidth768px } from '../../../../styles/media';
 
 const UploadImage = () => {
