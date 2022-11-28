@@ -90,26 +90,36 @@ const SocialInfo = () => {
         <>
           <SocialInfoContainer>
             <ul className='save-info'>
-              <li>
-                <MdEmail className='icon' />
-                <span>{socialInfo.email}</span>
-              </li>
-              <li>
-                <AiFillGithub className='icon' />
-                <span>{socialInfo.github}</span>
-              </li>
-              <li>
-                <AiOutlineTwitter className='icon' />
-                <span>{socialInfo.twitter}</span>
-              </li>
-              <li>
-                <AiFillFacebook className='icon' />
-                <span>{socialInfo.facebook}</span>
-              </li>
-              <li>
-                <AiFillHome className='icon' />
-                <span>{socialInfo.url}</span>
-              </li>
+              {socialInfo.email ? (
+                <li>
+                  <MdEmail className='icon' />
+                  <span>{socialInfo.email}</span>
+                </li>
+              ) : null}
+              {socialInfo.github ? (
+                <li>
+                  <AiFillGithub className='icon' />
+                  <span>{socialInfo.github}</span>
+                </li>
+              ) : null}
+              {socialInfo.twitter ? (
+                <li>
+                  <AiOutlineTwitter className='icon' />
+                  <span>{socialInfo.twitter}</span>
+                </li>
+              ) : null}
+              {socialInfo.facebook ? (
+                <li>
+                  <AiFillFacebook className='icon' />
+                  <span>{socialInfo.facebook}</span>
+                </li>
+              ) : null}
+              {socialInfo.url ? (
+                <li>
+                  <AiFillHome className='icon' />
+                  <span>{socialInfo.url}</span>
+                </li>
+              ) : null}
             </ul>
           </SocialInfoContainer>
           <EditButtonContainer>

@@ -1,17 +1,43 @@
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setProfileImage, setName, setIntro, setLologTitle, setSocialInfo, setEmail } from '../../store/modules/user';
+import { apiClient } from '../../api';
 import UserProfile from './UserProfile';
-import UserIntroduction from './UserIntroduction';
-import UserInformation from './UserInformation';
+import UserIntro from './UserIntro';
+import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
 
+const getSettingApi = async () => {
+  const resp = await apiClient.get('/');
+  return resp.data?.data;
+};
+
 const Setting = () => {
+  const dispatch = useDispatch();
+  const [settingInfo, setSettingInfo] = useState(null);
+  const { name, intro } = useSelector(state => state.user);
+
+  useEffect(() => {
+    const loader = async () => {
+      try {
+        const data = await getSettingApi();
+        setSettingInfo(data);
+      } catch (error) {
+        console.error(error);
+        setSettingInfo(null);
+      }
+    };
+    loader();
+  }, []);
+
   return (
     <SettingPage>
-      <section className='setting-user'>
+      <section className='setting-top'>
         <UserProfile />
-        <UserIntroduction />
+        <UserIntro />
       </section>
-      <UserInformation />
+      <UserInfo />
     </SettingPage>
   );
 };
@@ -26,7 +52,7 @@ const SettingPage = styled.div`
   ${settingMaxWidth1024px};
   ${settingMaxWidth768px};
 
-  .setting-user {
+  .setting-top {
     display: flex;
     height: 13.75rem;
 

@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import EditButton from '../../../components/EditButton';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
 import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../styles/media';
+import { setIntro, setName } from '../../../store/modules/user';
 
-const UserIntroduction = () => {
-  const [user, setUser] = useState('');
-  const [introduction, setIntroduction] = useState('');
+const UserIntro = () => {
+  // const [user, setUser] = useState('');
+  // const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
+
+  const { name, intro } = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   const onModify = () => {
     isModify ? setIsModify(false) : setIsModify(true);
@@ -17,24 +23,24 @@ const UserIntroduction = () => {
     // fetch =>user info
     const profile = { user: 'Eden', introduction: 'one part' };
 
-    setUser(profile.user);
-    setIntroduction(profile.introduction);
+    dispatch(setName(profile.user));
+    dispatch(setIntro(profile.introduction));
   }, []);
 
   const getUser = e => {
-    setUser(e.target.value);
+    dispatch(setName(e.target.value));
   };
 
   const getIntro = e => {
-    setIntroduction(e.target.value);
+    dispatch(setIntro(setIntroduction(e.target.value)));
   };
 
   return (
     <UserIntroContainer>
       {isModify ? (
         <>
-          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user} />
-          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={introduction} />
+          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={name} />
+          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={intro} />
           <Button
             className='confirm-button'
             onClick={() => {
@@ -45,8 +51,8 @@ const UserIntroduction = () => {
         </>
       ) : (
         <>
-          <h2>{user}</h2>
-          <p>{introduction}</p>
+          <h2>{name}</h2>
+          <p>{intro}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}
@@ -114,4 +120,4 @@ const UserIntroContainer = styled.div`
   }
 `;
 
-export default UserIntroduction;
+export default UserIntro;

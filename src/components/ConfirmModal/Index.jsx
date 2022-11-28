@@ -1,7 +1,7 @@
 import Button from '../Button';
 import styled from 'styled-components';
 
-const ConfirmModal = ({ title, message, onClose }) => {
+const ConfirmModal = ({ title, message, onClose, onMove }) => {
   return (
     <>
       <Background />
@@ -12,7 +12,7 @@ const ConfirmModal = ({ title, message, onClose }) => {
             <p className='msg'>{message}</p>
             <div className='button'>
               <Button className='cancel' text='취소' onClick={onClose} />
-              <Button className='confirm' text='확인' onClick={onClose} />
+              <Button className='confirm' text='확인' onClick={onMove} />
             </div>
           </div>
         </ModalContainer>
