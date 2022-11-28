@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsUploadModal } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
+import Toastify from '../../../../components/Toastify';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 const ModalBtns = () => {
@@ -21,14 +23,13 @@ const ModalBtns = () => {
         const response = await axios.post(`http://localhost:8000/posts?status=${uploadType}`, bodyData, config);
 
         if (response.data.message === 'post create success') {
-          alert('포스트 등록 완료');
           navigate(`/@${response.data.post.post[0].login_id}/${response.data.post.post[0].title}`);
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert('제목 또는 내용이 비어있습니다.');
+      toast.error('제목 또는 내용이 비어있습니다.');
     }
   };
 
@@ -42,6 +43,7 @@ const ModalBtns = () => {
     <ModalBtnsContainer className='modal-btns-container'>
       <Button text='취소' color='transparent' onClick={() => dispatch(setIsUploadModal(false))} />
       <Button text='출간하기' color='teal' onClick={onUpload} />
+      <Toastify />
     </ModalBtnsContainer>
   );
 };

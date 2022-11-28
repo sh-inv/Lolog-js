@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
+import Toastify from '../../../../components/Toastify';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 const EditorFooter = () => {
@@ -18,13 +20,13 @@ const EditorFooter = () => {
         const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [] };
         const response = await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
         if (response.data.message === 'post create success') {
-          alert('포스트 임시저장 완료');
+          toast.success('포스트 임시저장 완료');
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert('제목 또는 내용이 비어있습니다.');
+      toast.error('제목 또는 내용이 비어있습니다.');
     }
   };
 
@@ -48,6 +50,7 @@ const EditorFooter = () => {
           <Button text='출간하기' className='upload' color='teal' onClick={onUploadModal} />
         </div>
       </EditorFooterContainer>
+      <Toastify />
     </Positioner>
   );
 };
