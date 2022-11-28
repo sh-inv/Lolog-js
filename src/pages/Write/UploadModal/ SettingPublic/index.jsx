@@ -27,8 +27,9 @@ const SettingPublic = () => {
 
   const changePublic = e => {
     const btnType = e.target.className;
+    console.log(btnType);
 
-    if (btnType === 'public-btn') {
+    if (btnType.includes('public-btn')) {
       const changedActive = [true, false];
       setBtnActive(changedActive);
       dispatch(setUploadType('1'));
@@ -97,6 +98,7 @@ const SettingPublicContainer = styled.div`
         justify-content: center;
         -webkit-box-align: center;
         align-items: center;
+        pointer-events: none;
       }
     }
     .active {
