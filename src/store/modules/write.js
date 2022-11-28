@@ -6,6 +6,7 @@ const writeContentSlice = createSlice({
     title: '',
     content: [],
     thumbnail: '',
+    thumbnailPreview: '',
     uploadType: '1',
     uploadUrl: 'title',
     imageFileUrl: null,
@@ -22,6 +23,9 @@ const writeContentSlice = createSlice({
     },
     setThmbnail: (state, action) => {
       state.thumbnail = action.payload;
+    },
+    setThmbnailPreview: (state, action) => {
+      state.thumbnailPreview = action.payload;
     },
     setUploadType: (state, action) => {
       state.uploadType = action.payload;
@@ -44,5 +48,5 @@ const writeContentSlice = createSlice({
   },
 });
 
-export const { setTitle, setContent, setThmbnail, setUploadType, setUploadUrl, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal } = writeContentSlice.actions;
+export const { setTitle, setContent, setThmbnail, setThmbnailPreview, setUploadType, setUploadUrl, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal } = writeContentSlice.actions;
 export const writeContentReducer = writeContentSlice.reducer;

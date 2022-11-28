@@ -16,10 +16,12 @@ const ModalBtns = () => {
   const onUpload = async () => {
     if (title && content) {
       try {
-        const config = {
-          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
-        };
         const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: 0 };
+        const config = {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I`,
+          },
+        };
         const response = await axios.post(`http://localhost:8000/posts?status=${uploadType}`, bodyData, config);
 
         if (response.data.message === 'post create success') {

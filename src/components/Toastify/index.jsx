@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 
 const Toastify = () => {
-  return <Toast position='top-right' autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss pauseOnHover theme='colored' />;
+  return <Toast position='top-right' autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss pauseOnHover theme='colored' />;
 };
 
 const Toast = styled(ToastContainer)`
