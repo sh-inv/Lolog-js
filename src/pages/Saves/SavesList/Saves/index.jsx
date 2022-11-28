@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import GetPostDate from '../../../../components/GetPostDate';
 import EditButton from '../../../../components/EditButton';
@@ -5,8 +6,12 @@ import EditButton from '../../../../components/EditButton';
 const Saves = ({ title, contents, created_at, onModal }) => {
   return (
     <SavesContainer>
-      <h3>{title}</h3>
-      <p>{contents}</p>
+      <Link to={`write/${title}`}>
+        <h3>{title}</h3>
+      </Link>
+      <Link to={`write/${title}`}>
+        <p>{contents}</p>
+      </Link>
       <section>
         <GetPostDate postDate={created_at} />
         <EditButton text='삭제' onClick={onModal} />
