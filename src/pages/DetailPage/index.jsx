@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { apiClient } from '../../api';
 import CommentArea from './CommentArea';
+import { apiClient } from '../../api';
+import NextPrePost from './NextPrePost';
 
 const DetailPage = () => {
-  const [postData, setPostData] = useState([]);
+  const [postData, setPostData] = useState();
 
   useEffect(() => {
     (async () => {
@@ -27,9 +28,12 @@ const DetailPage = () => {
   }, []);
 
   return (
-    <DetailPageContainer>
-      <CommentArea comments={postData.comments} />
-    </DetailPageContainer>
+    postData && (
+      <DetailPageContainer>
+        <NextPrePost postData={postData} />
+        <CommentArea comments={postData.comments} />
+      </DetailPageContainer>
+    )
   );
 };
 
