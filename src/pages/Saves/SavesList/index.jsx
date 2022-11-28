@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import Saves from './Saves';
 import ConfirmModal from '../../../components/ConfirmModal';
+import Toastify from '../../../components/Toastify';
 
 const SavesList = () => {
   const [list, setList] = useState([]);
@@ -42,6 +44,11 @@ const SavesList = () => {
     setIsModal(true);
   };
 
+  const onConfirm = () => {
+    setIsModal(false);
+    toast.success('포스트가 삭제 되었습니다.');
+  };
+
   return (
     <>
       <SavesListContainer>
@@ -55,9 +62,11 @@ const SavesList = () => {
             onClose={() => {
               setIsModal(false);
             }}
+            onMove={onConfirm}
           />
         )}
       </SavesListContainer>
+      <Toastify />
     </>
   );
 };
