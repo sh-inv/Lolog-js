@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
 import UserBox from '../../components/UserBox';
 import NavBar from './NavBar';
 import SearchBox from '../../components/SearchBox';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MyLolog = () => {
@@ -20,8 +20,19 @@ const MyLologContainer = styled.div`
   margin: 0 auto;
 
   .search-box-container {
-    font-size: 0.5rem;
+    margin-left: auto;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    width: 12rem;
     height: 2.25rem;
+    .search-box-icon {
+      margin-right: 0.5rem;
+      width: 17px;
+    }
+    .search-box-input {
+      line-height: 1rem;
+      font-size: 0.875rem;
+    }
   }
 
   @media screen and (max-width: 767px) {
