@@ -5,7 +5,7 @@ const NextPrePost = ({ postData }) => {
   return (
     <NextPrePostContainer>
       <PostNavBtn postData={postData.pre_post} isLeft={true} />
-      <PostNavBtn postData={postData.next_post} />
+      {postData.next_post.length ? <PostNavBtn postData={postData.next_post} /> : <></>}
     </NextPrePostContainer>
   );
 };
