@@ -6,6 +6,7 @@ const store = configureStore({
   reducer: {
     darkMode: themeModeReducer,
     writeContent: writeContentReducer,
+    // detailPageData: detailPageDataReducer,
   },
 });
 

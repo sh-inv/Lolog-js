@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi';
-import { useState } from 'react';
-import CommentContent from '../../../../components/Comment/CommentContent';
-import Textarea from '../../../../components/Comment/Textarea';
+import CommentContent from '../../../components/Comment/CommentContent';
+import Textarea from '../../../components/Comment/Textarea';
 
 const Comment = ({ commentData }) => {
   const { nested_comments } = commentData;
@@ -38,7 +38,7 @@ const Comment = ({ commentData }) => {
                       <CommentContent key={nested_comment.comment_id} isNested={true} commentData={nested_comment} />
                     ))}
                   </div>
-                  <div className='comment-box'>
+                  <div className='neted-comment-box'>
                     <Textarea />
                   </div>
                 </>
@@ -93,6 +93,10 @@ const CommentContainer = styled.div`
     .comment-box {
       padding: 1.5rem;
       margin-top: 1.3125rem;
+    }
+
+    .neted-comment-box {
+      padding: 0 1.3125rem 1.3125rem 1.3125rem;
     }
   }
 `;
