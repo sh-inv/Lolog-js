@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Button = ({ color, onClick, text, icon, ...props }) => {
   return (
     <ButtonContainer color={color} onClick={onClick} {...props}>
-      {text}
+      {text} {icon}
     </ButtonContainer>
   );
 };
