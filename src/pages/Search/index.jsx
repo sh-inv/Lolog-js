@@ -19,6 +19,20 @@ const Positioner = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
 
+  .search-box-container {
+    padding: 1rem 1.5rem;
+    width: 768px;
+    .search-box-icon {
+      margin-right: 2.3%;
+      width: 4.5%;
+      height: 100%;
+    }
+    .search-box-input {
+      line-height: 2rem;
+      font-size: 1.5rem;
+    }
+  }
+
   ${searchMaxWidth768px}
 `;
 
