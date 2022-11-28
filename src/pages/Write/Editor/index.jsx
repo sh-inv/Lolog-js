@@ -103,7 +103,7 @@ const Editor = () => {
     }
   };
 
-  console.log('editor:', content);
+  // console.log('editor:', content);
 
   return (
     <EditorContainer className='editor-container'>

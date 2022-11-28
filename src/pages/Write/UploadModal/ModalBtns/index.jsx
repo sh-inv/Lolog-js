@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsUploadModal } from '../../../../store/modules/write';
@@ -8,13 +9,21 @@ import styled from 'styled-components';
 const ModalBtns = () => {
   const { title, content, thumbnail, uploadType } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onUpload = async () => {
     if (title && content) {
       try {
-        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [] };
-        const response = await axios.post(`http://localhost:8000/posts?status=${uploadType}`, bodyData);
-        console.log(response);
+        const config = {
+          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+        };
+        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: 0 };
+        const response = await axios.post(`http://localhost:8000/posts?status=${uploadType}`, bodyData, config);
+
+        if (response.data.message === 'post create success') {
+          alert('포스트 등록 완료');
+          navigate(`/@${response.data.post.post[0].login_id}/${response.data.post.post[0].title}`);
+        }
       } catch (error) {
         console.log(error);
       }
