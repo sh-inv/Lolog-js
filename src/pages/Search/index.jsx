@@ -23,9 +23,9 @@ const Positioner = styled.div`
     padding: 1rem 1.5rem;
     width: 768px;
     .search-box-icon {
-      margin-right: 2.3%;
-      width: 4.5%;
-      height: 100%;
+      margin-right: 1rem;
+      width: 2rem;
+      height: 2rem;
     }
     .search-box-input {
       line-height: 2rem;
