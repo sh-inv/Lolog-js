@@ -27,7 +27,6 @@ const SettingPublic = () => {
 
   const changePublic = e => {
     const btnType = e.target.className;
-    console.log(btnType);
 
     if (btnType.includes('public-btn')) {
       const changedActive = [true, false];

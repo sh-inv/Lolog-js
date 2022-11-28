@@ -125,6 +125,9 @@ ${'```'}`;
     setIsLinkModal(false);
   };
 
+  const selection = window.getSelection();
+  console.log(selection);
+
   return (
     <EditorContainer className='editor-container'>
       <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setTitle(e.target.value))} />
@@ -133,7 +136,9 @@ ${'```'}`;
       <ToolBar />
       {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
       <pre className='write-zone'>
-        <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => dispatch(setContent(e.target.value))} />
+        <div>
+          <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => dispatch(setContent(e.target.value))} />
+        </div>
       </pre>
       <EditorFooter title={title} content={content} />
     </EditorContainer>
