@@ -4,7 +4,7 @@ const writeContentSlice = createSlice({
   name: 'writeContentReducer',
   initialState: {
     title: '',
-    content: '',
+    content: [],
     thumbnail: '',
     uploadType: '1',
     uploadUrl: 'title',

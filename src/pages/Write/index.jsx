@@ -20,7 +20,7 @@ const Write = () => {
       ) : (
         <>
           <Editor />
-          <Preview />
+          {/* <Preview /> */}
         </>
       )}
       {isUploadModal && <UploadModal />}

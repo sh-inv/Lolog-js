@@ -13,120 +13,97 @@ const Editor = () => {
 
   const [isLinkModal, setIsLinkModal] = useState(false);
 
-  useEffect(() => {
-    if (selectedTool) {
-      let copy = content;
-      let updateContent = '';
+  //   useEffect(() => {
+  //     if (selectedTool) {
+  //       let copy = content;
+  //       let updateContent = '';
 
-      if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
-      if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote' || selectedTool === 'code') updateContent = textEffectHandler(copy, selectedTool);
-      if (selectedTool === 'link') {
-        setIsLinkModal(true);
-        dispatch(setSelectedTool(null));
-        return;
-      }
-      if (selectedTool === 'image') return;
+  //       if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
+  //       if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote' || selectedTool === 'code') updateContent = textEffectHandler(copy, selectedTool);
+  //       if (selectedTool === 'link') {
+  //         setIsLinkModal(true);
+  //         dispatch(setSelectedTool(null));
+  //         return;
+  //       }
+  //       if (selectedTool === 'image') return;
 
-      dispatch(setContent(updateContent));
-      dispatch(setSelectedTool(null));
+  //       dispatch(setContent(updateContent));
+  //       dispatch(setSelectedTool(null));
+  //     }
+  //   }, [selectedTool]);
+
+  //   useEffect(() => {
+  //     if (imageFileUrl) {
+  //       let copy = content;
+  //       const toolToValue = ` ![](${imageFileUrl})`;
+  //       const updateContent = copy + toolToValue;
+  //       dispatch(setContent(updateContent));
+  //     }
+  //   }, [imageFileUrl]);
+
+  //   const textEffectHandler = (currentContent, tool) => {
+  //     let toolToValue = '';
+  //     let updateContent = '';
+  //     const isAlreadyQuote = currentContent.split(' ')[0].includes('>');
+
+  //     switch (tool) {
+  //       case 'bold':
+  //         toolToValue = '**텍스트**';
+  //         break;
+  //       case 'italic':
+  //         toolToValue = '_텍스트_';
+  //         break;
+  //       case 'remove':
+  //         toolToValue = '~~텍스트~~';
+  //         break;
+  //       case 'quote':
+  //         toolToValue = '> ';
+  //         break;
+  //       case 'code':
+  //         toolToValue = `
+  // ${'```'}
+  // 코드를 입력하세요
+  // ${'```'}`;
+  //         break;
+  //       default:
+  //         break;
+  //     }
+
+  //     if (toolToValue === '> ') {
+  //       if (isAlreadyQuote) {
+  //         let result = currentContent.split(' ');
+  //         result[0] = '';
+  //         updateContent = result.join('');
+  //       } else {
+  //         updateContent = toolToValue + currentContent;
+  //       }
+  //     } else {
+  //       updateContent = currentContent + toolToValue;
+  //     }
+
+  //     return updateContent;
+  //   };
+
+  //   const linkHandler = linkValue => {
+  //     let copy = content;
+  //     const toolToValue = `[링크텍스트](${linkValue})`;
+  //     const updateContent = copy + toolToValue;
+  //     dispatch(setContent(updateContent));
+  //     setIsLinkModal(false);
+  //   };
+
+  // const selection = window.getSelection();
+  // console.log(selection);
+
+  const changeContent = e => {
+    let copy = [...content];
+    if (e.key === 'Enter') {
+      copy.push('<br />');
+      dispatch(setContent(copy));
     }
-  }, [selectedTool]);
-
-  useEffect(() => {
-    if (imageFileUrl) {
-      let copy = content;
-      const toolToValue = ` ![](${imageFileUrl})`;
-      const updateContent = copy + toolToValue;
-      dispatch(setContent(updateContent));
-    }
-  }, [imageFileUrl]);
-
-  const hTagToolHandler = (currentContent, tool) => {
-    let toolToValue = '';
-    let updateContent = '';
-    const isAlreadyHashtag = currentContent.split(' ')[0].includes('#');
-
-    switch (tool) {
-      case 'H1':
-        toolToValue = '# ';
-        break;
-      case 'H2':
-        toolToValue = '## ';
-        break;
-      case 'H3':
-        toolToValue = '### ';
-        break;
-      case 'H4':
-        toolToValue = '#### ';
-        break;
-      default:
-        break;
-    }
-
-    if (isAlreadyHashtag) {
-      let result = currentContent.split(' ');
-      result[0] = toolToValue;
-      updateContent = result.join('');
-    } else {
-      updateContent = toolToValue + currentContent;
-    }
-
-    return updateContent;
   };
 
-  const textEffectHandler = (currentContent, tool) => {
-    let toolToValue = '';
-    let updateContent = '';
-    const isAlreadyQuote = currentContent.split(' ')[0].includes('>');
-
-    switch (tool) {
-      case 'bold':
-        toolToValue = '**텍스트**';
-        break;
-      case 'italic':
-        toolToValue = '_텍스트_';
-        break;
-      case 'remove':
-        toolToValue = '~~텍스트~~';
-        break;
-      case 'quote':
-        toolToValue = '> ';
-        break;
-      case 'code':
-        toolToValue = `
-${'```'}
-코드를 입력하세요
-${'```'}`;
-        break;
-      default:
-        break;
-    }
-
-    if (toolToValue === '> ') {
-      if (isAlreadyQuote) {
-        let result = currentContent.split(' ');
-        result[0] = '';
-        updateContent = result.join('');
-      } else {
-        updateContent = toolToValue + currentContent;
-      }
-    } else {
-      updateContent = currentContent + toolToValue;
-    }
-
-    return updateContent;
-  };
-
-  const linkHandler = linkValue => {
-    let copy = content;
-    const toolToValue = `[링크텍스트](${linkValue})`;
-    const updateContent = copy + toolToValue;
-    dispatch(setContent(updateContent));
-    setIsLinkModal(false);
-  };
-
-  const selection = window.getSelection();
-  console.log(selection);
+  console.log('editor:', content);
 
   return (
     <EditorContainer className='editor-container'>
@@ -135,11 +112,9 @@ ${'```'}`;
       <Tags />
       <ToolBar />
       {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
-      <pre className='write-zone'>
-        <div>
-          <textarea placeholder='당신의 이야기를 적어보세요...' value={content} onChange={e => dispatch(setContent(e.target.value))} />
-        </div>
-      </pre>
+      <div className='write-zone'>
+        <textarea placeholder='당신의 이야기를 적어보세요...' onKeyUp={changeContent} />
+      </div>
       <EditorFooter title={title} content={content} />
     </EditorContainer>
   );
