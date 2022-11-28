@@ -66,7 +66,6 @@ const PostNavBtnContainer = styled.div`
       .post {
         text-align: ${({ isLeft }) => (isLeft ? 'left' : 'right')};
         font-size: 0.75rem;
-        font-weight: bold;
       }
 
       .text {
@@ -78,6 +77,18 @@ const PostNavBtnContainer = styled.div`
         white-space: nowrap;
         overflow: hidden;
         text-align: ${({ isLeft }) => (isLeft ? '' : 'right')};
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+
+    .navigater {
+      margin: ${({ isLeft }) => (isLeft ? '0 0 1.5rem 0' : '0')};
+
+      .text {
+        font-size: 1rem;
       }
     }
   }

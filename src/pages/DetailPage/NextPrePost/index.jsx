@@ -14,6 +14,10 @@ const NextPrePostContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 3rem;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export default NextPrePost;

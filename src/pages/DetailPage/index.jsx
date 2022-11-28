@@ -11,7 +11,7 @@ const DetailPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get('/inside/1/19');
+        const { data } = await apiClient.get('/inside/1/8');
         setPostData(data);
       } catch (error) {
         console.log('comment list error => ', error);
