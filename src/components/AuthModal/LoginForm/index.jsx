@@ -1,12 +1,56 @@
+import { useCallback, useState } from 'react';
+import { apiClient } from '../../../api';
 import Button from '../../Button';
 import styled from 'styled-components';
 
-const LoginForm = ({ onClick }) => {
+const LoginForm = ({ onClick, onClose }) => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const onChange = useCallback(
+    e => {
+      const { value, name } = e.target;
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    },
+    [form]
+  );
+
+  const onSubmit = useCallback(
+    async e => {
+      e.preventDefault();
+      const body = {
+        login_id: form.email,
+        passowrd: form.password,
+      };
+
+      try {
+        const resp = await apiClient.post('/auth/login', body);
+        if (resp.status === 200) {
+          const { token } = resp.data;
+          localStorage.setItem('authToken', token);
+          setForm({
+            email: '',
+            password: '',
+          });
+          onClose();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [form]
+  );
+
   return (
-    <LoginFormContainer>
-      <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' />
-      <input type='password' tabIndex='3' placeholder='비밀번호를 입력하세요.' />
-      <Button className='login-button' text='로그인' color='teal' onClick={onClick} tabIndex='4' />
+    <LoginFormContainer onSubmit={onSubmit}>
+      <input type='text' name='email' required tabIndex='2' placeholder='이메일을 입력하세요.' onChange={onChange} value={form.email} />
+      <input type='password' name='password' required tabIndex='3' placeholder='비밀번호를 입력하세요.' onChange={onChange} value={form.password} />
+      <Button type='submit' className='login-button' text='로그인' color='teal' tabIndex='4' />
     </LoginFormContainer>
   );
 };

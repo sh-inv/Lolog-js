@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
@@ -8,6 +8,10 @@ import styled from 'styled-components';
 
 const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
   const [isSignInModal, setIsSignInModal] = useState(false);
+
+  const onClose = useCallback(() => {
+    setIsLoginModal(false);
+  }, [isLoginModal]);
 
   return (
     <>
@@ -26,7 +30,7 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
               <h2>{isSignInModal ? '회원가입' : '로그인'}</h2>
               <section>
                 <h4>이메일로 {isLoginModal ? '로그인' : '회원가입'}</h4>
-                {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} />}
+                {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} onClose={onClose} />}
               </section>
               <section>
                 <h4>소셜 계정으로 {isSignInModal ? '회원가입' : '로그인'}</h4>
