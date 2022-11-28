@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const user = createSlice({
   name: 'userReducer',
   initialState: {
-    id: '',
+    id: null,
     profileImage: null,
     name: '',
     intro: '',
@@ -16,8 +16,13 @@ const user = createSlice({
     socialInfoTwitter: '',
     socialInfoFacebook: '',
     socialInfoUrl: '',
+    user: null,
   },
   reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+
     setId: (state, action) => {
       state.id = action.payload;
     },
@@ -63,5 +68,6 @@ const user = createSlice({
   },
 });
 
-export const { setId, setProfileImage, setName, setIntro, setTitle, setSocialInfo, setEmail, setCommentAlert, setUpdateAlert, setSocialInfoEmail, setSocialInfoGithub, setSocialInfoTwitter, setSocialInfoFacebook, setSocialInfoUrl } = user.actions;
+export const { setUser, setId, setProfileImage, setName, setIntro, setTitle, setSocialInfo, setEmail, setCommentAlert, setUpdateAlert, setSocialInfoEmail, setSocialInfoGithub, setSocialInfoTwitter, setSocialInfoFacebook, setSocialInfoUrl } =
+  user.actions;
 export const userReducer = user.reducer;

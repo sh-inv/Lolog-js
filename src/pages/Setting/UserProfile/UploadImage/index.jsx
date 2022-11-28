@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../../../../components/Button';
 import { settingProfileButtonMaxWidth768px } from '../../../../styles/media';
@@ -6,6 +7,7 @@ import { settingProfileButtonMaxWidth768px } from '../../../../styles/media';
 const UploadImage = () => {
   const [imageFile, setImageFile] = useState(null);
   const imageRef = useRef(null);
+  const { profileImage } = useSelector(state => state.user);
 
   const onUploadImage = e => {
     if (!e.target.files) return;

@@ -11,21 +11,21 @@ const UserIntro = () => {
   // const [user, setUser] = useState('');
   // const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
-
-  const { name, intro } = useSelector(state => state.user);
+  // const { name, intro } = useSelector(state => state.user);
+  const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
   const onModify = () => {
     isModify ? setIsModify(false) : setIsModify(true);
   };
 
-  useEffect(() => {
-    // fetch =>user info
-    const profile = { user: 'Eden', introduction: 'one part' };
+  // useEffect(() => {
+  //   // fetch =>user info
+  //   const profile = { user: 'Eden', introduction: 'one part' };
 
-    dispatch(setName(profile.user));
-    dispatch(setIntro(profile.introduction));
-  }, []);
+  //   dispatch(setName(profile.user));
+  //   dispatch(setIntro(profile.introduction));
+  // }, []);
 
   const getUser = e => {
     dispatch(setName(e.target.value));
@@ -39,7 +39,7 @@ const UserIntro = () => {
     <UserIntroContainer>
       {isModify ? (
         <>
-          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={name} />
+          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user?.name} />
           <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={intro} />
           <Button
             className='confirm-button'
@@ -51,8 +51,8 @@ const UserIntro = () => {
         </>
       ) : (
         <>
-          <h2>{name}</h2>
-          <p>{intro}</p>
+          <h2>{user?.name}</h2>
+          <p>{user?.intro}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}

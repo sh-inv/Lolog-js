@@ -15,6 +15,7 @@ import {
   setSocialInfoTwitter,
   setSocialInfoFacebook,
   setSocialInfoUrl,
+  setUser,
 } from '../../store/modules/user';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
@@ -35,7 +36,8 @@ import axios from 'axios';
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const [settingInfo, setSettingInfo] = useState(null);
+  const user = useSelector(state => state.user.user);
+  // const [settingInfo, setSettingInfo] = useState(null);
 
   // useEffect(() => {
   //   const loader = async () => {
@@ -52,12 +54,14 @@ const Setting = () => {
 
   const getLoader = async () => {
     try {
-      const { data } = await axios.get('data/setting/user.json');
-      setSettingInfo(data.user);
-      console.log(data);
+      const {
+        data: { user },
+      } = await axios.get('data/setting/user.json');
+      dispatch(setUser(user));
+      // console.log(user);
     } catch (error) {
       console.log(error);
-      setSettingInfo(null);
+      dispatch(setUser(null));
     }
   };
 
@@ -65,19 +69,21 @@ const Setting = () => {
     getLoader();
   }, []);
 
-  dispatch(setId(settingInfo.id));
-  dispatch(setProfileImage(settingInfo.profile_image));
-  dispatch(setName(settingInfo.name));
-  dispatch(setIntro(settingInfo.about_me));
-  dispatch(setTitle(settingInfo.title));
-  dispatch(setEmail(settingInfo.email));
-  dispatch(setCommentAlert(settingInfo.comment_alert));
-  dispatch(setUpdateAlert(settingInfo.update_alert));
-  dispatch(setSocialInfoEmail(settingInfo.social_info_email));
-  dispatch(setSocialInfoGithub(settingInfo.social_info_github));
-  dispatch(setSocialInfoTwitter(settingInfo.social_info_twitter));
-  dispatch(setSocialInfoFacebook(settingInfo.social_info_facebook));
-  dispatch(setSocialInfoUrl(settingInfo.social_info_url));
+  console.log(user);
+
+  // dispatch(setId(settingInfo.id));
+  // dispatch(setProfileImage(settingInfo.profile_image));
+  // dispatch(setName(settingInfo.name));
+  // dispatch(setIntro(settingInfo.about_me));
+  // dispatch(setTitle(settingInfo.title));
+  // dispatch(setEmail(settingInfo.email));
+  // dispatch(setCommentAlert(settingInfo.comment_alert));
+  // dispatch(setUpdateAlert(settingInfo.update_alert));
+  // dispatch(setSocialInfoEmail(settingInfo.social_info_email));
+  // dispatch(setSocialInfoGithub(settingInfo.social_info_github));
+  // dispatch(setSocialInfoTwitter(settingInfo.social_info_twitter));
+  // dispatch(setSocialInfoFacebook(settingInfo.social_info_facebook));
+  // dispatch(setSocialInfoUrl(settingInfo.social_info_url));
 
   return (
     <SettingPage>
