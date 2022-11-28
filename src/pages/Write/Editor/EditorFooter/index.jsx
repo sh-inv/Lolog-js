@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
 import styled from 'styled-components';
-import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 
 const EditorFooter = ({ title, content }) => {
   const isReverse = useSelector(state => state.writeContent.isReverse);
@@ -38,13 +38,13 @@ const EditorFooter = ({ title, content }) => {
   return (
     <Positioner className='editor-footer-positioner' isReverse={isReverse}>
       <EditorFooterContainer>
-        <div className='exit'>
+        <a className='exit' href='/'>
           <BiArrowBack className='arrow-icon' />
           <span>나가기</span>
-        </div>
+        </a>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' color="transparent" onClick={onSave} />
-          <Button text='출간하기' className='upload' color="teal" onClick={onUploadModal} />
+          <Button text='임시저장' className='temporary-storage' color='transparent' onClick={onSave} />
+          <Button text='출간하기' className='upload' color='teal' onClick={onUploadModal} />
         </div>
       </EditorFooterContainer>
     </Positioner>
