@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import GetPostDate from '../../../components/GetPostDate';
-import EditButton from '../../../components/EditButton';
-import ConfirmModal from '../../../components/ConfirmModal';
 import styled from 'styled-components';
+import Saves from './Saves';
+import ConfirmModal from '../../../components/ConfirmModal';
 
 const SavesList = () => {
   const [list, setList] = useState([]);
@@ -44,76 +43,25 @@ const SavesList = () => {
   };
 
   return (
-    <SaveListContainer>
-      {list.map(saves => {
-        return (
-          <SavesContainer key={saves.title}>
-            <h3>{saves.title}</h3>
-            <p>{saves.contents}</p>
-            <section>
-              <GetPostDate postDate={saves.created_at} />
-              <EditButton text='삭제' onClick={onModal} />
-            </section>
-          </SavesContainer>
-        );
-      })}
-      {isModal && (
-        <ConfirmModal
-          title='임시 글 삭제'
-          message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
-          onClose={() => {
-            setIsModal(false);
-          }}
-        />
-      )}
-    </SaveListContainer>
+    <>
+      <SavesListContainer>
+        {list.map(saves => (
+          <Saves key={saves.title} title={saves.title} contents={saves.contents} created_at={saves.created_at} onModal={onModal} />
+        ))}
+        {isModal && (
+          <ConfirmModal
+            title='임시 글 삭제'
+            message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
+            onClose={() => {
+              setIsModal(false);
+            }}
+          />
+        )}
+      </SavesListContainer>
+    </>
   );
 };
 
-const SaveListContainer = styled.div``;
-
-const SavesContainer = styled.div`
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  line-height: 1.5;
-  border-bottom: 1px solid var(--border3);
-
-  h3 {
-    margin-top: 0px;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: var(--text1);
-  }
-
-  p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    white-space: normal;
-    margin-top: 0px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: var(--text2);
-  }
-
-  section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    span {
-      color: var(--text3);
-    }
-
-    button {
-      color: var(--text1);
-
-      &:hover {
-        color: rgb(250, 82, 82);
-      }
-    }
-  }
-`;
+const SavesListContainer = styled.div``;
 
 export default SavesList;
