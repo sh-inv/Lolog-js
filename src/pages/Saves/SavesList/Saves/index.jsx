@@ -44,6 +44,7 @@ const SavesContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: 0.875rem;
 
     span {
       color: var(--text3);
@@ -51,6 +52,7 @@ const SavesContainer = styled.div`
 
     button {
       color: var(--text1);
+      font-size: inherit;
 
       &:hover {
         color: rgb(250, 82, 82);
