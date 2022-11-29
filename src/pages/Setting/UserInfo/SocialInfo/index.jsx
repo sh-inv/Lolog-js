@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../../../store/modules/user';
 import styled from 'styled-components';
@@ -9,14 +9,6 @@ import Button from '../../../../components/Button';
 
 const SocialInfo = () => {
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
-  const [socialInfo, setSocialInfo] = useState({
-    email: '',
-    github: '',
-    twitter: '',
-    facebook: '',
-    url: '',
-  });
-
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const email = user?.social_info_email;
@@ -29,54 +21,47 @@ const SocialInfo = () => {
     isModifySocialInfo ? setisModifySocialInfo(false) : setisModifySocialInfo(true);
   };
 
-  // useEffect(() => {
-  //   const contents = {
-  //     social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
-  //   };
-  //   setSocialInfo({
-  //     ...contents.social,
-  //   });
-  // }, []);
-
   const getSocialInfo = e => {
-    setSocialInfo({
-      ...socialInfo,
-      [e.target.name]: e.target.value,
-    });
+    dispatch(
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const info = [
     {
       id: 1,
-      name: 'email',
+      name: 'social_info_email',
       icon: <MdEmail className='icon' />,
       placeholder: '이메일을 입력하세요.',
       value: email,
     },
     {
       id: 2,
-      name: 'github',
+      name: 'social_info_github',
       icon: <AiFillGithub className='icon' />,
       placeholder: 'Github 계정을 입력하세요.',
       value: github,
     },
     {
       id: 3,
-      name: 'twitter',
+      name: 'social_info_twitter',
       icon: <AiOutlineTwitter className='icon' />,
       placeholder: 'Twitter 계정을 입력하세요.',
       value: twitter,
     },
     {
       id: 4,
-      name: 'facebook',
+      name: 'social_info_facebook',
       icon: <AiFillFacebook className='icon' />,
       placeholder: 'http://www.facebook.com/',
       value: facebook,
     },
     {
       id: 5,
-      name: 'url',
+      name: 'social_info_url',
       icon: <AiFillHome className='icon' />,
       placeholder: '홈페이지 주소를 입력하세요.',
       value: url,
