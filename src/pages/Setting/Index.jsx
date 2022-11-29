@@ -1,22 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setId,
-  setProfileImage,
-  setName,
-  setIntro,
-  setTitle,
-  setSocialInfo,
-  setEmail,
-  setCommentAlert,
-  setUpdateAlert,
-  setSocialInfoEmail,
-  setSocialInfoGithub,
-  setSocialInfoTwitter,
-  setSocialInfoFacebook,
-  setSocialInfoUrl,
-  setUser,
-} from '../../store/modules/user';
+import { setUser } from '../../store/modules/user';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
 import UserProfile from './UserProfile';
