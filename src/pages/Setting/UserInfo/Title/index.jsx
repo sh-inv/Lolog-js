@@ -6,22 +6,19 @@ import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const Title = () => {
+  const [isModifyTitle, setIsModifyTitle] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
-  const [title, setTitle] = useState('');
-  const [isModifyTitle, setIsModifyTitle] = useState(false);
 
   const onModify = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
   };
 
   const getTitle = e => {
-    // setTitle(e.target.value);
-    console.log(e.target.value);
     e.preventDefault();
     dispatch(
       setUser({
-        ...setUser,
+        ...user,
         title: e.target.value,
       })
     );
