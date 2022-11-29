@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const UserBox = () => {
   return (
-    <UserBoxContainer>
+    <UserBoxContainer className='user-box-container'>
       <User />
       <Social />
     </UserBoxContainer>
