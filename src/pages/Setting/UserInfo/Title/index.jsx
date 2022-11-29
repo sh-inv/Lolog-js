@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../../../store/modules/user';
 import EditButton from '../../../../components/EditButton';
 import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const Title = () => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const [title, setTitle] = useState('');
   const [isModifyTitle, setIsModifyTitle] = useState(false);
@@ -13,15 +15,10 @@ const Title = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
   };
 
-  // useEffect(() => {
-  //   const contents = {
-  //     title: 'my.log',
-  //   };
-  //   setTitle(contents.title);
-  // }, []);
-
   const getTitle = e => {
     setTitle(e.target.value);
+
+    // dispatch(setUser(user?.title 안에 e.target.value));
   };
 
   return (
