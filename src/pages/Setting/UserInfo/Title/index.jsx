@@ -16,9 +16,15 @@ const Title = () => {
   };
 
   const getTitle = e => {
-    setTitle(e.target.value);
-
-    // dispatch(setUser(user?.title 안에 e.target.value));
+    // setTitle(e.target.value);
+    console.log(e.target.value);
+    e.preventDefault();
+    dispatch(
+      setUser({
+        ...setUser,
+        title: e.target.value,
+      })
+    );
   };
 
   return (
