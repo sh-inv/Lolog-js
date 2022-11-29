@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../../../store/modules/user';
 import styled from 'styled-components';
@@ -6,7 +6,6 @@ import Button from '../../../../components/Button';
 import { settingProfileButtonMaxWidth768px } from '../../../../styles/media';
 
 const UploadImage = () => {
-  const [imageFile, setImageFile] = useState(null);
   const imageRef = useRef(null);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
