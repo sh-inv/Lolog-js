@@ -21,7 +21,12 @@ const UploadImage = () => {
   };
 
   const removeImage = () => {
-    dispatch(setUser(user?.profile_image === null));
+    dispatch(
+      setUser({
+        ...user,
+        profile_image: null,
+      })
+    );
   };
 
   return (
