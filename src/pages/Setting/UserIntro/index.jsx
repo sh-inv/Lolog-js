@@ -11,7 +11,6 @@ const UserIntro = () => {
   // const [user, setUser] = useState('');
   // const [introduction, setIntroduction] = useState('');
   const [isModify, setIsModify] = useState(false);
-  // const { name, intro } = useSelector(state => state.user);
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
@@ -40,7 +39,7 @@ const UserIntro = () => {
       {isModify ? (
         <>
           <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getUser} value={user?.name} />
-          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={intro} />
+          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user?.about_me} />
           <Button
             className='confirm-button'
             onClick={() => {
@@ -52,7 +51,7 @@ const UserIntro = () => {
       ) : (
         <>
           <h2>{user?.name}</h2>
-          <p>{user?.intro}</p>
+          <p>{user?.about_me}</p>
           <EditButton text='수정' onClick={onModify} />
         </>
       )}

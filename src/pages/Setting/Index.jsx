@@ -37,7 +37,6 @@ import axios from 'axios';
 const Setting = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
-  // const [settingInfo, setSettingInfo] = useState(null);
 
   // useEffect(() => {
   //   const loader = async () => {
@@ -70,20 +69,6 @@ const Setting = () => {
   }, []);
 
   console.log(user);
-
-  // dispatch(setId(settingInfo.id));
-  // dispatch(setProfileImage(settingInfo.profile_image));
-  // dispatch(setName(settingInfo.name));
-  // dispatch(setIntro(settingInfo.about_me));
-  // dispatch(setTitle(settingInfo.title));
-  // dispatch(setEmail(settingInfo.email));
-  // dispatch(setCommentAlert(settingInfo.comment_alert));
-  // dispatch(setUpdateAlert(settingInfo.update_alert));
-  // dispatch(setSocialInfoEmail(settingInfo.social_info_email));
-  // dispatch(setSocialInfoGithub(settingInfo.social_info_github));
-  // dispatch(setSocialInfoTwitter(settingInfo.social_info_twitter));
-  // dispatch(setSocialInfoFacebook(settingInfo.social_info_facebook));
-  // dispatch(setSocialInfoUrl(settingInfo.social_info_url));
 
   return (
     <SettingPage>
