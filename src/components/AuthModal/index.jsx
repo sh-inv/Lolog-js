@@ -29,7 +29,7 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
             <div className='wrapper'>
               <h2>{isSignInModal ? '회원가입' : '로그인'}</h2>
               <section>
-                <h4>아이디로 {isSignInModal ? '회원가입' : '로그인'}</h4>
+                <h4>{isSignInModal ? '이메일로 회원가입' : '아이디로 로그인'}</h4>
                 {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} onClose={onClose} />}
               </section>
               <section>
