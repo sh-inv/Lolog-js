@@ -121,6 +121,35 @@ const CommentContainer = styled.div`
     word-break: keep-all;
     overflow-wrap: break-word;
   }
+
+  @media screen and (max-width: 768px) {
+    .profile-box {
+      .profile {
+        .profile-img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+
+        .profile-info {
+          margin-left: 0.5rem;
+          .user-id {
+            font-size: 0.875rem;
+          }
+          .create-at {
+            font-size: 0.75rem;
+          }
+        }
+      }
+
+      .actions {
+        font-size: 0.75rem;
+      }
+    }
+
+    .text {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export default CommentContent;
