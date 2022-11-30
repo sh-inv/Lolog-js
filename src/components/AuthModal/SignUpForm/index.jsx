@@ -53,7 +53,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
   );
 };
 
-const SignUpFormContainer = styled.div`
+const SignUpFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
