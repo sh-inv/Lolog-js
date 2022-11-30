@@ -12,7 +12,9 @@ import axios from 'axios';
 
 // const getSettingApi = async () => {
 //   const config = {
-//     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+//     headers: {
+//       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MSwibG9naW5faWQiOiJqb3NlcGhzY2FobjEiLCJuYW1lIjoi7JWI7IiY7LKgMSJ9LCJpYXQiOjE2Njk4MDU5MjJ9.Tt81yQZSWMitJP-O_wEzXY1I90iqlpXB_qbA2hbhLvo`,
+//     },
 //   };
 //   const resp = await apiClient.get('/users', config);
 //   return resp.data?.data;
@@ -20,39 +22,62 @@ import axios from 'axios';
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  // const user = useSelector(state => state.user.user);
 
   // useEffect(() => {
   //   const loader = async () => {
   //     try {
-  //       const data = await getSettingApi();
-  //       setSettingInfo(data);
+  //       const {
+  //         data: { user },
+  //       } = await getSettingApi();
+  //       dispatch(setUser(user));
   //     } catch (error) {
-  //       console.error(error);
-  //       setSettingInfo(null);
+  //       console.log(error);
+  //       dispatch(setUser(null));
   //     }
   //   };
   //   loader();
   // }, []);
 
-  const getLoader = async () => {
-    try {
-      const {
-        data: { user },
-      } = await axios.get('data/setting/user.json');
-      dispatch(setUser(user));
-      // console.log(user);
-    } catch (error) {
-      console.log(error);
-      dispatch(setUser(null));
-    }
-  };
-
   useEffect(() => {
-    getLoader();
+    const loader = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MSwibG9naW5faWQiOiJqb3NlcGhzY2FobjEiLCJuYW1lIjoi7JWI7IiY7LKgMSJ9LCJpYXQiOjE2Njk4MTIyMDN9.NYh36rjSojciJ_J9ndpe_AJPxDcpzFwqmNUon5KCbHQ`,
+          },
+        };
+        const {
+          data: { user },
+        } = await axios.get('http://localhost:8000/users', config);
+        dispatch(setUser(user));
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+        dispatch(setUser(null));
+      }
+    };
+    loader();
   }, []);
 
-  console.log(user);
+  // const getLoader = async () => {
+  //   try {
+  //     const {
+  //       data: { user },
+  //     } = await axios.get('data/setting/user.json');
+  //     dispatch(setUser(user));
+  //     // console.log(user);
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(setUser(null));
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getLoader();
+  // }, []);
+
+  // console.log(user);
 
   return (
     <SettingPage>
