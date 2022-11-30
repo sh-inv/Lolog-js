@@ -3,18 +3,10 @@ import Toggle from './Toggle';
 import styled from 'styled-components';
 
 const EmailReceiveSetting = () => {
-  // const dispatch = useDispatch();
-  // const user = useSelector(state => state.user.user);
-
-  // // console.log(user?.comment_alert);
-
-  // const onCommentAlert = () => {
-  //   // dispatch(setUser(!user?.comment_alert));
-  //   console.log(user?.comment_alert);
-  // };
-  // const onUpdateAlert = () => {
-  //   dispatch(setUser(!user?.update_alert));
-  // };
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
+  const commentAlert = user?.comment_alert;
+  const updateAlert = user?.update_alert;
 
   return (
     <EmailReceiveSettingContainer>
