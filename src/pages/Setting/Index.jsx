@@ -38,44 +38,44 @@ const Setting = () => {
   //   loader();
   // }, []);
 
-  useEffect(() => {
-    const loader = async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
-          },
-        };
-        const {
-          data: { user },
-        } = await axios.get('http://localhost:8000/users', config);
-        dispatch(setUser(user));
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-        dispatch(setUser(null));
-      }
-    };
-    loader();
-  }, []);
+  // useEffect(() => {
+  //   const loader = async () => {
+  //     try {
+  //       const config = {
+  //         headers: {
+  //           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+  //         },
+  //       };
+  //       const {
+  //         data: { user },
+  //       } = await axios.get('http://localhost:8000/users', config);
+  //       dispatch(setUser(user));
+  //       console.log(user);
+  //     } catch (error) {
+  //       console.log(error);
+  //       dispatch(setUser(null));
+  //     }
+  //   };
+  //   loader();
+  // }, []);
 
   // mock data
-  // const getLoader = async () => {
-  //   try {
-  //     const {
-  //       data: { user },
-  //     } = await axios.get('data/setting/user.json');
-  //     dispatch(setUser(user));
-  //     // console.log(user);
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(setUser(null));
-  //   }
-  // };
+  const getLoader = async () => {
+    try {
+      const {
+        data: { user },
+      } = await axios.get('data/setting/user.json');
+      dispatch(setUser(user));
+      // console.log(user);
+    } catch (error) {
+      console.log(error);
+      dispatch(setUser(null));
+    }
+  };
 
-  // useEffect(() => {
-  //   getLoader();
-  // }, []);
+  useEffect(() => {
+    getLoader();
+  }, []);
 
   // console.log(user);
 

@@ -2,30 +2,75 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../../../../store/modules/user';
 import styled from 'styled-components';
+import { apiClient } from '../../../../../api';
+
+import axios from 'axios';
 
 const Toggle = ({ checked = false, name }) => {
   const [toggle, setToggle] = useState(checked);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
 
-  const onToggle = async () => {
+  // const onAlert  = async () => {
+  //   const body = {
+  //     comment_alert: user?.comment_alert,
+  //     update_alert: user?.update_alert,
+  //   };
+
+  //   Object.assign(body, {
+  //     [name]: !toggle,
+  //   });
+
+  //   console.log(body);
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+  //       },
+  //     };
+  //     const resp = await apiClient.patch('/users/type=alert', config, body);
+  //     if (resp.status === 201) {
+  //       setToggle(!toggle);
+  //       dispatch(
+  //         setUser({
+  //           ...user,
+  //           [name]: !toggle,
+  //         })
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // * mock data
+  const onAlert = async () => {
     const body = {
       comment_alert: user?.comment_alert,
       update_alert: user?.update_alert,
     };
+
     Object.assign(body, {
       [name]: !toggle,
     });
+
     console.log(body);
     try {
-      // fetch
-      setToggle(!toggle);
-      dispatch(
-        setUser({
-          ...user,
-          [name]: !toggle,
-        })
-      );
+      const config = {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+        },
+      };
+      const resp = await axios.patch('data/setting/user.json', config, body);
+      if (resp.status === 201) {
+        setToggle(!toggle);
+        dispatch(
+          setUser({
+            ...user,
+            [name]: !toggle,
+          })
+        );
+      }
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +78,7 @@ const Toggle = ({ checked = false, name }) => {
 
   return (
     <ToggleBox>
-      <div className={toggle ? 'toggle-on' : 'toggle-off'} onClick={onToggle}>
+      <div className={toggle ? 'toggle-on' : 'toggle-off'} onClick={onAlert}>
         <div className='circle' />
       </div>
     </ToggleBox>
