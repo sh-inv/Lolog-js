@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Toggle from './Toggle';
 import styled from 'styled-components';
+import { createPortal } from 'react-dom';
 
 const EmailReceiveSetting = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const EmailReceiveSetting = () => {
       <ul>
         <li>
           <span className='alert'>댓글 알림</span>
-          <Toggle />
+          <Toggle true={commentAlert === 1} />
         </li>
         <li>
           <span className='alert'>벨로그 업데이트 소식</span>
