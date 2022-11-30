@@ -29,7 +29,7 @@ const LoginForm = ({ onClose }) => {
       };
       try {
         const resp = await apiClient.post('/auth/login', body);
-        if (resp.status === 200) {
+        if (resp.status === 201) {
           const { token } = resp.data;
           localStorage.setItem('authToken', token);
           setForm({

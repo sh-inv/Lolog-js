@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import Button from '../../Button';
 import Toastify from '../../../components/Toastify';
 
@@ -10,6 +11,12 @@ const SignUpForm = ({ setIsLoginModal }) => {
   const [email, setEmail] = useState('');
   const [isEmail, setIsEmail] = useState(false);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
+
+  //   const postEmail = async() => {
+  // const body = {
+  //   email :
+  // }
+  //   }
 
   const getEmail = e => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -23,6 +30,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
   };
 
   const error = () => toast.error('이메일 형식을 확인해주세요!');
+
   const getAuth = () => {
     toast.info('인증 메일을 확인해주세요');
     setIsEmailAuth(true);
