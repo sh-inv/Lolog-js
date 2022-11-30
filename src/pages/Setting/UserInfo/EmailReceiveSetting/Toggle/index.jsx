@@ -1,11 +1,32 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { setUser } from '../../../../../store/modules/user';
 
-const Toggle = () => {
-  const [toggle, setToggle] = useState(false);
+const Toggle = ({ checked = false, name }) => {
+  const [toggle, setToggle] = useState(checked);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
 
-  const onToggle = () => {
+  const onToggle = async () => {
+    const body = {
+      comment_alert: user?.comment_alert,
+      update_alert: user?.update_alert,
+    };
+
+    Object.assign(body, {
+      [name]: !toggle,
+    });
+    console.log(body);
+    // fetch
+
     setToggle(!toggle);
+    dispatch(
+      setUser({
+        ...user,
+        [name]: !toggle,
+      })
+    );
   };
 
   return (

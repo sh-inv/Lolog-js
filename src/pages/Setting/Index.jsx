@@ -13,7 +13,7 @@ import axios from 'axios';
 const getSettingApi = async () => {
   const config = {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MSwibG9naW5faWQiOiJqb3NlcGhzY2FobjEiLCJuYW1lIjoi7JWI7IiY7LKgMSJ9LCJpYXQiOjE2Njk4MDU5MjJ9.Tt81yQZSWMitJP-O_wEzXY1I90iqlpXB_qbA2hbhLvo`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
     },
   };
   const resp = await apiClient.get('/users', config);

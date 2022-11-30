@@ -14,11 +14,11 @@ const EmailReceiveSetting = () => {
       <ul>
         <li>
           <span className='alert'>댓글 알림</span>
-          <Toggle true={commentAlert === 1} />
+          <Toggle name='comment_alert' checked={commentAlert === 1} />
         </li>
         <li>
           <span className='alert'>벨로그 업데이트 소식</span>
-          <Toggle />
+          <Toggle name='update_alert' checked={updateAlert === 1} />
         </li>
       </ul>
     </EmailReceiveSettingContainer>
