@@ -1,25 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../../../store/modules/user';
 import EditButton from '../../../../components/EditButton';
 import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const Title = () => {
-  const [title, setTitle] = useState('');
   const [isModifyTitle, setIsModifyTitle] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
 
   const onModify = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
   };
 
-  useEffect(() => {
-    const contents = {
-      title: 'my.log',
-    };
-    setTitle(contents.title);
-  }, []);
-
   const getTitle = e => {
-    setTitle(e.target.value);
+    e.preventDefault();
+    dispatch(
+      setUser({
+        ...user,
+        title: e.target.value,
+      })
+    );
   };
 
   return (
@@ -27,13 +29,13 @@ const Title = () => {
       {isModifyTitle ? (
         <TitleContainer>
           <form>
-            <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={title} />
+            <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user?.title} />
             <Button type='submit' onClick={onModify} text='저장' className='confirm-button' />
           </form>
         </TitleContainer>
       ) : (
         <>
-          <TitleContainer>{title}</TitleContainer>
+          <TitleContainer>{user?.title}</TitleContainer>
           <EditButtonContainer>
             <EditButton text='수정' onClick={onModify} />
           </EditButtonContainer>
