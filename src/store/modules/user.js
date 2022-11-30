@@ -17,6 +17,7 @@ const user = createSlice({
     socialInfoFacebook: '',
     socialInfoUrl: '',
     user: null,
+    followCount: '',
   },
   reducers: {
     setUser: (state, action) => {
@@ -25,6 +26,5 @@ const user = createSlice({
   },
 });
 
-export const { setUser, setId, setProfileImage, setName, setIntro, setTitle, setSocialInfo, setEmail, setCommentAlert, setUpdateAlert, setSocialInfoEmail, setSocialInfoGithub, setSocialInfoTwitter, setSocialInfoFacebook, setSocialInfoUrl } =
-  user.actions;
+export const { setUser } = user.actions;
 export const userReducer = user.reducer;
