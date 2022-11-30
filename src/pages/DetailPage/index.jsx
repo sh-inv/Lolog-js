@@ -1,37 +1,40 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import CommentArea from './CommentArea';
 import { apiClient } from '../../api';
 import NextPrePost from './NextPrePost';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailData } from '../../store/modules/detailPage';
 
 const DetailPage = () => {
-  const [postData, setPostData] = useState();
+  const dispatch = useDispatch();
+  const { postData, commentsData } = useSelector(state => state.detailData);
 
   useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiClient.get('/lolog/1/8');
+        dispatch(getDetailData(data));
+      } catch (error) {
+        console.log('detail page data error => ', error);
+      }
+    })();
     // (async () => {
     //   try {
-    //     const { data } = await apiClient.get('/inside/1/8');
-    //     setPostData(data);
+    //     const { data } = await axios.get('/public/data/detailpage/comments.json');
+    //     dispatch(getDetailData(data));
     //   } catch (error) {
     //     console.log('comment list error => ', error);
     //   }
     // })();
-    (async () => {
-      try {
-        const { data } = await axios.get('/public/data/detailpage/comments.json');
-        setPostData(data);
-      } catch (error) {
-        console.log('comment list error => ', error);
-      }
-    })();
   }, []);
 
   return (
     postData && (
       <DetailPageContainer>
         <NextPrePost postData={postData} />
-        <CommentArea comments={postData.comments} />
+        <CommentArea comments={commentsData} />
       </DetailPageContainer>
     )
   );

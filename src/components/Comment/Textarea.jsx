@@ -1,12 +1,40 @@
 import styled from 'styled-components';
+import { apiClient } from '../../api';
+import { toast } from 'react-toastify';
+import Toastify from '../Toastify';
 
 const Textarea = ({ setIsModify, isModify, content }) => {
   const cancelHandler = () => {
     setIsModify(false);
   };
 
+  const headers = {
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTc4NDY0N30.IQWbyxgj3UjAx8D8hMcQpAdf4uIu2XvkT7RrJ3e6fSY`,
+  };
+
+  const commantError = () => toast.error('댓글 통신 에러');
+
+  const comments = async () => {
+    try {
+      const { data } = await apiClient.post(
+        '/comments/8',
+        {
+          content: 'klsdjfghksjdfhgjklshdfkghsjklrd',
+          depth: 1,
+          parent_id: 46,
+        },
+        { headers: headers }
+      );
+      data && success();
+    } catch (error) {
+      console.log('댓글 통신 에러', error);
+      commantError();
+    }
+  };
+
   return (
     <TextareaContainer>
+      <Toastify />
       <textarea
         className='textarea'
         rows={1}
@@ -22,7 +50,9 @@ const Textarea = ({ setIsModify, isModify, content }) => {
             취소
           </button>
         )}
-        <button className='btn upload'>댓글 {isModify ? '수정' : '작성'}</button>
+        <button className='btn upload' onClick={comments}>
+          댓글 {isModify ? '수정' : '작성'}
+        </button>
       </div>
     </TextareaContainer>
   );

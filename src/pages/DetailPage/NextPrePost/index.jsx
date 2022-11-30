@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import PostNavBtn from '../../../components/PostNavBtn';
 
 const NextPrePost = ({ postData }) => {
+  const { pre_post, next_post } = postData;
   return (
     <NextPrePostContainer>
-      <PostNavBtn postData={postData.pre_post} isLeft={true} />
-      {postData.next_post.length ? <PostNavBtn postData={postData.next_post} /> : <></>}
+      <PostNavBtn postData={pre_post} isLeft={true} />
+      {next_post && <PostNavBtn postData={next_post} />}
     </NextPrePostContainer>
   );
 };
