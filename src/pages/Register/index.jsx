@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
 import { MdLockOutline } from 'react-icons/md';
 import { TfiCheckBox } from 'react-icons/tfi';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
-import styled from 'styled-components';
 
 const Register = () => {
   const navigate = useNavigate();

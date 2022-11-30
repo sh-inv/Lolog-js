@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../Button';
 
-const LoginForm = ({ onClick, onClose }) => {
+const LoginForm = ({ onClose }) => {
   const [form, setForm] = useState({
     id: '',
     password: '',

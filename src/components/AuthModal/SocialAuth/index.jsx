@@ -7,13 +7,13 @@ import styled from 'styled-components';
 const SocialAuth = () => {
   return (
     <SocialAuthContainer>
-      <Link className='github' tabIndex='5'>
+      <Link className='github' tabIndex='7'>
         <AiOutlineGithub />
       </Link>
-      <Link className='google' tabIndex='6'>
+      <Link className='google' tabIndex='8'>
         <FcGoogle />
       </Link>
-      <Link className='facebook' tabIndex='7'>
+      <Link className='facebook' tabIndex='9'>
         <FaFacebookF />
       </Link>
     </SocialAuthContainer>
