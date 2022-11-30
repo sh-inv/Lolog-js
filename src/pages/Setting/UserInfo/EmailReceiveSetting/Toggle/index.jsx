@@ -57,20 +57,18 @@ const Toggle = ({ checked = false, name }) => {
     console.log(body);
     try {
       const config = {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
-        },
+        // headers: {
+        //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+        // },
       };
       const resp = await axios.patch('data/setting/user.json', config, body);
-      if (resp.status === 201) {
-        setToggle(!toggle);
-        dispatch(
-          setUser({
-            ...user,
-            [name]: !toggle,
-          })
-        );
-      }
+      setToggle(!toggle);
+      dispatch(
+        setUser({
+          ...user,
+          [name]: !toggle,
+        })
+      );
     } catch (error) {
       console.log(error);
     }

@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import Button from '../../../../components/Button';
 import ConfirmModal from '../../../../components/ConfirmModal';
-import styled from 'styled-components';
 
 const Withdrawal = () => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
 
   const onModal = () => {
-    //token 값 추가해야함
     setIsModal(true);
   };
 
