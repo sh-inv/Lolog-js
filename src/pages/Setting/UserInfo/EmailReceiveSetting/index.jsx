@@ -1,10 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Toggle from './Toggle';
 import styled from 'styled-components';
-import { createPortal } from 'react-dom';
 
 const EmailReceiveSetting = () => {
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const commentAlert = user?.comment_alert;
   const updateAlert = user?.update_alert;

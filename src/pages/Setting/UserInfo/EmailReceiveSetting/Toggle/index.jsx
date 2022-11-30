@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { setUser } from '../../../../../store/modules/user';
+import styled from 'styled-components';
 
 const Toggle = ({ checked = false, name }) => {
   const [toggle, setToggle] = useState(checked);
@@ -13,20 +13,22 @@ const Toggle = ({ checked = false, name }) => {
       comment_alert: user?.comment_alert,
       update_alert: user?.update_alert,
     };
-
     Object.assign(body, {
       [name]: !toggle,
     });
     console.log(body);
-    // fetch
-
-    setToggle(!toggle);
-    dispatch(
-      setUser({
-        ...user,
-        [name]: !toggle,
-      })
-    );
+    try {
+      // fetch
+      setToggle(!toggle);
+      dispatch(
+        setUser({
+          ...user,
+          [name]: !toggle,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

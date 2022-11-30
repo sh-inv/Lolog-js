@@ -10,47 +10,26 @@ import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px }
 
 import axios from 'axios';
 
-const getSettingApi = async () => {
-  const config = {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
-    },
-  };
-  const resp = await apiClient.get('/users', config);
-  return resp.data?.data;
-};
+// const getSettingApi = async () => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+//     },
+//   };
+//   const resp = await apiClient.get('/users', config);
+//   return resp.data?.data;
+// };
 
 const Setting = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const loader = async () => {
-      try {
-        const {
-          data: { user },
-        } = await getSettingApi();
-        dispatch(setUser(user));
-      } catch (error) {
-        console.log(error);
-        dispatch(setUser(null));
-      }
-    };
-    loader();
-  }, []);
-
   // useEffect(() => {
   //   const loader = async () => {
   //     try {
-  //       const config = {
-  //         headers: {
-  //           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MSwibG9naW5faWQiOiJqb3NlcGhzY2FobjEiLCJuYW1lIjoi7JWI7IiY7LKgMSJ9LCJpYXQiOjE2Njk4MTIyMDN9.NYh36rjSojciJ_J9ndpe_AJPxDcpzFwqmNUon5KCbHQ`,
-  //         },
-  //       };
   //       const {
   //         data: { user },
-  //       } = await apiClient.get('/users', config);
+  //       } = await getSettingApi();
   //       dispatch(setUser(user));
-  //       console.log(user);
   //     } catch (error) {
   //       console.log(error);
   //       dispatch(setUser(null));
@@ -58,6 +37,27 @@ const Setting = () => {
   //   };
   //   loader();
   // }, []);
+
+  useEffect(() => {
+    const loader = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+          },
+        };
+        const {
+          data: { user },
+        } = await axios.get('http://localhost:8000/users', config);
+        dispatch(setUser(user));
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+        dispatch(setUser(null));
+      }
+    };
+    loader();
+  }, []);
 
   // mock data
   // const getLoader = async () => {
