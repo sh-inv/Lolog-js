@@ -1,38 +1,20 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Textarea from '../../../components/Comment/Textarea';
-import CommentList from './CommentList';
+import Comment from './Comment';
 
-const CommentArea = () => {
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get('http://localhost:8000/inside/1/8');
-        setComments(data.comments);
-      } catch (error) {
-        console.log('comment list error => ', error);
-      }
-    })();
-    // (async () => {
-    //   try {
-    //     const { data } = await axios.get('/public/data/detailpage/comments.json');
-    //     setComments(data.comments);
-    //   } catch (error) {
-    //     console.log('comment list error => ', error);
-    //   }
-    // })();
-  }, []);
-  console.log(comments);
-
+const CommentArea = ({ comments }) => {
   return (
-    <CommentAreaContainer>
-      <h4 className='comments-count'>{comments.length}개의 댓글</h4>
-      <Textarea />
-      <CommentList comments={comments} />
-    </CommentAreaContainer>
+    comments && (
+      <CommentAreaContainer>
+        <h4 className='comments-count'>{comments.length}개의 댓글</h4>
+        <Textarea />
+        <div className='comments-list' comments={comments}>
+          {comments.map(commentData => (
+            <Comment key={commentData.comment_id} commentData={commentData} />
+          ))}
+        </div>
+      </CommentAreaContainer>
+    )
   );
 };
 
@@ -45,6 +27,10 @@ const CommentAreaContainer = styled.div`
     line-height: 1.5;
     font-weight: 600;
     margin-bottom: 1rem;
+  }
+
+  .comments-list {
+    margin-top: 2.5rem;
   }
 `;
 

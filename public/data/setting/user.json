@@ -1,0 +1,17 @@
+{
+  "user": {
+    "id": 14,
+    "profile_image": "https://velog.velcdn.com/images/daydreamplace/post/3a7c1309-51a5-46eb-abb6-407954aa7948/image.png",
+    "name": "eden",
+    "about_me": "i am me",
+    "title": "me.log",
+    "email": "emailtest@gmail.com",
+    "comment_alert": 0,
+    "update_alert": 0,
+    "social_info_email": "ubin@gmail.com",
+    "social_info_github": "ubin",
+    "social_info_twitter": "ubinzzang",
+    "social_info_facebook": "ubn",
+    "social_info_url": "bn.com"
+  }
+}
