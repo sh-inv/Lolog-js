@@ -8,23 +8,14 @@ import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../st
 
 const UserIntro = () => {
   const [isModify, setIsModify] = useState(false);
-  const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
 
   const onModify = () => {
     isModify ? setIsModify(false) : setIsModify(true);
   };
 
-  // useEffect(() => {
-  //   // fetch =>user info
-  //   const profile = { user: 'Eden', introduction: 'one part' };
-
-  //   dispatch(setName(profile.user));
-  //   dispatch(setIntro(profile.introduction));
-  // }, []);
-
   const getName = e => {
-    e.preventDefault();
     dispatch(
       setUser({
         ...user,

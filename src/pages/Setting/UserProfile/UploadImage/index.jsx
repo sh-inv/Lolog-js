@@ -12,9 +12,15 @@ const UploadImage = () => {
 
   const onUploadImage = e => {
     if (!e.target.files) return;
+    dispatch(
+      setUser({
+        ...user,
+        profile_image: URL.createObjectURL(e.target.files[0]),
+      })
+    );
   };
 
-  const getImage = e => {
+  const getImage = () => {
     if (!imageRef.current) return;
     imageRef.current.click();
   };
