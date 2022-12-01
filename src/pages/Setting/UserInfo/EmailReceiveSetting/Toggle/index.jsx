@@ -11,39 +11,6 @@ const Toggle = ({ checked = false, name }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
 
-  // const onAlert  = async () => {
-  //   const body = {
-  //     comment_alert: user?.comment_alert,
-  //     update_alert: user?.update_alert,
-  //   };
-
-  //   Object.assign(body, {
-  //     [name]: !toggle,
-  //   });
-
-  //   console.log(body);
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
-  //       },
-  //     };
-  //     const resp = await apiClient.patch('/users/type=alert', config, body);
-  //     if (resp.status === 201) {
-  //       setToggle(!toggle);
-  //       dispatch(
-  //         setUser({
-  //           ...user,
-  //           [name]: !toggle,
-  //         })
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // * mock data
   const onAlert = async () => {
     const body = {
       comment_alert: user?.comment_alert,
@@ -57,26 +24,59 @@ const Toggle = ({ checked = false, name }) => {
     console.log(body);
     try {
       const config = {
-        // headers: {
-        //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
-        // },
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTQsImxvZ2luX2lkIjoieW91MTExIiwibmFtZSI6IuydtOumhCJ9LCJpYXQiOjE2Njk4Nzk5MTN9.pC18ZARWicHtnOW5vHEhvxjwxIOMj1pPD6CrYAWxdn0`,
+        },
       };
-      const resp = await axios.patch('data/setting/user.json', config, body);
-      setToggle(!toggle);
-      dispatch(
-        setUser({
-          ...user,
-          [name]: !toggle,
-        })
-      );
+      const resp = await apiClient.patch('/users?type=alert', body, config);
+      if (resp.status === 201) {
+        setToggle(!toggle);
+        dispatch(
+          setUser({
+            ...user,
+            [name]: !toggle,
+          })
+        );
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
+  // * mock data
+  // const onAlert = async () => {
+  //   const body = {
+  //     comment_alert: user?.comment_alert,
+  //     update_alert: user?.update_alert,
+  //   };
+
+  //   Object.assign(body, {
+  //     [name]: !toggle,
+  //   });
+
+  //   console.log(body);
+  //   try {
+  //     const config = {
+  //       // headers: {
+  //       //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+  //       // },
+  //     };
+  //     const resp = await axios.patch('data/setting/user.json', config, body);
+  //     setToggle(!toggle);
+  //     dispatch(
+  //       setUser({
+  //         ...user,
+  //         [name]: !toggle,
+  //       })
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <ToggleBox>
-      <div className={toggle ? 'toggle-on' : 'toggle-off'} onClick={onAlert}>
+      <div className={toggle === 1 ? 'toggle-on' : 'toggle-off'} onClick={onAlert}>
         <div className='circle' />
       </div>
     </ToggleBox>
