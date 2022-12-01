@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../../store/modules/user';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import EditButton from '../../../components/EditButton';
 import Button from '../../../components/Button';
+import Toastify from '../../../components/Toastify';
 import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../styles/media';
 
 const UserIntro = () => {
   const [isModify, setIsModify] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-
-  const onModify = () => {
-    isModify ? setIsModify(false) : setIsModify(true);
-  };
 
   const getName = e => {
     dispatch(
@@ -25,12 +24,39 @@ const UserIntro = () => {
   };
 
   const getIntro = e => {
+    console.log(e.target.value);
     dispatch(
       setUser({
         ...user,
         about_me: e.target.value,
       })
     );
+  };
+
+  const onConfirm = async () => {
+    const body = {
+      name: user.name,
+      about_me: user.about_me,
+    };
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
+        },
+      };
+      await apiClient.patch('/users?type=name', body, config);
+      dispatch(
+        setUser({
+          ...user,
+          name: user.name,
+          abou_me: user.about_me,
+        })
+      );
+      setIsModify(false);
+    } catch (error) {
+      toast.error('이름을 입력해주세요');
+    }
   };
 
   return (
@@ -40,21 +66,21 @@ const UserIntro = () => {
           <>
             <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
             <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
-            <Button
-              className='confirm-button'
-              onClick={() => {
-                setIsModify(false);
-              }}
-              text='저장'
-            />
+            <Button className='confirm-button' onClick={onConfirm} text='저장' />
           </>
         ) : (
           <>
             <h2>{user.name}</h2>
             <p>{user.about_me}</p>
-            <EditButton text='수정' onClick={onModify} />
+            <EditButton
+              text='수정'
+              onClick={() => {
+                setIsModify(true);
+              }}
+            />
           </>
         )}
+        <Toastify />
       </UserIntroContainer>
     )
   );
