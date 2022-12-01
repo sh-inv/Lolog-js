@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { settingProfileMaxWidth768px, UserProfileImageMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
   return (
-    <UserProfileContainer>
-      <UserProfileImage source={user?.profile_image} />
-      <UploadImage />
-    </UserProfileContainer>
+    user && (
+      <UserProfileContainer>
+        <UserProfileImage source={user.profile_image} />
+        <UploadImage />
+      </UserProfileContainer>
+    )
   );
 };
 

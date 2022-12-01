@@ -43,17 +43,17 @@ const Setting = () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTQsImxvZ2luX2lkIjoieW91MTExIiwibmFtZSI6IuydtOumhCJ9LCJpYXQiOjE2Njk4Nzk5MTN9.pC18ZARWicHtnOW5vHEhvxjwxIOMj1pPD6CrYAWxdn0`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
           },
         };
         const {
           data: { user },
-        } = await axios.get('http://localhost:8000/users', config);
+        } = await apiClient.get('/users', config);
         dispatch(setUser(user));
         console.log(user);
       } catch (error) {
         console.log(error);
-        dispatch(setUser(null));
+        // dispatch(setUser(null));
       }
     };
     loader();

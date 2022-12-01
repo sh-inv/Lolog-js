@@ -1,9 +1,9 @@
+import styled from 'styled-components';
 import Title from './Title';
 import SocialInfo from './SocialInfo';
 import Email from './Email';
 import EmailReceiveSetting from './EmailReceiveSetting';
 import Withdrawal from './Withdrawal';
-import styled from 'styled-components';
 import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTitleMaxWidth768px } from '../../../styles/media';
 
 const UserInfo = () => {

@@ -9,7 +9,7 @@ import { UserIntroMaxWidth768px, UserIntroTitleMaxWidth768px } from '../../../st
 const UserIntro = () => {
   const [isModify, setIsModify] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
 
   const onModify = () => {
     isModify ? setIsModify(false) : setIsModify(true);
@@ -34,27 +34,29 @@ const UserIntro = () => {
   };
 
   return (
-    <UserIntroContainer>
-      {isModify ? (
-        <>
-          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user?.name} />
-          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user?.about_me} />
-          <Button
-            className='confirm-button'
-            onClick={() => {
-              setIsModify(false);
-            }}
-            text='저장'
-          />
-        </>
-      ) : (
-        <>
-          <h2>{user?.name}</h2>
-          <p>{user?.about_me}</p>
-          <EditButton text='수정' onClick={onModify} />
-        </>
-      )}
-    </UserIntroContainer>
+    user && (
+      <UserIntroContainer>
+        {isModify ? (
+          <>
+            <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
+            <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
+            <Button
+              className='confirm-button'
+              onClick={() => {
+                setIsModify(false);
+              }}
+              text='저장'
+            />
+          </>
+        ) : (
+          <>
+            <h2>{user.name}</h2>
+            <p>{user.about_me}</p>
+            <EditButton text='수정' onClick={onModify} />
+          </>
+        )}
+      </UserIntroContainer>
+    )
   );
 };
 

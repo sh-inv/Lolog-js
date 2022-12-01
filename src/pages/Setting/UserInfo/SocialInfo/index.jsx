@@ -10,7 +10,8 @@ import Button from '../../../../components/Button';
 const SocialInfo = () => {
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
+
   const email = user?.social_info_email;
   const github = user?.social_info_github;
   const twitter = user?.social_info_twitter;
@@ -69,65 +70,67 @@ const SocialInfo = () => {
   ];
 
   return (
-    <>
-      {isModifySocialInfo ? (
-        <SocialInfoContainer>
-          <form>
-            <ul className='modify-info'>
-              {info.map(content => (
-                <li key={content.id}>
-                  {content.icon}
-                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={content.value || ''} onChange={getSocialInfo} />
-                </li>
-              ))}
-            </ul>
-            <div className='button-wrapper'>
-              <Button onClick={onModify} text='저장' className='confirm-button' />
-            </div>
-          </form>
-        </SocialInfoContainer>
-      ) : (
-        <>
+    user && (
+      <>
+        {isModifySocialInfo ? (
           <SocialInfoContainer>
-            <ul className='save-info'>
-              {email ? (
-                <li>
-                  <MdEmail className='icon' />
-                  <span>{email}</span>
-                </li>
-              ) : null}
-              {github ? (
-                <li>
-                  <AiFillGithub className='icon' />
-                  <span>{github}</span>
-                </li>
-              ) : null}
-              {twitter ? (
-                <li>
-                  <AiOutlineTwitter className='icon' />
-                  <span>{twitter}</span>
-                </li>
-              ) : null}
-              {facebook ? (
-                <li>
-                  <AiFillFacebook className='icon' />
-                  <span>{facebook}</span>
-                </li>
-              ) : null}
-              {url ? (
-                <li>
-                  <AiFillHome className='icon' />
-                  <span>{url}</span>
-                </li>
-              ) : null}
-            </ul>
+            <form>
+              <ul className='modify-info'>
+                {info.map(content => (
+                  <li key={content.id}>
+                    {content.icon}
+                    <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={content.value || ''} onChange={getSocialInfo} />
+                  </li>
+                ))}
+              </ul>
+              <div className='button-wrapper'>
+                <Button onClick={onModify} text='저장' className='confirm-button' />
+              </div>
+            </form>
           </SocialInfoContainer>
-          <EditButtonContainer>
-            <EditButton text='수정' onClick={onModify} />
-          </EditButtonContainer>
-        </>
-      )}
-    </>
+        ) : (
+          <>
+            <SocialInfoContainer>
+              <ul className='save-info'>
+                {email && (
+                  <li>
+                    <MdEmail className='icon' />
+                    <span>{email}</span>
+                  </li>
+                )}
+                {github && (
+                  <li>
+                    <AiFillGithub className='icon' />
+                    <span>{github}</span>
+                  </li>
+                )}
+                {twitter && (
+                  <li>
+                    <AiOutlineTwitter className='icon' />
+                    <span>{twitter}</span>
+                  </li>
+                )}
+                {facebook && (
+                  <li>
+                    <AiFillFacebook className='icon' />
+                    <span>{facebook}</span>
+                  </li>
+                )}
+                {url && (
+                  <li>
+                    <AiFillHome className='icon' />
+                    <span>{url}</span>
+                  </li>
+                )}
+              </ul>
+            </SocialInfoContainer>
+            <EditButtonContainer>
+              <EditButton text='수정' onClick={onModify} />
+            </EditButtonContainer>
+          </>
+        )}
+      </>
+    )
   );
 };
 
