@@ -45,7 +45,7 @@ const UserIntro = () => {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
         },
       };
-      await apiClient.patch('/users?type=name', body, config);
+      const resp = await apiClient.patch('/users?type=name', body, config);
       dispatch(
         setUser({
           ...user,
@@ -55,6 +55,7 @@ const UserIntro = () => {
       );
       setIsModify(false);
     } catch (error) {
+      console.log(error);
       toast.error('이름을 입력해주세요');
     }
   };
