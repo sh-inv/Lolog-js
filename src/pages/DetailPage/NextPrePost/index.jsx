@@ -5,7 +5,7 @@ const NextPrePost = ({ postData }) => {
   const { pre_post, next_post } = postData;
   return (
     <NextPrePostContainer>
-      <PostNavBtn postData={pre_post} isLeft={true} />
+      {pre_post ? <PostNavBtn postData={pre_post} isLeft={true} /> : <div />}
       {next_post && <PostNavBtn postData={next_post} />}
     </NextPrePostContainer>
   );

@@ -6,18 +6,18 @@ import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
 const CommentContent = ({ isNested, commentData }) => {
-  const { profile_img, user_id, create_at, is_comments_writer, content } = commentData;
+  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id } = commentData;
   const [isModify, setIsModify] = useState(false);
 
   return (
     <CommentContainer isNested={isNested}>
       <div className='profile-box'>
         <div className='profile'>
-          <Link to='' className='profile-img'>
+          <Link to={`/${comment_login_id}`} className='profile-img'>
             <UserProfileImage source={profile_img} />
           </Link>
           <div className='profile-info'>
-            <Link to='' className='user-id'>
+            <Link to={`/${comment_login_id}`} className='user-id'>
               {user_id}
             </Link>
             <div className='create-at'>
