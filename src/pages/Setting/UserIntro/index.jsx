@@ -60,27 +60,29 @@ const UserIntro = () => {
   };
 
   return (
-    <UserIntroContainer>
-      {isModify ? (
-        <h2>
-          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
-          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
-          <Button className='confirm-button' onClick={onModifyConfirm} text='저장' />
-        </h2>
-      ) : (
-        <>
-          <h2>{user.name}</h2>
-          <p>{user.about_me}</p>
-          <EditButton
-            text='수정'
-            onClick={() => {
-              setIsModify(true);
-            }}
-          />
-        </>
-      )}
-      <Toastify />
-    </UserIntroContainer>
+    user && (
+      <UserIntroContainer>
+        {isModify ? (
+          <h2>
+            <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
+            <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
+            <Button className='confirm-button' onClick={onModifyConfirm} text='저장' />
+          </h2>
+        ) : (
+          <>
+            <h2>{user.name}</h2>
+            <p>{user.about_me}</p>
+            <EditButton
+              text='수정'
+              onClick={() => {
+                setIsModify(true);
+              }}
+            />
+          </>
+        )}
+        <Toastify />
+      </UserIntroContainer>
+    )
   );
 };
 

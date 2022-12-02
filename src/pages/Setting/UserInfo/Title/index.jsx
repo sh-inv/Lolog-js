@@ -52,24 +52,26 @@ const Title = () => {
   };
 
   return (
-    <>
-      {isModifyTitle ? (
-        <TitleContainer>
-          <div className='form'>
-            <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user.title} />
-            <Button type='submit' onClick={onModifyConfirm} text='저장' className='confirm-button' />
-          </div>
-        </TitleContainer>
-      ) : (
-        <>
-          <TitleContainer>{user.title}</TitleContainer>
-          <EditButtonContainer>
-            <EditButton text='수정' onClick={onModify} />
-          </EditButtonContainer>
-        </>
-      )}
-      <Toastify />
-    </>
+    user && (
+      <>
+        {isModifyTitle ? (
+          <TitleContainer>
+            <div className='form'>
+              <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user.title} />
+              <Button type='submit' onClick={onModifyConfirm} text='저장' className='confirm-button' />
+            </div>
+          </TitleContainer>
+        ) : (
+          <>
+            <TitleContainer>{user.title}</TitleContainer>
+            <EditButtonContainer>
+              <EditButton text='수정' onClick={onModify} />
+            </EditButtonContainer>
+          </>
+        )}
+        <Toastify />
+      </>
+    )
   );
 };
 
