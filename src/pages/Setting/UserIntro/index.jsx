@@ -24,7 +24,6 @@ const UserIntro = () => {
   };
 
   const getIntro = e => {
-    console.log(e.target.value);
     dispatch(
       setUser({
         ...user,
@@ -33,7 +32,7 @@ const UserIntro = () => {
     );
   };
 
-  const onConfirm = async () => {
+  const onModifyConfirm = async () => {
     const body = {
       name: user.name,
       about_me: user.about_me,
@@ -61,29 +60,27 @@ const UserIntro = () => {
   };
 
   return (
-    user && (
-      <UserIntroContainer>
-        {isModify ? (
-          <>
-            <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
-            <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
-            <Button className='confirm-button' onClick={onConfirm} text='저장' />
-          </>
-        ) : (
-          <>
-            <h2>{user.name}</h2>
-            <p>{user.about_me}</p>
-            <EditButton
-              text='수정'
-              onClick={() => {
-                setIsModify(true);
-              }}
-            />
-          </>
-        )}
-        <Toastify />
-      </UserIntroContainer>
-    )
+    <UserIntroContainer>
+      {isModify ? (
+        <h2>
+          <input className='modify-input modify-user' type='text' placeholder='이름' onChange={getName} value={user.name} />
+          <input className='modify-input modify-intro' type='text' placeholder='한 줄 소개' onChange={getIntro} value={user.about_me} />
+          <Button className='confirm-button' onClick={onModifyConfirm} text='저장' />
+        </h2>
+      ) : (
+        <>
+          <h2>{user.name}</h2>
+          <p>{user.about_me}</p>
+          <EditButton
+            text='수정'
+            onClick={() => {
+              setIsModify(true);
+            }}
+          />
+        </>
+      )}
+      <Toastify />
+    </UserIntroContainer>
   );
 };
 

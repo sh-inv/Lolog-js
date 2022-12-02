@@ -18,7 +18,7 @@ const user = createSlice({
     //   socialInfoFacebook: '',
     //   socialInfoUrl: '',
     // },
-    { user: null },
+    { user: {} },
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
