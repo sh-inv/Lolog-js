@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Email = () => {
-  return <EmailContainer>you8inpark@gmail.com</EmailContainer>;
+  const user = useSelector(state => state.user.user);
+
+  return <EmailContainer>{user?.email}</EmailContainer>;
 };
 
 const EmailContainer = styled.div`
