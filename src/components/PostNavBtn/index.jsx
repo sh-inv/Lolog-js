@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FiArrowLeft } from 'react-icons/fi';
 
 const PostNavBtn = ({ isLeft, postData }) => {
-  const { post_id, title } = postData[0];
+  const { post_id, title } = postData;
 
   return (
     <PostNavBtnContainer isLeft={isLeft}>

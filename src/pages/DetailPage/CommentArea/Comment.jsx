@@ -5,7 +5,7 @@ import CommentContent from '../../../components/Comment/CommentContent';
 import Textarea from '../../../components/Comment/Textarea';
 
 const Comment = ({ commentData }) => {
-  const { nested_comments } = commentData;
+  const { nested_comments, comment_id, post_id } = commentData;
   const [isNestedCommentsOpen, setIsNestedCommentsOpen] = useState(false);
   const nestedCommentsBtnHandler = () => {
     setIsNestedCommentsOpen(!isNestedCommentsOpen);
@@ -39,17 +39,16 @@ const Comment = ({ commentData }) => {
                     ))}
                   </div>
                   <div className='neted-comment-box'>
-                    <Textarea />
+                    <Textarea postId={post_id} commentId={comment_id} isNested={true} />
                   </div>
                 </>
               );
-            } else {
-              return (
-                <div className='comment-box'>
-                  <Textarea />
-                </div>
-              );
             }
+            return (
+              <div className='comment-box'>
+                <Textarea postId={post_id} commentId={comment_id} isNested={true} />
+              </div>
+            );
           }
           return;
         })()}
@@ -98,6 +97,8 @@ const CommentContainer = styled.div`
     .neted-comment-box {
       padding: 0 1.3125rem 1.3125rem 1.3125rem;
     }
+  }
+  @media screen and (max-width: 768px) {
   }
 `;
 
