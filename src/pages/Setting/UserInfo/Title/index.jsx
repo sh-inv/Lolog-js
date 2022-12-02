@@ -41,7 +41,7 @@ const Title = () => {
       dispatch(
         setUser({
           ...user,
-          title: user.title,
+          body,
         })
       );
       setIsModifyTitle(false);
@@ -56,10 +56,10 @@ const Title = () => {
       <>
         {isModifyTitle ? (
           <TitleContainer>
-            <div className='form'>
+            <form onSubmit={e => e.preventDefault()}>
               <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user.title} />
               <Button type='submit' onClick={onModifyConfirm} text='저장' className='confirm-button' />
-            </div>
+            </form>
           </TitleContainer>
         ) : (
           <>
@@ -81,7 +81,7 @@ const TitleContainer = styled.div`
   color: var(--text2);
   line-height: 1.5;
 
-  .form {
+  form {
     display: flex;
     -webkit-box-align: center;
     align-items: center;

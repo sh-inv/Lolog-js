@@ -8,7 +8,7 @@ import { UserContentsMaxWidth768px, UserContentsBoxMaxWidth768px, UserContentsTi
 
 const UserInfo = () => {
   const infoData = [
-    { id: 1, title: '벨로그 제목', component: <Title />, description: '개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.' },
+    { id: 1, title: '롤로그 제목', component: <Title />, description: '개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.' },
     { id: 2, title: '소셜 정보', component: <SocialInfo />, description: '포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다.' },
     { id: 3, title: '이메일 주소', component: <Email />, description: '회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다.' },
     {

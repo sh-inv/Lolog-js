@@ -4,8 +4,11 @@ import { setUser } from '../../../../store/modules/user';
 import styled from 'styled-components';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
+import { apiClient } from '../../../../api';
 import EditButton from '../../../../components/EditButton';
 import Button from '../../../../components/Button';
+import Toastify from '../../../../components/Toastify';
+import { toast } from 'react-toastify';
 
 const SocialInfo = () => {
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
@@ -29,6 +32,33 @@ const SocialInfo = () => {
         [e.target.name]: e.target.value,
       })
     );
+  };
+
+  const onModifyConfirm = async () => {
+    const body = {
+      social_info_email: email,
+      social_info_github: github,
+      social_info_twitter: twitter,
+      social_info_facebook: facebook,
+      social_info_url: url,
+    };
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
+        },
+      };
+      await apiClient.patch('/users?type=social_info', body, config);
+      dispatch(
+        setUser({
+          ...user,
+          body,
+        })
+      );
+      setisModifySocialInfo(false);
+    } catch (error) {
+      toast.error('이메일 형식과 url형식을 확인해주세요');
+    }
   };
 
   const info = [
@@ -74,7 +104,7 @@ const SocialInfo = () => {
       <>
         {isModifySocialInfo ? (
           <SocialInfoContainer>
-            <form>
+            <form onSubmit={e => e.preventDefault()}>
               <ul className='modify-info'>
                 {info.map(content => (
                   <li key={content.id}>
@@ -84,7 +114,7 @@ const SocialInfo = () => {
                 ))}
               </ul>
               <div className='button-wrapper'>
-                <Button onClick={onModify} text='저장' className='confirm-button' />
+                <Button onClick={onModifyConfirm} text='저장' className='confirm-button' />
               </div>
             </form>
           </SocialInfoContainer>
@@ -127,6 +157,7 @@ const SocialInfo = () => {
             <EditButtonContainer>
               <EditButton text='수정' onClick={onModify} />
             </EditButtonContainer>
+            <Toastify />
           </>
         )}
       </>
