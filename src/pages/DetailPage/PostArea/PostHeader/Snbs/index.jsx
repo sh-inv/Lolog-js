@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { GiShare } from 'react-icons/gi';
 import { BsFacebook, BsTwitter } from 'react-icons/bs';
@@ -7,6 +7,30 @@ import styled from 'styled-components';
 
 const Snbs = () => {
   const [isShare, setIsShare] = useState(false);
+  const [ScrollY, setScrollY] = useState(0);
+  const [ScrollActive, setScrollActive] = useState(false);
+  const snbRef = useRef();
+
+  const handleScroll = () => {
+    const snbTop = snbRef.current.offsetTop;
+    if (ScrollY > snbTop - 112) {
+      setScrollY(window.pageYOffset);
+      setScrollActive(true);
+    } else {
+      setScrollY(window.pageYOffset);
+      setScrollActive(false);
+    }
+  };
+
+  useEffect(() => {
+    const scrollListener = () => {
+      window.addEventListener('scroll', handleScroll);
+    };
+    scrollListener();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
 
   const changeLike = e => {
     const isLike = e.target.className.includes('active');
@@ -18,9 +42,9 @@ const Snbs = () => {
   };
 
   return (
-    <SnbsPositioner isShare={isShare}>
+    <SnbsPositioner ref={snbRef} isShare={isShare}>
       <div className='left-snb'>
-        <div className='left-snb-content'>
+        <div className={ScrollActive ? 'left-snb-content fixed' : 'left-snb-content'}>
           <div className='snb-icon' onClick={changeLike}>
             <FaHeart />
           </div>
@@ -42,7 +66,7 @@ const Snbs = () => {
         </div>
       </div>
       <div className='right-snb'>
-        <div className='right-snb-content'>
+        <div className={ScrollActive ? 'right-snb-content fixed' : 'right-snb-content'}>
           <div style={{ marginLeft: '0px' }}>
             <a href=''>10월</a>
           </div>
@@ -62,12 +86,15 @@ const SnbsPositioner = styled.div`
   position: relative;
   margin-top: 2rem;
   z-index: 15;
+  .fixed {
+    position: fixed;
+    top: 112px;
+  }
+
   .left-snb {
     position: absolute;
     left: -7rem;
     .left-snb-content {
-      position: fixed;
-      top: 112px;
       width: 4rem;
       background: var(--bg-element2);
       border: 1px solid var(--border4);
@@ -167,8 +194,6 @@ const SnbsPositioner = styled.div`
     position: absolute;
     left: 100%;
     .right-snb-content {
-      position: fixed;
-      top: 112px;
       width: 240px;
       margin-left: 5rem;
       border-left: 2px solid var(--border4);
