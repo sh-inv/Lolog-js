@@ -11,7 +11,7 @@ import Toastify from '../../../../components/Toastify';
 const Title = () => {
   const [isModifyTitle, setIsModifyTitle] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
 
   const onModify = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { apiClient } from '../../../../api';
+import Toastify from '../../../../components/Toastify';
 import Button from '../../../../components/Button';
 import ConfirmModal from '../../../../components/ConfirmModal';
 
@@ -10,6 +13,25 @@ const Withdrawal = () => {
 
   const onModal = () => {
     setIsModal(true);
+  };
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6NSwibG9naW5faWQiOiIxMjM0NWFhYSIsIm5hbWUiOiLrsJXjhaDruYgifSwiaWF0IjoxNjcwMDY3MjI4fQ.dkwk_xmhvw7dTB9DRr8u0YAEfNDKRp8eFs-upR3E-5E';
+
+  const onWithdrawal = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const resp = await apiClient.delete('/users', config);
+      console.log(resp.status);
+      setIsModal(false);
+      navigate('/');
+      toast.success(`회원탈퇴가 완료되었습니다.`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -24,12 +46,10 @@ const Withdrawal = () => {
           onClose={() => {
             setIsModal(false);
           }}
-          onMove={() => {
-            setIsModal(false);
-            navigate('/');
-          }}
+          onMove={onWithdrawal}
         />
       )}
+      <Toastify />
     </>
   );
 };

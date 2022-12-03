@@ -8,12 +8,10 @@ const UserProfile = () => {
   const { user } = useSelector(state => state.user);
 
   return (
-    user && (
-      <UserProfileContainer>
-        <UserProfileImage source={user.profile_image} />
-        <UploadImage />
-      </UserProfileContainer>
-    )
+    <UserProfileContainer>
+      {user && <UserProfileImage source={user.profile_image} />}
+      <UploadImage />
+    </UserProfileContainer>
   );
 };
 
