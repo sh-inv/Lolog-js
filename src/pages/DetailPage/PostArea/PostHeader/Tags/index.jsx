@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 
-const Tags = () => {
+const Tags = ({ tags }) => {
   return (
     <TagsContainer>
-      <a href=''>백엔드</a>
+      {tags.map(tag => {
+        return (
+          <a key={tag.tag_name} href={`/tags/${tag.tag_name}`}>
+            {tag.tag_name}
+          </a>
+        );
+      })}
     </TagsContainer>
   );
 };

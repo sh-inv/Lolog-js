@@ -2,10 +2,10 @@ import User from './User';
 import Social from './Social';
 import styled from 'styled-components';
 
-const UserBox = () => {
+const UserBox = ({ userInfo }) => {
   return (
     <UserBoxContainer className='user-box-container'>
-      <User />
+      <User userInfo={userInfo} />
       <Social />
     </UserBoxContainer>
   );

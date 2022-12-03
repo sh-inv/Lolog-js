@@ -1,17 +1,33 @@
-import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import PostHeader from './PostHeader';
 import Content from './Content';
 import UserBox from '../../../components/UserBox';
-import PostHeader from './PostHeader';
+import styled from 'styled-components';
 
 const PostArea = ({ postData }) => {
-  console.log(postData);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    if (postData) {
+      setUserInfo({
+        userId: postData.post.user_id,
+        loginId: postData.post.login_id,
+        userName: postData.post.name,
+        profileImg: postData.post.profileImg,
+        aboutMe: postData.post.about_me,
+      });
+    }
+  }, [postData]);
+
   return (
-    <PostAreaContainer>
-      <PostHeader />
-      <img className='post-area-thumbnail' src='' alt='thumbnail' />
-      <Content />
-      <UserBox className='post-area-user-info' />
-    </PostAreaContainer>
+    postData && (
+      <PostAreaContainer>
+        <PostHeader postData={postData.post} />
+        <img className='post-area-thumbnail' src='' alt='thumbnail' />
+        <Content postContent={postData.content} />
+        <UserBox className='post-area-user-info' userInfo={userInfo} />
+      </PostAreaContainer>
+    )
   );
 };
 

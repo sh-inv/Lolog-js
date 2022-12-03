@@ -4,12 +4,13 @@ import Series from './Series';
 import Snbs from './Snbs';
 import Tags from './Tags';
 
-const PostHeader = () => {
+const PostHeader = ({ postData }) => {
+  console.log(postData);
   return (
     <PostHeaderContainer>
-      <h1>title</h1>
-      <Information />
-      <Tags />
+      <h1>{postData.title}</h1>
+      <Information userId={postData.login_id} />
+      <Tags tags={postData.tags} />
       <Snbs />
       <Series />
     </PostHeaderContainer>

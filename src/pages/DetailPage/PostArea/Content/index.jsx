@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const Content = () => {
+const Content = ({ postContent }) => {
   return (
     <ContentContainer>
-      <div className='content'>content</div>
+      <div className='content'>{postContent}아직 내용 없음</div>
     </ContentContainer>
   );
 };
