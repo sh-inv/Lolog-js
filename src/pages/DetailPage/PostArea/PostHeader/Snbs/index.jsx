@@ -1,22 +1,42 @@
+import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { GiShare } from 'react-icons/gi';
+import { BsFacebook, BsTwitter } from 'react-icons/bs';
+import { FiPaperclip } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const Snbs = () => {
+  const [isShare, setIsShare] = useState(false);
+
   const changeLike = e => {
     const isLike = e.target.className.includes('active');
-    isLike ? (e.target.className = 'like-icon') : (e.target.className = 'like-icon active');
+    isLike ? (e.target.className = 'snb-icon') : (e.target.className = 'snb-icon active');
+  };
+
+  const changeShare = () => {
+    setIsShare(!isShare);
   };
 
   return (
-    <SnbsPositioner>
+    <SnbsPositioner isShare={isShare}>
       <div className='left-snb'>
         <div className='left-snb-content'>
-          <div className='like-icon' onClick={changeLike}>
+          <div className='snb-icon' onClick={changeLike}>
             <FaHeart />
           </div>
           <div className='like-count'>98</div>
-          <div className='share-icon'>
+          <div className='share-child-positioner'>
+            <div className='snb-icon facebook'>
+              <BsFacebook />
+            </div>
+            <div className='snb-icon twitter'>
+              <BsTwitter />
+            </div>
+            <div className='snb-icon clip'>
+              <FiPaperclip />
+            </div>
+          </div>
+          <div className='snb-icon' onClick={changeShare}>
             <GiShare />
           </div>
         </div>
@@ -41,6 +61,7 @@ const Snbs = () => {
 const SnbsPositioner = styled.div`
   position: relative;
   margin-top: 2rem;
+  z-index: 15;
   .left-snb {
     position: absolute;
     left: -7rem;
@@ -57,8 +78,7 @@ const SnbsPositioner = styled.div`
       -webkit-box-align: center;
       align-items: center;
 
-      .like-icon,
-      .share-icon {
+      .snb-icon {
         height: 3rem;
         width: 3rem;
         display: flex;
@@ -105,6 +125,31 @@ const SnbsPositioner = styled.div`
           background: rgb(56, 217, 169);
           border-color: rgb(56, 217, 169);
           color: var(--button-text);
+        }
+      }
+      .share-child-positioner {
+        position: relative;
+        top: 28px;
+
+        .facebook,
+        .twitter,
+        .clip {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          transition: all 0.3s;
+          width: ${props => (props.isShare ? '48px' : '0')};
+          height: ${props => (props.isShare ? '48px' : '0')};
+          opacity: ${props => (props.isShare ? '1' : '0')};
+        }
+        .facebook {
+          transform: ${props => (props.isShare ? 'translate(24px, -80px)' : 'translate(-24px)')};
+        }
+        .twitter {
+          transform: ${props => (props.isShare ? 'translate(52px, -28px)' : 'translate(-24px)')};
+        }
+        .clip {
+          transform: ${props => (props.isShare ? 'translate(24px, 24px)' : 'translate(-24px)')};
         }
       }
 
