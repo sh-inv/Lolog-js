@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import { ImBookmark } from 'react-icons/im';
-import { VscTriangleDown } from 'react-icons/vsc';
+import { VscTriangleDown, VscTriangleUp } from 'react-icons/vsc';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled from 'styled-components';
 
 const Series = () => {
+  const [isToggle, setIsToggle] = useState(false);
+
+  const changeToggle = e => {
+    setIsToggle(!isToggle);
+  };
+
   return (
     <SeriesContainer>
       <h2>
@@ -12,10 +19,25 @@ const Series = () => {
       <div className='bookmark-icon'>
         <ImBookmark />
       </div>
-      <div className='series-list-wrapper'>
-        <div className='list-route-toggle'>
-          <VscTriangleDown className='arrow-icon' />
-          목록 보기
+      {isToggle && (
+        <ol className='series-list'>
+          <li>
+            <a href=''>series1</a>
+          </li>
+          <li>
+            <a href=''>series2</a>
+          </li>
+          <li>
+            <a href='' style={{ color: 'var(--primary1)', fontWeight: 'bold' }}>
+              series3
+            </a>
+          </li>
+        </ol>
+      )}
+      <div className='series-list-router'>
+        <div className='list-route-toggle' onClick={changeToggle}>
+          {isToggle ? <VscTriangleUp className='arrow-icon' /> : <VscTriangleDown className='arrow-icon' />}
+          {isToggle ? '숨기기' : '목록 보기'}
         </div>
         <div className='list-route-btn'>
           <div className='series-number'>6/6</div>
@@ -47,7 +69,26 @@ const SeriesContainer = styled.div`
     font-size: 52px;
     color: var(--primary1);
   }
-  .series-list-wrapper {
+  .series-list {
+    padding-left: 0px;
+    margin: 16px 0;
+    line-height: 1.8;
+    font-size: 1rem;
+    color: var(--text2);
+    counter-reset: item 0;
+    li::before {
+      content: counter(item) '. ';
+      counter-increment: item 1;
+      color: var(--text3);
+      font-style: italic;
+      margin-right: 0.25rem;
+      pointer-events: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  .series-list-router {
     margin-top: 3rem;
     display: flex;
     -webkit-box-pack: justify;
@@ -66,6 +107,7 @@ const SeriesContainer = styled.div`
         margin-right: 0.7rem;
         color: var(--text1);
         font-size: 0.8rem;
+        pointer-events: none;
       }
     }
     .list-route-btn {
