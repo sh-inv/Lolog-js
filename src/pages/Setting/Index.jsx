@@ -12,7 +12,9 @@ import axios from 'axios';
 
 // const getSettingApi = async () => {
 //   const config = {
-//     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+//     headers: {
+//       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTgxNzgwN30.VJYvq9uwloqM1qewPXyHBxmJj4YttAlD_zc4bQX8pk4`,
+//     },
 //   };
 //   const resp = await apiClient.get('/users', config);
 //   return resp.data?.data;
@@ -20,39 +22,64 @@ import axios from 'axios';
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
 
   // useEffect(() => {
   //   const loader = async () => {
   //     try {
-  //       const data = await getSettingApi();
-  //       setSettingInfo(data);
+  //       const {
+  //         data: { user },
+  //       } = await getSettingApi();
+  //       dispatch(setUser(user));
   //     } catch (error) {
-  //       console.error(error);
-  //       setSettingInfo(null);
+  //       console.log(error);
+  //       dispatch(setUser(null));
   //     }
   //   };
   //   loader();
   // }, []);
 
-  const getLoader = async () => {
-    try {
-      const {
-        data: { user },
-      } = await axios.get('data/setting/user.json');
-      dispatch(setUser(user));
-      // console.log(user);
-    } catch (error) {
-      console.log(error);
-      dispatch(setUser(null));
-    }
-  };
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6NSwibG9naW5faWQiOiIxMjM0NWFhYSIsIm5hbWUiOiLrsJXjhaDruYgifSwiaWF0IjoxNjcwMDY3MjI4fQ.dkwk_xmhvw7dTB9DRr8u0YAEfNDKRp8eFs-upR3E-5E';
 
   useEffect(() => {
-    getLoader();
+    const loader = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const {
+          data: { user },
+        } = await apiClient.get('/users', config);
+        dispatch(setUser(user));
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+        // dispatch(setUser(null));
+      }
+    };
+    loader();
   }, []);
 
-  console.log(user);
+  // mock data
+  // const getLoader = async () => {
+  //   try {
+  //     const {
+  //       data: { user },
+  //     } = await axios.get('data/setting/user.json');
+  //     dispatch(setUser(user));
+  //     // console.log(user);
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(setUser(null));
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getLoader();
+  // }, []);
+
+  // console.log(user);
 
   return (
     <SettingPage>

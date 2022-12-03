@@ -2,19 +2,14 @@ import styled from 'styled-components';
 import Textarea from '../../../components/Comment/Textarea';
 import Comment from './Comment';
 
-const CommentArea = ({ comments }) => {
+const CommentArea = ({ postData }) => {
+  const { post, comments } = postData;
   return (
-    comments && (
-      <CommentAreaContainer>
-        <h4 className='comments-count'>{comments.length}개의 댓글</h4>
-        <Textarea />
-        <div className='comments-list' comments={comments}>
-          {comments.map(commentData => (
-            <Comment key={commentData.comment_id} commentData={commentData} />
-          ))}
-        </div>
-      </CommentAreaContainer>
-    )
+    <CommentAreaContainer>
+      <h4 className='comments-count'>{comments ? comments.length : '0'}개의 댓글</h4>
+      <Textarea postId={post.post_id} />
+      <div className='comments-list'>{comments && comments.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} />)}</div>
+    </CommentAreaContainer>
   );
 };
 
