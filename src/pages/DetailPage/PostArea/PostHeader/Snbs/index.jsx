@@ -3,11 +3,16 @@ import { GiShare } from 'react-icons/gi';
 import styled from 'styled-components';
 
 const Snbs = () => {
+  const changeLike = e => {
+    const isLike = e.target.className.includes('active');
+    isLike ? (e.target.className = 'like-icon') : (e.target.className = 'like-icon active');
+  };
+
   return (
     <SnbsPositioner>
       <div className='left-snb'>
         <div className='left-snb-content'>
-          <div className='like-icon'>
+          <div className='like-icon' onClick={changeLike}>
             <FaHeart />
           </div>
           <div className='like-count'>98</div>
@@ -51,6 +56,7 @@ const SnbsPositioner = styled.div`
       flex-direction: column;
       -webkit-box-align: center;
       align-items: center;
+
       .like-icon,
       .share-icon {
         height: 3rem;
@@ -66,15 +72,42 @@ const SnbsPositioner = styled.div`
         color: var(--text3);
         cursor: pointer;
         z-index: 5;
+
         svg {
           width: 24px;
           height: 24px;
+          pointer-events: none;
         }
         &:hover {
           color: var(--text1);
           border-color: var(--text1);
         }
       }
+
+      @keyframes spring {
+        from {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .active {
+        animation: spring 0.25s 2;
+        border-color: var(--primary2);
+        background: var(--primary2);
+        color: var(--button-text);
+        &:hover {
+          background: rgb(56, 217, 169);
+          border-color: rgb(56, 217, 169);
+          color: var(--button-text);
+        }
+      }
+
       .like-count {
         margin-top: 0.5rem;
         color: var(--text2);
