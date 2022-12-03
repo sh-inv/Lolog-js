@@ -1,52 +1,35 @@
 import { useState, useEffect } from 'react';
-import SeriesCard from './SeriesCard';
 import styled from 'styled-components';
+import { apiClient } from '../../../api';
+import SeriesCard from './SeriesCard';
 import { SeriesMaxWidth768px } from '../../../styles/media';
 
 const Series = () => {
   const [seriesList, setSeriesList] = useState([]);
 
-  useEffect(() => {
-    const seriesData = [
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
-        title: 'TIL',
-        update: 'November 18, 2022 11:08:00',
-      },
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/247f0904-74f6-4fde-9132-b49f7256e71f/image.png',
-        title: 'Javascript',
-        update: 'April 16, 2022 11:08:00',
-      },
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/33f15afc-5b41-4f6d-9ed4-a7b53d7958a4/image.png',
-        title: 'React',
-        update: 'November 16, 2022 11:08:00',
-      },
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
-        title: 'ddddd111111sssssssssssss1sssssdadasssssafadasss1ssssdsfsasssss',
-        update: 'November 16, 2022 11:08:00',
-      },
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/5cff9b8b-c1a2-4a34-a637-1e21e7e0e417/image.png',
-        title: '회고록',
-        update: 'May 28, 2022 11:08:00',
-      },
-      {
-        src: 'https://velog.velcdn.com/images/daydreamplace/post/80237a44-72d2-4fb9-9661-eabe22d60c0e/image.png',
-        title: '회고록2',
-        update: 'July 16, 2022 11:08:00',
-      },
-    ];
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDg2NDMwfQ.DFFTbK0IfzSKiz38OxohQwcpO3p7zzNkV1GLvEQDjSY`;
 
-    setSeriesList(seriesData);
+  useEffect(() => {
+    const loader = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await apiClient.get('/lolog/3/series', config);
+        setSeriesList(data.series);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    loader();
   }, []);
 
   return (
     <SeriesContainer>
       {seriesList.map(series => {
-        return <SeriesCard key={series.title} src={series.src} title={series.title} update={series.update} />;
+        return <SeriesCard seriesList={seriesList} key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
       })}
     </SeriesContainer>
   );

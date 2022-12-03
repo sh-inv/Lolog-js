@@ -20,7 +20,6 @@ const SavesList = () => {
         headers: { Authorization: `Bearer ${token}` },
       };
       const { data } = await apiClient.get('/posts/saves', config);
-      console.log(data.saves.length);
       setList(data.saves);
     } catch (error) {
       console.log(error);

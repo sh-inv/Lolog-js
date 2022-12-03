@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Thumbnail from '../../../../components/Thumbnail';
 import SeriesInfo from './SeriesInfo';
-import styled from 'styled-components';
+import ThumbnailSkeleton from '../../../../components/PostSkeleton/Post/Thumbnail';
 import { SeriesPostMaxWidth768px } from '../../../../styles/media';
 
-const SeriesCard = ({ src, title, update }) => {
+const SeriesCard = ({ seriesList, src, title, update }) => {
   return (
     <SeriesCardContainer>
       <ThumbnailContainer>

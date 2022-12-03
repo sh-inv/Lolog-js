@@ -38,7 +38,7 @@ const Setting = () => {
   //   loader();
   // }, []);
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6NSwibG9naW5faWQiOiIxMjM0NWFhYSIsIm5hbWUiOiLrsJXjhaDruYgifSwiaWF0IjoxNjcwMDY3MjI4fQ.dkwk_xmhvw7dTB9DRr8u0YAEfNDKRp8eFs-upR3E-5E';
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDg2NDMwfQ.DFFTbK0IfzSKiz38OxohQwcpO3p7zzNkV1GLvEQDjSY`;
 
   useEffect(() => {
     const loader = async () => {
