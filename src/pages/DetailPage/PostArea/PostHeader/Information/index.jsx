@@ -1,3 +1,4 @@
+import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 
 const Information = () => {
@@ -7,7 +8,7 @@ const Information = () => {
         <div className='information'>
           <span className='user-name'>userid</span>
           <span className='separator'>&#183;</span>
-          <span>6일 전</span>
+          <GetPostDate postDate={'November 16, 2022 11:08:00'} />
         </div>
       </div>
     </InformationContainer>
