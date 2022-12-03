@@ -1,3 +1,5 @@
+import { FaHeart } from 'react-icons/fa';
+import { GiShare } from 'react-icons/gi';
 import styled from 'styled-components';
 
 const Snbs = () => {
@@ -5,9 +7,13 @@ const Snbs = () => {
     <SnbsPositioner>
       <div className='left-snb'>
         <div className='left-snb-content'>
-          <div className='like-icon'>heart</div>
+          <div className='like-icon'>
+            <FaHeart />
+          </div>
           <div className='like-count'>98</div>
-          <div className='share-icon'>share</div>
+          <div className='share-icon'>
+            <GiShare />
+          </div>
         </div>
       </div>
       <div className='right-snb'>
@@ -63,6 +69,10 @@ const SnbsPositioner = styled.div`
         svg {
           width: 24px;
           height: 24px;
+        }
+        &:hover {
+          color: var(--text1);
+          border-color: var(--text1);
         }
       }
       .like-count {

@@ -1,3 +1,6 @@
+import { ImBookmark } from 'react-icons/im';
+import { VscTriangleDown } from 'react-icons/vsc';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled from 'styled-components';
 
 const Series = () => {
@@ -6,17 +9,23 @@ const Series = () => {
       <h2>
         <a href=''>series-title</a>
       </h2>
-      <div className='bookmark-icon'>bookmark</div>
+      <div className='bookmark-icon'>
+        <ImBookmark />
+      </div>
       <div className='series-list-wrapper'>
         <div className='list-route-toggle'>
-          <div className='arrow-icon'>arrow</div>
+          <VscTriangleDown className='arrow-icon' />
           목록 보기
         </div>
         <div className='list-route-btn'>
           <div className='series-number'>6/6</div>
           <div className='btn-wrapper'>
-            <button className='pre'></button>
-            <button className='next'></button>
+            <button className='pre'>
+              <MdKeyboardArrowLeft />
+            </button>
+            <button className='next'>
+              <MdKeyboardArrowRight />
+            </button>
           </div>
         </div>
       </div>
@@ -35,6 +44,8 @@ const SeriesContainer = styled.div`
     position: absolute;
     right: 1.5rem;
     top: 0px;
+    font-size: 52px;
+    color: var(--primary1);
   }
   .series-list-wrapper {
     margin-top: 3rem;
@@ -52,9 +63,9 @@ const SeriesContainer = styled.div`
       line-height: 1;
       cursor: pointer;
       .arrow-icon {
-        margin-right: 0.25rem;
+        margin-right: 0.7rem;
         color: var(--text1);
-        font-size: 1.5rem;
+        font-size: 0.8rem;
       }
     }
     .list-route-btn {
