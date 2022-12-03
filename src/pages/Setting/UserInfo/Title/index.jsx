@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../../../store/modules/user';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import { apiClient } from '../../../../api';
 import EditButton from '../../../../components/EditButton';
 import Button from '../../../../components/Button';
-import styled from 'styled-components';
+import Toastify from '../../../../components/Toastify';
 
 const Title = () => {
   const [isModifyTitle, setIsModifyTitle] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
 
   const onModify = () => {
     isModifyTitle ? setIsModifyTitle(false) : setIsModifyTitle(true);
@@ -24,24 +27,51 @@ const Title = () => {
     );
   };
 
+  const onModifyConfirm = async () => {
+    const body = {
+      title: user.title,
+    };
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
+        },
+      };
+      await apiClient.patch('/users?type=title', body, config);
+      dispatch(
+        setUser({
+          ...user,
+          body,
+        })
+      );
+      setIsModifyTitle(false);
+    } catch (error) {
+      console.log(error);
+      toast.error('제목을 입력해주세요');
+    }
+  };
+
   return (
-    <>
-      {isModifyTitle ? (
-        <TitleContainer>
-          <form>
-            <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user?.title} />
-            <Button type='submit' onClick={onModify} text='저장' className='confirm-button' />
-          </form>
-        </TitleContainer>
-      ) : (
-        <>
-          <TitleContainer>{user?.title}</TitleContainer>
-          <EditButtonContainer>
-            <EditButton text='수정' onClick={onModify} />
-          </EditButtonContainer>
-        </>
-      )}
-    </>
+    user && (
+      <>
+        {isModifyTitle ? (
+          <TitleContainer>
+            <form onSubmit={e => e.preventDefault()}>
+              <input className='modify-input' type='text' placeholder='벨로그 제목' onChange={getTitle} value={user.title} />
+              <Button type='submit' onClick={onModifyConfirm} text='저장' className='confirm-button' />
+            </form>
+          </TitleContainer>
+        ) : (
+          <>
+            <TitleContainer>{user.title}</TitleContainer>
+            <EditButtonContainer>
+              <EditButton text='수정' onClick={onModify} />
+            </EditButtonContainer>
+          </>
+        )}
+        <Toastify />
+      </>
+    )
   );
 };
 
