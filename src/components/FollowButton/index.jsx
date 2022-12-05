@@ -11,7 +11,7 @@ const FollowButton = () => {
       <Button
         icon={isFollow ? <FiUserCheck /> : <FiUserPlus />}
         text={isFollow ? '구독 중' : '구독하기'}
-        color={isFollow ? 'teal' : 'gray'}
+        color={isFollow ? 'teal' : 'darkgray'}
         onClick={() => {
           setIsFollow(!isFollow);
         }}
