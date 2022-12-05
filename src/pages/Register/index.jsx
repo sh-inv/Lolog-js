@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { MdLockOutline } from 'react-icons/md';
 import { TfiCheckBox } from 'react-icons/tfi';
+import { apiClient } from '../../api';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
 
@@ -78,7 +79,7 @@ const Register = () => {
     const passwordConfirmCurrent = e.target.value;
     setPasswordConfrim(passwordConfirmCurrent);
     if (password === passwordConfirmCurrent) {
-      setPasswordConfrimMessage('비밀번호가 일치합니다!');
+      setPasswordConfrimMessage('');
       setIsPasswordConfirm(true);
     } else {
       setPasswordConfrimMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요!');
@@ -107,7 +108,23 @@ const Register = () => {
     });
   };
 
-  const error = () => toast.error('모든 항목을 작성해주세요');
+  // const error = () => toast.error('모든 항목을 작성해주세요');
+
+  const onRegister = async () => {
+    const body = {
+      name: name,
+      login_id: id,
+      password: password,
+      about_me: intro,
+    };
+    try {
+      await apiClient.post('signup?type=email', body);
+      const { token } = resp.data;
+      localStorage.setItem('authToken', token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <RegisterContainer>
@@ -171,13 +188,7 @@ const Register = () => {
         <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
-          <Button
-            className='next'
-            text='다음'
-            color='teal'
-            // disabled={!(isName && isId && isPassword && isPasswordConfirm)}
-            onClick={error}
-          />
+          <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />
         </div>
       </div>
       <Toastify />

@@ -35,7 +35,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
       if (isEmail && resp.status === 201) {
         toast.info('인증 메일을 확인해주세요');
         setIsEmailAuth(true);
-      } else if (resp.status === 409) toast.error('중복된 이메일 입니다.');
+      } else if (resp.status === 409) toast.error(resp.message);
     } catch (error) {
       console.log(error);
     }
