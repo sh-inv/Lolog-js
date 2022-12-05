@@ -12,7 +12,7 @@ const SavesList = () => {
   const [postId, setPostId] = useState();
   const [isModal, setIsModal] = useState(false);
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6NSwibG9naW5faWQiOiIxMjM0NWFhYSIsIm5hbWUiOiLrsJXjhaDruYgifSwiaWF0IjoxNjcwMDY3MjI4fQ.dkwk_xmhvw7dTB9DRr8u0YAEfNDKRp8eFs-upR3E-5E`;
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
 
   const getLoader = async () => {
     try {
@@ -49,31 +49,27 @@ const SavesList = () => {
     setIsModal(true);
   };
 
-  return (
+  return Array.isArray(list) && list.length ? (
     <>
-      {Array.isArray(list) && list.length ? (
-        <>
-          <SavesListContainer>
-            {list.map(saves => (
-              <Saves key={saves.post_id} setPostId={setPostId} id={saves.post_id} title={saves.title} contents={saves.content} created_at={saves.create_at} onModal={onModal} />
-            ))}
-            {isModal && (
-              <ConfirmModal
-                title='임시 글 삭제'
-                message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
-                onClose={() => {
-                  setIsModal(false);
-                }}
-                onMove={deletePost}
-              />
-            )}
-          </SavesListContainer>
-          <Toastify />
-        </>
-      ) : (
-        <NoSaves />
-      )}
+      <SavesListContainer>
+        {list.map(saves => (
+          <Saves key={saves.post_id} setPostId={setPostId} id={saves.post_id} title={saves.title} contents={saves.content} created_at={saves.create_at} onModal={onModal} />
+        ))}
+        {isModal && (
+          <ConfirmModal
+            title='임시 글 삭제'
+            message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
+            onClose={() => {
+              setIsModal(false);
+            }}
+            onMove={deletePost}
+          />
+        )}
+      </SavesListContainer>
+      <Toastify />
     </>
+  ) : (
+    <NoSaves />
   );
 };
 
