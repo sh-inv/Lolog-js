@@ -9,7 +9,7 @@ const About = () => {
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
-    isModify ? setIsModify(false) : setIsModify(true);
+    setIsModify(true);
   };
 
   const getIntro = e => {
@@ -35,10 +35,28 @@ const About = () => {
     loader();
   }, []);
 
+  const modifyConfirm = async () => {
+    const body = {
+      about_blog: about,
+    };
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await apiClient.patch('/lolog/10/about', body, config);
+      setAbout(body.about_blog);
+      setIsModify(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AboutContainer>
       <div className='button-wrapper'>
-        <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={onModify} />
+        <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
       </div>
       <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={about}></textarea> : <p>{about}</p>}</div>
     </AboutContainer>
