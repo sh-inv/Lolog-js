@@ -33,14 +33,15 @@ const UserContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   .user {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     img {
       margin-bottom: 0;
