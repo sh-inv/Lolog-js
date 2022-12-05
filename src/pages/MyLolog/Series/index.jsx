@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import SeriesCard from './SeriesCard';
+import NoSeriesCard from './NoSeriesCard';
 import { SeriesMaxWidth768px } from '../../../styles/media';
 
 const Series = () => {
-  const [seriesList, setSeriesList] = useState([]);
+  const [seriesCardList, setSeriesCardList] = useState([]);
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDg2NDMwfQ.DFFTbK0IfzSKiz38OxohQwcpO3p7zzNkV1GLvEQDjSY`;
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
 
   useEffect(() => {
     const loader = async () => {
@@ -17,8 +18,8 @@ const Series = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await apiClient.get('/lolog/3/series', config);
-        setSeriesList(data.series);
+        const { data } = await apiClient.get('/lolog/10/series', config);
+        setSeriesCardList(data.series);
       } catch (error) {
         console.log(error);
       }
@@ -26,12 +27,14 @@ const Series = () => {
     loader();
   }, []);
 
-  return (
+  return Array.isArray(seriesCardList) && seriesCardList.length > 0 ? (
     <SeriesContainer>
-      {seriesList.map(series => {
-        return <SeriesCard seriesList={seriesList} key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
+      {seriesCardList.map(series => {
+        return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
       })}
     </SeriesContainer>
+  ) : (
+    <NoSeriesCard />
   );
 };
 

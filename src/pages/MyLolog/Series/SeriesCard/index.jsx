@@ -5,7 +5,7 @@ import SeriesInfo from './SeriesInfo';
 import ThumbnailSkeleton from '../../../../components/PostSkeleton/Post/Thumbnail';
 import { SeriesPostMaxWidth768px } from '../../../../styles/media';
 
-const SeriesCard = ({ seriesList, src, title, update }) => {
+const SeriesCard = ({ src, title, update }) => {
   return (
     <SeriesCardContainer>
       <ThumbnailContainer>
