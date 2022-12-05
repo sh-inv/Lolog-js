@@ -49,7 +49,7 @@ const UserIntro = () => {
         setUser({
           ...user,
           name: user.name,
-          abou_me: user.about_me,
+          about_me: user.about_me,
         })
       );
       setIsModify(false);
