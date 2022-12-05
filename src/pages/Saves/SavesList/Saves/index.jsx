@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GetPostDate from '../../../../components/GetPostDate';
 import EditButton from '../../../../components/EditButton';
 
-const Saves = ({ title, contents, created_at, onModal }) => {
+const Saves = ({ id, setPostId, title, contents, created_at, onModal }) => {
   return (
     <SavesContainer>
       <Link to={`write/${title}`}>
@@ -14,7 +14,13 @@ const Saves = ({ title, contents, created_at, onModal }) => {
       </Link>
       <section>
         <GetPostDate postDate={created_at} />
-        <EditButton text='삭제' onClick={onModal} />
+        <EditButton
+          text='삭제'
+          onClick={() => {
+            onModal();
+            setPostId(id);
+          }}
+        />
       </section>
     </SavesContainer>
   );
