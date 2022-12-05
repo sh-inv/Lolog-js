@@ -24,7 +24,7 @@ const ButtonContainer = styled.button`
   background: ${props => props.color === 'transparent' && 'transparent'};
   background: ${props => props.color === 'gray' && 'var(--bg-element4)'};
   background: ${props => props.color === 'red' && 'var(--destructive1)'};
-  background: ${props => props.color === 'darkgray' && 'var(--prism-code-1)'};
+  background: ${props => props.color === 'darkgray' && 'var(--bg-element9)'};
   color: ${props => props.color === 'teal' && 'var(--button-text)'};
   color: ${props => props.color === 'transparent' && 'var(--primary1)'};
   color: ${props => props.color === 'gray' && 'var(--text1)'};
@@ -38,7 +38,7 @@ const ButtonContainer = styled.button`
     background: ${props => props.color === 'transparent' && 'var(--slight-layer)'};
     background: ${props => props.color === 'gray' && 'var(--prism-code-1)'};
     background: ${props => props.color === 'red' && 'var(--destructive2)'};
-    background: ${props => props.color === 'darkgray' && 'var(--prism-code-2)'};
+    background: ${props => props.color === 'darkgray' && 'var(--prism-code-1)'};
     cursor: pointer;
   }
 `;
