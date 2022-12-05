@@ -12,12 +12,6 @@ const SignUpForm = ({ setIsLoginModal }) => {
   const [isEmail, setIsEmail] = useState(false);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
 
-  //   const postEmail = async() => {
-  // const body = {
-  //   email :
-  // }
-  //   }
-
   const getEmail = e => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const emailCurrent = e.target.value;
@@ -31,31 +25,42 @@ const SignUpForm = ({ setIsLoginModal }) => {
 
   const error = () => toast.error('이메일 형식을 확인해주세요!');
 
-  const getAuth = () => {
-    toast.info('인증 메일을 확인해주세요');
-    setIsEmailAuth(true);
+  const checkEmail = async e => {
+    e.preventDefault();
+    const body = {
+      email: email,
+    };
+    try {
+      const resp = await apiClient.post('auth/email', body);
+      if (isEmail && resp.status === 201) {
+        toast.info('인증 메일을 확인해주세요');
+        setIsEmailAuth(true);
+      } else if (resp.status === 409) toast.error('중복된 이메일 입니다.');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const goRegister = () => {
+  const getVerify = () => {
     navigate('/register');
     setIsLoginModal(false);
   };
 
   return (
-    <SignUpFormContainer>
+    <SignUpFormContainer onSubmit={checkEmail}>
       <div className='input-wrapper'>
         <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' onChange={getEmail} value={email} />
-        <Button className='sign-up-button' text='중복확인' color='teal' onClick={isEmail ? getAuth : error} tabIndex='4' />
+        <Button className='sign-up-button' text='중복확인' color='teal' onClick={isEmail ? checkEmail : error} tabIndex='4' />
       </div>
-      {isEmailAuth ? (
+      {isEmailAuth && (
         <div className='auth-wrapper'>
           <h3>인증번호</h3>
           <div className='auth-input'>
             <input type='text' tabIndex='5' placeholder='인증번호를 입력하세요.' maxLength={4} />
-            <Button type='submit' className='login-button' text='인증' color='teal' tabIndex='6' onClick={goRegister} />
+            <Button type='submit' className='login-button' text='인증' color='teal' tabIndex='6' onClick={getVerify} />
           </div>
         </div>
-      ) : null}
+      )}
       <Toastify />
     </SignUpFormContainer>
   );
