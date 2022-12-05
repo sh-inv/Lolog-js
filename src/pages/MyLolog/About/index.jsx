@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import Button from '../../../components/Button';
 import styled from 'styled-components';
+import { apiClient } from '../../../api';
+import Button from '../../../components/Button';
 import { AboutMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
-  const [introduction, setIntroduction] = useState('');
+  const [about, setAbout] = useState('');
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
@@ -12,22 +13,34 @@ const About = () => {
   };
 
   const getIntro = e => {
-    setIntroduction(e.target.value);
+    setAbout(e.target.value);
   };
 
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
+
   useEffect(() => {
-    const intro = {
-      intro: "It's just one part of me, that you know of. 😀",
+    const loader = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await apiClient.get('/lolog/10/about', config);
+        setAbout(data.about.about_blog);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    setIntroduction(intro.intro);
+    loader();
   }, []);
 
   return (
     <AboutContainer>
       <div className='button-wrapper'>
-        <Button text={isModify ? '저장하기' : '수정하기'} onClick={onModify} />
+        <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={onModify} />
       </div>
-      <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={introduction}></textarea> : <p>{introduction}</p>}</div>
+      <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={about}></textarea> : <p>{about}</p>}</div>
     </AboutContainer>
   );
 };
