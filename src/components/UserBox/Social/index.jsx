@@ -12,23 +12,21 @@ const Social = () => {
     url: 'https://www.naver.com/',
   };
 
+  const social = [
+    { href: `https://github.com/${socialInfo.github}`, target: '_blank', icon: <AiFillGithub /> },
+    { href: `https://twitter.com/${socialInfo.twitter}`, target: '_blank', icon: <AiOutlineTwitter /> },
+    { href: `https://www.facebook.com/${socialInfo.facebook}`, target: '_blank', icon: <AiFillGithub /> },
+    { href: socialInfo.url, target: '_blank', icon: <AiFillHome /> },
+    { href: `mailto:${socialInfo.email}`, icon: <MdEmail /> },
+  ];
+
   return (
     <SocialContainer>
-      <a href={`https://github.com/${socialInfo.github}`} target='_blank' className='social-link'>
-        <AiFillGithub className='icon' />
-      </a>
-      <a href={`https://twitter.com/${socialInfo.twitter}`} target='_blank' className='social-link'>
-        <AiOutlineTwitter className='icon' />
-      </a>
-      <a href={`https://www.facebook.com/${socialInfo.facebook}`} target='_blank' className='social-link'>
-        <ImFacebook2 className='icon' />
-      </a>
-      <a href={socialInfo.url} target='_blank' className='social-link'>
-        <AiFillHome className='icon' />
-      </a>
-      <a href={`mailto:${socialInfo.email}`} className='social-link'>
-        <MdEmail className='icon' />
-      </a>
+      {social.map(info => (
+        <a key={info.href} href={info.href} target={info.target} className='social-link'>
+          {info.icon}
+        </a>
+      ))}
     </SocialContainer>
   );
 };
@@ -41,7 +39,7 @@ const SocialContainer = styled.div`
     display: block;
     color: inherit;
 
-    .icon {
+    svg {
       font-size: 2rem;
       cursor: pointer;
 
