@@ -12,6 +12,7 @@ const writeContentSlice = createSlice({
     selectedTool: null,
     isReverse: false,
     isUploadModal: false,
+    isSeriesList: false,
   },
   reducers: {
     setTitle: (state, action) => {
@@ -41,8 +42,11 @@ const writeContentSlice = createSlice({
     setIsUploadModal: (state, action) => {
       state.isUploadModal = action.payload;
     },
+    setIsSeriesList: (state, action) => {
+      state.isSeriesList = action.payload;
+    },
   },
 });
 
-export const { setTitle, setContent, setThmbnail, setUploadType, setUploadUrl, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal } = writeContentSlice.actions;
+export const { setTitle, setContent, setThmbnail, setUploadType, setUploadUrl, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal, setIsSeriesList } = writeContentSlice.actions;
 export const writeContentReducer = writeContentSlice.reducer;

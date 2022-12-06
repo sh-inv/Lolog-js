@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '../../../components/Button';
 import SettingThumbnail from './SettingThumbnail';
 import SettingPublic from './ SettingPublic';
 import SettingUrl from './SettingUrl';
