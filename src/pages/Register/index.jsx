@@ -89,7 +89,8 @@ const Register = () => {
   const handleIntro = e => setIntro(e.target.value);
 
   const onDuplicateCheck = () => {
-    setIsIdDuplicateCheck(true);
+    setIsIdDuplicateCheck(!isIdDuplicateCheck);
+    console.log(isIdDuplicateCheck);
   };
 
   const { nameActive, idActive, passwordActive, passwordConfirmActive, introActive } = isActiveFocus;
@@ -108,11 +109,14 @@ const Register = () => {
     });
   };
 
+  console.log(isIdDuplicateCheck);
+
   // const error = () => toast.error('모든 항목을 작성해주세요');
 
   const onRegister = async () => {
     const body = {
       name: name,
+      email: email,
       login_id: id,
       password: password,
       about_me: intro,
@@ -140,7 +144,7 @@ const Register = () => {
           </div>
           <div className='validation'>{nameMessage}</div>
         </div>
-        <div className='wrapper  email-wrapper'>
+        <div className='wrapper email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
             <input type='text' disabled value='lolog@email.com' />
@@ -151,7 +155,7 @@ const Register = () => {
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
-            <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} onClick={onDuplicateCheck} />
+            {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onDuplicateCheck} />}
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
@@ -235,11 +239,12 @@ const RegisterContainer = styled.div`
       }
 
       .input-wrapper {
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--border2);
         display: flex;
+        justify-content: space-between;
         -webkit-box-align: center;
         align-items: center;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border2);
 
         input {
           display: block;
@@ -262,15 +267,16 @@ const RegisterContainer = styled.div`
           color: var(--text3);
         }
 
-        .checked-icon {
-          color: var(--primary2);
+        .duplicate {
+          display: block;
+          width: 7rem;
         }
-      }
 
-      .duplicate {
-        padding: 0;
-        background: none;
-        color: var(--text3);
+        .checked {
+          display: block;
+          width: 7rem;
+          pointer-events: none;
+        }
       }
 
       .validation {
