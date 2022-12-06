@@ -6,10 +6,12 @@ import ContentWrapper from '../ContentWrapper';
 import { toast } from 'react-toastify';
 import Toastify from '../../../../components/Toastify';
 import { MdPlaylistAdd } from 'react-icons/md';
+import { AiTwotoneSetting } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const SettingSeries = () => {
   const [seriesList, setSeriesList] = useState([]);
+  const [seriesName, setSeriesName] = useState('');
   const { seriesId, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
@@ -31,6 +33,11 @@ const SettingSeries = () => {
 
   const selectSeries = e => {
     dispatch(setSeriesId(Number(e.target.id)));
+    setSeriesName(e.target.innerText);
+  };
+
+  const removeSeries = () => {
+    dispatch(setSeriesId(null));
   };
 
   useEffect(() => {
@@ -60,12 +67,26 @@ const SettingSeries = () => {
         </SettingSeriesContainerActive>
       ) : (
         <SettingSeriesContainer>
-          <div className='add-series-container' onClick={getSeriesList}>
-            <div>
-              <MdPlaylistAdd className='icon' />
-              시리즈에 추가하기
-            </div>
+          <div className='setting-series-container' onClick={getSeriesList}>
+            {seriesId ? (
+              <div className='selected-series-info'>
+                <span>{seriesName}</span>
+                <div className='series-setting-btn' onClick={getSeriesList}>
+                  <AiTwotoneSetting />
+                </div>
+              </div>
+            ) : (
+              <div className='add-series'>
+                <MdPlaylistAdd className='icon' />
+                시리즈에 추가하기
+              </div>
+            )}
           </div>
+          {seriesId && (
+            <p className='remove-series' onClick={removeSeries}>
+              시리즈에서 제거
+            </p>
+          )}
         </SettingSeriesContainer>
       )}
       <Toastify />
@@ -74,12 +95,13 @@ const SettingSeries = () => {
 };
 
 const SettingSeriesContainer = styled.div`
-  .add-series-container {
+  display: flex;
+  flex-direction: column;
+
+  .setting-series-container {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
     width: 100%;
     height: 3rem;
     box-shadow: rgb(0 0 0 / 5%) 0px 0px 4px 0px;
@@ -87,16 +109,9 @@ const SettingSeriesContainer = styled.div`
     border: none;
     border-radius: 4px;
     background: var(--bg-element7);
-    color: var(--primary2);
-    font-size: 1.125rem;
-    font-weight: 600;
 
-    &:hover {
-      opacity: 0.7;
-      cursor: pointer;
-    }
-
-    div {
+    .selected-series-info,
+    .add-series {
       display: flex;
       flex: 1 1 0%;
       -webkit-box-pack: center;
@@ -108,6 +123,47 @@ const SettingSeriesContainer = styled.div`
         margin-right: 1rem;
       }
     }
+    .selected-series-info {
+      -webkit-box-pack: start;
+      justify-content: start;
+      height: 100%;
+      padding-left: 1rem;
+      color: var(--text1);
+      .series-setting-btn {
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        margin-left: auto;
+        width: 48px;
+        height: 100%;
+        background: var(--primary1);
+        color: var(--text1);
+        font-size: 1.5rem;
+        &:hover {
+          background: var(--primary2);
+          cursor: pointer;
+        }
+      }
+    }
+    .add-series {
+      -webkit-box-pack: center;
+      justify-content: center;
+      color: var(--primary2);
+      font-size: 1.125rem;
+      font-weight: 600;
+      &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+  }
+  .remove-series {
+    margin-left: auto;
+    margin-top: 0.7rem;
+    color: var(--prism-code-3);
+    cursor: pointer;
   }
 `;
 
@@ -148,6 +204,7 @@ const SettingSeriesContainerActive = styled.div`
     li {
       padding: 1rem;
       border-bottom: 1px solid var(--border3);
+      cursor: pointer;
     }
 
     .active {
