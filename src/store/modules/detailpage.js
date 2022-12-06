@@ -1,8 +1,18 @@
-// import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-// const detailPageDataSlice = createSlice({
-//   name: 'detailPageDataReducer',
-//   initialState: {
-//     data: '1',
-//   },
-// });
+export const detailPageSlice = createSlice({
+  name: 'detailData',
+  initialState: { postData: null, commentsData: [] },
+  reducers: {
+    setDetailData: (state, action) => {
+      state.postData = action.payload;
+      state.commentsData = action.payload.comments;
+    },
+    setNewCommentsData: (state, action) => {
+      state.commentsData = action.payload;
+    },
+  },
+});
+
+export const { setDetailData, setNewCommentsData } = detailPageSlice.actions;
+export const detailPageReducer = detailPageSlice.reducer;

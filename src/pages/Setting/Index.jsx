@@ -1,35 +1,58 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setProfileImage, setName, setIntro, setLologTitle, setSocialInfo, setEmail } from '../../store/modules/user';
+import { setUser } from '../../store/modules/user';
+import styled from 'styled-components';
 import { apiClient } from '../../api';
 import UserProfile from './UserProfile';
 import UserIntro from './UserIntro';
 import UserInfo from './UserInfo';
-import styled from 'styled-components';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
 
-const getSettingApi = async () => {
-  const resp = await apiClient.get('/');
-  return resp.data?.data;
-};
+import axios from 'axios';
+
+// const getSettingApi = async () => {
+//   const config = {
+//     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+//   };
+//   const resp = await apiClient.get('/users', config);
+//   return resp.data?.data;
+// };
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const [settingInfo, setSettingInfo] = useState(null);
-  const { name, intro } = useSelector(state => state.user);
+  const user = useSelector(state => state.user.user);
+
+  // useEffect(() => {
+  //   const loader = async () => {
+  //     try {
+  //       const data = await getSettingApi();
+  //       setSettingInfo(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //       setSettingInfo(null);
+  //     }
+  //   };
+  //   loader();
+  // }, []);
+
+  const getLoader = async () => {
+    try {
+      const {
+        data: { user },
+      } = await axios.get('data/setting/user.json');
+      dispatch(setUser(user));
+      // console.log(user);
+    } catch (error) {
+      console.log(error);
+      dispatch(setUser(null));
+    }
+  };
 
   useEffect(() => {
-    const loader = async () => {
-      try {
-        const data = await getSettingApi();
-        setSettingInfo(data);
-      } catch (error) {
-        console.error(error);
-        setSettingInfo(null);
-      }
-    };
-    loader();
+    getLoader();
   }, []);
+
+  console.log(user);
 
   return (
     <SettingPage>

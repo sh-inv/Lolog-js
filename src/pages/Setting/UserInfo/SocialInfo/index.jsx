@@ -1,70 +1,70 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../../../store/modules/user';
+import styled from 'styled-components';
 import { MdEmail } from 'react-icons/md';
 import { AiFillGithub, AiOutlineTwitter, AiFillFacebook, AiFillHome } from 'react-icons/ai';
 import EditButton from '../../../../components/EditButton';
 import Button from '../../../../components/Button';
-import styled from 'styled-components';
 
 const SocialInfo = () => {
   const [isModifySocialInfo, setisModifySocialInfo] = useState(false);
-  const [socialInfo, setSocialInfo] = useState({
-    email: '',
-    github: '',
-    twitter: '',
-    facebook: '',
-    url: '',
-  });
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user);
+  const email = user?.social_info_email;
+  const github = user?.social_info_github;
+  const twitter = user?.social_info_twitter;
+  const facebook = user?.social_info_facebook;
+  const url = user?.social_info_url;
 
   const onModify = () => {
     isModifySocialInfo ? setisModifySocialInfo(false) : setisModifySocialInfo(true);
   };
 
-  useEffect(() => {
-    const contents = {
-      social: { email: 'you8inpark@gmail.com', github: 'daydreamplace', twitter: 'eden', facebook: 'eden', url: 'dev-eden.shop' },
-    };
-    setSocialInfo({
-      ...contents.social,
-    });
-  }, []);
-
   const getSocialInfo = e => {
-    setSocialInfo({
-      ...socialInfo,
-      [e.target.name]: e.target.value,
-    });
+    dispatch(
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const info = [
     {
       id: 1,
-      name: 'email',
+      name: 'social_info_email',
       icon: <MdEmail className='icon' />,
       placeholder: '이메일을 입력하세요.',
+      value: email,
     },
     {
       id: 2,
-      name: 'github',
+      name: 'social_info_github',
       icon: <AiFillGithub className='icon' />,
       placeholder: 'Github 계정을 입력하세요.',
+      value: github,
     },
     {
       id: 3,
-      name: 'twitter',
+      name: 'social_info_twitter',
       icon: <AiOutlineTwitter className='icon' />,
       placeholder: 'Twitter 계정을 입력하세요.',
+      value: twitter,
     },
     {
       id: 4,
-      name: 'facebook',
+      name: 'social_info_facebook',
       icon: <AiFillFacebook className='icon' />,
       placeholder: 'http://www.facebook.com/',
+      value: facebook,
     },
     {
       id: 5,
-      name: 'url',
+      name: 'social_info_url',
       icon: <AiFillHome className='icon' />,
       placeholder: '홈페이지 주소를 입력하세요.',
+      value: url,
     },
   ];
 
@@ -77,7 +77,7 @@ const SocialInfo = () => {
               {info.map(content => (
                 <li key={content.id}>
                   {content.icon}
-                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={socialInfo[content.name]} onChange={getSocialInfo} />
+                  <input className='modify-input' type='text' name={content.name} placeholder={content.placeholder} value={content.value} onChange={getSocialInfo} />
                 </li>
               ))}
             </ul>
@@ -90,34 +90,34 @@ const SocialInfo = () => {
         <>
           <SocialInfoContainer>
             <ul className='save-info'>
-              {socialInfo.email ? (
+              {email ? (
                 <li>
                   <MdEmail className='icon' />
-                  <span>{socialInfo.email}</span>
+                  <span>{email}</span>
                 </li>
               ) : null}
-              {socialInfo.github ? (
+              {github ? (
                 <li>
                   <AiFillGithub className='icon' />
-                  <span>{socialInfo.github}</span>
+                  <span>{github}</span>
                 </li>
               ) : null}
-              {socialInfo.twitter ? (
+              {twitter ? (
                 <li>
                   <AiOutlineTwitter className='icon' />
-                  <span>{socialInfo.twitter}</span>
+                  <span>{twitter}</span>
                 </li>
               ) : null}
-              {socialInfo.facebook ? (
+              {facebook ? (
                 <li>
                   <AiFillFacebook className='icon' />
-                  <span>{socialInfo.facebook}</span>
+                  <span>{facebook}</span>
                 </li>
               ) : null}
-              {socialInfo.url ? (
+              {url ? (
                 <li>
                   <AiFillHome className='icon' />
-                  <span>{socialInfo.url}</span>
+                  <span>{url}</span>
                 </li>
               ) : null}
             </ul>

@@ -1,52 +1,49 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import CommentArea from './CommentArea';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiClient } from '../../api';
-import NextPrePost from './NextPrePost';
+// import { setDetailData } from '../../store/modules/detailPage';
+import { toast } from 'react-toastify';
 import PostArea from './PostArea';
+import CommentArea from './CommentArea';
+import NextPrePost from './NextPrePost';
+import Toastify from '../../components/Toastify';
+import styled from 'styled-components';
+import axios from 'axios';
 
 const DetailPage = () => {
-  const [postData, setPostData] = useState();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const { data } = await apiClient.get('/inside/1/8');
-  //       setPostData(data);
-  //     } catch (error) {
-  //       console.log('comment list error => ', error);
-  //     }
-  //   })();
-  //   // (async () => {
-  //   //   try {
-  //   //     const { data } = await axios.get('/public/data/detailpage/comments.json');
-  //   //     setComments(data.comments);
-  //   //   } catch (error) {
-  //   //     console.log('comment list error => ', error);
-  //   //   }
-  //   // })();
-  // }, []);
+  const dispatch = useDispatch();
+  // const { postData, commentsData } = useSelector(state => state.detailData);
+  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDcyODUyfQ.JMBl7I1IfMJQ6_dChKsl0FDHmyJ8UOALMYPgd15p2rA');
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('/data/detailPage/detailPage.json');
-        setPostData(data);
+        const config = {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDcyODUyfQ.JMBl7I1IfMJQ6_dChKsl0FDHmyJ8UOALMYPgd15p2rA',
+          },
+        };
+        const { data } = await axios.get('http://localhost:8000/lolog/1/1', config);
+        // dispatch(setDetailData(data));
+        console.log(data);
       } catch (error) {
-        console.log('comment list error => ', error);
+        (() => toast.error('댓글 통신 에러'))();
+        console.log('detail data error => ', error);
       }
     })();
   }, []);
 
   return (
-    postData && (
-      <DetailPageContainer>
-        <PostArea postData={postData} />
-        {/* <NextPrePost postData={postData} /> */}
-        <CommentArea comments={postData.comments} />
-      </DetailPageContainer>
-    )
+    <>
+      <Toastify />
+      {/* {postData && ( */}
+      {/* <DetailPageContainer> */}
+      {/* <PostArea postData={postData} /> */}
+      {/* <NextPrePost postData={postData} /> */}
+      {/* <CommentArea postData={postData} /> */}
+      {/* </DetailPageContainer> */}
+      {/* )} */}
+    </>
   );
 };
 
