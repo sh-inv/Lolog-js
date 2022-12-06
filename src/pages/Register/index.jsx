@@ -202,10 +202,10 @@ const RegisterContainer = styled.div`
   line-height: 1.5;
 
   h1 {
+    margin: 0;
     font-size: 4rem;
     color: var(--text1);
     font-weight: bolder;
-    margin: 0px;
   }
 
   .description {
