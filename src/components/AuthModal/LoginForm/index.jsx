@@ -25,7 +25,7 @@ const LoginForm = ({ onClose }) => {
       e.preventDefault();
       const body = {
         login_id: form.id,
-        passowrd: form.password,
+        password: form.password,
       };
       try {
         const resp = await apiClient.post('/auth/login', body);

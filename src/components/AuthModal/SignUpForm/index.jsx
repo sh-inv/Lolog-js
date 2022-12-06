@@ -11,6 +11,8 @@ const SignUpForm = ({ setIsLoginModal }) => {
   const [email, setEmail] = useState('');
   const [isEmail, setIsEmail] = useState(false);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
+  const [code, setCode] = useState('');
+  const [verifyCode, setVerifyCode] = useState('');
 
   const getEmail = e => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -34,16 +36,29 @@ const SignUpForm = ({ setIsLoginModal }) => {
       const resp = await apiClient.post('auth/email', body);
       if (isEmail && resp.status === 201) {
         toast.info('인증 메일을 확인해주세요');
+        setVerifyCode(resp.data.signup_code);
         setIsEmailAuth(true);
-      } else if (resp.status === 409) toast.error(resp.message);
+      } else if (resp.status === 409) {
+        toast.error(resp.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getVerify = () => {
-    navigate('/register');
-    setIsLoginModal(false);
+  const getCode = e => {
+    setCode(e.target.value);
+  };
+
+  const getVerify = e => {
+    if (code === verifyCode) {
+      navigate('/register');
+      setIsLoginModal(false);
+      console.log('인증완료');
+    } else {
+      e.preventDefault();
+      toast.error('인증번호를 다시 확인해주세요');
+    }
   };
 
   return (
@@ -56,7 +71,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
         <div className='auth-wrapper'>
           <h3>인증번호</h3>
           <div className='auth-input'>
-            <input type='text' tabIndex='5' placeholder='인증번호를 입력하세요.' maxLength={4} />
+            <input type='number' tabIndex='5' placeholder='인증번호를 입력하세요.' maxLength={4} onChange={getCode} value={code} />
             <Button type='submit' className='login-button' text='인증' color='teal' tabIndex='6' onClick={getVerify} />
           </div>
         </div>
@@ -124,6 +139,12 @@ const SignUpFormContainer = styled.form`
         :focus {
           border-bottom: 1px solid var(--primary1);
         }
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
 
       button {
