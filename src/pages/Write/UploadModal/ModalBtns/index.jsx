@@ -18,7 +18,7 @@ const ModalBtns = () => {
   };
 
   const selectSeries = () => {
-    dispatch(setIsUploadModal(false));
+    dispatch(setIsSeriesList(false));
   };
 
   const onUpload = async () => {

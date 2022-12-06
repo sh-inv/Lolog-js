@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSeriesList } from '../../../../store/modules/write';
+import { setIsSeriesList, setSeriesId } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
+import { toast } from 'react-toastify';
+import Toastify from '../../../../components/Toastify';
 import { MdPlaylistAdd } from 'react-icons/md';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 
 const SettingSeries = () => {
-  const { isSeriesList } = useSelector(state => state.writeContent);
+  const [seriesList, setSeriesList] = useState([]);
+  const { seriesId, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const getSeriesList = async () => {
@@ -20,10 +22,15 @@ const SettingSeries = () => {
       };
       const { data } = await axios.get(`http://localhost:8000/series`, config);
       dispatch(setIsSeriesList(true));
-      console.log(data);
+      setSeriesList(data.series);
     } catch (error) {
+      toast.error('시리즈 불러오기 실패');
       console.log(error);
     }
+  };
+
+  const selectSeries = e => {
+    dispatch(setSeriesId(Number(e.target.id)));
   };
 
   useEffect(() => {
@@ -41,7 +48,15 @@ const SettingSeries = () => {
               <input type='text' placeholder='새로운 시리즈 이름을 입력하세요' />
             </form>
           </div>
-          <ul className='series-list'></ul>
+          <ul className='series-list'>
+            {seriesList.map(seriesInfo => {
+              return (
+                <li key={seriesInfo.series_series_name} className={seriesInfo.series_id === seriesId ? 'active' : ''} id={seriesInfo.series_id} onClick={selectSeries}>
+                  {seriesInfo.series_series_name}
+                </li>
+              );
+            })}
+          </ul>
         </SettingSeriesContainerActive>
       ) : (
         <SettingSeriesContainer>
@@ -53,6 +68,7 @@ const SettingSeries = () => {
           </div>
         </SettingSeriesContainer>
       )}
+      <Toastify />
     </ContentWrapper>
   );
 };
@@ -129,6 +145,15 @@ const SettingSeriesContainerActive = styled.div`
     list-style: none;
     margin: 0px;
     background: var(--bg-element7);
+    li {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border3);
+    }
+
+    .active {
+      background: var(--primary1);
+      color: var(--button-text);
+    }
   }
 `;
 
