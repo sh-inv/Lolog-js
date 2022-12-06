@@ -1,27 +1,25 @@
-import { useSelector, useDispatch } from 'react-redux';
-import Toggle from './Toggle';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { createPortal } from 'react-dom';
+import Toggle from './Toggle';
 
 const EmailReceiveSetting = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
-  const commentAlert = user?.comment_alert;
-  const updateAlert = user?.update_alert;
+  const { user } = useSelector(state => state.user);
 
   return (
-    <EmailReceiveSettingContainer>
-      <ul>
-        <li>
-          <span className='alert'>댓글 알림</span>
-          <Toggle true={commentAlert === 1} />
-        </li>
-        <li>
-          <span className='alert'>벨로그 업데이트 소식</span>
-          <Toggle />
-        </li>
-      </ul>
-    </EmailReceiveSettingContainer>
+    user && (
+      <EmailReceiveSettingContainer>
+        <ul>
+          <li>
+            <span className='alert'>댓글 알림</span>
+            <Toggle name='comment_alert' checked={user.comment_alert} />
+          </li>
+          <li>
+            <span className='alert'>벨로그 업데이트 소식</span>
+            <Toggle name='update_alert' checked={user.update_alert} />
+          </li>
+        </ul>
+      </EmailReceiveSettingContainer>
+    )
   );
 };
 

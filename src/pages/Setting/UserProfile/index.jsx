@@ -1,14 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserProfileImage from '../../../components/UserProfileImage';
 import UploadImage from './UploadImage';
 import styled from 'styled-components';
 import { settingProfileMaxWidth768px, UserProfileImageMaxWidth768px } from '../../../styles/media';
 
 const UserProfile = () => {
-  const user = useSelector(state => state.user.user);
+  const { user } = useSelector(state => state.user);
+
   return (
     <UserProfileContainer>
-      <UserProfileImage source={user?.profile_image} />
+      {user && <UserProfileImage source={user.profile_image} />}
       <UploadImage />
     </UserProfileContainer>
   );
