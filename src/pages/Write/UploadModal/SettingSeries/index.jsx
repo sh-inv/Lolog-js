@@ -5,6 +5,7 @@ import { setIsSeriesList } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import { MdPlaylistAdd } from 'react-icons/md';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 const SettingSeries = () => {
   const { isSeriesList } = useSelector(state => state.writeContent);
@@ -24,6 +25,12 @@ const SettingSeries = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(setIsSeriesList(false));
+    };
+  }, []);
 
   return (
     <ContentWrapper contentTitle={'시리즈 설정'}>

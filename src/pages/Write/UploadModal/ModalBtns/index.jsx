@@ -1,13 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsUploadModal } from '../../../../store/modules/write';
+import { setIsSeriesList, setIsUploadModal } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect } from 'react';
 
 const ModalBtns = () => {
-  const { title, content, thumbnail, uploadType } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, uploadType, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
+
+  const seriesCancel = () => {
+    dispatch(setIsSeriesList(false));
+  };
+
+  const uploadCancel = () => {
+    dispatch(setIsUploadModal(false));
+  };
+
+  const selectSeries = () => {
+    dispatch(setIsUploadModal(false));
+  };
 
   const onUpload = async () => {
     if (title && content) {
@@ -35,8 +47,8 @@ const ModalBtns = () => {
 
   return (
     <ModalBtnsContainer className='modal-btns-container'>
-      <Button text='취소' color='transparent' onClick={() => dispatch(setIsUploadModal(false))} />
-      <Button text='출간하기' color='teal' onClick={onUpload} />
+      <Button text='취소' color='transparent' onClick={isSeriesList ? seriesCancel : uploadCancel} />
+      <Button text={isSeriesList ? '선택하기' : '출간하기'} color='teal' onClick={isSeriesList ? selectSeries : onUpload} />
     </ModalBtnsContainer>
   );
 };
