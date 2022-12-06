@@ -4,7 +4,7 @@ import { VscTriangleDown, VscTriangleUp } from 'react-icons/vsc';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled from 'styled-components';
 
-const Series = () => {
+const Series = ({ seriesData }) => {
   const [isToggle, setIsToggle] = useState(false);
 
   const changeToggle = e => {
@@ -12,46 +12,50 @@ const Series = () => {
   };
 
   return (
-    <SeriesContainer>
-      <h2>
-        <a href=''>series-title</a>
-      </h2>
-      <div className='bookmark-icon'>
-        <ImBookmark />
-      </div>
-      {isToggle && (
-        <ol className='series-list'>
-          <li>
-            <a href=''>series1</a>
-          </li>
-          <li>
-            <a href=''>series2</a>
-          </li>
-          <li>
-            <a href='' style={{ color: 'var(--primary1)', fontWeight: 'bold' }}>
-              series3
-            </a>
-          </li>
-        </ol>
-      )}
-      <div className='series-list-router'>
-        <div className='list-route-toggle' onClick={changeToggle}>
-          {isToggle ? <VscTriangleUp className='arrow-icon' /> : <VscTriangleDown className='arrow-icon' />}
-          {isToggle ? '숨기기' : '목록 보기'}
-        </div>
-        <div className='list-route-btn'>
-          <div className='series-number'>6/6</div>
-          <div className='btn-wrapper'>
-            <button className='pre'>
-              <MdKeyboardArrowLeft />
-            </button>
-            <button className='next'>
-              <MdKeyboardArrowRight />
-            </button>
+    <>
+      {seriesData && (
+        <SeriesContainer>
+          <h2>
+            <a href=''>series-title</a>
+          </h2>
+          <div className='bookmark-icon'>
+            <ImBookmark />
           </div>
-        </div>
-      </div>
-    </SeriesContainer>
+          {isToggle && (
+            <ol className='series-list'>
+              <li>
+                <a href=''>series1</a>
+              </li>
+              <li>
+                <a href=''>series2</a>
+              </li>
+              <li>
+                <a href='' style={{ color: 'var(--primary1)', fontWeight: 'bold' }}>
+                  series3
+                </a>
+              </li>
+            </ol>
+          )}
+          <div className='series-list-router'>
+            <div className='list-route-toggle' onClick={changeToggle}>
+              {isToggle ? <VscTriangleUp className='arrow-icon' /> : <VscTriangleDown className='arrow-icon' />}
+              {isToggle ? '숨기기' : '목록 보기'}
+            </div>
+            <div className='list-route-btn'>
+              <div className='series-number'>6/6</div>
+              <div className='btn-wrapper'>
+                <button className='pre'>
+                  <MdKeyboardArrowLeft />
+                </button>
+                <button className='next'>
+                  <MdKeyboardArrowRight />
+                </button>
+              </div>
+            </div>
+          </div>
+        </SeriesContainer>
+      )}
+    </>
   );
 };
 

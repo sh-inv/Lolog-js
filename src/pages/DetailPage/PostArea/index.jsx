@@ -22,7 +22,7 @@ const PostArea = ({ postData }) => {
   return (
     postData && (
       <PostAreaContainer>
-        <PostHeader postData={postData.post} />
+        <PostHeader postData={postData.post} seriesData={postData.series} />
         <img className='post-area-thumbnail' src='' alt='thumbnail' />
         <Content postContent={postData.content} />
         <UserBox className='post-area-user-info' userInfo={userInfo} />

@@ -5,7 +5,7 @@ import Toastify from '../Toastify';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getNewCommentsData } from '../../store/modules/detailPage';
+import { setNewCommentsData } from '../../store/modules/detailPage';
 
 const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested }) => {
   const [disable, setDisable] = useState(true);
@@ -29,7 +29,7 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
         },
         { headers: headers }
       );
-      dispatch(getNewCommentsData(data.comments));
+      dispatch(setNewCommentsData(data.comments));
       textareaRef.current.value = '';
       console.log(data);
     } catch (error) {

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 const Tags = ({ tags }) => {
   return (
     <TagsContainer>
-      {tags.map(tag => {
-        return (
-          <a key={tag.tag_name} href={`/tags/${tag.tag_name}`}>
-            {tag.tag_name}
-          </a>
-        );
-      })}
+      {tags &&
+        tags.map(tag => {
+          return (
+            <a key={tag.tag_name} href={`/tags/${tag.tag_name}`}>
+              {tag.tag_name}
+            </a>
+          );
+        })}
     </TagsContainer>
   );
 };

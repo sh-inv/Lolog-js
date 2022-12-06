@@ -1,14 +1,16 @@
 import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 
-const Information = ({ userId }) => {
+const Information = ({ userId, createAt }) => {
+  const postDate = new Date(createAt);
+
   return (
     <InformationContainer>
       <div className='info-wrapper'>
         <div className='information'>
           <span className='user-name'>{userId}</span>
           <span className='separator'>&#183;</span>
-          <GetPostDate postDate={'November 16, 2022 11:08:00'} />
+          <GetPostDate postDate={postDate} />
         </div>
       </div>
     </InformationContainer>
