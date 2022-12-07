@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 const ModalBtns = () => {
-  const { title, content, thumbnail, uploadType, isSeriesList } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, seriesId, uploadType, uploadUrl, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,18 +28,16 @@ const ModalBtns = () => {
   const onUpload = async () => {
     if (title && content) {
       try {
-        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: 0 };
         const config = {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU`,
           },
         };
-        const response = await axios.post(`http://localhost:8000/posts?status=${uploadType}`, bodyData, config);
-
-        if (response.data.message === 'post create success') {
-          navigate(`/@${response.data.post.post[0].login_id}/${response.data.post.post[0].title}`);
-        }
+        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: '' };
+        const response = await axios.post(`http://localhost:8000/posts`, bodyData, config);
+        navigate(`/posts/${response.data.post_id}`);
       } catch (error) {
+        toast.error('게시글 업로드 실패');
         console.log(error);
       }
     } else {
