@@ -1,32 +1,33 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiClient } from '../../api';
 import { setDetailData } from '../../store/modules/detailPage';
+import { useLocation } from 'react-router-dom';
+import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import PostArea from './PostArea';
-import CommentArea from './CommentArea';
 import NextPrePost from './NextPrePost';
+import CommentArea from './CommentArea';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
-import axios from 'axios';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { postData, commentsData } = useSelector(state => state.detailData);
-  // localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDcyODUyfQ.JMBl7I1IfMJQ6_dChKsl0FDHmyJ8UOALMYPgd15p2rA');
+  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzgwNDQ4fQ.gnZa0IFLsT4_d8N4neijUehkq19aOVg3TdI5ZcUb8bA');
 
   useEffect(() => {
     (async () => {
       try {
         const config = {
           headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU',
+            Authorization: localStorage.getItem('authToken'),
           },
         };
-        const { data } = await axios.get('http://localhost:8000/posts/1', config);
+        const { data } = await apiClient.get(`/posts${location.pathname}`, config);
         dispatch(setDetailData(data));
       } catch (error) {
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('게시글을 불러오지 못했습니다.');
         console.log('detail data error => ', error);
       }
     })();
@@ -38,8 +39,8 @@ const DetailPage = () => {
       {postData && (
         <DetailPageContainer>
           <PostArea postData={postData} />
-          {/* <NextPrePost postData={postData} /> */}
-          {/* <CommentArea postData={postData} /> */}
+          <NextPrePost postData={postData} />
+          <CommentArea postData={postData} />
         </DetailPageContainer>
       )}
     </>

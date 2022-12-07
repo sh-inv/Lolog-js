@@ -46,7 +46,7 @@ const CommentContent = ({ isNested, commentData }) => {
           <div style={{ height: '1.5rem' }} />
         </>
       ) : (
-        <p className='text'>{content}</p>
+        <pre className='text'>{content}</pre>
       )}
     </CommentContainer>
   );
