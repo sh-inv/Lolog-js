@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-
-import styled from 'styled-components';
-import ContentRouter from './ContentRouter';
 import LikeAndShare from './LikeAndShare';
+import ContentRouter from './ContentRouter';
+import styled from 'styled-components';
 
 const Snbs = () => {
   const [ScrollY, setScrollY] = useState(0);
