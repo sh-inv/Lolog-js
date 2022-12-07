@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-import Button from '../../../components/Button';
+import { useSelector } from 'react-redux';
 import SettingThumbnail from './SettingThumbnail';
 import SettingPublic from './ SettingPublic';
 import SettingUrl from './SettingUrl';
 import SettingSeries from './SettingSeries';
 import ModalBtns from './ModalBtns';
+import styled from 'styled-components';
 
 const UploadModal = () => {
+  const { isSeriesList } = useSelector(state => state.writeContent);
+
   return (
     <UploadModalContainer className='upload-modal-container'>
       <div className='upload-modal-content'>
@@ -16,8 +18,12 @@ const UploadModal = () => {
         <div className='upload-modal-dividing-line' />
         <div className='right-section'>
           <div className='right-section-content'>
-            <SettingPublic />
-            <SettingUrl />
+            {!isSeriesList && (
+              <>
+                <SettingPublic />
+                <SettingUrl />
+              </>
+            )}
             <SettingSeries />
           </div>
           <ModalBtns />

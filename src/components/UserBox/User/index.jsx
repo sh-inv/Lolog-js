@@ -3,20 +3,18 @@ import styled from 'styled-components';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
 
-const User = () => {
+const User = ({ userInfo }) => {
   return (
     <>
       <UserContainer>
         <div className='user'>
-          <Link to='/id'>
-            <UserProfileImage />
-          </Link>
+          <Link to={`/@${userInfo.loginId}`}>{userInfo.profileImg ? <img src={userInfo.profileImg} alt='profileImg' /> : <UserProfileImage />}</Link>
           <div className='flex'>
             <div className='user-info'>
               <div className='user-name'>
-                <Link to='/id'>Eeeee</Link>
+                <Link to='/id'>{userInfo.userName}</Link>
               </div>
-              <div className='description'>ben1mki가나다</div>
+              <div className='description'>{userInfo.aboutMe}</div>
             </div>
           </div>
         </div>

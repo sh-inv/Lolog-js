@@ -1,29 +1,32 @@
-import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
+import Toastify from '../../../../components/Toastify';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
 
-const EditorFooter = ({ title, content }) => {
-  const isReverse = useSelector(state => state.writeContent.isReverse);
+const EditorFooter = () => {
+  const { title, content, thumbnail, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const onSave = async () => {
     if (title && content) {
       try {
-        const response = await axios.put(`http://localhost:8000/posts?status=3`, {
-          title: title,
-          content: content,
-          thumbnail: '',
-          tags: [],
-        });
-        console.log(response);
+        const config = {
+          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+        };
+        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [] };
+        const response = await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
+        if (response.data.message === 'post create success') {
+          toast.success('포스트 임시저장 완료');
+        }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert('제목 또는 내용이 비어있습니다.');
+      toast.error('제목 또는 내용이 비어있습니다.');
     }
   };
 
@@ -38,15 +41,16 @@ const EditorFooter = ({ title, content }) => {
   return (
     <Positioner className='editor-footer-positioner' isReverse={isReverse}>
       <EditorFooterContainer>
-        <div className='exit'>
+        <a className='exit' href='/'>
           <BiArrowBack className='arrow-icon' />
           <span>나가기</span>
-        </div>
+        </a>
         <div className='export'>
-          <Button text='임시저장' className='temporary-storage' color="transparent" onClick={onSave} />
-          <Button text='출간하기' className='upload' color="teal" onClick={onUploadModal} />
+          <Button text='임시저장' className='temporary-storage' color='transparent' onClick={onSave} />
+          <Button text='출간하기' className='upload' color='teal' onClick={onUploadModal} />
         </div>
       </EditorFooterContainer>
+      <Toastify />
     </Positioner>
   );
 };

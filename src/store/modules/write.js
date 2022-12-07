@@ -4,14 +4,17 @@ const writeContentSlice = createSlice({
   name: 'writeContentReducer',
   initialState: {
     title: '',
-    content: '',
+    content: [],
     thumbnail: '',
+    thumbnailPreview: '',
     uploadType: '1',
     uploadUrl: 'title',
+    seriesId: null,
     imageFileUrl: null,
     selectedTool: null,
     isReverse: false,
     isUploadModal: false,
+    isSeriesList: false,
   },
   reducers: {
     setTitle: (state, action) => {
@@ -23,11 +26,17 @@ const writeContentSlice = createSlice({
     setThmbnail: (state, action) => {
       state.thumbnail = action.payload;
     },
+    setThmbnailPreview: (state, action) => {
+      state.thumbnailPreview = action.payload;
+    },
     setUploadType: (state, action) => {
       state.uploadType = action.payload;
     },
     setUploadUrl: (state, action) => {
       state.uploadUrl = action.payload;
+    },
+    setSeriesId: (state, action) => {
+      state.seriesId = action.payload;
     },
     setImageFileUrl: (state, action) => {
       state.imageFileUrl = action.payload;
@@ -41,8 +50,11 @@ const writeContentSlice = createSlice({
     setIsUploadModal: (state, action) => {
       state.isUploadModal = action.payload;
     },
+    setIsSeriesList: (state, action) => {
+      state.isSeriesList = action.payload;
+    },
   },
 });
 
-export const { setTitle, setContent, setThmbnail, setUploadType, setUploadUrl, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal } = writeContentSlice.actions;
+export const { setTitle, setContent, setThmbnail, setThmbnailPreview, setUploadType, setUploadUrl, setSeriesId, setImageFileUrl, setSelectedTool, reversePosition, setIsUploadModal, setIsSeriesList } = writeContentSlice.actions;
 export const writeContentReducer = writeContentSlice.reducer;
