@@ -111,8 +111,6 @@ const Register = () => {
 
   console.log(isIdDuplicateCheck);
 
-  // const error = () => toast.error('모든 항목을 작성해주세요');
-
   const onRegister = async () => {
     const body = {
       name: name,
@@ -189,7 +187,7 @@ const Register = () => {
         </div>
       </div>
       <div className='form-bottom'>
-        <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
+        <div className='all-valid'>{!(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
           <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />

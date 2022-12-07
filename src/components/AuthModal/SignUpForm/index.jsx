@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail } from '../../../store/modules/auth';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
@@ -8,15 +10,17 @@ import Toastify from '../../../components/Toastify';
 
 const SignUpForm = ({ setIsLoginModal }) => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
   const [isEmail, setIsEmail] = useState(false);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
   const [code, setCode] = useState('');
   const [verifyCode, setVerifyCode] = useState('');
+  const dispatch = useDispatch();
+  const { email } = useSelector(state => state.auth);
 
   const getEmail = e => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const emailCurrent = e.target.value;
+    dispatch(setEmail(emailCurrent));
     setEmail(emailCurrent);
     if (!emailRegax.test(emailCurrent)) {
       setIsEmail(false);
@@ -54,7 +58,6 @@ const SignUpForm = ({ setIsLoginModal }) => {
     if (code === verifyCode) {
       navigate('/register');
       setIsLoginModal(false);
-      console.log('인증완료');
     } else {
       e.preventDefault();
       toast.error('인증번호를 다시 확인해주세요');
