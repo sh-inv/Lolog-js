@@ -21,7 +21,6 @@ const SignUpForm = ({ setIsLoginModal }) => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const emailCurrent = e.target.value;
     dispatch(setEmail(emailCurrent));
-    setEmail(emailCurrent);
     if (!emailRegax.test(emailCurrent)) {
       setIsEmail(false);
     } else {

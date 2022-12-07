@@ -54,7 +54,7 @@ const Register = () => {
     const idCurrent = e.target.value;
     setId(idCurrent);
     if (!idRegax.test(idCurrent)) {
-      setIdMessage('아이디 형식이 틀렸습니다. 영어와 숫자로 구성해야합니다. 다시 한번 확인해주세요');
+      setIdMessage('아이디는 4자 이상의 영어와 숫자로 구성해야합니다');
       setIsId(false);
       // } else if (idCurrent.length >= 4) {
       //   setIdMessage('아이디 중복 여부를 확인 해주세요');
@@ -89,11 +89,6 @@ const Register = () => {
   };
   const handleIntro = e => setIntro(e.target.value);
 
-  const onDuplicateCheck = () => {
-    setIsIdDuplicateCheck(!isIdDuplicateCheck);
-    console.log(isIdDuplicateCheck);
-  };
-
   const { nameActive, idActive, passwordActive, passwordConfirmActive, introActive } = isActiveFocus;
 
   const handleFocus = focus => {
@@ -110,7 +105,19 @@ const Register = () => {
     });
   };
 
-  console.log(isIdDuplicateCheck);
+  const onIdDuplicateCheck = async () => {
+    const body = {
+      login_id: id,
+    };
+    try {
+      await apiClient.post('auth/login_id', body);
+      setIsIdDuplicateCheck(true);
+    } catch (error) {
+      if (error.response.status === 409) {
+        toast.error('이미 사용 중인 아이디입니다.');
+      }
+    }
+  };
 
   const onRegister = async () => {
     const body = {
@@ -121,9 +128,10 @@ const Register = () => {
       about_me: intro,
     };
     try {
-      await apiClient.post('signup?type=email', body);
-      const { token } = resp.data;
-      localStorage.setItem('authToken', token);
+      const resp = await apiClient.post('auth/signup?type=email', body);
+      console.log(resp);
+      // const { token } = resp.data;
+      // localStorage.setItem('authToken', token);
     } catch (error) {
       console.log(error);
     }
@@ -154,7 +162,7 @@ const Register = () => {
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
             <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
-            {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onDuplicateCheck} />}
+            {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onIdDuplicateCheck} />}
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
