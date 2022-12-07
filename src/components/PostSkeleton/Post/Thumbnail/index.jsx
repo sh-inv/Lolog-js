@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Thumbnail = () => {
-  return <ThumbnailBox />;
+const Thumbnail = ({ className }) => {
+  return <ThumbnailBox className={className} />;
 };
 
 const ThumbnailBox = styled.div`
