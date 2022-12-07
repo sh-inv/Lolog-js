@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { MdLockOutline } from 'react-icons/md';
-import { TfiCheckBox } from 'react-icons/tfi';
 import { apiClient } from '../../api';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
@@ -16,6 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfrim] = useState('');
   const [intro, setIntro] = useState('');
+  const { email } = useSelector(state => state.auth);
   //오류메세지 상태저장
   const [nameMessage, setNameMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
@@ -145,7 +146,7 @@ const Register = () => {
         <div className='wrapper email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' disabled value='lolog@email.com' />
+            <input type='text' disabled value={email} />
             <MdLockOutline />
           </div>
         </div>
