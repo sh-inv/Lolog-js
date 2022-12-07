@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
@@ -11,17 +12,17 @@ import Toastify from '../../components/Toastify';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { postData, commentsData } = useSelector(state => state.detailData);
-  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiJFZGVuIn0sImlhdCI6MTY2OTg4MTc2OH0.jPT90PxE_dJaV3OAjioIpVRXdgyaELBvNsRMieZ6q0c');
+  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzgwNDQ4fQ.gnZa0IFLsT4_d8N4neijUehkq19aOVg3TdI5ZcUb8bA');
 
   useEffect(() => {
-    const headers = localStorage.getItem('token');
     (async () => {
       try {
-        const { data } = await apiClient.get('/posts/1', { headers: headers });
+        const { data } = await apiClient.get(`/posts${location.pathname}`, { headers: { Authorization: localStorage.getItem('authToken') } });
         dispatch(getDetailData(data));
       } catch (error) {
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('게시글을 불러오지 못했습니다.');
         console.log('detail data error => ', error);
       }
     })();
@@ -30,22 +31,23 @@ const DetailPage = () => {
     //     const { data } = await axios.get('/public/data/detailpage/comments.json');
     //     dispatch(getDetailData(data));
     //   } catch (error) {
+    //     (() => toast.error('댓글 통신 에러'))();
     //     console.log('comment list error => ', error);
     //   }
     // })();
   }, []);
 
-  console.log(localStorage.getItem('authToken'));
+  console.log('postData', postData);
 
   return (
     <>
       <Toastify />
-      postData && (
-      <DetailPageContainer>
-        <NextPrePost postData={postData} />
-        <CommentArea postData={postData} />
-      </DetailPageContainer>
-      )
+      {postData && (
+        <DetailPageContainer>
+          <NextPrePost postData={postData} />
+          <CommentArea postData={postData} />
+        </DetailPageContainer>
+      )}
     </>
   );
 };
