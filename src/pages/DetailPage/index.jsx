@@ -32,7 +32,7 @@ const DetailPage = () => {
         console.log('detail data error => ', error);
       }
     })();
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
