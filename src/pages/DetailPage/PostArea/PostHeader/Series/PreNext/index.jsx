@@ -1,25 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled from 'styled-components';
 
 const PreNext = ({ postId, seriesData }) => {
-  const [currentSort, setCurrentSort] = useState(0);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (seriesData) {
-      const index = seriesData.findIndex(i => i.post_id === postId);
-      setCurrentSort(index + 1);
-    }
-  }, [seriesData]);
+  const index = seriesData.findIndex(i => i.post_id === postId);
+  const currentSort = index + 1;
+  const sortCount = seriesData.length;
+
+  const preAbled = currentSort !== 1;
+  const nextAbled = currentSort !== sortCount;
+
+  const goToPre = () => {
+    preAbled && navigate(`/posts/${seriesData[index - 1].post_id}`);
+  };
+
+  const goToNext = () => {
+    nextAbled && navigate(`/posts/${seriesData[index + 1].post_id}`);
+  };
 
   return (
     <PreNextContainer>
-      <div className='location-number'>{`${currentSort}/${seriesData.length}`}</div>
+      <div className='location-number'>{`${currentSort}/${sortCount}`}</div>
       <div className='btn-wrapper'>
-        <button className='pre'>
+        <button className={preAbled ? '' : 'disabled'} onClick={goToPre}>
           <MdKeyboardArrowLeft />
         </button>
-        <button className='next'>
+        <button className={nextAbled ? '' : 'disabled'} onClick={goToNext}>
           <MdKeyboardArrowRight />
         </button>
       </div>
@@ -56,10 +65,15 @@ const PreNextContainer = styled.div`
       color: var(--primary1);
       font-size: 1.25rem;
       cursor: pointer;
-
       svg {
         color: var(--primary1);
         pointer-events: none;
+      }
+    }
+    .disabled {
+      cursor: default;
+      svg {
+        opacity: 0.5;
       }
     }
   }
