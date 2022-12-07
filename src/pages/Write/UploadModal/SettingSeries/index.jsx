@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsSeriesList, setSeriesId } from '../../../../store/modules/write';
-import ContentWrapper from '../ContentWrapper';
 import { toast } from 'react-toastify';
 import Toastify from '../../../../components/Toastify';
+import ContentWrapper from '../ContentWrapper';
+import Button from '../../../../components/Button';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import styled from 'styled-components';
@@ -12,6 +13,8 @@ import styled from 'styled-components';
 const SettingSeries = () => {
   const [seriesList, setSeriesList] = useState([]);
   const [seriesName, setSeriesName] = useState('');
+  const [isInputOpen, setIsInputOpen] = useState(false);
+  const [addSeriesValue, setAddSeriesValue] = useState('');
   const { seriesId, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
@@ -40,6 +43,25 @@ const SettingSeries = () => {
     dispatch(setSeriesId(null));
   };
 
+  const addSeries = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU',
+        },
+      };
+      const bodyData = {
+        series_name: addSeriesValue,
+      };
+      const response = await axios.post(`http://localhost:8000/series`, bodyData, config);
+      getSeriesList();
+      setIsInputOpen(false);
+    } catch (error) {
+      toast.error('시리즈 생성 실패');
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     return () => {
       dispatch(setIsSeriesList(false));
@@ -51,9 +73,21 @@ const SettingSeries = () => {
       {isSeriesList ? (
         <SettingSeriesContainerActive>
           <div className='input-wrapper'>
-            <form>
-              <input type='text' placeholder='새로운 시리즈 이름을 입력하세요' />
-            </form>
+            <div className='series-add'>
+              <input className='series-url-input' type='text' placeholder='새로운 시리즈 이름을 입력하세요' value={addSeriesValue} onClick={() => setIsInputOpen(true)} onChange={e => setAddSeriesValue(e.target.value)} />
+              {isInputOpen && (
+                <div className='new-series-url'>
+                  <div className='url-slug-wrapper'>
+                    <span>{`/@userid/series/`}</span>
+                    <input className='url-slug-input' type='text' value={addSeriesValue} />
+                  </div>
+                  <div className='btns'>
+                    <Button text='취소' color='transparent' onClick={() => setIsInputOpen(false)} />
+                    <Button text={'시리즈 추가'} color='teal' onClick={addSeries} />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <ul className='series-list'>
             {seriesList.map(seriesInfo => {
@@ -176,12 +210,11 @@ const SettingSeriesContainerActive = styled.div`
   box-shadow: rgb(0 0 0 / 3%) 0px 0px 4px 0px;
   overflow: hidden;
 
-  form {
+  .series-add {
     background: var(--bg-element3);
     padding: 1rem;
-    height: 4rem;
     transition: all 0.125s ease-in 0s;
-    input {
+    .series-url-input {
       height: 2rem;
       width: 100%;
       padding: 0.5rem;
@@ -192,6 +225,38 @@ const SettingSeriesContainerActive = styled.div`
       box-shadow: rgb(0 0 0 / 3%) 0px 0px 4px 0px;
       background: var(--bg-element1);
       color: var(--text1);
+    }
+  }
+  .new-series-url {
+    margin-top: 0.5rem;
+    .url-slug-wrapper {
+      height: 2rem;
+      width: 100%;
+      display: flex;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      border-radius: 2px;
+      box-shadow: rgb(0 0 0 / 3%) 0px 0px 4px 0px;
+      background: var(--bg-element1);
+      color: var(--text3);
+      span {
+        padding-top: 0.16rem;
+      }
+      .url-slug-input {
+        color: var(--text1);
+        flex: 1 1 0%;
+        outline: none;
+        border: none;
+        padding-left: 0;
+        font-size: inherit;
+        background: transparent;
+      }
+    }
+    .btns {
+      display: flex;
+      -webkit-box-pack: end;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
     }
   }
   ul {

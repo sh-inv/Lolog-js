@@ -66,6 +66,7 @@ const ModalBtnsContainer = styled.div`
   display: flex;
   -webkit-box-pack: end;
   justify-content: flex-end;
+  margin-top: 0.7rem;
 
   button + button {
     margin-left: 0.875rem;

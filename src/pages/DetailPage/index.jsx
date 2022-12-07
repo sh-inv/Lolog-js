@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetailData } from '../../store/modules/detailPage';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import PostArea from './PostArea';
@@ -14,7 +15,7 @@ const DetailPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { postData, commentsData } = useSelector(state => state.detailData);
-  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzgwNDQ4fQ.gnZa0IFLsT4_d8N4neijUehkq19aOVg3TdI5ZcUb8bA');
+  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzkyODcyfQ._vtBm0mTxBG4sWbU8pHjnxlDuWigMmuPCLK5tw5mDW8');
 
   useEffect(() => {
     (async () => {
@@ -24,7 +25,7 @@ const DetailPage = () => {
             Authorization: localStorage.getItem('authToken'),
           },
         };
-        const { data } = await apiClient.get(`/posts${location.pathname}`, config);
+        const { data } = await axios.get(`http://localhost:8000${location.pathname}`, config);
         dispatch(setDetailData(data));
       } catch (error) {
         toast.error('게시글을 불러오지 못했습니다.');
