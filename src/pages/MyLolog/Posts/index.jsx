@@ -1,21 +1,38 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MaxWidth1199pxTagList from './MaxWidth1199pxTagList';
 import MinWidth1200pxTagList from './MinWidth1200pxTagList';
 import Post from './Post';
 import NoPost from './NoPost';
+import { apiClient } from '../../../api';
 
 const Posts = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 67, 7, 8, 8, 67, 5, 3, 4, 6, 7];
+  const [postsData, setPostsData] = useState();
+  const [tagId, setTagId] = useState('');
+  const [isNoPost, setIsNoPost] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiClient.get(`/lolog/1?offset=1&limit=20&tag_id=${tagId}`);
+        setPostsData(data);
+        !data.posts && setIsNoPost(true);
+      } catch (error) {
+        console.log('내 벨로그 글 데이터 통신 오류', error);
+        setIsNoPost(true);
+      }
+    })();
+  }, []);
+  console.log(postsData);
+
   return (
     <PostsContainer>
       <MinWidth1200pxTagList />
       <MaxWidth1199pxTagList />
-      <div className='post-padding'>
-        {arr.map((_, i) => (
-          <Post key={i} />
-        ))}
-      </div>
-      <NoPost />
+      {postsData && <div className='post-padding'>{postsData && postsData.posts.map((postData, i) => <Post key={i} postData={postData} />)}</div>}
+      {isNoPost && <NoPost />}
     </PostsContainer>
   );
 };
