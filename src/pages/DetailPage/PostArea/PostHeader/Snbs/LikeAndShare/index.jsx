@@ -10,7 +10,7 @@ const LikeAndShare = ({ ScrollActive }) => {
 
   const changeLike = e => {
     const isLike = e.target.className.includes('active');
-    isLike ? (e.target.className = 'snb-icon') : (e.target.className = 'snb-icon active');
+    isLike ? (e.target.className = 'icon-circle-wrapper') : (e.target.className = 'icon-circle-wrapper active');
   };
 
   const changeShare = () => {
@@ -19,23 +19,23 @@ const LikeAndShare = ({ ScrollActive }) => {
 
   return (
     <LikeAndShareContainer isShare={isShare}>
-      <div className={ScrollActive ? 'left-snb-content fixed' : 'left-snb-content'}>
-        <div className='snb-icon' onClick={changeLike}>
+      <div className={ScrollActive ? 'like-and-share-content fixed' : 'like-and-share-content'}>
+        <div className='icon-circle-wrapper' onClick={changeLike}>
           <FaHeart />
         </div>
         <div className='like-count'>98</div>
         <div className='share-child-positioner'>
-          <div className='snb-icon facebook'>
+          <div className='icon-circle-wrapper facebook'>
             <BsFacebook />
           </div>
-          <div className='snb-icon twitter'>
+          <div className='icon-circle-wrapper twitter'>
             <BsTwitter />
           </div>
-          <div className='snb-icon clip'>
+          <div className='icon-circle-wrapper clip'>
             <FiPaperclip />
           </div>
         </div>
-        <div className='snb-icon' onClick={changeShare}>
+        <div className='icon-circle-wrapper' onClick={changeShare}>
           <GiShare />
         </div>
       </div>
@@ -46,40 +46,40 @@ const LikeAndShare = ({ ScrollActive }) => {
 const LikeAndShareContainer = styled.div`
   position: absolute;
   left: -7rem;
-  .left-snb-content {
-    width: 4rem;
-    background: var(--bg-element2);
-    border: 1px solid var(--border4);
-    border-radius: 2rem;
-    padding: 0.5rem;
+
+  .like-and-share-content {
     display: flex;
     flex-direction: column;
     -webkit-box-align: center;
     align-items: center;
+    width: 4rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border4);
+    border-radius: 2rem;
+    background: var(--bg-element2);
 
-    .snb-icon {
-      height: 3rem;
-      width: 3rem;
+    .icon-circle-wrapper {
       display: flex;
       -webkit-box-align: center;
       align-items: center;
       -webkit-box-pack: center;
       justify-content: center;
-      background: var(--bg-element1);
+      width: 3rem;
+      height: 3rem;
       border: 1px solid var(--border3);
       border-radius: 1.5rem;
+      background: var(--bg-element1);
       color: var(--text3);
-      cursor: pointer;
       z-index: 5;
-
+      cursor: pointer;
       svg {
         width: 24px;
         height: 24px;
         pointer-events: none;
       }
       &:hover {
-        color: var(--text1);
         border-color: var(--text1);
+        color: var(--text1);
       }
     }
 
@@ -94,15 +94,14 @@ const LikeAndShareContainer = styled.div`
         transform: scale(1);
       }
     }
-
     .active {
       animation: spring 0.25s 2;
       border-color: var(--primary2);
       background: var(--primary2);
       color: var(--button-text);
       &:hover {
-        background: rgb(56, 217, 169);
         border-color: rgb(56, 217, 169);
+        background: rgb(56, 217, 169);
         color: var(--button-text);
       }
     }
@@ -116,10 +115,10 @@ const LikeAndShareContainer = styled.div`
         position: absolute;
         top: 0px;
         left: 0px;
-        transition: all 0.3s;
         width: ${props => (props.isShare ? '48px' : '0')};
         height: ${props => (props.isShare ? '48px' : '0')};
         opacity: ${props => (props.isShare ? '1' : '0')};
+        transition: all 0.3s;
       }
       .facebook {
         transform: ${props => (props.isShare ? 'translate(24px, -80px)' : 'translate(-24px)')};
@@ -134,10 +133,10 @@ const LikeAndShareContainer = styled.div`
 
     .like-count {
       margin-top: 0.5rem;
+      margin-bottom: 1rem;
       color: var(--text2);
       line-height: 1;
       font-size: 0.75rem;
-      margin-bottom: 1rem;
       font-weight: bold;
     }
   }

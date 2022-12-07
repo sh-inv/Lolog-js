@@ -42,6 +42,7 @@ const SnbsPositioner = styled.div`
   position: relative;
   margin-top: 2rem;
   z-index: 15;
+
   .fixed {
     position: fixed;
     top: 112px;
