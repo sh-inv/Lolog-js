@@ -6,6 +6,7 @@ import { AboutMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
   const [about, setAbout] = useState('');
+  const [isAbout, setIsAbout] = useState(false);
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
