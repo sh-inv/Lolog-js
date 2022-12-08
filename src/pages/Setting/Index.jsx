@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/modules/user';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
@@ -7,8 +7,6 @@ import UserProfile from './UserProfile';
 import UserIntro from './UserIntro';
 import UserInfo from './UserInfo';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
-
-import axios from 'axios';
 
 // const getSettingApi = async () => {
 //   const config = {

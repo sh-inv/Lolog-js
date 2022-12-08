@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setEmail } from '../../../store/modules/auth';
@@ -41,11 +41,14 @@ const SignUpForm = ({ setIsLoginModal }) => {
         toast.info('인증 메일을 확인해주세요');
         setVerifyCode(resp.data.signup_code);
         setIsEmailAuth(true);
-      } else if (resp.status === 409) {
-        toast.error(resp.message);
+        console.log(email);
+        localStorage.setItem('email', email);
       }
     } catch (error) {
       console.log(error);
+      if (error.response.status === 409) {
+        toast.error(resp.message);
+      }
     }
   };
 

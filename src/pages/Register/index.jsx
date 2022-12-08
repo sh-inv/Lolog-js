@@ -10,19 +10,17 @@ import Toastify from '../../components/Toastify';
 
 const Register = () => {
   const navigate = useNavigate();
-  //이름, 이메일, 아이디(롤로그 제목), 비밀번호, 소개글 확인
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfrim] = useState('');
   const [intro, setIntro] = useState('');
-  const { email } = useSelector(state => state.auth);
-  //오류메세지 상태저장
+
   const [nameMessage, setNameMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfrimMessage, setPasswordConfrimMessage] = useState('');
-  //유효성 검사
+
   const [isName, setIsName] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
@@ -37,6 +35,8 @@ const Register = () => {
     passwordConfirmActive: false,
     introActive: false,
   });
+
+  const { email } = useSelector(state => state.auth);
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -56,7 +56,7 @@ const Register = () => {
     if (!idRegax.test(idCurrent)) {
       setIdMessage('아이디는 4자 이상의 영어와 숫자로 구성해야합니다');
       setIsId(false);
-      // } else if (idCurrent.length >= 4) {
+      // } else if (idCurrent.length >= 4 && isIdDuplicateCheck === false) {
       //   setIdMessage('아이디 중복 여부를 확인 해주세요');
       //   setIsId(false);
     } else {
@@ -64,6 +64,8 @@ const Register = () => {
       setIsId(true);
     }
   };
+
+  console.log(isIdDuplicateCheck);
   const handlePassword = e => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
     const passwordCurrent = e.target.value;
@@ -112,6 +114,7 @@ const Register = () => {
     try {
       await apiClient.post('auth/login_id', body);
       setIsIdDuplicateCheck(true);
+      toast.success('사용할 수 있는 아이디 입니다.');
     } catch (error) {
       if (error.response.status === 409) {
         toast.error('이미 사용 중인 아이디입니다.');
@@ -128,8 +131,8 @@ const Register = () => {
       about_me: intro,
     };
     try {
-      const resp = await apiClient.post('auth/signup?type=email', body);
-      console.log(resp);
+      const { data } = await apiClient.post('auth/signup?type=email', body);
+      console.log(data);
       // const { token } = resp.data;
       // localStorage.setItem('authToken', token);
     } catch (error) {
@@ -154,14 +157,14 @@ const Register = () => {
         <div className='wrapper email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' disabled value={email} />
+            <input type='text' disabled value={localStorage.getItem('email')} />
             <MdLockOutline />
           </div>
         </div>
         <div className={idActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
+            <input type='text' placeholder='아이디를 입력하세요' disabled={isIdDuplicateCheck === true} onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
             {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onIdDuplicateCheck} />}
           </div>
           <div className='validation'>{idMessage}</div>
