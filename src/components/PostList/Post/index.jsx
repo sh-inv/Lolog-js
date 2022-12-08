@@ -5,14 +5,16 @@ import styled from 'styled-components';
 import { postMaxWidth1056px, postMaxWidth767px } from '../../../styles/media';
 import Thumbnail from '../../Thumbnail';
 
-const Post = () => {
+const Post = ({ postData }) => {
+  const { post_id, post_thumbnail } = postData;
+
   return (
     <PostBox>
-      <Link to='' className='thumbnail-box'>
-        <Thumbnail src={'https://velog.velcdn.com/images/s2ksh77/post/442c7442-0de4-4730-a447-d8a40bf5d074/image.png'} />
+      <Link to={`/posts/${post_id}`} className='thumbnail-box'>
+        <Thumbnail src={post_thumbnail} />
       </Link>
-      <PostInfo />
-      <UserInfo />
+      <PostInfo postData={postData} />
+      <UserInfo postData={postData} />
     </PostBox>
   );
 };

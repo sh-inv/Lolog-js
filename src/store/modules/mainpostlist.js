@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const detailPageSlice = createSlice({
-  name: 'detailData',
+const mainPostListSlice = createSlice({
+  name: 'post',
   initialState: { postData: null, commentsData: [] },
   reducers: {
     setDetailData: (state, action) => {

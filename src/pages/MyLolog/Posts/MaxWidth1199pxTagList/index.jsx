@@ -1,118 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MaxWidth1199pxTagList = () => {
-  const list = [
-    {
-      name: '전체보기',
-      post: 123,
-    },
-    {
-      name: '1',
-      post: 4563,
-    },
-    {
-      name: '2',
-      post: 234,
-    },
-    {
-      name: '3',
-      post: 5,
-    },
-    {
-      name: '4',
-      post: 7,
-    },
-    {
-      name: '5',
-      post: 345,
-    },
-    {
-      name: '6',
-      post: 789,
-    },
-    {
-      name: '7',
-      post: 76,
-    },
-    {
-      name: '8',
-      post: 52,
-    },
-    {
-      name: '9',
-      post: 33,
-    },
-    {
-      name: '11',
-      post: 33,
-    },
-    {
-      name: '12',
-      post: 33,
-    },
-    {
-      name: '13',
-      post: 33,
-    },
-    {
-      name: '14',
-      post: 33,
-    },
-    {
-      name: '15',
-      post: 33,
-    },
-    {
-      name: '16',
-      post: 33,
-    },
-    {
-      name: '17',
-      post: 33,
-    },
-    {
-      name: '18',
-      post: 33,
-    },
-    {
-      name: '19',
-      post: 33,
-    },
-    {
-      name: '20',
-      post: 33,
-    },
-    {
-      name: '21',
-      post: 33,
-    },
-    {
-      name: '22',
-      post: 33,
-    },
-    {
-      name: '23',
-      post: 33,
-    },
-    {
-      name: '24',
-      post: 33,
-    },
-    {
-      name: '25',
-      post: 33,
-    },
-    {
-      name: '26',
-      post: 33,
-    },
-  ];
+const MaxWidth1199pxTagList = ({ tagData, setTagId }) => {
+  const location = useLocation();
 
   return (
     <MaxWidth1199pxTagListContainer>
       <ul className='tag-list'>
-        {list.map(tag => (
+        {tagData.map(tag => (
           <NavLink
             to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
             key={tag.name}
@@ -122,9 +17,12 @@ const MaxWidth1199pxTagList = () => {
               if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
               else return 'tag-link';
             }}
+            onClick={() => {
+              setTagId(tag.tag_id);
+            }}
           >
             {tag.name}
-            <span className='tag-post-count'>({tag.post})</span>
+            <span className='tag-post-count'>({tag.post_count})</span>
           </NavLink>
         ))}
       </ul>

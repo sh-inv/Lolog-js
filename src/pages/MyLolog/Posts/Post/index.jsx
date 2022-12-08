@@ -4,29 +4,33 @@ import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import { BsFillHeartFill } from 'react-icons/bs';
 
-const Post = () => {
-  const tags = [45, 56, 67, 5, 4235, 34, 34567, 789, 897];
+const Post = ({ postData }) => {
+  const { create_at, post_comment_count, post_description, post_id, post_likes, post_thumbnail, post_title, tags } = postData;
 
   return (
     <PostContainer>
-      <Link to='' className=''>
-        <div className='thumbnail'>
-          <Thumbnail src={'https://velog.velcdn.com/images/city7310/post/7166f1f8-41d4-4c4b-9230-640e790e7ba0/image.png'} />
+      {post_thumbnail && (
+        <Link to={`/${post_id}`}>
+          <div className='thumbnail'>
+            <Thumbnail src={post_thumbnail} />
+          </div>
+        </Link>
+      )}
+      <Link to={`/${post_id}`}>
+        <h2 className='title'>{post_title}</h2>
+      </Link>
+      <p className='txt'>{post_description}</p>
+      {tags && (
+        <div className='tags'>
+          {tags.map(tag => (
+            <div key={tag.tag_id} className='tag'>
+              {tag.tag_name}
+            </div>
+          ))}
         </div>
-      </Link>
-      <Link to=''>
-        <h2 className='title'>[파이썬 튜토리얼] list 타입</h2>
-      </Link>
-      <p className='txt'>컨테이너, Iterable, list 리터럴 표현식, sum, len</p>
-      <div className='tags'>
-        {tags.map(tag => (
-          <Link to='' key={tag} className='tag'>
-            {tag}
-          </Link>
-        ))}
-      </div>
+      )}
       <div className='sub-info'>
-        <GetPostDate postDate={'November 16, 2022 11:08:00'} /> · 0개의 댓글 · <BsFillHeartFill className='icon' /> 0
+        <GetPostDate postDate={create_at} /> · {post_comment_count}개의 댓글 · <BsFillHeartFill className='icon' /> {post_likes}
       </div>
     </PostContainer>
   );
@@ -34,8 +38,12 @@ const Post = () => {
 
 const PostContainer = styled.div`
   border-top: 1px solid var(--border4);
-  padding-bottom: 4rem;
+  padding: 4rem 0;
   line-height: 1.5;
+
+  :nth-child(1) {
+    border-top: none;
+  }
 
   .thumbnail {
     position: relative;

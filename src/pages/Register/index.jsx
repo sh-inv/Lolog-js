@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
 import { MdLockOutline } from 'react-icons/md';
-import { TfiCheckBox } from 'react-icons/tfi';
+import { apiClient } from '../../api';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
-import styled from 'styled-components';
 
 const Register = () => {
   const navigate = useNavigate();
-  //이름, 이메일, 아이디(롤로그 제목), 비밀번호, 소개글 확인
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfrim] = useState('');
   const [intro, setIntro] = useState('');
-  //오류메세지 상태저장
+
   const [nameMessage, setNameMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfrimMessage, setPasswordConfrimMessage] = useState('');
-  //유효성 검사
+
   const [isName, setIsName] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
@@ -35,6 +35,8 @@ const Register = () => {
     passwordConfirmActive: false,
     introActive: false,
   });
+
+  const { email } = useSelector(state => state.auth);
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -52,9 +54,9 @@ const Register = () => {
     const idCurrent = e.target.value;
     setId(idCurrent);
     if (!idRegax.test(idCurrent)) {
-      setIdMessage('아이디 형식이 틀렸습니다. 영어와 숫자로 구성해야합니다. 다시 한번 확인해주세요');
+      setIdMessage('아이디는 4자 이상의 영어와 숫자로 구성해야합니다');
       setIsId(false);
-      // } else if (idCurrent.length >= 4) {
+      // } else if (idCurrent.length >= 4 && isIdDuplicateCheck === false) {
       //   setIdMessage('아이디 중복 여부를 확인 해주세요');
       //   setIsId(false);
     } else {
@@ -62,6 +64,7 @@ const Register = () => {
       setIsId(true);
     }
   };
+
   const handlePassword = e => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
     const passwordCurrent = e.target.value;
@@ -78,7 +81,7 @@ const Register = () => {
     const passwordConfirmCurrent = e.target.value;
     setPasswordConfrim(passwordConfirmCurrent);
     if (password === passwordConfirmCurrent) {
-      setPasswordConfrimMessage('비밀번호가 일치합니다!');
+      setPasswordConfrimMessage('');
       setIsPasswordConfirm(true);
     } else {
       setPasswordConfrimMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요!');
@@ -86,10 +89,6 @@ const Register = () => {
     }
   };
   const handleIntro = e => setIntro(e.target.value);
-
-  const onDuplicateCheck = () => {
-    setIsIdDuplicateCheck(true);
-  };
 
   const { nameActive, idActive, passwordActive, passwordConfirmActive, introActive } = isActiveFocus;
 
@@ -107,7 +106,38 @@ const Register = () => {
     });
   };
 
-  const error = () => toast.error('모든 항목을 작성해주세요');
+  const onIdDuplicateCheck = async () => {
+    const body = {
+      login_id: id,
+    };
+    try {
+      await apiClient.post('auth/login_id', body);
+      setIsIdDuplicateCheck(true);
+      toast.success('사용할 수 있는 아이디 입니다.');
+    } catch (error) {
+      if (error.response.status === 409) {
+        toast.error('이미 사용 중인 아이디입니다.');
+      }
+    }
+  };
+
+  const onRegister = async () => {
+    const body = {
+      name: name,
+      email: email,
+      login_id: id,
+      password: password,
+      about_me: intro,
+    };
+    try {
+      const { data } = await apiClient.post('auth/signup?type=email', body);
+      const { token } = data;
+      localStorage.setItem('authToken', token);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <RegisterContainer>
@@ -123,18 +153,18 @@ const Register = () => {
           </div>
           <div className='validation'>{nameMessage}</div>
         </div>
-        <div className='wrapper  email-wrapper'>
+        <div className='wrapper email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' disabled value='lolog@email.com' />
+            <input type='text' disabled value={email} />
             <MdLockOutline />
           </div>
         </div>
         <div className={idActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>아이디 ﹡</label>
           <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
-            <Button className='duplicate' text={<TfiCheckBox className={isIdDuplicateCheck ? 'checked-icon' : ''} />} onClick={onDuplicateCheck} />
+            <input type='text' placeholder='아이디를 입력하세요' disabled={isIdDuplicateCheck === true} onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
+            {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onIdDuplicateCheck} />}
           </div>
           <div className='validation'>{idMessage}</div>
         </div>
@@ -168,16 +198,10 @@ const Register = () => {
         </div>
       </div>
       <div className='form-bottom'>
-        <div className='all-valid'>{isName && isId && isPassword && isPasswordConfirm ? '' : '모든 필수 항목을 입력해주세요'}</div>
+        <div className='all-valid'>{!(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
-          <Button
-            className='next'
-            text='다음'
-            color='teal'
-            // disabled={!(isName && isId && isPassword && isPasswordConfirm)}
-            onClick={error}
-          />
+          <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />
         </div>
       </div>
       <Toastify />
@@ -191,10 +215,10 @@ const RegisterContainer = styled.div`
   line-height: 1.5;
 
   h1 {
+    margin: 0;
     font-size: 4rem;
     color: var(--text1);
     font-weight: bolder;
-    margin: 0px;
   }
 
   .description {
@@ -224,11 +248,12 @@ const RegisterContainer = styled.div`
       }
 
       .input-wrapper {
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--border2);
         display: flex;
+        justify-content: space-between;
         -webkit-box-align: center;
         align-items: center;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border2);
 
         input {
           display: block;
@@ -251,15 +276,16 @@ const RegisterContainer = styled.div`
           color: var(--text3);
         }
 
-        .checked-icon {
-          color: var(--primary2);
+        .duplicate {
+          display: block;
+          width: 7rem;
         }
-      }
 
-      .duplicate {
-        padding: 0;
-        background: none;
-        color: var(--text3);
+        .checked {
+          display: block;
+          width: 7rem;
+          pointer-events: none;
+        }
       }
 
       .validation {
