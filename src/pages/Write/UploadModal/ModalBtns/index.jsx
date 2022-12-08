@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSeriesList, setIsUploadModal } from '../../../../store/modules/write';
+import { setWriteContent } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import Toastify from '../../../../components/Toastify';
 import { toast } from 'react-toastify';
@@ -13,16 +13,12 @@ const ModalBtns = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const seriesCancel = () => {
-    dispatch(setIsSeriesList(false));
+  const closeSeriesList = () => {
+    dispatch(setWriteContent({ type: 'isSeriesList', value: false }));
   };
 
-  const uploadCancel = () => {
-    dispatch(setIsUploadModal(false));
-  };
-
-  const selectSeries = () => {
-    dispatch(setIsSeriesList(false));
+  const closeUploadModal = () => {
+    dispatch(setWriteContent({ type: 'isUploadModal', value: false }));
   };
 
   const onUpload = async () => {
@@ -47,14 +43,14 @@ const ModalBtns = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setIsUploadModal(false));
+      dispatch(setWriteContent({ type: 'isUploadModal', value: false }));
     };
   }, []);
 
   return (
     <ModalBtnsContainer className='modal-btns-container'>
-      <Button text='취소' color='transparent' onClick={isSeriesList ? seriesCancel : uploadCancel} />
-      <Button text={isSeriesList ? '선택하기' : '출간하기'} color='teal' onClick={isSeriesList ? selectSeries : onUpload} />
+      <Button text='취소' color='transparent' onClick={isSeriesList ? closeSeriesList : closeUploadModal} />
+      <Button text={isSeriesList ? '선택하기' : '출간하기'} color='teal' onClick={isSeriesList ? closeSeriesList : onUpload} />
       <Toastify />
     </ModalBtnsContainer>
   );

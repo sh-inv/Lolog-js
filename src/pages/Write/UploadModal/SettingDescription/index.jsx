@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setDiscription } from '../../../../store/modules/write';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWriteContent } from '../../../../store/modules/write';
 import styled from 'styled-components';
 
 const SettingDescription = () => {
@@ -10,7 +10,7 @@ const SettingDescription = () => {
   return (
     <SettingDescriptionContainer>
       <h4>{title}</h4>
-      <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' value={discription} onChange={e => dispatch(setDiscription(e.target.value))} maxLength={150} />
+      <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' value={discription} onChange={e => dispatch(setWriteContent({ type: 'discription', value: e.target.value }))} maxLength={150} />
       <p style={{ color: discriptionLenght >= 150 ? 'var(--prism-code-3)' : 'var(--text1)' }}>{discriptionLenght}/150</p>
     </SettingDescriptionContainer>
   );

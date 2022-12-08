@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setUploadUrl } from '../../../../store/modules/write';
+import { setWriteContent } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import styled from 'styled-components';
 
@@ -11,8 +11,8 @@ const SettingUrl = () => {
     <ContentWrapper contentTitle={'URL 설정'}>
       <SettingUrlContainer>
         <div className='url-container'>
-          <span>/@userid/</span>
-          <input type='text' value={uploadUrl} onChange={e => dispatch(setUploadUrl(e.target.value))} />
+          <span>/posts/</span>
+          <input type='text' value={uploadUrl} onChange={e => dispatch(setWriteContent({ type: 'uploadUrl', value: e.target.value }))} />
         </div>
       </SettingUrlContainer>
     </ContentWrapper>

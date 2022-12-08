@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setThmbnail } from '../../../../store/modules/write';
+import { setWriteContent } from '../../../../store/modules/write';
+import axios from 'axios';
 import ContentWrapper from '../ContentWrapper';
 import { SlPicture } from 'react-icons/sl';
 import { toast } from 'react-toastify';
@@ -30,10 +30,9 @@ const SettingThumbnail = () => {
         },
       };
       toast.error('이미지 로딩중...');
-
       const response = await axios.post(`http://localhost:8000/uploads/thumbnail?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
+      dispatch(setWriteContent({ type: 'thumbnail', value: response.data.imageUrl[0] }));
       toast.success('이미지 업로드 완료');
-      dispatch(setThmbnail(response.data.imageUrl[0]));
     } catch (error) {
       toast.success('이미지 업로드 실패');
       console.log(error);
@@ -41,7 +40,7 @@ const SettingThumbnail = () => {
   };
 
   const removeFileImage = () => {
-    dispatch(setThmbnail(null));
+    dispatch(setWriteContent({ type: 'thumbnail', value: null }));
   };
 
   return (

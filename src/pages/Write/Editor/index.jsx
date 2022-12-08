@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setContent, setSelectedTool } from '../../../store/modules/write';
+import { setWriteContent } from '../../../store/modules/write';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
 import LinkModal from './LinkModal';
@@ -96,18 +96,18 @@ const Editor = () => {
   // console.log(selection);
 
   const changeContent = e => {
-    let copy = [...content];
-    if (e.key === 'Enter') {
-      copy.push('<br />');
-      dispatch(setContent(copy));
-    }
+    // let copy = [...content];
+    // if (e.key === 'Enter') {
+    //   copy.push('<br />');
+    //   dispatch(setContent(copy));
+    // }
   };
 
   // console.log('editor:', content);
 
   return (
     <EditorContainer className='editor-container'>
-      <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setTitle(e.target.value))} />
+      <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />

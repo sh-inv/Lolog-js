@@ -5,7 +5,7 @@ const RouterList = ({ postId, seriesData }) => {
     <RouterListContainer>
       {seriesData.map(seriesInfo => {
         return (
-          <li key={seriesInfo.title}>
+          <li key={seriesInfo.post_id}>
             <a className={seriesInfo.post_id === postId ? 'current-post-link' : ''} href={`/posts/${seriesInfo.post_id}`}>
               {seriesInfo.title}
             </a>

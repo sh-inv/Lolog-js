@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSeriesList, setSeriesId } from '../../../../store/modules/write';
+import { setWriteContent } from '../../../../store/modules/write';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import Toastify from '../../../../components/Toastify';
 import ContentWrapper from '../ContentWrapper';
@@ -26,7 +26,7 @@ const SettingSeries = () => {
         },
       };
       const { data } = await axios.get(`http://localhost:8000/series`, config);
-      dispatch(setIsSeriesList(true));
+      dispatch(setWriteContent({ type: 'isSeriesList', value: true }));
       setSeriesList(data.series);
     } catch (error) {
       toast.error('시리즈 불러오기 실패');
@@ -35,12 +35,12 @@ const SettingSeries = () => {
   };
 
   const selectSeries = e => {
-    dispatch(setSeriesId(Number(e.target.id)));
+    dispatch(setWriteContent({ type: 'seriesId', value: Number(e.target.id) }));
     setSeriesName(e.target.innerText);
   };
 
   const removeSeries = () => {
-    dispatch(setSeriesId(null));
+    dispatch(setWriteContent({ type: 'seriesId', value: null }));
   };
 
   const addSeries = async () => {
@@ -64,7 +64,7 @@ const SettingSeries = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setIsSeriesList(false));
+      dispatch(setWriteContent({ type: 'isSeriesList', value: false }));
     };
   }, []);
 
