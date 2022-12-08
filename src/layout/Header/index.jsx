@@ -38,7 +38,7 @@ const Header = () => {
       try {
         const {
           data: { toggle },
-        } = await axios.get('data/header/toggle.json');
+        } = await axios.get('/data/header/toggle.json', {});
         setToggleMenuList(toggle);
       } catch (error) {
         console.log('error => ', error);

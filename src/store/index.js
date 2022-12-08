@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     darkMode: themeModeReducer,
     writeContent: writeContentReducer,
-    detailData: detailPageReducer.reducer,
+    detailData: detailPageReducer,
     user: userReducer,
     auth: authReducer,
   },
