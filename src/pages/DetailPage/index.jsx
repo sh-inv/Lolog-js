@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetailData } from '../../store/modules/detailPage';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import PostArea from './PostArea';
@@ -25,7 +24,7 @@ const DetailPage = () => {
             Authorization: localStorage.getItem('authToken'),
           },
         };
-        const { data } = await axios.get(`http://localhost:8000${location.pathname}`, config);
+        const { data } = await apiClient.get(`${location.pathname}`, config);
         dispatch(setDetailData(data));
       } catch (error) {
         toast.error('게시글을 불러오지 못했습니다.');
