@@ -1,21 +1,21 @@
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
-import styled from 'styled-components';
 
 const SocialAuth = () => {
   return (
     <SocialAuthContainer>
-      <Link className='github' tabIndex='7'>
+      <a className='github' tabIndex='7'>
         <AiOutlineGithub />
-      </Link>
-      <Link className='google' tabIndex='8'>
+      </a>
+      <a className='google' tabIndex='8'>
         <FcGoogle />
-      </Link>
-      <Link className='facebook' tabIndex='9'>
+      </a>
+      <a className='facebook' tabIndex='9'>
         <FaFacebookF />
-      </Link>
+      </a>
     </SocialAuthContainer>
   );
 };
