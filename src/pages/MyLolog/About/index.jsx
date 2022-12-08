@@ -17,18 +17,14 @@ const About = () => {
     setAbout(e.target.value);
   };
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
+  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNDkyNjgxfQ.lbkgkD5qWDGhlQygJq2sPcw750NBdiF-gdyzm2txSZs`;
 
   useEffect(() => {
     const loader = async () => {
       try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await apiClient.get('/lolog/10/about', config);
+        const { data } = await apiClient.get('lolog/10/about');
         setAbout(data.about.about_blog);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -46,7 +42,7 @@ const About = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      await apiClient.patch('/lolog/10/about', body, config);
+      await apiClient.patch('lolog/10/about', body, config);
       setAbout(body.about_blog);
       setIsModify(false);
     } catch (error) {
