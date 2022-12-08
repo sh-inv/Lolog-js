@@ -5,23 +5,25 @@ import FollowButton from '../../FollowButton';
 
 const User = ({ userInfo }) => {
   return (
-    <>
-      <UserContainer>
-        <div className='user'>
-          <Link to={`/@${userInfo.loginId}`}>{userInfo.profileImg ? <img src={userInfo.profileImg} alt='profileImg' /> : <UserProfileImage />}</Link>
-          <div className='flex'>
-            <div className='user-info'>
-              <div className='user-name'>
-                <Link to='/id'>{userInfo.userName}</Link>
+    userInfo && (
+      <>
+        <UserContainer>
+          <div className='user'>
+            <Link to={`/@${userInfo.loginId}`}>{userInfo.profileImg ? <img src={userInfo.profileImg} alt='profileImg' /> : <UserProfileImage />}</Link>
+            <div className='flex'>
+              <div className='user-info'>
+                <div className='user-name'>
+                  <Link to='/id'>{userInfo.userName}</Link>
+                </div>
+                <div className='description'>{userInfo.aboutMe}</div>
               </div>
-              <div className='description'>{userInfo.aboutMe}</div>
             </div>
           </div>
-        </div>
-        <FollowButton />
-      </UserContainer>
-      <Border />
-    </>
+          <FollowButton />
+        </UserContainer>
+        <Border />
+      </>
+    )
   );
 };
 
