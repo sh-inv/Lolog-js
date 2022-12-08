@@ -6,7 +6,7 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
-const PostListNavBar = () => {
+const PostListNavBar = ({ setPeriod }) => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
   const navBar = [
@@ -42,7 +42,7 @@ const PostListNavBar = () => {
           )}
           <SlideBorder location={location} isLogin={isLogin} />
         </NavTab>
-        {location.pathname === '/' && <PeriodFilter />}
+        {location.pathname === '/' && <PeriodFilter setPeriod={setPeriod} />}
       </div>
       <More />
     </PostListNavBarContainer>

@@ -7,7 +7,7 @@ const UserInfo = ({ postData }) => {
   const { user_profile_image, user_login_id, post_likes } = postData;
   return (
     <UserInfoContainer>
-      <Link to='' className='user'>
+      <Link to={`/id`} className='user'>
         <span className='profile-img'>
           <UserProfileImage source={user_profile_image} />
         </span>

@@ -10,11 +10,20 @@ const Main = () => {
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') {
-      setPageInfo('trend');
+      setPageInfo({
+        name: 'trend',
+        query: 'week',
+      });
     } else if (path === '/recent') {
-      setPageInfo('recent');
+      setPageInfo({
+        name: 'recent',
+        query: '',
+      });
     } else {
-      setPageInfo('follow');
+      setPageInfo({
+        name: 'follow',
+        query: '',
+      });
     }
   }, [location]);
 

@@ -1,18 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 import { apiClient } from '../../api';
-import { useLocation } from 'react-router-dom';
 
 const PostList = ({ pageInfo }) => {
-  const location = useLocation();
+  const { name, query } = pageInfo;
   const [postData, setPostData] = useState([]);
-  const [type, setType] = useState('');
-  const [period, setPeriod] = useState('');
+  const [period, setPeriod] = useState(query);
   const [pageNum, setPageNum] = useState(1);
   const observerRef = useRef(null);
   const [bottom, setBottom] = useState(null);
@@ -20,15 +17,13 @@ const PostList = ({ pageInfo }) => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get(`/main?type=${pageInfo}&period=${period}&offset=${pageNum}&limit=50`);
+        const { data } = await apiClient.get(`/main?type=${name}&period=${period}&offset=${pageNum}&limit=50`);
         setPostData([...postData, ...data.post]);
       } catch (error) {
         console.log('메인페이지 게시글 통신 오류 => ', error);
       }
     })();
-  }, [pageInfo, period, pageNum]);
-
-  console.log(postData);
+  }, [name, period, pageNum]);
 
   const intersectionObserver = entries => {
     if (entries[0].isIntersecting) {
@@ -51,17 +46,17 @@ const PostList = ({ pageInfo }) => {
     const observer = observerRef.current;
     if (bottom) {
       observer.observe(bottom);
-      console.log('관찰시작');
+      // console.log('관찰시작');
     }
     return () => {
       if (bottom) observer.unobserve(bottom);
-      console.log('관찰종료');
+      // console.log('관찰종료');
     };
   }, [bottom]);
 
   return (
     <PostListContainer>
-      <PostListNavBar />
+      <PostListNavBar setPeriod={setPeriod} />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
           {postData.map((data, i) => {

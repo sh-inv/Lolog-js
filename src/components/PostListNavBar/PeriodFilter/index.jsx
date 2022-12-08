@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
 
-const PeriodFilter = () => {
+const PeriodFilter = ({ setPeriod }) => {
   const [isToggle, setIsToggle] = useState(false);
   const [filter, setFilter] = useState('이번 주');
-  const filterList = [
+  const [filterList, setFilterList] = useState([
     {
       name: '오늘',
       query: 'today',
@@ -27,7 +27,7 @@ const PeriodFilter = () => {
       query: 'year',
       view: false,
     },
-  ];
+  ]);
   const toggleBtnRef = useRef();
   const toggleBoxRef = useRef();
 
@@ -60,6 +60,7 @@ const PeriodFilter = () => {
                 arr.forEach(filter => (filter.view = false));
                 arr[i].view = true;
                 setFilterList(arr);
+                setPeriod(filter.query);
                 setFilter(filter.name);
                 setIsToggle(false);
               }}
