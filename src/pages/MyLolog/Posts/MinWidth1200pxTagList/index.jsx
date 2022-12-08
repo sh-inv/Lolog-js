@@ -1,72 +1,34 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MinWidth1200pxTagList = () => {
-  const list = [
-    {
-      name: '전체보기',
-      post: 123,
-    },
-    {
-      name: '1',
-      post: 4563,
-    },
-    {
-      name: '2',
-      post: 234,
-    },
-    {
-      name: '3',
-      post: 5,
-    },
-    {
-      name: '4',
-      post: 7,
-    },
-    {
-      name: '5',
-      post: 345,
-    },
-    {
-      name: '6',
-      post: 789,
-    },
-    {
-      name: '7',
-      post: 76,
-    },
-    {
-      name: '8',
-      post: 52,
-    },
-    {
-      name: '9',
-      post: 33,
-    },
-  ];
-
+const MinWidth1200pxTagList = ({ tagData, setTagId }) => {
   return (
-    <MinWidth1200pxTagListContainer>
-      <div className='tag-list'>태그 목록</div>
-      <ul>
-        {list.map(tag => (
-          <li className='tag' key={tag.name}>
-            <NavLink
-              to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
-              className={() => {
-                const params = new URLSearchParams(location.search);
-                const getTag = params.get('tag');
-                if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
-                else return 'tag-link';
-              }}
-            >
-              {tag.name}
-            </NavLink>
-            <span className='tag-post-count'>({tag.post})</span>
-          </li>
-        ))}
-      </ul>
-    </MinWidth1200pxTagListContainer>
+    tagData && (
+      <MinWidth1200pxTagListContainer>
+        <div className='tag-list'>태그 목록</div>
+        <ul>
+          {tagData.map(tag => (
+            <li className='tag' key={tag.name}>
+              <NavLink
+                to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
+                className={() => {
+                  const params = new URLSearchParams(location.search);
+                  const getTag = params.get('tag');
+                  if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
+                  else return 'tag-link';
+                }}
+                onClick={() => {
+                  setTagId(tag.tag_id);
+                }}
+              >
+                {tag.name}
+              </NavLink>
+              <span className='tag-post-count'>({tag.post_count})</span>
+            </li>
+          ))}
+        </ul>
+      </MinWidth1200pxTagListContainer>
+    )
   );
 };
 

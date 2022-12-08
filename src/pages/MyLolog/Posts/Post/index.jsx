@@ -5,7 +5,7 @@ import GetPostDate from '../../../../components/GetPostDate';
 import { BsFillHeartFill } from 'react-icons/bs';
 
 const Post = ({ postData }) => {
-  const { create_at, post_comment_count, post_description, post_id, post_likes, post_status, post_thumbnail, post_title, tags, user_id } = postData;
+  const { create_at, post_comment_count, post_description, post_id, post_likes, post_thumbnail, post_title, tags } = postData;
 
   return (
     <PostContainer>
@@ -23,9 +23,9 @@ const Post = ({ postData }) => {
       {tags && (
         <div className='tags'>
           {tags.map(tag => (
-            <Link to='' key={tag.tag_id} className='tag'>
+            <div key={tag.tag_id} className='tag'>
               {tag.tag_name}
-            </Link>
+            </div>
           ))}
         </div>
       )}
@@ -40,6 +40,10 @@ const PostContainer = styled.div`
   border-top: 1px solid var(--border4);
   padding: 4rem 0;
   line-height: 1.5;
+
+  :nth-child(1) {
+    border-top: none;
+  }
 
   .thumbnail {
     position: relative;
