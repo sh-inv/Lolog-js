@@ -1,21 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
-import styled from 'styled-components';
 
 const SocialAuth = () => {
+  const onSocialLogin = async () => {
+    const config = {
+      headers: { 'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE' },
+    };
+    try {
+      const resp = await apiClient.get('auth/github', config);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <SocialAuthContainer>
-      <Link className='github' tabIndex='5'>
+      <a className='github' tabIndex='5' onClick={onSocialLogin}>
         <AiOutlineGithub />
-      </Link>
-      <Link className='google' tabIndex='6'>
+      </a>
+      <a className='google' tabIndex='6'>
         <FcGoogle />
-      </Link>
-      <Link className='facebook' tabIndex='7'>
+      </a>
+      <a className='facebook' tabIndex='7'>
         <FaFacebookF />
-      </Link>
+      </a>
     </SocialAuthContainer>
   );
 };
