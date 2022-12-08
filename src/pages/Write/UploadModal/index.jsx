@@ -5,6 +5,7 @@ import SettingUrl from './SettingUrl';
 import SettingSeries from './SettingSeries';
 import ModalBtns from './ModalBtns';
 import styled from 'styled-components';
+import SettingDescription from './SettingDescription';
 
 const UploadModal = () => {
   const { isSeriesList } = useSelector(state => state.writeContent);
@@ -14,6 +15,7 @@ const UploadModal = () => {
       <div className='upload-modal-content'>
         <div className='left-section'>
           <SettingThumbnail />
+          <SettingDescription />
         </div>
         <div className='upload-modal-dividing-line' />
         <div className='right-section'>
