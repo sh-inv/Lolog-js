@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
+import UserProfileImage from '../../../UserProfileImage';
 
 const UserInfo = ({ postData }) => {
   const { user_profile_image, user_login_id, post_likes } = postData;
   return (
     <UserInfoContainer>
       <Link to='' className='user'>
-        <img className='profile-img' src={user_profile_image} alt='profile-img' />
+        <span className='profile-img'>
+          <UserProfileImage source={user_profile_image} />
+        </span>
         <span className='user-by'>
           by <span className='user-name'>{user_login_id}</span>
         </span>
