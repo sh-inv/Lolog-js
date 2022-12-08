@@ -41,13 +41,11 @@ const SignUpForm = ({ setIsLoginModal }) => {
         toast.info('인증 메일을 확인해주세요');
         setVerifyCode(resp.data.signup_code);
         setIsEmailAuth(true);
-        console.log(email);
-        localStorage.setItem('email', email);
       }
     } catch (error) {
       console.log(error);
       if (error.response.status === 409) {
-        toast.error(resp.message);
+        toast.error('이미 사용중인 이메일입니다.');
       }
     }
   };

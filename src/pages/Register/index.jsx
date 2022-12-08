@@ -65,7 +65,6 @@ const Register = () => {
     }
   };
 
-  console.log(isIdDuplicateCheck);
   const handlePassword = e => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
     const passwordCurrent = e.target.value;
@@ -132,9 +131,9 @@ const Register = () => {
     };
     try {
       const { data } = await apiClient.post('auth/signup?type=email', body);
-      console.log(data);
-      // const { token } = resp.data;
-      // localStorage.setItem('authToken', token);
+      const { token } = data;
+      localStorage.setItem('authToken', token);
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -157,7 +156,7 @@ const Register = () => {
         <div className='wrapper email-wrapper'>
           <label>이메일</label>
           <div className='input-wrapper'>
-            <input type='text' disabled value={localStorage.getItem('email')} />
+            <input type='text' disabled value={email} />
             <MdLockOutline />
           </div>
         </div>
