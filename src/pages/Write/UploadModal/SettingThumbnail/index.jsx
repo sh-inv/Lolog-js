@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setThmbnail, setThmbnailPreview } from '../../../../store/modules/write';
+import { setThmbnail } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import { SlPicture } from 'react-icons/sl';
 import { toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import Toastify from '../../../../components/Toastify';
 import styled from 'styled-components';
 
 const SettingThumbnail = () => {
-  const { title, thumbnailPreview } = useSelector(state => state.writeContent);
+  const { title, thumbnail } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
   const thumbnailInput = useRef();
   const [summaryValue, setSummaryValue] = useState('');
@@ -27,7 +27,7 @@ const SettingThumbnail = () => {
 
       const config = {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNTAxMDUxfQ.PZBGpmo9wdYaWotJbhzR20GUKT87mkH8EWGjrNt9SdQ`,
           'Content-Type': 'multipart/form-data',
         },
       };
@@ -36,7 +36,6 @@ const SettingThumbnail = () => {
       const response = await axios.post(`http://localhost:8000/uploads/thumbnail?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
       toast.success('이미지 업로드 완료');
       dispatch(setThmbnail(response.data.imageUrl[0]));
-      dispatch(setThmbnailPreview(URL.createObjectURL(e.target.files[0])));
     } catch (error) {
       toast.success('이미지 업로드 실패');
       console.log(error);
@@ -45,14 +44,13 @@ const SettingThumbnail = () => {
 
   const removeFileImage = () => {
     dispatch(setThmbnail(null));
-    dispatch(setThmbnailPreview(null));
   };
 
   return (
     <SettingThumbnailContainer>
       <ContentWrapper contentTitle={'포스트 미리보기'}>
         <div className='thumbnail-container'>
-          {thumbnailPreview ? (
+          {thumbnail ? (
             <div className='have-thumbnail'>
               <p>
                 <span onClick={handleClick}>
@@ -62,7 +60,7 @@ const SettingThumbnail = () => {
                 &#183;
                 <span onClick={removeFileImage}>제거</span>
               </p>
-              <img src={thumbnailPreview} alt='thumbnail' />
+              <img src={thumbnail} alt='thumbnail' />
             </div>
           ) : (
             <div className='none-thumbnail'>
