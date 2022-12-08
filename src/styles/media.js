@@ -13,6 +13,23 @@ export const minWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
 }`;
 
+// search 반응형
+export const searchMaxWidth768px = `@media screen and (max-width: 768px) {
+  top: 20%;
+  .search-box-container {
+    width: 90%;
+    padding: 0.125rem 1.5rem;
+    .search-box-icon {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-right: 0.5rem;
+    }
+    .search-box-input {
+      font-size: 1.125rem;
+    }
+  }
+}`;
+
 // post 반응형
 export const postMaxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(50% - 2rem);

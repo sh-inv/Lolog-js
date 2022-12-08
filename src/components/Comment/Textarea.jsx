@@ -5,7 +5,7 @@ import Toastify from '../Toastify';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getNewCommentsData } from '../../store/modules/detailPage';
+import { setNewCommentsData } from '../../store/modules/detailPage';
 
 const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested }) => {
   const [disable, setDisable] = useState(true);
