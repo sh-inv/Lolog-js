@@ -2,33 +2,32 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MinWidth1200pxTagList = ({ tagData, setTagId }) => {
+  const location = useLocation();
   return (
-    tagData && (
-      <MinWidth1200pxTagListContainer>
-        <div className='tag-list'>태그 목록</div>
-        <ul>
-          {tagData.map(tag => (
-            <li className='tag' key={tag.name}>
-              <NavLink
-                to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
-                className={() => {
-                  const params = new URLSearchParams(location.search);
-                  const getTag = params.get('tag');
-                  if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
-                  else return 'tag-link';
-                }}
-                onClick={() => {
-                  setTagId(tag.tag_id);
-                }}
-              >
-                {tag.name}
-              </NavLink>
-              <span className='tag-post-count'>({tag.post_count})</span>
-            </li>
-          ))}
-        </ul>
-      </MinWidth1200pxTagListContainer>
-    )
+    <MinWidth1200pxTagListContainer>
+      <div className='tag-list'>태그 목록</div>
+      <ul>
+        {tagData.map(tag => (
+          <li className='tag' key={tag.name}>
+            <NavLink
+              to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
+              className={() => {
+                const params = new URLSearchParams(location.search);
+                const getTag = params.get('tag');
+                if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
+                else return 'tag-link';
+              }}
+              onClick={() => {
+                setTagId(tag.tag_id);
+              }}
+            >
+              {tag.name}
+            </NavLink>
+            <span className='tag-post-count'>({tag.post_count})</span>
+          </li>
+        ))}
+      </ul>
+    </MinWidth1200pxTagListContainer>
   );
 };
 

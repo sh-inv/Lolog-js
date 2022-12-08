@@ -30,8 +30,12 @@ const Posts = () => {
 
   return (
     <PostsContainer>
-      <MinWidth1200pxTagList tagData={tagData} setTagId={setTagId} />
-      <MaxWidth1199pxTagList tagData={tagData} setTagId={setTagId} />
+      {tagData && (
+        <>
+          <MinWidth1200pxTagList tagData={tagData} setTagId={setTagId} />
+          <MaxWidth1199pxTagList tagData={tagData} setTagId={setTagId} />
+        </>
+      )}
       {postsData && (
         <div className='post-padding'>
           {postsData.map((postData, i) => (
