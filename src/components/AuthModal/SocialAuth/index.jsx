@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import { AiOutlineGithub } from 'react-icons/ai';
@@ -8,7 +7,7 @@ import { FaFacebookF } from 'react-icons/fa';
 const SocialAuth = () => {
   const onSocialLogin = async () => {
     const config = {
-      headers: { 'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE' },
+      headers: { 'Access-Control-Allow-origin': 'http://127.0.0.1:5173/', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE' },
     };
     try {
       const resp = await apiClient.get('auth/github', config);

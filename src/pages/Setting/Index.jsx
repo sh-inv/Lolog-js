@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/modules/user';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
@@ -7,8 +7,6 @@ import UserProfile from './UserProfile';
 import UserIntro from './UserIntro';
 import UserInfo from './UserInfo';
 import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px } from '../../styles/media';
-
-import axios from 'axios';
 
 // const getSettingApi = async () => {
 //   const config = {
@@ -38,14 +36,12 @@ const Setting = () => {
   //   loader();
   // }, []);
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMDg2NDMwfQ.DFFTbK0IfzSKiz38OxohQwcpO3p7zzNkV1GLvEQDjSY`;
-
   useEffect(() => {
     const loader = async () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${authToken}`,
           },
         };
         const {

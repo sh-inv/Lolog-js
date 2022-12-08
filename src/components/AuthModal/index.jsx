@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
@@ -7,7 +7,11 @@ import welcome from '../../assets/welcome.png';
 import styled from 'styled-components';
 
 const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
-  const [isSignInModal, setIsSignInModal] = useState(false);
+  const [isSignUpModal, setIsSignUpModal] = useState(false);
+
+  const onClose = useCallback(() => {
+    setIsLoginModal(false);
+  }, [isLoginModal]);
 
   return (
     <>
@@ -23,26 +27,26 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
               <MdOutlineClose className='icon' onClick={() => setIsLoginModal(false)} />
             </div>
             <div className='wrapper'>
-              <h2>{isSignInModal ? '회원가입' : '로그인'}</h2>
+              <h2>{isSignUpModal ? '회원가입' : '로그인'}</h2>
               <section>
-                <h4>이메일로 {isLoginModal ? '로그인' : '회원가입'}</h4>
-                {isSignInModal ? <SignUpForm title={title} isSignInModal={isSignInModal} /> : <LoginForm title={title} isSignInModal={isSignInModal} />}
+                <h4>{isSignUpModal ? '이메일로 회원가입' : '아이디로 로그인'}</h4>
+                {isSignUpModal ? <SignUpForm title={title} setIsLoginModal={setIsLoginModal} /> : <LoginForm title={title} onClose={onClose} />}
               </section>
               <section>
-                <h4>소셜 계정으로 {isSignInModal ? '회원가입' : '로그인'}</h4>
+                <h4>소셜 계정으로 {isSignUpModal ? '회원가입' : '로그인'}</h4>
                 <SocialAuth />
               </section>
             </div>
             <div className='foot'>
-              <span>{isSignInModal ? '계정이 이미 있으신가요?' : '아직 회원이 아니신가요?'}</span>
+              <span>{isSignUpModal ? '계정이 이미 있으신가요?' : '아직 회원이 아니신가요?'}</span>
               <div
                 className='link'
                 onClick={() => {
-                  setIsSignInModal(!isSignInModal);
+                  setIsSignUpModal(!isSignUpModal);
                 }}
                 tabIndex='8'
               >
-                {isSignInModal ? '로그인' : '회원가입'}
+                {isSignUpModal ? '로그인' : '회원가입'}
               </div>
             </div>
           </div>
