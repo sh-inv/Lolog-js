@@ -7,6 +7,7 @@ import { SeriesMaxWidth768px } from '../../../styles/media';
 
 const Series = () => {
   const [seriesCardList, setSeriesCardList] = useState([]);
+  const [isNoSeries, setIsNoSeries] = useState(false);
 
   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
 
@@ -20,6 +21,7 @@ const Series = () => {
         };
         const { data } = await apiClient.get('/lolog/10/series', config);
         setSeriesCardList(data.series);
+        !data.series.length && setIsNoSeries(true);
       } catch (error) {
         console.log(error);
       }
@@ -27,14 +29,17 @@ const Series = () => {
     loader();
   }, []);
 
-  return Array.isArray(seriesCardList) && seriesCardList.length > 0 ? (
-    <SeriesContainer>
-      {seriesCardList.map(series => {
-        return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
-      })}
-    </SeriesContainer>
-  ) : (
-    <NoSeriesCard />
+  return (
+    <>
+      {seriesCardList && !isNoSeries && (
+        <SeriesContainer>
+          {seriesCardList.map(series => {
+            return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
+          })}
+        </SeriesContainer>
+      )}
+      {isNoSeries && <NoSeriesCard />}
+    </>
   );
 };
 
