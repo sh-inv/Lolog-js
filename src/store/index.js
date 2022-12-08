@@ -3,6 +3,7 @@ import { themeModeReducer } from './modules/header';
 import { writeContentReducer } from './modules/write';
 import { userReducer } from './modules/user';
 import { detailPageReducer } from './modules/detailPage';
+import { authReducer } from './modules/auth';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     writeContent: writeContentReducer,
     detailData: detailPageReducer,
     user: userReducer,
+    auth: authReducer,
   },
 });
 
