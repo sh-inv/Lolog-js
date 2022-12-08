@@ -5,27 +5,30 @@ import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
+import { apiClient } from '../../api';
+import { useLocation } from 'react-router-dom';
 
-const PostList = () => {
+const PostList = ({ pageInfo }) => {
+  const location = useLocation();
   const [postData, setPostData] = useState([]);
+  const [type, setType] = useState('');
+  const [period, setPeriod] = useState('');
+  const [pageNum, setPageNum] = useState(1);
   const observerRef = useRef(null);
   const [bottom, setBottom] = useState(null);
-  const [pageNum, setPageNum] = useState(1);
 
-  const getPostData = () => {
+  useEffect(() => {
     (async () => {
       try {
-        const {
-          data: { data },
-        } = await axios.get('data/postlist/data.json');
-        setPostData([...postData, ...data]);
+        const { data } = await apiClient.get(`/main?type=${pageInfo}&period=${period}&offset=${pageNum}&limit=50`);
+        setPostData([...postData, ...data.post]);
       } catch (error) {
-        console.log('error => ', error);
+        console.log('메인페이지 게시글 통신 오류 => ', error);
       }
     })();
-  };
+  }, [pageInfo, period, pageNum]);
 
-  useEffect(getPostData, [pageNum]);
+  console.log(postData);
 
   const intersectionObserver = entries => {
     if (entries[0].isIntersecting) {
@@ -38,12 +41,13 @@ const PostList = () => {
     rootMargin: '50px',
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(intersectionObserver, observerOptions);
-    observerRef.current = observer;
-  }, [postData]);
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(intersectionObserver, observerOptions);
+  //   observerRef.current = observer;
+  // }, []);
 
   useEffect(() => {
+    observerRef.current = new IntersectionObserver(intersectionObserver, observerOptions);
     const observer = observerRef.current;
     if (bottom) {
       observer.observe(bottom);
@@ -60,8 +64,8 @@ const PostList = () => {
       <PostListNavBar />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
-          {postData.map((_, i) => {
-            return <Post key={i} />;
+          {postData.map((data, i) => {
+            return <Post key={i} postData={data} />;
           })}
           {postData.length ? <div ref={setBottom} /> : null}
           <PostSkeleton />
