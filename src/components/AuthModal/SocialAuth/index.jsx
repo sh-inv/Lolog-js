@@ -6,11 +6,11 @@ import { FaFacebookF } from 'react-icons/fa';
 
 const SocialAuth = () => {
   const onSocialLogin = async () => {
-    const config = {
-      headers: { 'Access-Control-Allow-origin': 'http://127.0.0.1:5173/', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE' },
-    };
+    // const config = {
+    //   headers: { 'Access-Control-Allow-origin': 'http://localhost:5173', 'Access-Control-Allow-Methods': 'GET' },
+    // };
     try {
-      const resp = await apiClient.get('auth/github', config);
+      const resp = await apiClient.get('auth/facebook');
       console.log(resp);
     } catch (error) {
       console.log(error);
