@@ -17,10 +17,16 @@ const DetailPage = () => {
   const { postData } = useSelector(state => state.detailData);
 
   const getPostData = async () => {
+    const isLogin = () => {
+      if (localStorage.getItem('authToken')) {
+        return `Bearer ${localStorage.getItem('authToken')}`;
+      }
+    };
+
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: isLogin(),
         },
       };
       const { data } = await apiClient.get(`${location.pathname}`, config);
