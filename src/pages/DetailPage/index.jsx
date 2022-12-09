@@ -41,7 +41,7 @@ const DetailPage = () => {
       {postData && (
         <>
           <DetailPageContainer>
-            <PostArea postData={postData} />
+            <PostArea />
             <NextPrePost postData={postData} />
             <CommentArea postData={postData} />
           </DetailPageContainer>

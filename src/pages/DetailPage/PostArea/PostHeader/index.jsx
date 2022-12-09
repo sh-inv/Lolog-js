@@ -10,7 +10,7 @@ const PostHeader = ({ postData, seriesData }) => {
       <h1>{postData.title}</h1>
       <Information userId={postData.login_id} createAt={postData.create_at} />
       <Tags tags={postData.tags} />
-      <Snbs postId={postData.post_id} />
+      <Snbs />
       {seriesData && <Series postId={postData.post_id} seriesData={seriesData} />}
     </PostHeaderContainer>
   );

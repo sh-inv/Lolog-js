@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PostHeader from './PostHeader';
 import Content from './Content';
 import UserBox from '../../../components/UserBox';
 import styled from 'styled-components';
 
-const PostArea = ({ postData }) => {
+const PostArea = () => {
+  const { postData } = useSelector(state => state.detailData);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
