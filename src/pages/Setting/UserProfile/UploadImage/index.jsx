@@ -32,9 +32,6 @@ const UploadImage = () => {
         },
       };
       const { data } = await apiClient.post(`/users/profile_image?image_url=${URL.createObjectURL(e.target.files[0])}}`, formData, config);
-
-      console.log('222', data.profile_image);
-
       dispatch(
         setUser({
           ...user,
