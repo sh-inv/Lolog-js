@@ -9,13 +9,13 @@ const User = ({ userInfo }) => {
       <>
         <UserContainer>
           <div className='user'>
-            <Link to={`/@${userInfo.loginId}`}>{userInfo.profileImg ? <img src={userInfo.profileImg} alt='profileImg' /> : <UserProfileImage />}</Link>
+            <Link to={`/${userInfo.id}`}>{userInfo.profile_image ? <img src={userInfo.profile_image} alt='profileImg' /> : <UserProfileImage />}</Link>
             <div className='flex'>
               <div className='user-info'>
                 <div className='user-name'>
-                  <Link to='/id'>{userInfo.userName}</Link>
+                  <Link to={`/${userInfo.id}`}>{userInfo.name}</Link>
                 </div>
-                <div className='description'>{userInfo.aboutMe}</div>
+                <div className='description'>{userInfo.about_me}</div>
               </div>
             </div>
           </div>

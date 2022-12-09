@@ -10,7 +10,7 @@ const MinWidth1200pxTagList = ({ tagData, setTagId }) => {
         {tagData.map(tag => (
           <li className='tag' key={tag.name}>
             <NavLink
-              to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
+              to={tag.name === '전체보기' ? `${location.pathname}` : `${location.pathname}?tag=${tag.name}`}
               className={() => {
                 const params = new URLSearchParams(location.search);
                 const getTag = params.get('tag');
