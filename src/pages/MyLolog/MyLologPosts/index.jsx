@@ -18,7 +18,7 @@ const MyLologPosts = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=15&tag_id=${tagId}`);
+        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=5&tag_id=${tagId}`);
         setPostsData(data.posts);
         setTagData(data.tags);
         !data.posts && setIsNoPost(true);
@@ -33,15 +33,16 @@ const MyLologPosts = () => {
 
   const observerRef = useRef(null);
   const [bottom, setBottom] = useState(null);
+  const [noMorePosts, setNoMorePosts] = useState(false);
 
   const intersectionObserver = entries => {
     if (entries[0].isIntersecting) {
       setOffset(offset => offset + 1);
-      console.log(offset);
       (async () => {
         try {
-          const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${offset}&limit=15&tag_id=${tagId}`);
-          setPostsData([...postsData, ...data.posts]);
+          const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${offset}&limit=5&tag_id=${tagId}`);
+          if (!data.posts) setNoMorePosts(true);
+          else setPostsData([...postsData, ...data.posts]);
         } catch (error) {
           console.log('내 벨로그 글 데이터 통신 오류', error);
         }
@@ -80,7 +81,7 @@ const MyLologPosts = () => {
           {postsData.map((postData, i) => (
             <MyLologPost key={i} postData={postData} />
           ))}
-          <div ref={setBottom} />
+          {!noMorePosts && <div ref={setBottom} className='asas' />}
         </div>
       )}
       {isNoPost && <MyLololgNoPost />}
@@ -94,6 +95,10 @@ const PostsContainer = styled.div`
   .post-padding {
     @media screen and (max-width: 768px) {
       padding: 0 1rem;
+    }
+
+    .asas {
+      height: 500px;
     }
   }
 `;
