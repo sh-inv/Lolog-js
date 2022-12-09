@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
 import Title from './Title';
@@ -13,18 +13,20 @@ const SeriesPostList = () => {
   const dispatch = useDispatch();
   const [isModify, setIsModify] = useState(false);
   const [isSort, setIsSort] = useState(false);
-
-  const loader = async () => {
-    try {
-      const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
-      console.log(data);
-      dispatch(setSeriesPostList(data.series));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [postList, setPostList] = useState([]);
+  const { seriesPostList } = useSelector(state => state.seriesPostList);
 
   useEffect(() => {
+    const loader = async () => {
+      try {
+        const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
+        console.log(data);
+        dispatch(setSeriesPostList(data.series));
+        setPostList(data.series);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     loader();
   }, [isSort]);
 
@@ -33,19 +35,21 @@ const SeriesPostList = () => {
   };
 
   return (
-    <SeriesPostListContainer>
-      <label>시리즈</label>
-      <Title />
-      <div className='border' />
-      <Edit isModify={isModify} setIsModify={setIsModify} />
-      {isModify ? (
-        <EditPostList />
-      ) : (
-        <>
-          <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} /> <PostList />
-        </>
-      )}
-    </SeriesPostListContainer>
+    seriesPostList && (
+      <SeriesPostListContainer>
+        <label>시리즈</label>
+        <Title />
+        <div className='border' />
+        {seriesPostList[0].is_owner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
+        {isModify ? (
+          <EditPostList postList={postList} setPostList={setPostList} />
+        ) : (
+          <>
+            <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} /> <PostList />
+          </>
+        )}
+      </SeriesPostListContainer>
+    )
   );
 };
 

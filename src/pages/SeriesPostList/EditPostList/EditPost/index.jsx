@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import styled from 'styled-components';
 import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
-import styled from 'styled-components';
 
-const EditPost = ({ id, contents, src, title, date, index, moveCard }) => {
+const EditPost = ({ index, id, contents, src, title, date, movePost }) => {
   const postRef = useRef(null);
 
   const [{ handlerId }, drop] = useDrop({
@@ -33,7 +33,7 @@ const EditPost = ({ id, contents, src, title, date, index, moveCard }) => {
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
-      moveCard(dragIndex, hoverIndex);
+      movePost(dragIndex, hoverIndex);
       item.index = hoverIndex;
     },
   });
@@ -119,8 +119,6 @@ const PostContainer = styled.div`
     }
 
     .thumbnail-wrapper {
-      width: 100%;
-
       img {
         position: inherit;
         margin-right: 1rem;

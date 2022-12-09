@@ -10,5 +10,5 @@ const seriesPostList = createSlice({
   },
 });
 
-export const { setSeriesPostList } = seriesPostList.actions;
+export const { setA, setSeriesPostList } = seriesPostList.actions;
 export const seriesReducer = seriesPostList.reducer;
