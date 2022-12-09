@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiClient } from '../../../../../../api';
 import { FaHeart } from 'react-icons/fa';
@@ -6,9 +6,13 @@ import styled from 'styled-components';
 
 const Like = () => {
   const { postData } = useSelector(state => state.detailData);
-  const [likeCount, setLikeCount] = useState(postData.post.likes);
-  const [isUserLike, setIsUserLike] = useState(Number(postData.post.is_liked));
-  const postId = postData.post.post_id;
+  const [likeCount, setLikeCount] = useState(0);
+  const [isUserLike, setIsUserLike] = useState(false);
+
+  useEffect(() => {
+    setLikeCount(postData.post.likes);
+    setIsUserLike(Number(postData.post.is_liked));
+  }, [postData]);
 
   const like = async () => {
     try {
@@ -17,7 +21,7 @@ const Like = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.post(`/lolog/${postId}/like`, '', config);
+      await apiClient.post(`/lolog/${postData.post.post_id}/like`, '', config);
       setLikeCount(prev => prev + 1);
       setIsUserLike(true);
     } catch (error) {
@@ -32,7 +36,7 @@ const Like = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.delete(`/lolog/${postId}/like`, config);
+      await apiClient.delete(`/lolog/${postData.post.post_id}/like`, config);
       setLikeCount(prev => prev - 1);
       setIsUserLike(false);
     } catch (error) {
