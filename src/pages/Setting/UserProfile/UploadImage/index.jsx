@@ -17,16 +17,6 @@ const UploadImage = () => {
     imageRef.current.click();
   };
 
-  // const onUploadImage = e => {
-  //   if (!e.target.files) return;
-  //   dispatch(
-  //     setUser({
-  //       ...user,
-  //       profile_image: URL.createObjectURL(e.target.files[0]),
-  //     })
-  //   );
-  // };
-
   const removeImage = () => {
     dispatch(
       setUser({
@@ -55,11 +45,11 @@ const UploadImage = () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await apiClient.patch('/users/profile_image', formData, config);
+      const { data } = await apiClient.post(`/users/profile_image?image_url=${image_url}`, formData, config);
       console.log('222', resp.data);
       dispatch(
         setUser({
