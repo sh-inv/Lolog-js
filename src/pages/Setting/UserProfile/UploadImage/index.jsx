@@ -12,13 +12,12 @@ const UploadImage = () => {
   const { user } = useSelector(state => state.user);
 
   const getImage = e => {
-    // if (!imageRef.current) return;
-    // e.preventDefault();
+    if (!imageRef.current) return;
+    e.preventDefault();
     imageRef.current.click();
   };
 
   const uploadImage = async e => {
-    if (!e.target.files) return;
     e.preventDefault();
     const uploadFile = e.target.files[0];
     const formData = new FormData();
@@ -50,7 +49,13 @@ const UploadImage = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.delete(`/users/profile_image?image_url=${user?.profile_image}`, config);
+      const { data } = await apiClient.delete(`/users/profile_image?image_url=${user?.profile_image}`, config);
+      dispatch(
+        setUser({
+          ...user,
+          profile_image: data.profile_image,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
