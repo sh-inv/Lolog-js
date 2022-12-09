@@ -2,23 +2,17 @@ import { useState } from 'react';
 import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 import styled from 'styled-components';
 
-const Sort = () => {
-  const [isSort, setIsSort] = useState(true);
-
-  const onSort = () => {
-    setIsSort(!isSort);
-  };
-
+const Sort = ({ isSort, setIsSort, onSort }) => {
   return (
     <SortContainer>
       <button onClick={onSort}>
         {isSort ? (
           <>
-            <IoChevronUp /> <span>오름차순</span>
+            <IoChevronDown /> <span>내림차순</span>
           </>
         ) : (
           <>
-            <IoChevronDown /> <span>내림차순</span>
+            <IoChevronUp /> <span>오름차순</span>
           </>
         )}
       </button>

@@ -4,6 +4,7 @@ import { writeContentReducer } from './modules/write';
 import { userReducer } from './modules/user';
 import { detailPageReducer } from './modules/detailPage';
 import { authReducer } from './modules/auth';
+import { seriesReducer } from './modules/seriespostlist';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     detailData: detailPageReducer,
     user: userReducer,
     auth: authReducer,
+    seriesPostList: seriesReducer,
   },
 });
 

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Post from './Post';
 import styled from 'styled-components';
 
 const PostList = () => {
+  const { seriesPostList } = useSelector(state => state.seriesPostList);
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const PostList = () => {
 
   return (
     <PostListContainer>
-      {postList.map(post => {
+      {seriesPostList.map(post => {
         return <Post key={post.title} id={post.id} title={post.title} src={post.src} contents={post.contents} date={post.created_at} className='post' />;
       })}
     </PostListContainer>

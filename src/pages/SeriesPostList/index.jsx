@@ -1,13 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { apiClient } from '../../api';
 import Title from './Title';
 import Edit from './Edit';
 import Sort from './Sort';
 import EditPostList from './EditPostList';
 import PostList from './PostList';
-import styled from 'styled-components';
+import { setSeriesPostList } from '../../store/modules/seriespostlist';
 
 const SeriesPostList = () => {
+  const dispatch = useDispatch();
   const [isModify, setIsModify] = useState(false);
+  const [isSort, setIsSort] = useState(false);
+
+  const loader = async () => {
+    try {
+      const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
+      console.log(data);
+      dispatch(setSeriesPostList(data.series));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loader();
+  }, [isSort]);
+
+  const onClickHandler = () => {
+    setIsSort(!isSort);
+  };
 
   return (
     <SeriesPostListContainer>
@@ -19,7 +42,7 @@ const SeriesPostList = () => {
         <EditPostList />
       ) : (
         <>
-          <Sort /> <PostList />
+          <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} /> <PostList />
         </>
       )}
     </SeriesPostListContainer>
