@@ -5,14 +5,18 @@ import styled from 'styled-components';
 import { postMaxWidth1056px, postMaxWidth767px } from '../../../styles/media';
 import Thumbnail from '../../Thumbnail';
 
-const Post = () => {
+const Post = ({ postData }) => {
+  const { post_id, post_thumbnail } = postData;
+
   return (
     <PostBox>
-      <Link to='' className='thumbnail-box'>
-        <Thumbnail src={'https://velog.velcdn.com/images/s2ksh77/post/442c7442-0de4-4730-a447-d8a40bf5d074/image.png'} />
+      <Link to={`/posts/${post_id}`} className='thumbnail-box'>
+        <div className='thumbnail-cover'>
+          <Thumbnail src={post_thumbnail} />
+        </div>
       </Link>
-      <PostInfo />
-      <UserInfo />
+      <PostInfo postData={postData} />
+      <UserInfo postData={postData} />
     </PostBox>
   );
 };
@@ -37,12 +41,12 @@ const PostBox = styled.div`
   }
 
   .thumbnail-box {
-    position: relative;
-    height: 167px;
-    .post-thumbnail-img {
+    display: block;
+    color: inherit;
+    .thumbnail-cover {
+      position: relative;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      padding-top: 52.1921%;
     }
   }
 `;

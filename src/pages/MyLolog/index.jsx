@@ -1,13 +1,29 @@
+import { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import UserBox from '../../components/UserBox';
 import NavBar from './NavBar';
 import SearchBox from '../../components/SearchBox';
-import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { apiClient } from '../../api';
 
 const MyLolog = () => {
+  const location = useLocation();
+  const [userInfo, setUserInfo] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=1&tag_id=`);
+        setUserInfo(data.user);
+      } catch (error) {
+        console.log('메인페이지 게시글 통신 오류 => ', error);
+      }
+    })();
+  }, []);
+
   return (
     <MyLologContainer>
-      <UserBox />
+      <UserBox userInfo={userInfo} />
       <NavBar />
       <SearchBox />
       <Outlet />
