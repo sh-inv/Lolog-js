@@ -5,15 +5,20 @@ import NavBar from './NavBar';
 import SearchBox from '../../components/SearchBox';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMyLologData } from '../../store/modules/mainpostlist';
 
 const MyLolog = () => {
   const location = useLocation();
   const [userInfo, setUserInfo] = useState();
+  const dispatch = useDispatch();
+  // const { myLologData } = useSelector(state => state);
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=1&tag_id=`);
+        dispatch(setMyLologData(data));
         setUserInfo(data.user);
       } catch (error) {
         console.log('메인페이지 게시글 통신 오류 => ', error);
