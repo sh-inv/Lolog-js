@@ -11,7 +11,7 @@ const PostHeader = ({ postData, seriesData }) => {
       <Information userId={postData.login_id} createAt={postData.create_at} />
       <Tags tags={postData.tags} />
       <Snbs />
-      <Series seriesData={seriesData} />
+      {seriesData && <Series postId={postData.post_id} seriesData={seriesData} />}
     </PostHeaderContainer>
   );
 };

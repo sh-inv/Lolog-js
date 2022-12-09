@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
-import { setDetailCommentsData } from '../../store/modules/detailPage';
+import { setDetailCommentsData } from '../../store/modules/detailpage';
 import ConfirmModal from '../ConfirmModal/Index';
 import GetPostDate from '../GetPostDate';
 import Toastify from '../Toastify';
