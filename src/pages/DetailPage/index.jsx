@@ -33,7 +33,6 @@ const DetailPage = () => {
 
   useEffect(() => {
     getPostData();
-    console.log('reload');
   }, [location.pathname]);
 
   return (
