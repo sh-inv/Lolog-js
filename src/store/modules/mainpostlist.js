@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const mainPostListSlice = createSlice({
-  name: 'post',
-  initialState: { postData: null, commentsData: [] },
+const myLologSlice = createSlice({
+  name: 'myLolog',
+  initialState: { posts: [], tags: [], user: {} },
   reducers: {
-    setDetailData: (state, action) => {
-      state.postData = action.payload;
-      state.commentsData = action.payload.comments;
-    },
-    setNewCommentsData: (state, action) => {
-      state.commentsData = action.payload;
+    setMyLologData: (state, action) => {
+      state.posts = action.payload.posts;
+      state.tags = action.payload.tags;
+      state.user = action.payload.user;
     },
   },
 });
 
-export const { setDetailData, setNewCommentsData } = detailPageSlice.actions;
-export const detailPageReducer = detailPageSlice.reducer;
+export const { setMyLologData } = myLologSlice.actions;
+export const myLologReducer = myLologSlice.reducer;
