@@ -14,23 +14,27 @@ import InterestingPost from './InterestingPost';
 const DetailPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { postData, commentsData } = useSelector(state => state.detailData);
+  const { postData } = useSelector(state => state.detailData);
+
+  const getPostData = async () => {
+    try {
+      const config = {
+        headers: {
+          // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgxMjMxIn0sImlhdCI6MTY3MDU4MDkzNX0.DkRmcqQMVHkU0_rBnow3HsSm38UECCvcl5AAzR2m48U`,
+        },
+      };
+      const { data } = await apiClient.get(`${location.pathname}`, config);
+      dispatch(setDetailData(data));
+      console.log(data.comments);
+    } catch (error) {
+      toast.error('게시글을 불러오지 못했습니다.');
+      console.log('detail data error => ', error);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: localStorage.getItem('authToken'),
-          },
-        };
-        const { data } = await apiClient.get(`${location.pathname}`, config);
-        dispatch(setDetailData(data));
-      } catch (error) {
-        toast.error('게시글을 불러오지 못했습니다.');
-        console.log('detail data error => ', error);
-      }
-    })();
+    getPostData();
   }, []);
 
   return (
@@ -41,7 +45,7 @@ const DetailPage = () => {
           <DetailPageContainer>
             <PostArea postData={postData} />
             <NextPrePost postData={postData} />
-            <CommentArea postData={postData} />
+            <CommentArea postData={postData} getPostData={getPostData} />
           </DetailPageContainer>
           <InterestingPost interestingPostData={postData.interested} />
         </>

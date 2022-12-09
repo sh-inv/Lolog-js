@@ -8,6 +8,7 @@ import Textarea from './Textarea';
 const CommentContent = ({ isNested, commentData }) => {
   const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id } = commentData;
   const [isModify, setIsModify] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   return (
     <CommentContainer isNested={isNested}>
@@ -25,20 +26,23 @@ const CommentContent = ({ isNested, commentData }) => {
             </div>
           </div>
         </div>
-        {is_comments_writer && !isModify ? (
-          <div className='actions'>
-            <span
-              onClick={() => {
-                setIsModify(true);
-              }}
-            >
-              수정
-            </span>
-            <span>삭제</span>
-          </div>
-        ) : (
-          <></>
-        )}
+        {
+          // is_comments_writer
+          true && !isModify ? (
+            <div className='actions'>
+              <span
+                onClick={() => {
+                  setIsModify(true);
+                }}
+              >
+                수정
+              </span>
+              <span>삭제</span>
+            </div>
+          ) : (
+            <></>
+          )
+        }
       </div>
       {isModify ? (
         <>

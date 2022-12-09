@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Post from '../../../components/PostList/Post';
 
 const InterestingPost = ({ interestingPostData }) => {
-  console.log(interestingPostData);
   return (
     <InterestingPostContainer>
       <div className='title'>관심 있을 만한 포스트</div>

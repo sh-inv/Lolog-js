@@ -4,18 +4,21 @@ import { toast } from 'react-toastify';
 import Toastify from '../Toastify';
 import { useRef } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setNewCommentsData } from '../../store/modules/detailPage';
 
-const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested }) => {
+const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested, getPostData }) => {
   const [disable, setDisable] = useState(true);
   const textareaRef = useRef();
-  const dispatch = useDispatch();
   const cancelHandler = () => {
     setIsModify(false);
   };
 
   const commentOnClickHandler = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    };
+
     if (isModify) {
       try {
         const { data } = await apiClient.patch(
@@ -24,14 +27,13 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
             content: textareaRef.current.value,
             parent_id: isNested && commentId,
           },
-          { headers: { Authorization: localStorage.getItem('authToken') } }
+          config
         );
-        dispatch(getNewCommentsData(data.comments));
         textareaRef.current.value = '';
         console.log('댓글 작성 성공', data);
       } catch (error) {
         console.log('댓글 통신 에러', error);
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('댓글 통신 에러');
       }
     } else {
       try {
@@ -41,9 +43,8 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
             content: textareaRef.current.value,
             parent_id: isNested && commentId,
           },
-          { headers: { Authorization: localStorage.getItem('authToken') } }
+          config
         );
-        dispatch(getNewCommentsData(data.comments));
         textareaRef.current.value = '';
         if (isNested) {
           console.log('대댓글 작성 성공', data);
@@ -52,9 +53,10 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
         }
       } catch (error) {
         console.log('댓글 통신 에러', error);
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('댓글 통신 에러');
       }
     }
+    getPostData();
   };
 
   // const nestedComment = async () => {
