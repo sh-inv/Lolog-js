@@ -1,38 +1,42 @@
-import { apiClient } from '../../../../../../api';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { apiClient } from '../../../../../../api';
 import { FaHeart } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const Like = () => {
   const { postData } = useSelector(state => state.detailData);
+  const [likeCount, setLikeCount] = useState(postData.post.likes);
+  const [isUserLike, setIsUserLike] = useState(Number(postData.post.is_liked));
   const postId = postData.post.post_id;
-  const likes = postData.post.likes;
 
-  const like = async e => {
+  const like = async () => {
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.post(`/lolog/${postId}/like`, config);
-      e.target.className = 'icon-circle-wrapper active';
+      await apiClient.post(`/lolog/${postId}/like`, '', config);
+      setLikeCount(prev => prev + 1);
+      setIsUserLike(true);
     } catch (error) {
-      console.log('detail data error => ', error);
+      console.log('like error => ', error);
     }
   };
 
-  const unLike = async e => {
+  const unLike = async () => {
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      const { data } = await apiClient.delete(`/lolog/${postId}/like`, config);
-      e.target.className = 'icon-circle-wrapper';
+      await apiClient.delete(`/lolog/${postId}/like`, config);
+      setLikeCount(prev => prev - 1);
+      setIsUserLike(false);
     } catch (error) {
-      console.log('detail data error => ', error);
+      console.log('unlike error => ', error);
     }
   };
 
@@ -43,10 +47,10 @@ const Like = () => {
 
   return (
     <LikeContainer>
-      <div className='icon-circle-wrapper' onClick={changeLike}>
+      <div className={isUserLike ? 'icon-circle-wrapper active' : 'icon-circle-wrapper'} onClick={changeLike}>
         <FaHeart />
       </div>
-      <div className='like-count'>{likes}</div>
+      <div className='like-count'>{likeCount}</div>
     </LikeContainer>
   );
 };
@@ -66,6 +70,16 @@ const LikeContainer = styled.div`
     }
     to {
       transform: scale(1);
+    }
+  }
+
+  .icon-circle-wrapper {
+    background: var(--bg-element1);
+    color: var(--text3);
+
+    &:hover {
+      border-color: var(--text1);
+      color: var(--text1);
     }
   }
 
