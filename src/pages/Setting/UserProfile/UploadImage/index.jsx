@@ -20,18 +20,9 @@ const UploadImage = () => {
   const uploadImage = async e => {
     if (!e.target.files) return;
     e.preventDefault();
-
     const uploadFile = e.target.files[0];
     const formData = new FormData();
-    formData.append('file', uploadFile);
-
-    // console.log(e.target.files[0]);
-
-    // const body = {
-    //   profile_image: e.target.files[0],
-    // };
-
-    // console.log(body);
+    formData.append('image', uploadFile);
 
     try {
       const config = {
@@ -40,14 +31,14 @@ const UploadImage = () => {
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await apiClient.post(`/users/profile_image?image_url=${user.imageUrl}`, formData, config);
-      console.log('222', resp.data);
+      const { data } = await apiClient.post(`/users/profile_image?image_url=${URL.createObjectURL(e.target.files[0])}}`, formData, config);
+
+      console.log('222', data.profile_image);
+
       dispatch(
         setUser({
           ...user,
-          profile_image: data.imageUrl,
-          // profile_image: URL.createObjectURL(),
-          // body,
+          profile_image: data.profile_image,
         })
       );
     } catch (error) {
@@ -62,13 +53,7 @@ const UploadImage = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.delete(`/users/profile_image?image_url=${user.imageUrl}`, config);
-      // dispatch(
-      //   setUser({
-      //     ...user,
-      //     profile_image: null,
-      //   })
-      // );
+      await apiClient.delete(`/users/profile_image?image_url=${user?.profile_image}`, config);
     } catch (error) {
       console.log(error);
     }
