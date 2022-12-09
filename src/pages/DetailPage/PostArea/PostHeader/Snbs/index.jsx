@@ -75,18 +75,12 @@ const SnbContainer = styled.div`
     height: 3rem;
     border: 1px solid var(--border3);
     border-radius: 1.5rem;
-    background: var(--bg-element1);
-    color: var(--text3);
-    z-index: 3;
     cursor: pointer;
+
     svg {
       width: 24px;
       height: 24px;
       pointer-events: none;
-    }
-    &:hover {
-      border-color: var(--text1);
-      color: var(--text1);
     }
   }
 `;

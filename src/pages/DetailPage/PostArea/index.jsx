@@ -36,13 +36,13 @@ const PostAreaContainer = styled.div`
   margin-top: 5.5rem;
 
   .post-area-thumbnail {
-    max-height: 100vh;
-    max-width: 100%;
-    width: auto;
-    margin: 2rem auto 0px;
-    height: auto;
-    object-fit: contain;
     display: block;
+    margin: 2rem auto 0px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
   }
 
   .user-box-container {

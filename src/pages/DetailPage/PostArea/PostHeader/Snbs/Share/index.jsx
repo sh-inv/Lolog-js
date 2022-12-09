@@ -58,6 +58,16 @@ const ShareContainer = styled.div`
       transform: ${props => (props.isShare ? 'translate(24px, 24px)' : 'translate(-24px)')};
     }
   }
+
+  .icon-circle-wrapper {
+    background: var(--bg-element1);
+    color: var(--text3);
+
+    &:hover {
+      border-color: var(--text1);
+      color: var(--text1);
+    }
+  }
 `;
 
 export default Share;
