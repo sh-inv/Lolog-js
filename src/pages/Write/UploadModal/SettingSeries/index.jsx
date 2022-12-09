@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWriteContent } from '../../../../store/modules/write';
-import axios from 'axios';
+import { apiClient } from '../../../../api';
 import { toast } from 'react-toastify';
 import Toastify from '../../../../components/Toastify';
 import ContentWrapper from '../ContentWrapper';
@@ -25,7 +25,7 @@ const SettingSeries = () => {
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU',
         },
       };
-      const { data } = await axios.get(`http://localhost:8000/series`, config);
+      const { data } = await apiClient.get(`/series`, config);
       dispatch(setWriteContent({ type: 'isSeriesList', value: true }));
       setSeriesList(data.series);
     } catch (error) {
@@ -53,7 +53,7 @@ const SettingSeries = () => {
       const bodyData = {
         series_name: addSeriesValue,
       };
-      const response = await axios.post(`http://localhost:8000/series`, bodyData, config);
+      const response = await apiClient.post(`/series`, bodyData, config);
       getSeriesList();
       setIsInputOpen(false);
     } catch (error) {

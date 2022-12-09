@@ -7,9 +7,9 @@ import { toast } from 'react-toastify';
 import PostArea from './PostArea';
 import NextPrePost from './NextPrePost';
 import CommentArea from './CommentArea';
+import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
-import InterestingPost from './InterestingPost';
 
 const DetailPage = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWriteContent } from '../../../../store/modules/write';
-import axios from 'axios';
+import { apiClient } from '../../../../api';
 import ContentWrapper from '../ContentWrapper';
 import { SlPicture } from 'react-icons/sl';
 import { toast } from 'react-toastify';
@@ -30,7 +30,7 @@ const SettingThumbnail = () => {
         },
       };
       toast.error('이미지 로딩중...');
-      const response = await axios.post(`http://localhost:8000/uploads/thumbnail?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
+      const response = await apiClient.post(`/uploads/thumbnail?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
       dispatch(setWriteContent({ type: 'thumbnail', value: response.data.imageUrl[0] }));
       toast.success('이미지 업로드 완료');
     } catch (error) {
