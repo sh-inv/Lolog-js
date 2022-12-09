@@ -11,7 +11,9 @@ const Post = ({ postData }) => {
   return (
     <PostBox>
       <Link to={`/posts/${post_id}`} className='thumbnail-box'>
-        <Thumbnail src={post_thumbnail} />
+        <div className='thumbnail-cover'>
+          <Thumbnail src={post_thumbnail} />
+        </div>
       </Link>
       <PostInfo postData={postData} />
       <UserInfo postData={postData} />
@@ -39,12 +41,12 @@ const PostBox = styled.div`
   }
 
   .thumbnail-box {
-    position: relative;
-    height: 167px;
-    .post-thumbnail-img {
+    display: block;
+    color: inherit;
+    .thumbnail-cover {
+      position: relative;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      padding-top: 52.1921%;
     }
   }
 `;
