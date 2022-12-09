@@ -25,7 +25,7 @@ const SettingThumbnail = () => {
 
       const config = {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNTAxMDUxfQ.PZBGpmo9wdYaWotJbhzR20GUKT87mkH8EWGjrNt9SdQ`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'multipart/form-data',
         },
       };
@@ -40,7 +40,7 @@ const SettingThumbnail = () => {
   };
 
   const removeFileImage = () => {
-    dispatch(setWriteContent({ type: 'thumbnail', value: null }));
+    dispatch(setWriteContent({ type: 'thumbnail', value: '' }));
   };
 
   return (

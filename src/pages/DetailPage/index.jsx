@@ -21,7 +21,7 @@ const DetailPage = () => {
       try {
         const config = {
           headers: {
-            Authorization: localStorage.getItem('authToken'),
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
         const { data } = await apiClient.get(`${location.pathname}`, config);

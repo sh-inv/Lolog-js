@@ -26,7 +26,7 @@ const ModalBtns = () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU`,
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
         const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: discription };
