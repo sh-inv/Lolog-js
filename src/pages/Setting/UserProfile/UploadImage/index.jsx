@@ -12,61 +12,48 @@ const UploadImage = () => {
   const { user } = useSelector(state => state.user);
 
   const getImage = e => {
-    // if (!imageRef.current) return;
-    // e.preventDefault();
+    if (!imageRef.current) return;
+    e.preventDefault();
     imageRef.current.click();
   };
 
-  // const onUploadImage = e => {
-  //   if (!e.target.files) return;
-  //   dispatch(
-  //     setUser({
-  //       ...user,
-  //       profile_image: URL.createObjectURL(e.target.files[0]),
-  //     })
-  //   );
-  // };
-
-  const removeImage = () => {
-    dispatch(
-      setUser({
-        ...user,
-        profile_image: null,
-      })
-    );
-  };
-
   const uploadImage = async e => {
-    if (!e.target.files) return;
     e.preventDefault();
-
     const uploadFile = e.target.files[0];
     const formData = new FormData();
-    formData.append('file', uploadFile);
-
-    console.log(e.target.files[0]);
-
-    // const body = {
-    //   profile_image: e.target.files[0],
-    // };
-
-    // console.log(body);
+    formData.append('image', uploadFile);
 
     try {
       const config = {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnbvsnYAifSwiaWF0IjoxNjY5OTAzOTU1fQ.PMGvDfMgixAdeJoL1qIMbs7QRBX0PBrUlFr9SxnRYTQ`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await apiClient.patch('/users/profile_image', formData, config);
-      console.log('222', resp.data);
+      const { data } = await apiClient.post(`/users/profile_image?image_url=${URL.createObjectURL(e.target.files[0])}}`, formData, config);
       dispatch(
         setUser({
           ...user,
-          profile_image: data.imageUrl,
-          // profile_image: URL.createObjectURL(),
-          // body,
+          profile_image: data.profile_image,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeImage = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const { data } = await apiClient.delete(`/users/profile_image?image_url=${user?.profile_image}`, config);
+      dispatch(
+        setUser({
+          ...user,
+          profile_image: data.profile_image,
         })
       );
     } catch (error) {
