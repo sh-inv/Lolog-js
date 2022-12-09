@@ -5,7 +5,7 @@ import Toastify from '../Toastify';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setNewCommentsData } from '../../store/modules/detailPage';
+import { setDetailCommentsData } from '../../store/modules/detailPage';
 
 const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested }) => {
   const [disable, setDisable] = useState(true);
@@ -16,23 +16,27 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
   };
 
   const commentOnClickHandler = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    };
+
     if (isModify) {
       try {
         const { data } = await apiClient.patch(
           `/comments/${postId}/${commentId}`,
           {
             content: textareaRef.current.value,
-            parent_id: isNested && commentId,
           },
-          { headers: { Authorization: localStorage.getItem('authToken') } }
+          config
         );
-        dispatch(getNewCommentsData(data.comments));
-        textareaRef.current.value = '';
-        console.log('댓글 작성 성공', data);
+        dispatch(setDetailCommentsData(data.comments));
+        toast.success('댓글 수정 성공');
       } catch (error) {
-        console.log('댓글 통신 에러', error);
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('댓글 수정 실패');
       }
+      setIsModify(false);
     } else {
       try {
         const { data } = await apiClient.post(
@@ -41,38 +45,22 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
             content: textareaRef.current.value,
             parent_id: isNested && commentId,
           },
-          { headers: { Authorization: localStorage.getItem('authToken') } }
+          config
         );
-        dispatch(getNewCommentsData(data.comments));
+        dispatch(setDetailCommentsData(data.comments));
         textareaRef.current.value = '';
         if (isNested) {
-          console.log('대댓글 작성 성공', data);
+          toast.success('대댓글 작성 성공');
         } else {
-          console.log('댓글 작성 성공', data);
+          toast.success('댓글 작성 성공');
         }
       } catch (error) {
-        console.log('댓글 통신 에러', error);
-        (() => toast.error('댓글 통신 에러'))();
+        toast.error('댓글 작성 실패');
       }
     }
   };
 
   // const nestedComment = async () => {
-  //   try {
-  //     const { data } = await apiClient.post(
-  //       `/comments/${postId}`,
-  //       {
-  //         content: textareaRef.current.value,
-  //       },
-  //       { headers: { Authorization: localStorage.getItem('authToken') } }
-  //     );
-  //     dispatch(getNewCommentsData(data.comments));
-  //     textareaRef.current.value = '';
-  //     console.log('대댓글 작성 성공', data);
-  //   } catch (error) {
-  //     console.log('댓글 통신 에러', error);
-  //     (() => toast.error('댓글 통신 에러'))();
-  //   }
   // };
 
   return (
@@ -85,7 +73,6 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
         placeholder='댓글을 작성하세요'
         defaultValue={content}
         onChange={e => {
-          console.log(textareaRef.current.value);
           e.target.style.height = e.target.scrollHeight + 'px';
           if (textareaRef.current.value) {
             setDisable(false);

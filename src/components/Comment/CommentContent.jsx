@@ -1,16 +1,42 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { apiClient } from '../../api';
+import { setDetailCommentsData } from '../../store/modules/detailPage';
+import ConfirmModal from '../ConfirmModal/Index';
 import GetPostDate from '../GetPostDate';
+import Toastify from '../Toastify';
 import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
 const CommentContent = ({ isNested, commentData }) => {
-  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id } = commentData;
+  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id, comment_id, post_id } = commentData;
   const [isModify, setIsModify] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const onClose = () => setIsDelete(false);
+  const dispatch = useDispatch();
+
+  const deleteCommentHandler = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const { data } = await apiClient.delete(`/comments/${post_id}/${comment_id}`, config);
+      dispatch(setDetailCommentsData(data.comments));
+      toast.success('댓글 삭제 성공');
+    } catch (error) {
+      toast.error('댓글 삭제 실패');
+    }
+    setIsDelete(false);
+  };
 
   return (
     <CommentContainer isNested={isNested}>
+      <Toastify />
       <div className='profile-box'>
         <div className='profile'>
           <Link to={`/${comment_login_id}`} className='profile-img'>
@@ -34,7 +60,13 @@ const CommentContent = ({ isNested, commentData }) => {
             >
               수정
             </span>
-            <span>삭제</span>
+            <span
+              onClick={() => {
+                setIsDelete(true);
+              }}
+            >
+              삭제
+            </span>
           </div>
         ) : (
           <></>
@@ -42,12 +74,13 @@ const CommentContent = ({ isNested, commentData }) => {
       </div>
       {isModify ? (
         <>
-          <Textarea setIsModify={setIsModify} isModify={true} content={content} />
+          <Textarea setIsModify={setIsModify} isModify={true} content={content} postId={post_id} commentId={comment_id} />
           <div style={{ height: '1.5rem' }} />
         </>
       ) : (
         <pre className='text'>{content}</pre>
       )}
+      {isDelete && <ConfirmModal title='댓글 삭제' message='댓글을 삭제하시겠습니까?' onClose={onClose} onMove={deleteCommentHandler} />}
     </CommentContainer>
   );
 };
