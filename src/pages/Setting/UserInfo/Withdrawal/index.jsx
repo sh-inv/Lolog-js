@@ -15,13 +15,11 @@ const Withdrawal = () => {
     setIsModal(true);
   };
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6NSwibG9naW5faWQiOiIxMjM0NWFhYSIsIm5hbWUiOiLrsJXjhaDruYgifSwiaWF0IjoxNjcwMDY3MjI4fQ.dkwk_xmhvw7dTB9DRr8u0YAEfNDKRp8eFs-upR3E-5E';
-
   const onWithdrawal = async () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
       const resp = await apiClient.delete('/users', config);

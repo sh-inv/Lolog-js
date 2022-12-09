@@ -1,28 +1,35 @@
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
 
-const PeriodFilter = () => {
+const PeriodFilter = ({ setPeriod }) => {
   const [isToggle, setIsToggle] = useState(false);
   const [filter, setFilter] = useState('이번 주');
-  const [filterList, setFilterList] = useState();
+  const [filterList, setFilterList] = useState([
+    {
+      name: '오늘',
+      query: 'today',
+      view: false,
+    },
+    {
+      name: '이번 주',
+      query: 'week',
+      view: true,
+    },
+    {
+      name: '이번 달',
+      query: 'month',
+      view: false,
+    },
+    {
+      name: '올해',
+      query: 'year',
+      view: false,
+    },
+  ]);
   const toggleBtnRef = useRef();
   const toggleBoxRef = useRef();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { filterdata },
-        } = await axios.get('data/postlist/filter.json');
-        setFilterList(filterdata);
-      } catch (error) {
-        console.log('error => ', error);
-      }
-    })();
-  }, []);
 
   useEffect(() => {
     const clickOutside = e => {
@@ -44,23 +51,23 @@ const PeriodFilter = () => {
       </div>
       <Filter isToggle={isToggle}>
         <ul ref={toggleBoxRef}>
-          {filterList &&
-            filterList.map((filter, i) => (
-              <li
-                key={filter.name}
-                className={filter.view ? 'active' : ''}
-                onClick={() => {
-                  let arr = [...filterList];
-                  arr.forEach(filter => (filter.view = false));
-                  arr[i].view = true;
-                  setFilterList(arr);
-                  setFilter(filter.name);
-                  setIsToggle(false);
-                }}
-              >
-                {filter.name}
-              </li>
-            ))}
+          {filterList.map((filter, i) => (
+            <li
+              key={filter.name}
+              className={filter.view ? 'active' : ''}
+              onClick={() => {
+                let arr = [...filterList];
+                arr.forEach(filter => (filter.view = false));
+                arr[i].view = true;
+                setFilterList(arr);
+                setPeriod(filter.query);
+                setFilter(filter.name);
+                setIsToggle(false);
+              }}
+            >
+              {filter.name}
+            </li>
+          ))}
         </ul>
       </Filter>
     </PeriodFilterContainer>

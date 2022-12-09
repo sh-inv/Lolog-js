@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NoPost = () => {
+const MyLololgNoPost = () => {
   return (
     <NoPostContainer>
       <img src='https://static.velog.io/static/media/undraw_blank_canvas_3rbb.35e81baf.svg' alt='포스트가 없습니다.' className='no-post-img' />
@@ -29,4 +29,4 @@ const NoPostContainer = styled.div`
   }
 `;
 
-export default NoPost;
+export default MyLololgNoPost;
