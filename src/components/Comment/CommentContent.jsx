@@ -1,20 +1,39 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { apiClient } from '../../api';
 import ConfirmModal from '../ConfirmModal/Index';
 import GetPostDate from '../GetPostDate';
+import Toastify from '../Toastify';
 import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
-const CommentContent = ({ isNested, commentData }) => {
-  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id } = commentData;
+const CommentContent = ({ isNested, commentData, getPostData }) => {
+  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id, comment_id, post_id } = commentData;
   const [isModify, setIsModify] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const onClose = () => setIsDelete(false);
-  const deleteCommentHandler = () => {};
+  const deleteCommentHandler = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const { data } = await apiClient.delete(`/comments/${post_id}/${comment_id}`, config);
+      toast.success('댓글 삭제 성공');
+    } catch (error) {
+      toast.error('댓글 삭제 실패');
+      console.log('댓글 삭제 에러 => ', error);
+    }
+    setIsDelete(false);
+    getPostData();
+  };
 
   return (
     <CommentContainer isNested={isNested}>
+      <Toastify />
       <div className='profile-box'>
         <div className='profile'>
           <Link to={`/${comment_login_id}`} className='profile-img'>
@@ -58,7 +77,7 @@ const CommentContent = ({ isNested, commentData }) => {
       ) : (
         <pre className='text'>{content}</pre>
       )}
-      {isDelete && <ConfirmModal title='댓글 삭제' message='댓글을 삭제하시겠습니까?' onClose={onClose} />}
+      {isDelete && <ConfirmModal title='댓글 삭제' message='댓글을 삭제하시겠습니까?' onClose={onClose} onMove={deleteCommentHandler} />}
     </CommentContainer>
   );
 };

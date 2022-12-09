@@ -20,8 +20,7 @@ const DetailPage = () => {
     try {
       const config = {
         headers: {
-          // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgxMjMxIn0sImlhdCI6MTY3MDU4MDkzNX0.DkRmcqQMVHkU0_rBnow3HsSm38UECCvcl5AAzR2m48U`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
       const { data } = await apiClient.get(`${location.pathname}`, config);

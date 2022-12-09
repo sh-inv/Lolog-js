@@ -4,7 +4,7 @@ import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi';
 import CommentContent from '../../../components/Comment/CommentContent';
 import Textarea from '../../../components/Comment/Textarea';
 
-const Comment = ({ commentData }) => {
+const Comment = ({ commentData, getPostData }) => {
   const { nested_comments, comment_id, post_id } = commentData;
   const [isNestedCommentsOpen, setIsNestedCommentsOpen] = useState(false);
   const nestedCommentsBtnHandler = () => {
@@ -13,7 +13,7 @@ const Comment = ({ commentData }) => {
 
   return (
     <CommentContainer>
-      <CommentContent commentData={commentData} />
+      <CommentContent commentData={commentData} getPostData={getPostData} />
       <div className='nested-comments-box'>
         <span className='open-btn' onClick={nestedCommentsBtnHandler}>
           {isNestedCommentsOpen ? (
@@ -35,7 +35,7 @@ const Comment = ({ commentData }) => {
                 <>
                   <div className='nested-comments-list-box'>
                     {nested_comments.map(nested_comment => (
-                      <CommentContent key={nested_comment.comment_id} isNested={true} commentData={nested_comment} />
+                      <CommentContent key={nested_comment.comment_id} isNested={true} commentData={nested_comment} getPostData={getPostData} />
                     ))}
                   </div>
                   <div className='neted-comment-box'>

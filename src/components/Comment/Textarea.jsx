@@ -35,7 +35,25 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested,
         console.log('댓글 통신 에러', error);
         toast.error('댓글 통신 에러');
       }
-    } else {
+    }
+    // else if (isNested) {
+    //   try {
+    //     const { data } = await apiClient.post(
+    //       `/comments/${postId}`,
+    //       {
+    //         content: textareaRef.current.value,
+    //       },
+    //       { headers: { Authorization: localStorage.getItem('authToken') } }
+    //     );
+    //     dispatch(getNewCommentsData(data.comments));
+    //     textareaRef.current.value = '';
+    //     console.log('대댓글 작성 성공', data);
+    //   } catch (error) {
+    //     console.log('댓글 통신 에러', error);
+    //     (() => toast.error('댓글 통신 에러'))();
+    //   }
+    // }
+    else {
       try {
         const { data } = await apiClient.post(
           `/comments/${postId}`,
@@ -60,21 +78,6 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested,
   };
 
   // const nestedComment = async () => {
-  //   try {
-  //     const { data } = await apiClient.post(
-  //       `/comments/${postId}`,
-  //       {
-  //         content: textareaRef.current.value,
-  //       },
-  //       { headers: { Authorization: localStorage.getItem('authToken') } }
-  //     );
-  //     dispatch(getNewCommentsData(data.comments));
-  //     textareaRef.current.value = '';
-  //     console.log('대댓글 작성 성공', data);
-  //   } catch (error) {
-  //     console.log('댓글 통신 에러', error);
-  //     (() => toast.error('댓글 통신 에러'))();
-  //   }
   // };
 
   return (

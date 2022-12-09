@@ -8,7 +8,7 @@ const CommentArea = ({ postData, getPostData }) => {
     <CommentAreaContainer>
       <h4 className='comments-count'>{comments ? comments.length : '0'}개의 댓글</h4>
       <Textarea postId={post.post_id} getPostData={getPostData} />
-      <div className='comments-list'>{comments && comments.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} />)}</div>
+      <div className='comments-list'>{comments && comments.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} getPostData={getPostData} />)}</div>
     </CommentAreaContainer>
   );
 };
