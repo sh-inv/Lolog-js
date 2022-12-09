@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MaxWidth1199pxTagList from './MaxWidth1199pxTagList';
@@ -8,16 +8,17 @@ import MyLololgNoPost from './MyLololgNoPost';
 import { apiClient } from '../../../api';
 
 const MyLologPosts = () => {
+  const location = useLocation();
   const [postsData, setPostsData] = useState();
   const [tagData, setTagData] = useState();
   const [tagId, setTagId] = useState(0);
   const [isNoPost, setIsNoPost] = useState(false);
-  const location = useLocation();
+  const [offset, setOffset] = useState(1);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get(`/lolog/1?offset=1&limit=100000&tag_id=${tagId}`);
+        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=15&tag_id=${tagId}`);
         setPostsData(data.posts);
         setTagData(data.tags);
         !data.posts && setIsNoPost(true);
@@ -27,6 +28,44 @@ const MyLologPosts = () => {
       }
     })();
   }, [tagId]);
+
+  // 무한 스크롤
+
+  const observerRef = useRef(null);
+  const [bottom, setBottom] = useState(null);
+
+  const intersectionObserver = entries => {
+    if (entries[0].isIntersecting) {
+      setOffset(offset => offset + 1);
+      console.log(offset);
+      (async () => {
+        try {
+          const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${offset}&limit=15&tag_id=${tagId}`);
+          setPostsData([...postsData, ...data.posts]);
+        } catch (error) {
+          console.log('내 벨로그 글 데이터 통신 오류', error);
+        }
+      })();
+    }
+  };
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '500px',
+  };
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(intersectionObserver, observerOptions);
+    const observer = observerRef.current;
+    if (bottom) {
+      observer.observe(bottom);
+      console.log('관찰시작');
+    }
+    return () => {
+      if (bottom) observer.unobserve(bottom);
+      console.log('관찰종료');
+    };
+  }, [bottom]);
 
   return (
     <PostsContainer>
@@ -41,6 +80,7 @@ const MyLologPosts = () => {
           {postsData.map((postData, i) => (
             <MyLologPost key={i} postData={postData} />
           ))}
+          <div ref={setBottom} />
         </div>
       )}
       {isNoPost && <MyLololgNoPost />}
