@@ -9,12 +9,12 @@ import NextPrePost from './NextPrePost';
 import CommentArea from './CommentArea';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
+import InterestingPost from './InterestingPost';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { postData, commentsData } = useSelector(state => state.detailData);
-  localStorage.setItem('authToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzkyODcyfQ._vtBm0mTxBG4sWbU8pHjnxlDuWigMmuPCLK5tw5mDW8');
 
   useEffect(() => {
     (async () => {
@@ -37,11 +37,14 @@ const DetailPage = () => {
     <>
       <Toastify />
       {postData && (
-        <DetailPageContainer>
-          <PostArea postData={postData} />
-          <NextPrePost postData={postData} />
-          <CommentArea postData={postData} />
-        </DetailPageContainer>
+        <>
+          <DetailPageContainer>
+            <PostArea postData={postData} />
+            <NextPrePost postData={postData} />
+            <CommentArea postData={postData} />
+          </DetailPageContainer>
+          <InterestingPost interestingPostData={postData.interested} />
+        </>
       )}
     </>
   );
