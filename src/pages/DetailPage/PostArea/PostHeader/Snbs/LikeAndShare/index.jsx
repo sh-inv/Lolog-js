@@ -1,16 +1,28 @@
 import { useState } from 'react';
+import { apiClient } from '../../../../../../api';
 import { FaHeart } from 'react-icons/fa';
 import { GiShare } from 'react-icons/gi';
 import { BsFacebook, BsTwitter } from 'react-icons/bs';
 import { FiPaperclip } from 'react-icons/fi';
 import styled from 'styled-components';
 
-const LikeAndShare = ({ ScrollActive }) => {
+const LikeAndShare = ({ ScrollActive, postId }) => {
   const [isShare, setIsShare] = useState(false);
 
-  const changeLike = e => {
-    const isLike = e.target.className.includes('active');
-    isLike ? (e.target.className = 'icon-circle-wrapper') : (e.target.className = 'icon-circle-wrapper active');
+  const changeLike = async e => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const { data } = await apiClient.post(`/lolog/${postId}/like`, config);
+      console.log(data);
+      const isLike = e.target.className.includes('active');
+      isLike ? (e.target.className = 'icon-circle-wrapper') : (e.target.className = 'icon-circle-wrapper active');
+    } catch (error) {
+      console.log('detail data error => ', error);
+    }
   };
 
   const changeShare = () => {

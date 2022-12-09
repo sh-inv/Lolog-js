@@ -3,7 +3,7 @@ import LikeAndShare from './LikeAndShare';
 import ContentRouter from './ContentRouter';
 import styled from 'styled-components';
 
-const Snbs = () => {
+const Snbs = ({ postId }) => {
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
   const snbRef = useRef();
@@ -31,7 +31,7 @@ const Snbs = () => {
 
   return (
     <SnbsPositioner ref={snbRef}>
-      <LikeAndShare ScrollActive={ScrollActive} />
+      <LikeAndShare ScrollActive={ScrollActive} postId={postId} />
       <ContentRouter ScrollActive={ScrollActive} />
     </SnbsPositioner>
   );
