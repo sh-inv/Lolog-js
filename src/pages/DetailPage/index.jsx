@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetailData } from '../../store/modules/detailPage';
+import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailPage';
 import { useLocation } from 'react-router-dom';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
@@ -24,11 +24,10 @@ const DetailPage = () => {
         },
       };
       const { data } = await apiClient.get(`${location.pathname}`, config);
-      dispatch(setDetailData(data));
-      console.log(data.comments);
+      dispatch(setDetailPostData(data));
+      dispatch(setDetailCommentsData(data.comments));
     } catch (error) {
       toast.error('게시글을 불러오지 못했습니다.');
-      console.log('detail data error => ', error);
     }
   };
 
@@ -44,7 +43,7 @@ const DetailPage = () => {
           <DetailPageContainer>
             <PostArea postData={postData} />
             <NextPrePost postData={postData} />
-            <CommentArea postData={postData} getPostData={getPostData} />
+            <CommentArea postData={postData} />
           </DetailPageContainer>
           <InterestingPost interestingPostData={postData.interested} />
         </>

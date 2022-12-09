@@ -2,13 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const detailPageSlice = createSlice({
   name: 'detailData',
-  initialState: { postData: null },
+  initialState: { postData: null, commentsData: null },
   reducers: {
-    setDetailData: (state, action) => {
+    setDetailPostData: (state, action) => {
       state.postData = action.payload;
+    },
+    setDetailCommentsData: (state, action) => {
+      state.commentsData = action.payload;
     },
   },
 });
 
-export const { setDetailData } = detailPageSlice.actions;
+export const { setDetailPostData, setDetailCommentsData } = detailPageSlice.actions;
 export const detailPageReducer = detailPageSlice.reducer;

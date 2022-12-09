@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
+import { setDetailCommentsData } from '../../store/modules/detailPage';
 import ConfirmModal from '../ConfirmModal/Index';
 import GetPostDate from '../GetPostDate';
 import Toastify from '../Toastify';
 import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
-const CommentContent = ({ isNested, commentData, getPostData }) => {
+const CommentContent = ({ isNested, commentData }) => {
   const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id, comment_id, post_id } = commentData;
   const [isModify, setIsModify] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const onClose = () => setIsDelete(false);
+  const dispatch = useDispatch();
+
   const deleteCommentHandler = async () => {
     try {
       const config = {
@@ -22,13 +26,12 @@ const CommentContent = ({ isNested, commentData, getPostData }) => {
         },
       };
       const { data } = await apiClient.delete(`/comments/${post_id}/${comment_id}`, config);
+      dispatch(setDetailCommentsData(data.comments));
       toast.success('댓글 삭제 성공');
     } catch (error) {
       toast.error('댓글 삭제 실패');
-      console.log('댓글 삭제 에러 => ', error);
     }
     setIsDelete(false);
-    getPostData();
   };
 
   return (
@@ -71,7 +74,7 @@ const CommentContent = ({ isNested, commentData, getPostData }) => {
       </div>
       {isModify ? (
         <>
-          <Textarea setIsModify={setIsModify} isModify={true} content={content} />
+          <Textarea setIsModify={setIsModify} isModify={true} content={content} postId={post_id} commentId={comment_id} />
           <div style={{ height: '1.5rem' }} />
         </>
       ) : (
