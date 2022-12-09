@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MaxWidth1199pxTagList from './MaxWidth1199pxTagList';
 import MinWidth1200pxTagList from './MinWidth1200pxTagList';
-import Post from './Post';
-import NoPost from './NoPost';
+import MyLologPost from './MyLologPost';
+import MyLololgNoPost from './MyLololgNoPost';
 import { apiClient } from '../../../api';
 
-const Posts = () => {
+const MyLologPosts = () => {
   const [postsData, setPostsData] = useState();
   const [tagData, setTagData] = useState();
   const [tagId, setTagId] = useState(0);
@@ -39,11 +39,11 @@ const Posts = () => {
       {postsData && (
         <div className='post-padding'>
           {postsData.map((postData, i) => (
-            <Post key={i} postData={postData} />
+            <MyLologPost key={i} postData={postData} />
           ))}
         </div>
       )}
-      {isNoPost && <NoPost />}
+      {isNoPost && <MyLololgNoPost />}
     </PostsContainer>
   );
 };
@@ -58,4 +58,4 @@ const PostsContainer = styled.div`
   }
 `;
 
-export default Posts;
+export default MyLologPosts;

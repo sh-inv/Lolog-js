@@ -4,7 +4,7 @@ import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import { BsFillHeartFill } from 'react-icons/bs';
 
-const Post = ({ postData }) => {
+const MyLologPost = ({ postData }) => {
   const { create_at, post_comment_count, post_description, post_id, post_likes, post_thumbnail, post_title, tags } = postData;
 
   return (
@@ -139,4 +139,4 @@ const PostContainer = styled.div`
   }
 `;
 
-export default Post;
+export default MyLologPost;
