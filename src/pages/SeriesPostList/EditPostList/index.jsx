@@ -14,26 +14,26 @@ const EditPostList = ({ isModify, setIsModify, postList, setPostList }) => {
   const { seriesPostList } = useSelector(state => state.seriesPostList);
   const seriesId = seriesPostList[0].series_id;
 
-  const modifyConfirm = async () => {
-    const body = [
-      {
-        post_id: '',
-        sort: index,
-      },
-    ];
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      };
-      const { data } = await apiClient.patch(`/series/${seriesId}`, body, config);
-      // dispatch(setSeriesPostList())
-      // setPostList();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const modifyConfirm = async () => {
+  //   const body = [
+  //     {
+  //       post_id: '',
+  //       sort: index,
+  //     },
+  //   ];
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+  //       },
+  //     };
+  //     const { data } = await apiClient.patch(`/series/${seriesId}`, body, config);
+  //     // dispatch(setSeriesPostList())
+  //     // setPostList();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const movePost = useCallback((dragIndex, hoverIndex) => {
     setPostList(prevCards =>
@@ -59,7 +59,7 @@ const EditPostList = ({ isModify, setIsModify, postList, setPostList }) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Button text='적용' color='teal' onClick={modifyConfirm} />
+      {/* <Button text='적용' color='teal' onClick={modifyConfirm} /> */}
       <EditPostListContainer>{postList.map((post, i) => renderPost(post, i))}</EditPostListContainer>
     </DndProvider>
   );
