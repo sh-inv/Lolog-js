@@ -10,11 +10,12 @@ import PostList from './PostList';
 import { setSeriesPostList } from '../../store/modules/seriespostlist';
 
 const SeriesPostList = () => {
-  const dispatch = useDispatch();
   const [isModify, setIsModify] = useState(false);
   const [isSort, setIsSort] = useState(false);
   const [postList, setPostList] = useState([]);
   const { seriesPostList } = useSelector(state => state.seriesPostList);
+  const isOwner = seriesPostList[0]?.is_owner;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const loader = async () => {
@@ -34,15 +35,24 @@ const SeriesPostList = () => {
     setIsSort(!isSort);
   };
 
+  // const modifyConfirm = async () => {
+  //   try {
+  //     const { data } = await apiClient.patch(`/series/${seriesId}`);
+  //     // dispatch(setSeriesPostList())
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     seriesPostList && (
       <SeriesPostListContainer>
         <label>시리즈</label>
         <Title />
         <div className='border' />
-        {seriesPostList[0].is_owner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
+        {isOwner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
         {isModify ? (
-          <EditPostList postList={postList} setPostList={setPostList} />
+          <EditPostList isModify={isModify} setIsModify={setIsModify} postList={postList} setPostList={setPostList} />
         ) : (
           <>
             <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} /> <PostList />
