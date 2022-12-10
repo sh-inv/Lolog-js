@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
 
 const User = ({ userInfo }) => {
+  const [isFollow, setIsFollow] = useState(false);
+
+  const handleFollow = () => {
+    setIsFollow(!isFollow);
+  };
+
   return (
     userInfo && (
       <>
@@ -19,7 +26,7 @@ const User = ({ userInfo }) => {
               </div>
             </div>
           </div>
-          <FollowButton />
+          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={handleFollow} />
         </UserContainer>
         <Border />
       </>
