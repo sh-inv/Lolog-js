@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import SeriesCard from './SeriesCard';

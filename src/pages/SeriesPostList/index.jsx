@@ -15,12 +15,15 @@ const SeriesPostList = () => {
   const [postList, setPostList] = useState([]);
   const { seriesPostList } = useSelector(state => state.seriesPostList);
   const isOwner = seriesPostList[0]?.is_owner;
+  const seriesId = seriesPostList[0]?.series_id;
   const dispatch = useDispatch();
+
+  console.log(seriesPostList);
 
   useEffect(() => {
     const loader = async () => {
       try {
-        const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
+        const { data } = await apiClient.get(`/series/posts/11?sort=${isSort ? 'desc' : 'asc'}`);
         console.log(data);
         dispatch(setSeriesPostList(data.series));
         setPostList(data.series);
