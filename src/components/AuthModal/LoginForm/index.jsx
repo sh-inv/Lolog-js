@@ -29,6 +29,7 @@ const LoginForm = ({ onClose }) => {
       };
       try {
         const resp = await apiClient.post('/auth/login', body);
+        console.log(resp);
         if (resp.status === 201) {
           const { token } = resp.data;
           localStorage.setItem('authToken', token);
@@ -48,7 +49,7 @@ const LoginForm = ({ onClose }) => {
   return (
     <LoginFormContainer onSubmit={onSubmit}>
       <input type='text' name='id' required tabIndex='2' placeholder='아이디를 입력하세요.' onChange={onChange} value={form.email} />
-      <input type='password' name='password' required tabIndex='3' placeholder='비밀번호를 입력하세요.' onChange={onChange} value={form.password} />
+      <input type='password' name='password' required tabIndex='3' placeholder='비밀번호를 입력하세요.' onChange={onChange} value={form.password} autoComplete='on' />
       <Button type='submit' className='login-button' text='로그인' color='teal' tabIndex='4' />
     </LoginFormContainer>
   );

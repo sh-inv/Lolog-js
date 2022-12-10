@@ -7,7 +7,7 @@ import { SeriesMaxWidth768px } from '../../../styles/media';
 
 const Series = () => {
   const [seriesCardList, setSeriesCardList] = useState([]);
-  const [isSeries, setIsSeries] = useState(false);
+  const [isNoSeries, setIsNoSeries] = useState(false);
 
   useEffect(() => {
     const loader = async () => {
@@ -19,7 +19,7 @@ const Series = () => {
         };
         const { data } = await apiClient.get('series/10', config);
         setSeriesCardList(data.series);
-        !data.series.length && setIsSeries(true);
+        !data.series.length && setIsNoSeries(true);
       } catch (error) {
         console.log(error);
       }
@@ -29,14 +29,14 @@ const Series = () => {
 
   return (
     <>
-      {seriesCardList && !isSeries && (
+      {seriesCardList && !isNoSeries && (
         <SeriesContainer>
           {seriesCardList.map(series => {
             return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
           })}
         </SeriesContainer>
       )}
-      {isSeries && <NoSeriesCard />}
+      {isNoSeries && <NoSeriesCard />}
     </>
   );
 };

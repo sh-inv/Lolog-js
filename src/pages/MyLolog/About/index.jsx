@@ -7,7 +7,7 @@ import { AboutMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
   const [about, setAbout] = useState('');
-  const [isAbout, setIsAbout] = useState(false);
+  const [isNoAbout, setIsNoAbout] = useState(false);
   const [isOwner, setIsOwner] = useState(0);
   const [isModify, setIsModify] = useState(false);
 
@@ -32,9 +32,9 @@ const About = () => {
         setIsOwner(data.about.is_owner);
         if (data.about.about_blog) {
           setAbout(data.about.about_blog);
-          setIsAbout(false);
+          setIsNoAbout(false);
         } else {
-          setIsAbout(true);
+          setIsNoAbout(true);
         }
       } catch (error) {
         console.log(error);
@@ -42,8 +42,6 @@ const About = () => {
     };
     loader();
   }, []);
-
-  console.log('22', isOwner);
 
   const modifyConfirm = async () => {
     const body = {
@@ -58,9 +56,9 @@ const About = () => {
       const { data } = await apiClient.patch('about', body, config);
       if (data.about.about_blog) {
         setAbout(data.about.about_blog);
-        setIsAbout(false);
+        setIsNoAbout(false);
       } else {
-        setIsAbout(true);
+        setIsNoAbout(true);
       }
       setIsModify(false);
     } catch (error) {
@@ -72,7 +70,7 @@ const About = () => {
     <>
       <AboutContainer>
         {(() => {
-          if (isAbout) {
+          if (isNoAbout) {
             if (isModify) {
               return (
                 <>
