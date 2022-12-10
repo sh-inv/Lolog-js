@@ -17,7 +17,7 @@ const Series = () => {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const { data } = await apiClient.get('series/10', config);
+        const { data } = await apiClient.get('series/3', config);
         setSeriesCardList(data.series);
         !data.series.length && setIsNoSeries(true);
       } catch (error) {
