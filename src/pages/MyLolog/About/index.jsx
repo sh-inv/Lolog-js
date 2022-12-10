@@ -10,6 +10,7 @@ const About = () => {
   const [isAbout, setIsAbout] = useState(false);
   const [isOwner, setIsOwner] = useState(0);
   const [isModify, setIsModify] = useState(false);
+  const [isNoAbout, setIsNoAbout] = useState(false);
 
   const onModify = () => {
     setIsModify(true);
@@ -27,10 +28,17 @@ const About = () => {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const { data } = await apiClient.get('about/10', config);
-        setAbout(data.about.about_blog);
-        !data.about.about_blog && setIsAbout(true);
-        console.log('소개 길이', data.about.about_blog.length);
+        const { data } = await apiClient.get('about/3', config);
+        // setAbout(data.about.about_blog);
+        if (data.about.about_blog) {
+          setAbout(data.about.about_blog);
+          setIsNoAbout(false);
+        } else {
+          setIsNoAbout(true);
+        }
+        // setAbout(data.about.about_blog);
+        // !data.about.about_blog && setIsAbout(true);
+        console.log('소개 길이', data.about);
         // setIsOwner(Number(data.about.is_owner));
         console.log('리스폰스:', data);
       } catch (error) {
@@ -40,8 +48,8 @@ const About = () => {
     loader();
   }, []);
 
-  console.log('"about" :', about);
-  console.log('isAbout :', isAbout);
+  // console.log('"about" :', about);
+  // console.log('isAbout :', isAbout);
 
   const modifyConfirm = async () => {
     const body = {
@@ -53,21 +61,54 @@ const About = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.patch('about', body, config);
-      setAbout(body.about_blog);
+      const { data } = await apiClient.patch('about', body, config);
+      if (data.about.about_blog) {
+        setAbout(data.about.about_blog);
+        setIsNoAbout(false);
+      } else {
+        setIsNoAbout(true);
+      }
       setIsModify(false);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(isNoAbout);
 
   return (
     <>
       <AboutContainer>
-        <div className='button-wrapper'>
+        {(() => {
+          if (isNoAbout) {
+            if (isModify) {
+              return (
+                <>
+                  <div className='button-wrapper'>
+                    <Button text='저장하기' color='teal' onClick={modifyConfirm} />
+                  </div>
+                  <div className='intro-wrapper'>
+                    <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} />
+                  </div>
+                </>
+              );
+            } else {
+              return <NoAbout onModify={onModify} />;
+            }
+          } else {
+            return (
+              <>
+                <div className='button-wrapper'>
+                  <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
+                </div>
+                <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : <p>{about}</p>}</div>
+              </>
+            );
+          }
+        })()}
+        {/* <div className='button-wrapper'>
           <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
         </div>
-        <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : !about ? <NoAbout onModify={onModify} /> : <p>{about}</p>}</div>
+        <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : !about ? <NoAbout onModify={onModify} /> : <p>{about}</p>}</div> */}
       </AboutContainer>
       {/* {(about || !isAbout) && (
         <AboutContainer>
