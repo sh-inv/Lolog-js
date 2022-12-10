@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import nodata from '../../../../assets/nodata.png';
 import Button from '../../../../components/Button';
 
-const NoAbout = ({ onModify }) => {
+const NoAbout = ({ onModify, isOwner }) => {
   return (
     <NoAboutContainer>
       <img alt='noabout' src={nodata} />
       <div className='message'>소개가 작성되지 않았습니다.</div>
-      <Button onClick={onModify} color='teal' text='새로작성하기' />
+      {isOwner === 1 && <Button onClick={onModify} color='teal' text='소개 글 작성하기' />}
     </NoAboutContainer>
   );
 };

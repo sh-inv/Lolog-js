@@ -28,7 +28,7 @@ const About = () => {
           },
         };
         const { data } = await apiClient.get('about/3', config);
-        console.log(data.about.is_owner);
+        console.log(data.about);
         setIsOwner(data.about.is_owner);
         if (data.about.about_blog) {
           setAbout(data.about.about_blog);
@@ -42,6 +42,8 @@ const About = () => {
     };
     loader();
   }, []);
+
+  console.log('000', isOwner);
 
   const modifyConfirm = async () => {
     const body = {
@@ -83,12 +85,12 @@ const About = () => {
                 </>
               );
             } else {
-              return <NoAbout onModify={onModify} />;
+              return <NoAbout onModify={onModify} isOwner={isOwner} />;
             }
           } else {
             return (
               <>
-                {isOwner && (
+                {isOwner === 1 && (
                   <div className='button-wrapper'>
                     <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
                   </div>
