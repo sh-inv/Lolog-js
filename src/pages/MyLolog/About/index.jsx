@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../../components/Button';
+import NoAbout from './NoAbout';
 import { AboutMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
   const [about, setAbout] = useState('');
   const [isAbout, setIsAbout] = useState(false);
+  const [isOwner, setIsOwner] = useState(0);
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
@@ -17,20 +19,29 @@ const About = () => {
     setAbout(e.target.value);
   };
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNDkyNjgxfQ.lbkgkD5qWDGhlQygJq2sPcw750NBdiF-gdyzm2txSZs`;
-
   useEffect(() => {
     const loader = async () => {
       try {
-        const { data } = await apiClient.get('lolog/10/about');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        };
+        const { data } = await apiClient.get('about/10', config);
         setAbout(data.about.about_blog);
-        console.log(data);
+        !data.about.about_blog && setIsAbout(true);
+        console.log('소개 길이', data.about.about_blog.length);
+        // setIsOwner(Number(data.about.is_owner));
+        console.log('리스폰스:', data);
       } catch (error) {
         console.log(error);
       }
     };
     loader();
   }, []);
+
+  console.log('"about" :', about);
+  console.log('isAbout :', isAbout);
 
   const modifyConfirm = async () => {
     const body = {
@@ -39,10 +50,10 @@ const About = () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.patch('lolog/10/about', body, config);
+      await apiClient.patch('about', body, config);
       setAbout(body.about_blog);
       setIsModify(false);
     } catch (error) {
@@ -51,12 +62,28 @@ const About = () => {
   };
 
   return (
-    <AboutContainer>
-      <div className='button-wrapper'>
-        <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
-      </div>
-      <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={about}></textarea> : <p>{about}</p>}</div>
-    </AboutContainer>
+    <>
+      <AboutContainer>
+        <div className='button-wrapper'>
+          <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
+        </div>
+        <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : !about ? <NoAbout onModify={onModify} /> : <p>{about}</p>}</div>
+      </AboutContainer>
+      {/* {(about || !isAbout) && (
+        <AboutContainer>
+          <div className='button-wrapper'>
+            <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
+          </div>
+          <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : <p>{about}</p>}</div>
+        </AboutContainer>
+      )}
+      {isAbout && (
+        <AboutContainer>
+          <div className='button-wrapper'>{isModify === true && <Button text='저장하기' color='teal' onClick={isModify ? modifyConfirm : onModify} />}</div>
+          <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : <NoAbout onModify={onModify} />}</div>
+        </AboutContainer>
+      )} */}
+    </>
   );
 };
 

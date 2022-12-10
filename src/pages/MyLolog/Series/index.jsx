@@ -9,17 +9,15 @@ const Series = () => {
   const [seriesCardList, setSeriesCardList] = useState([]);
   const [isSeries, setIsSeries] = useState(false);
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
-
   useEffect(() => {
     const loader = async () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const { data } = await apiClient.get('/lolog/10/series', config);
+        const { data } = await apiClient.get('series/10', config);
         setSeriesCardList(data.series);
         !data.series.length && setIsSeries(true);
       } catch (error) {
@@ -34,7 +32,7 @@ const Series = () => {
       {seriesCardList && !isSeries && (
         <SeriesContainer>
           {seriesCardList.map(series => {
-            return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_create_at} postCount={series.post_count} />;
+            return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
           })}
         </SeriesContainer>
       )}
