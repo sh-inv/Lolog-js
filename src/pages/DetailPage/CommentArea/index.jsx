@@ -1,14 +1,17 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Textarea from '../../../components/Comment/Textarea';
 import Comment from './Comment';
 
 const CommentArea = ({ postData }) => {
-  const { post, comments } = postData;
+  const { post } = postData;
+  const { commentsData } = useSelector(state => state.detailData);
+
   return (
     <CommentAreaContainer>
-      <h4 className='comments-count'>{comments ? comments.length : '0'}개의 댓글</h4>
+      <h4 className='comments-count'>{commentsData ? commentsData.length : '0'}개의 댓글</h4>
       <Textarea postId={post.post_id} />
-      <div className='comments-list'>{comments && comments.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} />)}</div>
+      <div className='comments-list'>{commentsData && commentsData.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} />)}</div>
     </CommentAreaContainer>
   );
 };

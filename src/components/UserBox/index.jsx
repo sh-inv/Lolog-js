@@ -1,11 +1,14 @@
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import User from './User';
 import Social from './Social';
-import styled from 'styled-components';
 
-const UserBox = ({ userInfo }) => {
+const UserBox = () => {
+  const { user } = useSelector(state => state.myLologData);
+
   return (
     <UserBoxContainer className='user-box-container'>
-      <User userInfo={userInfo} />
+      <User userInfo={user} />
       <Social />
     </UserBoxContainer>
   );

@@ -5,6 +5,7 @@ import { userReducer } from './modules/user';
 import { detailPageReducer } from './modules/detailPage';
 import { authReducer } from './modules/auth';
 import { seriesReducer } from './modules/seriespostlist';
+import { myLologReducer } from './modules/mainpostlist';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     user: userReducer,
     auth: authReducer,
     seriesPostList: seriesReducer,
+    myLologData: myLologReducer,
   },
 });
 

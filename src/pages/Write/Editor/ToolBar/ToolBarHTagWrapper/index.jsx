@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedTool } from '../../../../../store/modules/write';
+// import { setSelectedTool } from '../../../../../store/modules/write';
 import styled from 'styled-components';
 
 const ToolBarHTagWrapper = ({ type }) => {
