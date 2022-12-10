@@ -1,37 +1,39 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetailData } from '../../store/modules/detailPage';
+import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
 import { useLocation } from 'react-router-dom';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import PostArea from './PostArea';
 import NextPrePost from './NextPrePost';
 import CommentArea from './CommentArea';
+import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
-import InterestingPost from './InterestingPost';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { postData, commentsData } = useSelector(state => state.detailData);
+  const { postData } = useSelector(state => state.detailData);
+
+  const getPostData = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const { data } = await apiClient.get(`${location.pathname}`, config);
+      dispatch(setDetailPostData(data));
+      dispatch(setDetailCommentsData(data.comments));
+    } catch (error) {
+      toast.error('게시글을 불러오지 못했습니다.');
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: localStorage.getItem('authToken'),
-          },
-        };
-        const { data } = await apiClient.get(`${location.pathname}`, config);
-        dispatch(setDetailData(data));
-      } catch (error) {
-        toast.error('게시글을 불러오지 못했습니다.');
-        console.log('detail data error => ', error);
-      }
-    })();
-  }, []);
+    getPostData();
+  }, [location.pathname]);
 
   return (
     <>
@@ -39,7 +41,7 @@ const DetailPage = () => {
       {postData && (
         <>
           <DetailPageContainer>
-            <PostArea postData={postData} />
+            <PostArea />
             <NextPrePost postData={postData} />
             <CommentArea postData={postData} />
           </DetailPageContainer>

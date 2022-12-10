@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PostHeader from './PostHeader';
 import Content from './Content';
 import UserBox from '../../../components/UserBox';
 import styled from 'styled-components';
 
-const PostArea = ({ postData }) => {
+const PostArea = () => {
+  const { postData } = useSelector(state => state.detailData);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -23,7 +25,6 @@ const PostArea = ({ postData }) => {
     postData && (
       <PostAreaContainer>
         <PostHeader postData={postData.post} seriesData={postData.series} />
-        <img className='post-area-thumbnail' src='' alt='thumbnail' />
         <Content postContent={postData.content} />
         <UserBox className='post-area-user-info' userInfo={userInfo} />
       </PostAreaContainer>
@@ -35,13 +36,13 @@ const PostAreaContainer = styled.div`
   margin-top: 5.5rem;
 
   .post-area-thumbnail {
-    max-height: 100vh;
-    max-width: 100%;
-    width: auto;
-    margin: 2rem auto 0px;
-    height: auto;
-    object-fit: contain;
     display: block;
+    margin: 2rem auto 0px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
   }
 
   .user-box-container {
