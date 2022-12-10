@@ -8,7 +8,7 @@ import ConfirmModal from '../../../components/ConfirmModal';
 import Toastify from '../../../components/Toastify';
 
 const SavesList = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([{ post_id: 1, title: '제목', content: '내용' }]);
   const [postId, setPostId] = useState();
   const [isModal, setIsModal] = useState(false);
 
