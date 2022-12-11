@@ -69,7 +69,7 @@ const WriteZone = () => {
   return (
     <WriteZoneContainer>
       <div style={{ height: '25rem' }}>
-        <ReactQuill ref={quillRef} style={{ height: '100%', width: '100%' }} theme='snow' modules={modules} formats={formats} value={content} onChange={handleText} />
+        <ReactQuill ref={quillRef} placeholder='당신의 이야기를 적어보세요...' style={{ height: '100%', width: '100%' }} theme='snow' modules={modules} formats={formats} value={content} onChange={handleText} />
       </div>
       <Toastify />
     </WriteZoneContainer>
@@ -84,6 +84,10 @@ const WriteZoneContainer = styled.div`
   direction: ltr;
   cursor: text;
   caret-color: #56b6c2 !important;
+
+  .ql-container.ql-snow {
+    border: none;
+  }
 `;
 
 export default WriteZone;

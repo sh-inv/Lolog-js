@@ -12,24 +12,12 @@ const Editor = () => {
   const { title, content } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
-  const [isLinkModal, setIsLinkModal] = useState(false);
-
-  const changeContent = e => {
-    // let copy = [...content];
-    // if (e.key === 'Enter') {
-    //   copy.push('<br />');
-    //   dispatch(setContent(copy));
-    // }
-  };
-
   return (
     <EditorContainer className='editor-container'>
       <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />
-      {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
-
       <WriteZone />
       <EditorFooter title={title} content={content} />
     </EditorContainer>
@@ -60,6 +48,13 @@ const EditorContainer = styled.div`
     width: 4rem;
     border-radius: 1px;
     background: rgb(73, 80, 87);
+  }
+
+  .ql-toolbar.ql-snow {
+    border: none;
+    button + button {
+      margin: 0 0.5rem;
+    }
   }
 `;
 

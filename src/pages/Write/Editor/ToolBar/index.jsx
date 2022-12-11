@@ -37,7 +37,6 @@ const ToolBarContainer = styled.div`
     outline: none;
     border: none;
     background: none;
-    font-size: 1rem;
     color: var(--text3);
 
     &:hover {
