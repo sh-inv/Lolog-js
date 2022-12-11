@@ -1,8 +1,6 @@
-import ToolBarHTagWrapper from './ToolBarHTagWrapper';
-import ToolBarBtnWrapper from './ToolBarBtnWrapper';
 import styled from 'styled-components';
 
-const ToolBar = ({ imageFileInput }) => {
+const ToolBar = () => {
   const ToolBarHTagList = ['H1', 'H2'];
   const ToolBarBtnLIstMid = ['ql-bold', 'ql-italic', 'ql-strike'];
   const ToolBarBtnListRight = ['ql-blockquote', 'ql-link', 'ql-image', 'ql-code'];
@@ -10,15 +8,15 @@ const ToolBar = ({ imageFileInput }) => {
   return (
     <ToolBarContainer className='toolbar-container' id='toolbar'>
       {ToolBarHTagList.map(tag => {
-        return <ToolBarHTagWrapper key={tag} type={tag} />;
+        return <button key={tag} className='ql-header' value={tag[1]} />;
       })}
       <div className='vertical-line' />
       {ToolBarBtnLIstMid.map(btnType => {
-        return <ToolBarBtnWrapper key={btnType} type={btnType} />;
+        return <button key={btnType} className={btnType} />;
       })}
       <div className='vertical-line' />
       {ToolBarBtnListRight.map(btnType => {
-        return <ToolBarBtnWrapper key={btnType} type={btnType} />;
+        return <button key={btnType} className={btnType} />;
       })}
     </ToolBarContainer>
   );
@@ -46,6 +44,11 @@ const ToolBarContainer = styled.div`
       color: var(--text1);
       background: var(--bg-element2);
       cursor: pointer;
+    }
+
+    svg {
+      width: 24px;
+      height: 35px;
     }
   }
 
