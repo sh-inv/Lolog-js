@@ -1,4 +1,6 @@
-import { useState, useRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWriteContent } from '../../../../store/modules/write';
 import { apiClient } from '../../../../api';
 import ReactQuill from 'react-quill';
 import { toast } from 'react-toastify';
@@ -7,7 +9,8 @@ import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 
 const WriteZone = () => {
-  const [text, setText] = useState('');
+  const { content } = useSelector(state => state.writeContent);
+  const dispatch = useDispatch();
   const quillRef = useRef();
 
   const imageHandler = () => {
@@ -57,14 +60,14 @@ const WriteZone = () => {
   const formats = ['header', 'bold', 'italic', 'strike', 'blockquote', 'link', 'image', 'code'];
 
   const handleText = value => {
-    console.log(value);
-    setText(value);
+    dispatch(setWriteContent({ type: 'content', value: value }));
+    console.log(content);
   };
 
   return (
     <WriteZoneContainer>
       <div style={{ height: '25rem' }}>
-        <ReactQuill ref={quillRef} style={{ height: '100%', width: '100%' }} theme='snow' modules={modules} formats={formats} value={text} onChange={handleText} />
+        <ReactQuill ref={quillRef} style={{ height: '100%', width: '100%' }} theme='snow' modules={modules} formats={formats} value={content} onChange={handleText} />
       </div>
       <Toastify />
     </WriteZoneContainer>
