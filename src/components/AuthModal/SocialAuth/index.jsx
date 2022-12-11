@@ -4,7 +4,9 @@ import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 
-const SocialAuth = () => {
+import axios from 'axios';
+
+const SocialAuth = ({ isSignUpModal }) => {
   const socialList = [
     {
       id: 5,
@@ -23,12 +25,27 @@ const SocialAuth = () => {
     },
   ];
 
-  const onSocialLogin = async name => {
+  const onSocialLogin = async social => {
     const config = {
-      headers: { 'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET' },
+      headers: { 'Access-Control-Allow-origin': 'http://127.0.0.1:5173', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET' },
+      xhrFields: {
+        withCredentials: true,
+      },
     };
     try {
-      const resp = await apiClient.get(`auth/${name}`, config);
+      const resp = await apiClient.get(`auth/${social}`, config);
+      console.log(resp);
+    } catch (error) {
+      console.log('소셜로그인', error);
+    }
+  };
+
+  const onSocialSignUp = async social => {
+    // const config = {
+    //   headers: { 'Access-Control-Allow-origin': 'http://127.0.0.1:5173', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET' },
+    // };
+    try {
+      const resp = await apiClient.post(`auth/signup?type=${social}`);
       console.log(resp);
     } catch (error) {
       console.log(error);
@@ -44,7 +61,13 @@ const SocialAuth = () => {
             className={social.name}
             tabIndex={social.id}
             onClick={() => {
+              // if (!isSignUpModal) {
               onSocialLogin(social.name);
+              //   return;
+              // } else if (isSignUpModal) {
+              //   onSocialSignUp(social.name);
+              //   console.log('회원가입모달', isSignUpModal);
+              // }
             }}
           >
             {social.icon}
