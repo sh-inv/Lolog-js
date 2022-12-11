@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   title: '',
-  content: [],
+  content: '',
   thumbnail: '',
   seriesId: null,
   uploadType: '1',
