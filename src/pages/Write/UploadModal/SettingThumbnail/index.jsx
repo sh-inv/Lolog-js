@@ -30,7 +30,7 @@ const SettingThumbnail = () => {
         },
       };
       toast.error('이미지 로딩중...');
-      const response = await apiClient.post(`/uploads/thumbnail?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
+      const response = await apiClient.post(`/uploads?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
       dispatch(setWriteContent({ type: 'thumbnail', value: response.data.imageUrl[0] }));
       toast.success('이미지 업로드 완료');
     } catch (error) {

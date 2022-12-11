@@ -27,7 +27,7 @@ const WriteZone = () => {
             'Content-Type': 'multipart/form-data',
           },
         };
-        const response = await apiClient.post(`/uploads/thumbnail?image_url=${URL.createObjectURL(input.files[0])}`, formData, config);
+        const response = await apiClient.post(`/uploads?image_url=${URL.createObjectURL(input.files[0])}`, formData, config);
         const imgUrl = response.data.imageUrl[0];
         const quillObj = quillRef.current.getEditor();
         const range = quillObj.getSelection();
