@@ -9,7 +9,7 @@ const MaxWidth1199pxTagList = ({ tagData, setTagId }) => {
       <ul className='tag-list'>
         {tagData.map(tag => (
           <NavLink
-            to={tag.name === '전체보기' ? `/id` : `/id?tag=${tag.name}`}
+            to={tag.name === '전체보기' ? `${location.pathname}` : `${location.pathname}?tag=${tag.name}`}
             key={tag.name}
             className={() => {
               const params = new URLSearchParams(location.search);

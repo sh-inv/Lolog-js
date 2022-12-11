@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { setWriteContent } from '../../../../store/modules/write';
 import ContentWrapper from '../ContentWrapper';
 import { IoEarth } from 'react-icons/io5';
 import { IoIosLock } from 'react-icons/io';
 import styled from 'styled-components';
-import { setUploadType } from '../../../../store/modules/write';
 
 const SettingPublic = () => {
   const [btnActive, setBtnActive] = useState([true, false]);
@@ -31,11 +31,11 @@ const SettingPublic = () => {
     if (btnType.includes('public-btn')) {
       const changedActive = [true, false];
       setBtnActive(changedActive);
-      dispatch(setUploadType('1'));
+      dispatch(setWriteContent({ type: 'uploadType', value: '1' }));
     } else {
       const changedActive = [false, true];
       setBtnActive(changedActive);
-      dispatch(setUploadType('2'));
+      dispatch(setWriteContent({ type: 'uploadType', value: '2' }));
     }
   };
 
