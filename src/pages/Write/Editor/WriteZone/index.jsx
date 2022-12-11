@@ -1,6 +1,8 @@
 import { useState, useRef, useMemo } from 'react';
 import { apiClient } from '../../../../api';
 import ReactQuill from 'react-quill';
+import { toast } from 'react-toastify';
+import Toastify from '../../../../components/Toastify';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 
@@ -32,7 +34,9 @@ const WriteZone = () => {
         const quillObj = quillRef.current.getEditor();
         const range = quillObj.getSelection();
         quillObj.insertEmbed(range.index, 'image', imgUrl);
+        toast.success('이미지 업로드 완료');
       } catch (error) {
+        toast.success('이미지 업로드 실패');
         console.log('editor img error =>', error);
         return false;
       }
@@ -62,6 +66,7 @@ const WriteZone = () => {
       <div style={{ height: '25rem' }}>
         <ReactQuill ref={quillRef} style={{ height: '100%', width: '100%' }} theme='snow' modules={modules} formats={formats} value={text} onChange={handleText} />
       </div>
+      <Toastify />
     </WriteZoneContainer>
   );
 };
