@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import PostViewer from '../../../components/PostViewer';
 
 const Preview = () => {
   const { title, content } = useSelector(state => state.writeContent);
@@ -7,7 +8,7 @@ const Preview = () => {
   return (
     <PreviewContainer className='preview-container'>
       <h1 className='preview-title'>{title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      <PostViewer content={content} />
     </PreviewContainer>
   );
 };
@@ -21,23 +22,6 @@ const PreviewContainer = styled.div`
     margin-top: 1.675rem;
     margin-bottom: 4rem;
     font-weight: 800;
-  }
-
-  img {
-    width: 100%;
-  }
-
-  code {
-    margin: 0;
-    background: var(--bg-element4);
-    color: var(--text1);
-    padding: 0.5em 1rem;
-    border-radius: 0.5em;
-  }
-
-  a {
-    color: blue;
-    cursor: pointer;
   }
 `;
 

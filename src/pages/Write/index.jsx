@@ -21,7 +21,6 @@ const Write = () => {
   useEffect(() => {
     const setInitialValue = async () => {
       const savePost = queryString.parse(location.search);
-
       if (savePost.id) {
         try {
           const config = {

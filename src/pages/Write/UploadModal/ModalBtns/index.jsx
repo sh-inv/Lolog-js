@@ -29,7 +29,7 @@ const ModalBtns = () => {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: discription };
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: discription };
         const response = await apiClient.post(`/posts`, bodyData, config);
         navigate(`/posts/${response.data.post_id}`);
       } catch (error) {

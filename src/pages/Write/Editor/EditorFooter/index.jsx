@@ -17,7 +17,7 @@ const EditorFooter = () => {
         const config = {
           headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNTA4MzQxfQ.jMW-mdNJzRGuCMAtyuU5alzvTC9amlDXiA1hpWT8DDc` },
         };
-        const bodyData = { title: title, content: 'content', thumbnail: '', tags: [], status: 3, post_url: uploadUrl, description: '' };
+        const bodyData = { title: title, content: content, thumbnail: '', tags: [], status: 3, post_url: uploadUrl, description: '' };
 
         await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
         console.log(bodyData);
