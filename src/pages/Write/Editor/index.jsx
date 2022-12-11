@@ -6,94 +6,13 @@ import ToolBar from './ToolBar';
 import LinkModal from './LinkModal';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
+import WriteZone from './WriteZone';
 
 const Editor = () => {
-  const { title, content, imageFileUrl, selectedTool } = useSelector(state => state.writeContent);
+  const { title, content } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const [isLinkModal, setIsLinkModal] = useState(false);
-
-  //   useEffect(() => {
-  //     if (selectedTool) {
-  //       let copy = content;
-  //       let updateContent = '';
-
-  //       if (selectedTool[0] === 'H') updateContent = hTagToolHandler(copy, selectedTool);
-  //       if (selectedTool === 'bold' || selectedTool === 'italic' || selectedTool === 'remove' || selectedTool === 'quote' || selectedTool === 'code') updateContent = textEffectHandler(copy, selectedTool);
-  //       if (selectedTool === 'link') {
-  //         setIsLinkModal(true);
-  //         dispatch(setSelectedTool(null));
-  //         return;
-  //       }
-  //       if (selectedTool === 'image') return;
-
-  //       dispatch(setContent(updateContent));
-  //       dispatch(setSelectedTool(null));
-  //     }
-  //   }, [selectedTool]);
-
-  //   useEffect(() => {
-  //     if (imageFileUrl) {
-  //       let copy = content;
-  //       const toolToValue = ` ![](${imageFileUrl})`;
-  //       const updateContent = copy + toolToValue;
-  //       dispatch(setContent(updateContent));
-  //     }
-  //   }, [imageFileUrl]);
-
-  //   const textEffectHandler = (currentContent, tool) => {
-  //     let toolToValue = '';
-  //     let updateContent = '';
-  //     const isAlreadyQuote = currentContent.split(' ')[0].includes('>');
-
-  //     switch (tool) {
-  //       case 'bold':
-  //         toolToValue = '**텍스트**';
-  //         break;
-  //       case 'italic':
-  //         toolToValue = '_텍스트_';
-  //         break;
-  //       case 'remove':
-  //         toolToValue = '~~텍스트~~';
-  //         break;
-  //       case 'quote':
-  //         toolToValue = '> ';
-  //         break;
-  //       case 'code':
-  //         toolToValue = `
-  // ${'```'}
-  // 코드를 입력하세요
-  // ${'```'}`;
-  //         break;
-  //       default:
-  //         break;
-  //     }
-
-  //     if (toolToValue === '> ') {
-  //       if (isAlreadyQuote) {
-  //         let result = currentContent.split(' ');
-  //         result[0] = '';
-  //         updateContent = result.join('');
-  //       } else {
-  //         updateContent = toolToValue + currentContent;
-  //       }
-  //     } else {
-  //       updateContent = currentContent + toolToValue;
-  //     }
-
-  //     return updateContent;
-  //   };
-
-  //   const linkHandler = linkValue => {
-  //     let copy = content;
-  //     const toolToValue = `[링크텍스트](${linkValue})`;
-  //     const updateContent = copy + toolToValue;
-  //     dispatch(setContent(updateContent));
-  //     setIsLinkModal(false);
-  //   };
-
-  // const selection = window.getSelection();
-  // console.log(selection);
 
   const changeContent = e => {
     // let copy = [...content];
@@ -103,8 +22,6 @@ const Editor = () => {
     // }
   };
 
-  // console.log('editor:', content);
-
   return (
     <EditorContainer className='editor-container'>
       <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
@@ -112,9 +29,8 @@ const Editor = () => {
       <Tags />
       <ToolBar />
       {isLinkModal && <LinkModal setIsLinkModal={setIsLinkModal} linkHandler={linkHandler} />}
-      <div className='write-zone'>
-        <textarea placeholder='당신의 이야기를 적어보세요...' onKeyUp={changeContent} />
-      </div>
+
+      <WriteZone />
       <EditorFooter title={title} content={content} />
     </EditorContainer>
   );
@@ -144,18 +60,6 @@ const EditorContainer = styled.div`
     width: 4rem;
     border-radius: 1px;
     background: rgb(73, 80, 87);
-  }
-
-  .write-zone {
-    textarea {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text3);
-      font-style: italic;
-      direction: ltr;
-      cursor: text;
-      caret-color: #56b6c2 !important;
-    }
   }
 `;
 

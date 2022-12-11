@@ -1,46 +1,24 @@
-import { FaBold, FaItalic, FaRemoveFormat } from 'react-icons/fa';
-import { MdFormatQuote } from 'react-icons/md';
-import { FiLink2, FiCode } from 'react-icons/fi';
-import { SlPicture } from 'react-icons/sl';
 import ToolBarHTagWrapper from './ToolBarHTagWrapper';
 import ToolBarBtnWrapper from './ToolBarBtnWrapper';
 import styled from 'styled-components';
 
 const ToolBar = ({ imageFileInput }) => {
-  const ToolBarHTagList = ['H1', 'H2', 'H3', 'H4'];
-  const ToolBarBtnLIstMid = [
-    { type: 'bold', reactIcon: <FaBold /> },
-    { type: 'italic', reactIcon: <FaItalic /> },
-    { type: 'remove', reactIcon: <FaRemoveFormat /> },
-  ];
-
-  const ToolBarBtnListRight = [
-    { type: 'quote', reactIcon: <MdFormatQuote /> },
-    { type: 'link', reactIcon: <FiLink2 /> },
-    { type: 'image', reactIcon: <SlPicture /> },
-    { type: 'code', reactIcon: <FiCode /> },
-  ];
+  const ToolBarHTagList = ['H1', 'H2'];
+  const ToolBarBtnLIstMid = ['ql-bold', 'ql-italic', 'ql-strike'];
+  const ToolBarBtnListRight = ['ql-blockquote', 'ql-link', 'ql-image', 'ql-code'];
 
   return (
-    <ToolBarContainer className='toolbar-container'>
+    <ToolBarContainer className='toolbar-container' id='toolbar'>
       {ToolBarHTagList.map(tag => {
         return <ToolBarHTagWrapper key={tag} type={tag} />;
       })}
       <div className='vertical-line' />
-      {ToolBarBtnLIstMid.map(btn => {
-        return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
-            {btn.reactIcon}
-          </ToolBarBtnWrapper>
-        );
+      {ToolBarBtnLIstMid.map(btnType => {
+        return <ToolBarBtnWrapper key={btnType} type={btnType} />;
       })}
       <div className='vertical-line' />
-      {ToolBarBtnListRight.map(btn => {
-        return (
-          <ToolBarBtnWrapper key={btn.type} type={btn.type}>
-            {btn.reactIcon}
-          </ToolBarBtnWrapper>
-        );
+      {ToolBarBtnListRight.map(btnType => {
+        return <ToolBarBtnWrapper key={btnType} type={btnType} />;
       })}
     </ToolBarContainer>
   );
