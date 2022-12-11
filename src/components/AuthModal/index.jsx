@@ -34,7 +34,7 @@ const AuthModal = ({ isLoginModal, setIsLoginModal, title }) => {
               </section>
               <section>
                 <h4>소셜 계정으로 {isSignUpModal ? '회원가입' : '로그인'}</h4>
-                <SocialAuth />
+                <SocialAuth isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} isSignUpModal={isSignUpModal} />
               </section>
             </div>
             <div className='foot'>

@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../../components/Button';
+import NoAbout from './NoAbout';
 import { AboutMaxWidth768px } from '../../../styles/media';
 
 const About = () => {
   const [about, setAbout] = useState('');
+  const [isNoAbout, setIsNoAbout] = useState(false);
+  const [isOwner, setIsOwner] = useState(0);
   const [isModify, setIsModify] = useState(false);
 
   const onModify = () => {
@@ -16,24 +19,30 @@ const About = () => {
     setAbout(e.target.value);
   };
 
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
-
   useEffect(() => {
     const loader = async () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const { data } = await apiClient.get('/lolog/10/about', config);
-        setAbout(data.about.about_blog);
+        const { data } = await apiClient.get('about/3', config);
+        setIsOwner(data.about.is_owner);
+        if (data.about.about_blog) {
+          setAbout(data.about.about_blog);
+          setIsNoAbout(false);
+        } else {
+          setIsNoAbout(true);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     loader();
   }, []);
+
+  console.log('000', isOwner);
 
   const modifyConfirm = async () => {
     const body = {
@@ -42,11 +51,16 @@ const About = () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.patch('/lolog/10/about', body, config);
-      setAbout(body.about_blog);
+      const { data } = await apiClient.patch('about', body, config);
+      if (data.about.about_blog) {
+        setAbout(data.about.about_blog);
+        setIsNoAbout(false);
+      } else {
+        setIsNoAbout(true);
+      }
       setIsModify(false);
     } catch (error) {
       console.log(error);
@@ -54,12 +68,39 @@ const About = () => {
   };
 
   return (
-    <AboutContainer>
-      <div className='button-wrapper'>
-        <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
-      </div>
-      <div className='intro-wrapper'>{isModify ? <textarea onChange={getIntro} value={about}></textarea> : <p>{about}</p>}</div>
-    </AboutContainer>
+    <>
+      <AboutContainer>
+        {(() => {
+          if (isNoAbout) {
+            if (isModify) {
+              return (
+                <>
+                  <div className='button-wrapper'>
+                    <Button text='저장하기' color='teal' onClick={modifyConfirm} />
+                  </div>
+                  <div className='intro-wrapper'>
+                    <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} />
+                  </div>
+                </>
+              );
+            } else {
+              return <NoAbout onModify={onModify} isOwner={isOwner} />;
+            }
+          } else {
+            return (
+              <>
+                {isOwner === 1 && (
+                  <div className='button-wrapper'>
+                    <Button text={isModify ? '저장하기' : '수정하기'} color='teal' onClick={isModify ? modifyConfirm : onModify} />
+                  </div>
+                )}
+                <div className='intro-wrapper'>{isModify ? <textarea placeholder='당신은 어떤사람인가요? 당신에 대해 알려주세요!' onChange={getIntro} value={about} /> : <p>{about}</p>}</div>
+              </>
+            );
+          }
+        })()}
+      </AboutContainer>
+    </>
   );
 };
 
