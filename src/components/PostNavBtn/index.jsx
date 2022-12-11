@@ -7,7 +7,7 @@ const PostNavBtn = ({ isLeft, postData }) => {
 
   return (
     <PostNavBtnContainer isLeft={isLeft}>
-      <Link to={`/id/${post_id}`} className='navigater'>
+      <Link to={`/posts/${post_id}`} className='navigater'>
         {isLeft && (
           <div className='btn'>
             <FiArrowLeft />
