@@ -14,16 +14,17 @@ const SeriesPostList = () => {
   const [isSort, setIsSort] = useState(false);
   const [postList, setPostList] = useState([]);
   const { seriesPostList } = useSelector(state => state.seriesPostList);
-  const isOwner = seriesPostList[0]?.is_owner;
-  const seriesId = seriesPostList[0]?.series_id;
+  // const isOwner = seriesPostList[0].is_owner;
+  // const seriesId = seriesPostList[0]?.series_id;
   const dispatch = useDispatch();
 
   console.log(seriesPostList);
+  // console.log(seriesId);
 
   useEffect(() => {
     const loader = async () => {
       try {
-        const { data } = await apiClient.get(`/series/posts/11?sort=${isSort ? 'desc' : 'asc'}`);
+        const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
         console.log(data);
         dispatch(setSeriesPostList(data.series));
         setPostList(data.series);
@@ -51,9 +52,9 @@ const SeriesPostList = () => {
     seriesPostList && (
       <SeriesPostListContainer>
         <label>시리즈</label>
-        <Title />
+        <Title isModify={isModify} />
         <div className='border' />
-        {isOwner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
+        {seriesPostList[0]?.is_owner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
         {isModify ? (
           <EditPostList isModify={isModify} setIsModify={setIsModify} postList={postList} setPostList={setPostList} />
         ) : (
