@@ -11,7 +11,7 @@ const SavesList = () => {
   const [savesList, setSavesList] = useState([]);
   const [postId, setPostId] = useState();
   const [isModal, setIsModal] = useState(false);
-  const [isSaves, setIsSaves] = useState(false);
+  const [isNoSaves, setIsNoSaves] = useState(false);
 
   const getLoader = async () => {
     try {
@@ -22,7 +22,7 @@ const SavesList = () => {
       };
       const { data } = await apiClient.get('/posts/saves', config);
       setSavesList(data.saves);
-      data.saves && setIsSaves(true);
+      !data.saves && setIsNoSaves(true);
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +54,7 @@ const SavesList = () => {
 
   return (
     <>
-      {savesList ? (
+      {savesList && !isNoSaves && (
         <SavesListContainer>
           {savesList.map(saves => (
             <Saves key={saves.post_id} setPostId={setPostId} id={saves.post_id} title={saves.title} contents={saves.content} created_at={saves.create_at} onModal={onModal} />
@@ -71,10 +71,8 @@ const SavesList = () => {
           )}
           <Toastify />
         </SavesListContainer>
-      ) : (
-        <NoSaves />
       )}
-      {isSaves && <NoSaves />}
+      {isNoSaves && <NoSaves />}
     </>
   );
 };
