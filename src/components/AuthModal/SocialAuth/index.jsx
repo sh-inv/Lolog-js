@@ -5,12 +5,30 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 
 const SocialAuth = () => {
-  const onSocialLogin = async () => {
-    // const config = {
-    //   headers: { 'Access-Control-Allow-origin': 'http://localhost:5173', 'Access-Control-Allow-Methods': 'GET' },
-    // };
+  const socialList = [
+    {
+      id: 5,
+      name: 'github',
+      icon: <AiOutlineGithub />,
+    },
+    {
+      id: 6,
+      name: 'google',
+      icon: <FcGoogle />,
+    },
+    {
+      id: 7,
+      name: 'facebook',
+      icon: <FaFacebookF />,
+    },
+  ];
+
+  const onSocialLogin = async name => {
+    const config = {
+      headers: { 'Access-Control-Allow-origin': '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET' },
+    };
     try {
-      const resp = await apiClient.get('auth/facebook');
+      const resp = await apiClient.get(`auth/${name}`, config);
       console.log(resp);
     } catch (error) {
       console.log(error);
@@ -19,15 +37,20 @@ const SocialAuth = () => {
 
   return (
     <SocialAuthContainer>
-      <a className='github' tabIndex='5' onClick={onSocialLogin}>
-        <AiOutlineGithub />
-      </a>
-      <a className='google' tabIndex='6'>
-        <FcGoogle />
-      </a>
-      <a className='facebook' tabIndex='7'>
-        <FaFacebookF />
-      </a>
+      {socialList.map(social => {
+        return (
+          <a
+            key={social.id}
+            className={social.name}
+            tabIndex={social.id}
+            onClick={() => {
+              onSocialLogin(social.name);
+            }}
+          >
+            {social.icon}
+          </a>
+        );
+      })}
     </SocialAuthContainer>
   );
 };
