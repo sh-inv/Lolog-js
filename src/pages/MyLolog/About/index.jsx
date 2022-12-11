@@ -28,7 +28,6 @@ const About = () => {
           },
         };
         const { data } = await apiClient.get('about/3', config);
-        console.log(data.about);
         setIsOwner(data.about.is_owner);
         if (data.about.about_blog) {
           setAbout(data.about.about_blog);
