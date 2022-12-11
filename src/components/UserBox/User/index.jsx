@@ -7,10 +7,7 @@ import FollowButton from '../../FollowButton';
 
 const User = ({ userInfo }) => {
   const [isFollow, setIsFollow] = useState(false);
-
-  // const handleFollow = () => {
-  //   setIsFollow(!isFollow);
-  // };
+  // const [isFollow, setIsFollow] = useState(checked);
 
   const onFollow = async () => {
     const body = {
@@ -22,16 +19,15 @@ const User = ({ userInfo }) => {
       };
       const { data } = await apiClient.post('users/follow', body, config);
       console.log(data);
-      console.log(2);
       setIsFollow(true);
     } catch (error) {
-      console.log('팔로우 에러', error.message);
+      console.log('팔로우 에러', error);
     }
   };
 
   const unFollow = async () => {
     const body = {
-      followee_id: 1,
+      followee_id: 9,
     };
     try {
       const config = {
@@ -39,7 +35,6 @@ const User = ({ userInfo }) => {
       };
       await apiClient.delete('users/follow', body, config);
       toast.success('팔로우가 해제되었습니다');
-      console.log(3);
       setIsFollow(false);
     } catch (error) {
       console.log(error);
