@@ -1,14 +1,49 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
 
 const User = ({ userInfo }) => {
   const [isFollow, setIsFollow] = useState(false);
 
-  const handleFollow = () => {
-    setIsFollow(!isFollow);
+  // const handleFollow = () => {
+  //   setIsFollow(!isFollow);
+  // };
+
+  const onFollow = async () => {
+    const body = {
+      followee_id: 9,
+    };
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+      };
+      const { data } = await apiClient.post('users/follow', body, config);
+      console.log(data);
+      console.log(2);
+      setIsFollow(true);
+    } catch (error) {
+      console.log('팔로우 에러', error.message);
+    }
+  };
+
+  const unFollow = async () => {
+    const body = {
+      followee_id: 1,
+    };
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+      };
+      await apiClient.delete('users/follow', body, config);
+      toast.success('팔로우가 해제되었습니다');
+      console.log(3);
+      setIsFollow(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -26,7 +61,7 @@ const User = ({ userInfo }) => {
               </div>
             </div>
           </div>
-          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={handleFollow} />
+          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />
         </UserContainer>
         <Border />
       </>

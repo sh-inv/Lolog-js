@@ -8,22 +8,23 @@ import ConfirmModal from '../../../components/ConfirmModal';
 import Toastify from '../../../components/Toastify';
 
 const SavesList = () => {
-  const [list, setList] = useState([{ post_id: 1, title: '제목', content: '내용' }]);
+  const [savesList, setSavesList] = useState([]);
   const [postId, setPostId] = useState();
   const [isModal, setIsModal] = useState(false);
-
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MTAsImxvZ2luX2lkIjoieW91YmlubiIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMjI2OTc2fQ.xygwAqXJ88Py_BXthd5JMZkxIeI_L96WgM7T4AGJCxA`;
+  const [isNoSaves, setIsNoSaves] = useState(false);
 
   const getLoader = async () => {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
       };
       const { data } = await apiClient.get('/posts/saves', config);
-      setList(data.saves);
+      setSavesList(data.saves);
+      !data.saves && setIsNoSaves(true);
     } catch (error) {
       console.log(error);
-      setList(null);
     }
   };
 
@@ -34,14 +35,16 @@ const SavesList = () => {
   const deletePost = async () => {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
       };
-      await apiClient.delete(`/posts/${postId}?status=3`, config);
+      await apiClient.delete(`/posts/${postId}`, config);
       setIsModal(false);
       toast.success('포스트가 삭제 되었습니다.');
       getLoader();
     } catch (error) {
-      toast.error(error);
+      console.log(error);
     }
   };
 
@@ -49,27 +52,28 @@ const SavesList = () => {
     setIsModal(true);
   };
 
-  return Array.isArray(list) && list.length ? (
+  return (
     <>
-      <SavesListContainer>
-        {list.map(saves => (
-          <Saves key={saves.post_id} setPostId={setPostId} id={saves.post_id} title={saves.title} contents={saves.content} created_at={saves.create_at} onModal={onModal} />
-        ))}
-        {isModal && (
-          <ConfirmModal
-            title='임시 글 삭제'
-            message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
-            onClose={() => {
-              setIsModal(false);
-            }}
-            onMove={deletePost}
-          />
-        )}
-      </SavesListContainer>
-      <Toastify />
+      {savesList && !isNoSaves && (
+        <SavesListContainer>
+          {savesList.map(saves => (
+            <Saves key={saves.post_id} setPostId={setPostId} id={saves.post_id} title={saves.title} contents={saves.content} created_at={saves.create_at} onModal={onModal} />
+          ))}
+          {isModal && (
+            <ConfirmModal
+              title='임시 글 삭제'
+              message={`임시 저장한 글을 삭제하시겠습니까?\n삭제한 글은 복구할 수 없습니다.`}
+              onClose={() => {
+                setIsModal(false);
+              }}
+              onMove={deletePost}
+            />
+          )}
+          <Toastify />
+        </SavesListContainer>
+      )}
+      {isNoSaves && <NoSaves />}
     </>
-  ) : (
-    <NoSaves />
   );
 };
 
