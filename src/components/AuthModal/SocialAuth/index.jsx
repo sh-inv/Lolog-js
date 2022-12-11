@@ -4,8 +4,6 @@ import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 
-import axios from 'axios';
-
 const SocialAuth = ({ isSignUpModal }) => {
   const socialList = [
     {
@@ -28,9 +26,9 @@ const SocialAuth = ({ isSignUpModal }) => {
   const onSocialLogin = async social => {
     const config = {
       headers: { 'Access-Control-Allow-origin': 'http://127.0.0.1:5173', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET' },
-      xhrFields: {
-        withCredentials: true,
-      },
+      // xhrFields: {
+      //   withCredentials: true,
+      // },
     };
     try {
       const resp = await apiClient.get(`auth/${social}`, config);
