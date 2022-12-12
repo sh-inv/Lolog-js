@@ -1,12 +1,57 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ToggleMenuList = ({ toggleMenuRef, toggleMenuList, setIsToggleOpen }) => {
+const ToggleMenuList = ({ toggleMenuRef, setIsToggleOpen }) => {
+  const toggleMenuList = [
+    {
+      name: '내 벨로그',
+      path: `/${localStorage.getItem('userId')}`,
+    },
+    {
+      name: '새 글 작성',
+      path: '/write',
+    },
+    {
+      name: '임시 글',
+      path: '/saves',
+    },
+    {
+      name: '팔로우 목록',
+      path: '/follow-list',
+    },
+    {
+      name: '읽기 목록',
+      path: '/lists/liked',
+    },
+    {
+      name: '설정',
+      path: '/setting',
+    },
+    {
+      name: '로그아웃',
+      path: '/',
+      onClickHandler: async () => {
+        await window.location.reload();
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userProfileImg');
+      },
+    },
+  ];
+
   return (
     <ToggleMenuListContainer ref={toggleMenuRef}>
       {toggleMenuList.map(menu => {
         return (
-          <Link key={menu.name} className='link-tag' to={menu.path} onClick={() => setIsToggleOpen(false)}>
+          <Link
+            key={menu.name}
+            className='link-tag'
+            to={menu.path}
+            onClick={() => {
+              setIsToggleOpen(false);
+              menu.onClickHandler();
+            }}
+          >
             {menu.name}
           </Link>
         );

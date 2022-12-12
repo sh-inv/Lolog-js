@@ -2,19 +2,18 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { BiSearch } from 'react-icons/bi';
-import { CgProfile } from 'react-icons/cg';
 import { VscTriangleDown } from 'react-icons/vsc';
 import ThemeMode from './ThemeMode';
 import ToggleMenuList from './ToggleMenuList';
 import AuthModal from '../../components/AuthModal';
 import styled from 'styled-components';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
+import UserProfileImage from '../../components/UserProfileImage';
 
 const Header = () => {
   const myZoneRef = useRef();
   const toggleMenuRef = useRef();
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const [toggleMenuList, setToggleMenuList] = useState();
   const [isLoginModal, setIsLoginModal] = useState(false);
 
   const onLoginModal = () => {
@@ -33,19 +32,6 @@ const Header = () => {
     };
   }, [isToggleOpen]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { toggle },
-        } = await axios.get('/data/header/toggle.json', {});
-        setToggleMenuList(toggle);
-      } catch (error) {
-        console.log('error => ', error);
-      }
-    })();
-  }, []);
-
   return (
     <>
       <Positioner>
@@ -58,19 +44,26 @@ const Header = () => {
             <Link className='search setting-hover' to='/search'>
               <BiSearch />
             </Link>
-            <button className='login hover-link-btn' onClick={onLoginModal}>
-              로그인
-            </button>
-            <Link className='new-post hover-link-btn' to='/write'>
-              새 글 작성
-            </Link>
-            <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
-              <CgProfile className='profile' />
-              <VscTriangleDown className='toggle' />
-            </div>
+            {localStorage.getItem('authToken') ? (
+              <>
+                <Link className='new-post hover-link-btn' to='/write'>
+                  새 글 작성
+                </Link>
+                <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
+                  <span className='profile'>
+                    <UserProfileImage source={localStorage.getItem('userProfileImg')} />
+                  </span>
+                  <VscTriangleDown className='toggle' />
+                </div>
+              </>
+            ) : (
+              <button className='login hover-link-btn' onClick={onLoginModal}>
+                로그인
+              </button>
+            )}
           </RightIcons>
         </Content>
-        {isToggleOpen && toggleMenuList && <ToggleMenuList toggleMenuRef={toggleMenuRef} toggleMenuList={toggleMenuList} setIsToggleOpen={setIsToggleOpen} />}
+        {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
       </Positioner>
       {isLoginModal ? <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} /> : null}
     </>
@@ -176,22 +169,22 @@ const RightIcons = styled.div`
     align-items: center;
     justify-content: center;
     margin-left: 0.8rem;
+    cursor: pointer;
 
     .profile {
       width: 32px;
       height: 32px;
-      cursor: pointer;
     }
 
     .toggle {
       margin-left: 0.5rem;
       transition: all 0.125s ease-in 0s;
-      cursor: pointer;
-
       width: 12px;
       color: var(--bg-element9);
+    }
 
-      :hover {
+    &:hover {
+      .toggle {
         color: var(--text1);
       }
     }
