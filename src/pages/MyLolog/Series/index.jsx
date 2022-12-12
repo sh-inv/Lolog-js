@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import SeriesCard from './SeriesCard';
@@ -8,6 +9,7 @@ import { SeriesMaxWidth768px } from '../../../styles/media';
 const Series = () => {
   const [seriesCardList, setSeriesCardList] = useState([]);
   const [isNoSeries, setIsNoSeries] = useState(false);
+  const { user } = useSelector(state => state.myLologData);
 
   useEffect(() => {
     const loader = async () => {
@@ -17,7 +19,7 @@ const Series = () => {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const { data } = await apiClient.get('series/3', config);
+        const { data } = await apiClient.get(`series/${user.id}`, config);
         setSeriesCardList(data.series);
         !data.series.length && setIsNoSeries(true);
       } catch (error) {
@@ -32,7 +34,7 @@ const Series = () => {
       {seriesCardList && !isNoSeries && (
         <SeriesContainer>
           {seriesCardList.map(series => {
-            return <SeriesCard key={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
+            return <SeriesCard key={series.series_id} id={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
           })}
         </SeriesContainer>
       )}
