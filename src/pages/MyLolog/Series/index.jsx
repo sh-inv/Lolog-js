@@ -11,8 +11,6 @@ const Series = () => {
   const [isNoSeries, setIsNoSeries] = useState(false);
   const { user } = useSelector(state => state.myLologData);
 
-  console.log(user);
-
   useEffect(() => {
     const loader = async () => {
       try {

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../../components/Button';
 import EditButton from '../../../components/EditButton';
 import ConfirmModal from '../../../components/ConfirmModal';
+import Toastify from '../../../components/Toastify';
 
 const Edit = ({ isModify, setIsModify, seriesName, userId }) => {
   const navigate = useNavigate();
@@ -43,9 +45,9 @@ const Edit = ({ isModify, setIsModify, seriesName, userId }) => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      const resp = await apiClient.patch(`series/${seriesId}`, body, config);
-      console.log('수정 후', resp);
+      await apiClient.patch(`series/${seriesId}`, body, config);
       setIsModify(false);
+      toast.success('시리즈가 수정되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -58,10 +60,10 @@ const Edit = ({ isModify, setIsModify, seriesName, userId }) => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      const resp = await apiClient.delete(`series/${seriesId}`, config);
+      await apiClient.delete(`series/${seriesId}`, config);
       setIsModal(false);
       navigate(`/${userId}/series`);
-      console.log('응답', resp);
+      toast.success('시리즈가 삭제되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -89,6 +91,7 @@ const Edit = ({ isModify, setIsModify, seriesName, userId }) => {
           onMove={onDelete}
         />
       )}
+      <Toastify />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
@@ -7,10 +7,8 @@ import styled from 'styled-components';
 import EditPost from './EditPost';
 import { setSeriesPostList } from '../../../store/modules/seriespostlist';
 
-const EditPostList = ({ isModify, setIsModify, postList, setPostList }) => {
+const EditPostList = ({ postList, setPostList }) => {
   const dispatch = useDispatch();
-  const { seriesPostList } = useSelector(state => state.seriesPostList);
-  const seriesId = seriesPostList[0].series_id;
 
   const movePost = useCallback((dragIndex, hoverIndex) => {
     setPostList(prevCards =>
