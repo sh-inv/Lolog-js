@@ -48,7 +48,7 @@ const PostList = ({ pageInfo }) => {
             return <Post key={i} postData={data} />;
           })}
           {noMorePosts && postData.length ? <div ref={loader} /> : null}
-          <PostSkeleton />
+          {noMorePosts && <PostSkeleton />}
         </div>
       </div>
     </PostListContainer>
