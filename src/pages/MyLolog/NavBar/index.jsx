@@ -1,8 +1,11 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const NavBar = () => {
   const location = useLocation();
+  const { user } = useSelector(state => state.myLologData);
+
   const myNav = [
     {
       id: 1,
@@ -20,6 +23,13 @@ const NavBar = () => {
       title: '소개',
     },
   ];
+
+  console.log(location.pathname);
+  console.log(user.id);
+
+  // if (location.pathname === `/${user.id}`) return '0';
+  // else if (location.pathname === `/${user.id}/series`) return '33.3333%';
+  // else if (location.pathname === `/${user.id}/about`) return '66.6666%';
 
   return (
     <NavContainer>
@@ -79,7 +89,7 @@ const SlideBorder = styled.div`
   position: absolute;
   bottom: -2px;
   left: ${({ location }) => {
-    if (location.pathname === '/id') return '0';
+    if (location.pathname === `/id`) return '0';
     else if (location.pathname === '/id/series') return '33.3333%';
     else if (location.pathname === '/id/about') return '66.6666%';
   }};
