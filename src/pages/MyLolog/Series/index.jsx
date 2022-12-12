@@ -11,6 +11,8 @@ const Series = () => {
   const [isNoSeries, setIsNoSeries] = useState(false);
   const { user } = useSelector(state => state.myLologData);
 
+  console.log(user);
+
   useEffect(() => {
     const loader = async () => {
       try {
@@ -34,7 +36,7 @@ const Series = () => {
       {seriesCardList && !isNoSeries && (
         <SeriesContainer>
           {seriesCardList.map(series => {
-            return <SeriesCard key={series.series_id} id={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
+            return <SeriesCard key={series.series_id} seriesId={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
           })}
         </SeriesContainer>
       )}

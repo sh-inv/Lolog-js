@@ -1,21 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setSeriesPostList } from '../../../store/modules/seriespostlist';
 
-const Title = ({ isModify }) => {
+const Title = ({ isModify, seriesName, setSeriesName }) => {
   const { seriesPostList } = useSelector(state => state.seriesPostList);
-  const dispatch = useDispatch();
 
   const getTitle = e => {
-    console.log('2222', e.target.value);
-    // dispatch(setSeriesPostList({ ...seriesPostList, series_name: e.target.value }));
+    setSeriesName(e.target.value);
   };
-
-  console.log('1', seriesPostList[0]?.series_name);
 
   return isModify ? (
     <TitleModifyContainer>
-      <input placeholder='시리즈 이름을 입력하세요.' name={seriesPostList[0]?.series_name} onChange={getTitle} value={seriesPostList[0]?.series_name} />
+      <input placeholder='시리즈 이름을 입력하세요.' onChange={getTitle} value={seriesName} />
     </TitleModifyContainer>
   ) : (
     <TitleContainer>{seriesPostList[0]?.series_name}</TitleContainer>

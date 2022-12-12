@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
@@ -10,51 +11,53 @@ import PostList from './PostList';
 import { setSeriesPostList } from '../../store/modules/seriespostlist';
 
 const SeriesPostList = () => {
-  const [isModify, setIsModify] = useState(false);
-  const [isSort, setIsSort] = useState(false);
   const [postList, setPostList] = useState([]);
-  const { seriesPostList } = useSelector(state => state.seriesPostList);
-  // const isOwner = seriesPostList[0].is_owner;
-  // const seriesId = seriesPostList[0]?.series_id;
-  const dispatch = useDispatch();
+  const [seriesName, setSeriesName] = useState('');
+  const [isSort, setIsSort] = useState(false);
+  const [isModify, setIsModify] = useState(false);
 
-  console.log(seriesPostList);
-  // console.log(seriesId);
+  const location = useLocation();
+  const userId = location.pathname.split('/')[1];
+  const seriesId = location.pathname.split('/')[3];
+
+  const { seriesPostList } = useSelector(state => state.seriesPostList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const loader = async () => {
       try {
-        const { data } = await apiClient.get(`/series/posts/9?sort=${isSort ? 'desc' : 'asc'}`);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        };
+        const { data } = await apiClient.get(`/series/posts/${seriesId}?sort=${isSort ? 'desc' : 'asc'}`, config);
         console.log(data);
         dispatch(setSeriesPostList(data.series));
         setPostList(data.series);
+        setSeriesName(data.series[0].series_name);
       } catch (error) {
         console.log(error);
       }
     };
-    loader();
-  }, [isSort]);
+    if (isModify === false) {
+      loader();
+    }
+  }, [isSort, isModify]);
+
+  const isOwner = seriesPostList[0]?.is_owner;
 
   const onClickHandler = () => {
     setIsSort(!isSort);
   };
 
-  // const modifyConfirm = async () => {
-  //   try {
-  //     const { data } = await apiClient.patch(`/series/${seriesId}`);
-  //     // dispatch(setSeriesPostList())
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     seriesPostList && (
       <SeriesPostListContainer>
         <label>시리즈</label>
-        <Title isModify={isModify} />
+        <Title isModify={isModify} seriesName={seriesName} setSeriesName={setSeriesName} />
         <div className='border' />
-        {seriesPostList[0]?.is_owner === 0 && <Edit isModify={isModify} setIsModify={setIsModify} />}
+        {isOwner === 1 && <Edit isModify={isModify} setIsModify={setIsModify} seriesName={seriesName} userId={userId} />}
         {isModify ? (
           <EditPostList isModify={isModify} setIsModify={setIsModify} postList={postList} setPostList={setPostList} />
         ) : (

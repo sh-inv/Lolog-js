@@ -7,7 +7,7 @@ import Button from '../../../components/Button';
 import EditButton from '../../../components/EditButton';
 import ConfirmModal from '../../../components/ConfirmModal';
 
-const Edit = ({ isModify, setIsModify }) => {
+const Edit = ({ isModify, setIsModify, seriesName, userId }) => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const { seriesPostList } = useSelector(state => state.seriesPostList);
@@ -17,8 +17,38 @@ const Edit = ({ isModify, setIsModify }) => {
     setIsModal(true);
   };
 
-  const handleModify = () => {
-    setIsModify(!isModify);
+  const onModify = async () => {
+    setIsModify(true);
+  };
+
+  const modifyConfirm = async () => {
+    try {
+      let postIdList = [];
+      let sortData = [];
+      seriesPostList.map(postInfo => {
+        postIdList.push(postInfo.post_id);
+      });
+      postIdList.map((postId, index) => {
+        sortData.push({
+          post_id: postId,
+          sort: index + 1,
+        });
+      });
+      const body = {
+        series_name: seriesName,
+        sort: sortData,
+      };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const resp = await apiClient.patch(`series/${seriesId}`, body, config);
+      console.log('수정 후', resp);
+      setIsModify(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onDelete = async () => {
@@ -30,7 +60,7 @@ const Edit = ({ isModify, setIsModify }) => {
       };
       const resp = await apiClient.delete(`series/${seriesId}`, config);
       setIsModal(false);
-      navigate('/id/series');
+      navigate(`/${userId}/series`);
       console.log('응답', resp);
     } catch (error) {
       console.log(error);
@@ -41,10 +71,10 @@ const Edit = ({ isModify, setIsModify }) => {
     <>
       <EditContainer>
         {isModify ? (
-          <Button text='적용' color='teal' onClick={handleModify} />
+          <Button text='적용' color='teal' onClick={modifyConfirm} />
         ) : (
           <>
-            <EditButton text='수정' className={'edit-button'} onClick={handleModify} />
+            <EditButton text='수정' className={'edit-button'} onClick={onModify} />
             <EditButton text='삭제' className={'edit-button'} onClick={onModal} />
           </>
         )}

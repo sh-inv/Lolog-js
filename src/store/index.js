@@ -5,7 +5,7 @@ import { userReducer } from './modules/user';
 import { detailPageReducer } from './modules/detailPage';
 import { authReducer } from './modules/auth';
 import { seriesReducer } from './modules/seriespostlist';
-import { myLologReducer } from './modules/mainpostlist';
+import { myLologReducer } from './modules/mylologpostlist';
 
 const store = configureStore({
   reducer: {
