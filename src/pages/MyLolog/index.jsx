@@ -6,7 +6,7 @@ import SearchBox from '../../components/SearchBox';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
 import { useDispatch } from 'react-redux';
-import { setMyLologData } from '../../store/modules/mainpostlist';
+import { setMyLologData } from '../../store/modules/mylologpostlist';
 
 const MyLolog = () => {
   const location = useLocation();
