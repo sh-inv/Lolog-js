@@ -1,7 +1,9 @@
 import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import Button from '../../Button';
+import Toastify from '../../Toastify';
 
 const LoginForm = ({ onClose }) => {
   const [form, setForm] = useState({
@@ -29,10 +31,11 @@ const LoginForm = ({ onClose }) => {
       };
       try {
         const resp = await apiClient.post('/auth/login', body);
-        console.log(resp);
         if (resp.status === 201) {
-          const { token } = resp.data;
+          const { token, id, profile_image } = resp.data;
           localStorage.setItem('authToken', token);
+          localStorage.setItem('userId', id);
+          localStorage.setItem('userProfileImg', profile_image);
           setForm({
             id: '',
             password: '',
@@ -41,6 +44,13 @@ const LoginForm = ({ onClose }) => {
         }
       } catch (error) {
         console.error(error);
+        if (error.response.status === 401) {
+          toast.error('비밀번호를 다시 확인해주세요');
+        } else if (error.response.status === 403) {
+          toast.error('아이디를 다시 확인해주세요');
+        } else {
+          toast.error('로그인 정보를 다시 확인해주세요');
+        }
       }
     },
     [form]
@@ -51,6 +61,7 @@ const LoginForm = ({ onClose }) => {
       <input type='text' name='id' required tabIndex='2' placeholder='아이디를 입력하세요.' onChange={onChange} value={form.email} />
       <input type='password' name='password' required tabIndex='3' placeholder='비밀번호를 입력하세요.' onChange={onChange} value={form.password} autoComplete='on' />
       <Button type='submit' className='login-button' text='로그인' color='teal' tabIndex='4' />
+      <Toastify />
     </LoginFormContainer>
   );
 };

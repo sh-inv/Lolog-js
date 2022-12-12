@@ -65,7 +65,7 @@ const Header = () => {
         </Content>
         {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
       </Positioner>
-      {isLoginModal ? <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} /> : null}
+      {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
     </>
   );
 };
@@ -156,6 +156,10 @@ const RightIcons = styled.div`
   .login {
     background: var(--bg-element5);
     color: var(--button-text);
+
+    :hover {
+      background: var(--bg-element6);
+    }
   }
 
   .new-post {
