@@ -65,7 +65,7 @@ const Header = () => {
         </Content>
         {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
       </Positioner>
-      {isLoginModal ? <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} /> : null}
+      {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
     </>
   );
 };
