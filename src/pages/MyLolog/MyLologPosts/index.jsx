@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MaxWidth1199pxTagList from './MaxWidth1199pxTagList';
@@ -9,65 +9,65 @@ import { apiClient } from '../../../api';
 
 const MyLologPosts = () => {
   const location = useLocation();
-  const [postsData, setPostsData] = useState();
-  const [tagData, setTagData] = useState();
-  const [tagId, setTagId] = useState(0);
+
+  const [postsData, setPostsData] = useState([]);
+  const [tagData, setTagData] = useState([]);
+
   const [isNoPost, setIsNoPost] = useState(false);
-  const [offset, setOffset] = useState(1);
+  const [noMorePosts, setNoMorePosts] = useState(false);
+
+  const [tagId, setTagId] = useState(0);
+  const [pageNum, setPageNum] = useState(1);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=5&tag_id=${tagId}`);
-        setPostsData(data.posts);
-        setTagData(data.tags);
-        !data.posts && setIsNoPost(true);
+        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${pageNum}&limit=5&tag_id=${tagId}`);
+        console.log(data.posts);
+        if (data.posts.length) {
+          setNoMorePosts(true);
+          setPostsData(prev => [...prev, ...data.posts]);
+          setTagData(data.tags);
+        } else if (data.posts === null) {
+          setIsNoPost(true);
+        } else {
+          setNoMorePosts(false);
+        }
       } catch (error) {
         console.log('내 벨로그 글 데이터 통신 오류', error);
-        setIsNoPost(true);
       }
     })();
-  }, [tagId]);
+  }, [location.pathname, pageNum, tagId]);
 
   // 무한 스크롤
 
-  const observerRef = useRef(null);
-  const [bottom, setBottom] = useState(null);
-  const [noMorePosts, setNoMorePosts] = useState(false);
+  const loader = useRef(null);
 
-  const intersectionObserver = entries => {
-    if (entries[0].isIntersecting) {
-      setOffset(offset => offset + 1);
-      (async () => {
-        try {
-          const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${offset}&limit=5&tag_id=${tagId}`);
-          if (!data.posts) setNoMorePosts(true);
-          else setPostsData([...postsData, ...data.posts]);
-        } catch (error) {
-          console.log('내 벨로그 글 데이터 통신 오류', error);
-        }
-      })();
+  const intersectionObserver = useCallback(entries => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPageNum(prev => prev + 1);
     }
-  };
+    return;
+  }, []);
 
-  const observerOptions = {
+  const option = {
     threshold: 0.1,
-    rootMargin: '500px',
   };
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(intersectionObserver, observerOptions);
-    const observer = observerRef.current;
-    if (bottom) {
-      observer.observe(bottom);
+    const observer = new IntersectionObserver(intersectionObserver, option);
+    if (loader.current) {
+      observer.observe(loader.current);
       console.log('관찰시작');
     }
+
     return () => {
-      if (bottom) observer.unobserve(bottom);
+      if (loader.current) observer.unobserve(loader.current);
       console.log('관찰종료');
     };
-  }, [bottom]);
-
+  }, [intersectionObserver, noMorePosts]);
+  // console.log(pageNum);
   return (
     <PostsContainer>
       {tagData && (
@@ -81,7 +81,7 @@ const MyLologPosts = () => {
           {postsData.map((postData, i) => (
             <MyLologPost key={i} postData={postData} />
           ))}
-          {!noMorePosts && <div ref={setBottom} className='asas' />}
+          {noMorePosts && postsData.length && <div ref={loader} className='loader-area' />}
         </div>
       )}
       {isNoPost && <MyLololgNoPost />}
@@ -97,8 +97,8 @@ const PostsContainer = styled.div`
       padding: 0 1rem;
     }
 
-    .asas {
-      height: 500px;
+    .loader-area {
+      height: 20rem;
     }
   }
 `;

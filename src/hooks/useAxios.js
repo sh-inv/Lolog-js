@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { apiClient } from '../../api';
+import { apiClient } from '../api';
 
 const useAxios = (period, pageNum, name) => {
   const [postData, setPostData] = useState([]);

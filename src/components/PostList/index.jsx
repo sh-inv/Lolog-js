@@ -4,7 +4,7 @@ import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
-import useAxios from './useAxios';
+import useAxios from '../../hooks/useAxios';
 
 const PostList = ({ pageInfo }) => {
   const { name, query } = pageInfo;
@@ -47,7 +47,7 @@ const PostList = ({ pageInfo }) => {
           {postData.map((data, i) => {
             return <Post key={i} postData={data} />;
           })}
-          {noMorePosts && postData.length && <div ref={loader} />}
+          {noMorePosts && postData.length ? <div ref={loader} /> : null}
           <PostSkeleton />
         </div>
       </div>
