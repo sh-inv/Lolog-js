@@ -1,14 +1,15 @@
-import { useDispatch } from 'react-redux';
-import { reversePosition } from '../../../store/modules/write';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWriteContent } from '../../../store/modules/write';
 import { FaExchangeAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const ReversePositionBtn = () => {
+  const { isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   return (
     <ReversePositionBtnContainer className='reverse-position-btn-container'>
-      <FaExchangeAlt onClick={() => dispatch(reversePosition())} />
+      <FaExchangeAlt onClick={() => dispatch(setWriteContent({ type: 'isReverse', value: !isReverse }))} />
     </ReversePositionBtnContainer>
   );
 };
@@ -18,8 +19,8 @@ const ReversePositionBtnContainer = styled.button`
   align-items: center;
   justify-content: center;
   position: fixed;
-  right: 1rem;
   top: 1rem;
+  right: 1rem;
   width: 2rem;
   height: 2rem;
   outline: 0;

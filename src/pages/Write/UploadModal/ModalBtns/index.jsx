@@ -1,28 +1,24 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSeriesList, setIsUploadModal } from '../../../../store/modules/write';
-import Button from '../../../../components/Button';
-import Toastify from '../../../../components/Toastify';
+import { setWriteContent } from '../../../../store/modules/write';
+import { apiClient } from '../../../../api';
 import { toast } from 'react-toastify';
+import Toastify from '../../../../components/Toastify';
+import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const ModalBtns = () => {
-  const { title, content, thumbnail, seriesId, uploadType, uploadUrl, isSeriesList } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, discription, seriesId, uploadType, uploadUrl, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const seriesCancel = () => {
-    dispatch(setIsSeriesList(false));
+  const closeSeriesList = () => {
+    dispatch(setWriteContent({ type: 'isSeriesList', value: false }));
   };
 
-  const uploadCancel = () => {
-    dispatch(setIsUploadModal(false));
-  };
-
-  const selectSeries = () => {
-    dispatch(setIsSeriesList(false));
+  const closeUploadModal = () => {
+    dispatch(setWriteContent({ type: 'isUploadModal', value: false }));
   };
 
   const onUpload = async () => {
@@ -30,11 +26,11 @@ const ModalBtns = () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwMzMzNzUyfQ.X6dn8fdrkbsTxcno9k1r_IZEZNTD_t20vFo_VNMGbjU`,
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: '' };
-        const response = await axios.post(`http://localhost:8000/posts`, bodyData, config);
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: discription };
+        const response = await apiClient.post(`/posts`, bodyData, config);
         navigate(`/posts/${response.data.post_id}`);
       } catch (error) {
         toast.error('게시글 업로드 실패');
@@ -47,14 +43,14 @@ const ModalBtns = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setIsUploadModal(false));
+      dispatch(setWriteContent({ type: 'isUploadModal', value: false }));
     };
   }, []);
 
   return (
     <ModalBtnsContainer className='modal-btns-container'>
-      <Button text='취소' color='transparent' onClick={isSeriesList ? seriesCancel : uploadCancel} />
-      <Button text={isSeriesList ? '선택하기' : '출간하기'} color='teal' onClick={isSeriesList ? selectSeries : onUpload} />
+      <Button text='취소' color='transparent' onClick={isSeriesList ? closeSeriesList : closeUploadModal} />
+      <Button text={isSeriesList ? '선택하기' : '출간하기'} color='teal' onClick={isSeriesList ? closeSeriesList : onUpload} />
       <Toastify />
     </ModalBtnsContainer>
   );

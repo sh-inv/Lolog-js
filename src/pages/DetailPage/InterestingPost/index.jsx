@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import Post from '../../../components/PostList/Post';
+import styled from 'styled-components';
 
 const InterestingPost = ({ interestingPostData }) => {
   return (

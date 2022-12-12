@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailPage';
+import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
 import { useLocation } from 'react-router-dom';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import PostArea from './PostArea';
 import NextPrePost from './NextPrePost';
 import CommentArea from './CommentArea';
+import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
-import InterestingPost from './InterestingPost';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     getPostData();
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
@@ -47,7 +47,7 @@ const DetailPage = () => {
       {postData && (
         <>
           <DetailPageContainer>
-            <PostArea postData={postData} />
+            <PostArea />
             <NextPrePost postData={postData} />
             <CommentArea postData={postData} />
           </DetailPageContainer>

@@ -1,21 +1,11 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { FiUserPlus, FiUserCheck } from 'react-icons/fi';
 import Button from '../Button';
 
-const FollowButton = () => {
-  const [isFollow, setIsFollow] = useState(false);
-
+const FollowButton = ({ isFollow, checked, onClick }) => {
   return (
     <FollowButtonContainer>
-      <Button
-        icon={isFollow ? <FiUserCheck /> : <FiUserPlus />}
-        text={isFollow ? '구독 중' : '구독하기'}
-        color={isFollow ? 'teal' : 'darkgray'}
-        onClick={() => {
-          setIsFollow(!isFollow);
-        }}
-      />
+      <Button icon={isFollow || checked ? <FiUserCheck /> : <FiUserPlus />} text={isFollow || checked ? '구독 중' : '구독하기'} color={isFollow || checked ? 'teal' : 'darkgray'} onClick={onClick} />
     </FollowButtonContainer>
   );
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setContent, setIsUploadModal, setTitle, setUploadType, setUploadUrl } from '../../../../store/modules/write';
+import { setWriteContent } from '../../../../store/modules/write';
 import Button from '../../../../components/Button';
 import { BiArrowBack } from 'react-icons/bi';
 import Toastify from '../../../../components/Toastify';
@@ -8,21 +8,22 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 const EditorFooter = () => {
-  const { title, content, thumbnail, isReverse } = useSelector(state => state.writeContent);
+  const { title, content, uploadUrl, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const onSave = async () => {
     if (title && content) {
       try {
         const config = {
-          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLthYzsiqTtirgifSwiaWF0IjoxNjY5NjMwNjE5fQ.qPQNhe2qVb8VMnrlxueDGBFHYkOkfwrZCiENYXevp4I` },
+          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNTA4MzQxfQ.jMW-mdNJzRGuCMAtyuU5alzvTC9amlDXiA1hpWT8DDc` },
         };
-        const bodyData = { title: title, content: 'content', thumbnail: thumbnail, tags: [] };
-        const response = await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
-        if (response.data.message === 'post create success') {
-          toast.success('포스트 임시저장 완료');
-        }
+        const bodyData = { title: title, content: content, thumbnail: '', tags: [], status: 3, post_url: uploadUrl, description: '' };
+
+        await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
+        console.log(bodyData);
+        toast.success('게시글 임시저장 완료');
       } catch (error) {
+        toast.error('게시글 임시저장 실패');
         console.log(error);
       }
     } else {
@@ -31,11 +32,8 @@ const EditorFooter = () => {
   };
 
   const onUploadModal = () => {
-    dispatch(setTitle(title));
-    dispatch(setContent(content));
-    dispatch(setUploadType('1'));
-    dispatch(setUploadUrl(title));
-    dispatch(setIsUploadModal(true));
+    dispatch(setWriteContent({ type: 'uploadUrl', value: title }));
+    dispatch(setWriteContent({ type: 'isUploadModal', value: true }));
   };
 
   return (
