@@ -44,7 +44,15 @@ const LoginForm = ({ onClose }) => {
         }
       } catch (error) {
         console.error(error);
+        if (error.response.status === 401) {
+          toast.error('비밀번호를 다시 확인해주세요');
+        } else if (error.response.status === 403) {
+          toast.error('아이디를 다시 확인해주세요');
+        } else {
+          toast.error('로그인 정보를 다시 확인해주세요');
+        }
       }
+    },
     [form]
   );
 
