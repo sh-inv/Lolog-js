@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -24,13 +25,6 @@ const NavBar = () => {
     },
   ];
 
-  console.log(location.pathname);
-  console.log(user.id);
-
-  // if (location.pathname === `/${user.id}`) return '0';
-  // else if (location.pathname === `/${user.id}/series`) return '33.3333%';
-  // else if (location.pathname === `/${user.id}/about`) return '66.6666%';
-
   return (
     <NavContainer>
       <div className='nav'>
@@ -41,7 +35,7 @@ const NavBar = () => {
             </MyNavBar>
           );
         })}
-        <SlideBorder location={location} />
+        <SlideBorder location={location} userId={user.id} />
       </div>
     </NavContainer>
   );
@@ -59,7 +53,6 @@ const NavContainer = styled.div`
     position: relative;
   }
 `;
-
 const MyNavBar = styled(NavLink)`
   display: flex;
   -webkit-box-align: center;
@@ -84,19 +77,17 @@ const MyNavBar = styled(NavLink)`
     color: var(--primary2);
   }
 `;
-
 const SlideBorder = styled.div`
   position: absolute;
   bottom: -2px;
-  left: ${({ location }) => {
-    if (location.pathname === `/id`) return '0';
-    else if (location.pathname === '/id/series') return '33.3333%';
-    else if (location.pathname === '/id/about') return '66.6666%';
+  left: ${({ location, userId }) => {
+    if (location.pathname === `/${userId}`) return '0';
+    else if (location.pathname === `/${userId}/series`) return '33.3333%';
+    else if (location.pathname === `/${userId}/about`) return '66.6666%';
   }};
   width: 8rem;
   height: 2px;
   background: var(--primary2);
   transition: left 0.25s ease-in-out 0s;
 `;
-
 export default NavBar;

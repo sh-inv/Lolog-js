@@ -21,7 +21,7 @@ const Like = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.post(`/lolog/${postData.post.post_id}/like`, '', config);
+      await apiClient.post(`/posts/${postData.post.post_id}/like`, '', config);
       setLikeCount(prev => prev + 1);
       setIsUserLike(true);
     } catch (error) {
@@ -36,7 +36,7 @@ const Like = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      await apiClient.delete(`/lolog/${postData.post.post_id}/like`, config);
+      await apiClient.delete(`/posts/${postData.post.post_id}/like`, config);
       setLikeCount(prev => prev - 1);
       setIsUserLike(false);
     } catch (error) {
