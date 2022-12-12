@@ -51,9 +51,17 @@ const EditorContainer = styled.div`
   }
 
   .ql-toolbar.ql-snow {
+    display: flex;
     border: none;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3rem;
+      height: 2rem;
+    }
     button + button {
-      margin: 0 0.5rem;
+      margin-left: 0 0.5rem;
     }
   }
 `;
