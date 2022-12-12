@@ -156,6 +156,10 @@ const RightIcons = styled.div`
   .login {
     background: var(--bg-element5);
     color: var(--button-text);
+
+    :hover {
+      background: var(--bg-element6);
+    }
   }
 
   .new-post {
