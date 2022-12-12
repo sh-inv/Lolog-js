@@ -27,16 +27,39 @@ const PostViewerContainer = styled.div`
     font-weight: 800;
   }
 
+  strong {
+    font-weight: 800;
+  }
+
+  em {
+    font-style: italic;
+  }
+
   img {
     width: 100%;
   }
 
+  blockquote {
+    margin: 0.5rem 0px;
+    padding: 1rem 1rem 1rem 2rem;
+    border-top-right-radius: 4px;
+    border-left: 4px solid var(--primary2);
+    border-bottom-right-radius: 4px;
+    background: var(--bg-element2);
+    color: var(--text1);
+  }
+
   code {
     margin: 0;
-    background: var(--bg-element4);
-    color: var(--text1);
     padding: 0.5em 1rem;
     border-radius: 0.5em;
+    line-height: 1.5;
+    background: var(--prism-bg);
+    color: var(--text1);
+    font-size: 0.875rem;
+    letter-spacing: 0px;
+    font-family: 'Fira Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    overflow-x: auto;
   }
 
   a {
