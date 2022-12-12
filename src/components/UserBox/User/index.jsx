@@ -81,6 +81,11 @@ const UserContainer = styled.div`
     }
 
     img {
+      display: block;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      object-fit: cover;
       margin-bottom: 0;
       box-shadow: rgb(0 0 0 / 6%) 0px 0px 4px 0px;
 

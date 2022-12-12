@@ -99,6 +99,7 @@ const SocialAuthContainer = styled.div`
     outline: none;
     transition: all 0.125s ease-in 0s;
     color: #fff;
+    cursor: pointer;
   }
 
   .google {
@@ -114,8 +115,9 @@ const SocialAuthContainer = styled.div`
     border-radius: 1.5rem;
     outline: none;
     transition: all 0.125s ease-in 0s;
-    color: fff;
+    color: #fff;
     border: 1px solid var(--border3);
+    cursor: pointer;
   }
 
   .facebook {
@@ -132,6 +134,7 @@ const SocialAuthContainer = styled.div`
     outline: none;
     transition: all 0.125s ease-in 0s;
     color: #fff;
+    cursor: pointer;
   }
 `;
 
