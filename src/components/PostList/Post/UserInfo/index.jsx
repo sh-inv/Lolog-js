@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import UserProfileImage from '../../../UserProfileImage';
 
 const UserInfo = ({ postData }) => {
-  const { user_profile_image, user_login_id, post_likes } = postData;
+  const { user_profile_image, user_login_id, post_likes, user_id } = postData;
+  console.log(postData);
   return (
     <UserInfoContainer>
-      <Link to={`/id`} className='user'>
+      <Link to={`/${user_id}`} className='user'>
         <span className='profile-img'>
           <UserProfileImage source={user_profile_image} />
         </span>

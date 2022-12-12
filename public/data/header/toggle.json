@@ -13,6 +13,10 @@
       "path": "/saves"
     },
     {
+      "name": "팔로우 목록",
+      "path": "/follow-list"
+    },
+    {
       "name": "읽기 목록",
       "path": "/lists/liked"
     },
