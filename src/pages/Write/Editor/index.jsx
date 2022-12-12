@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWriteContent } from '../../../store/modules/write';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
-import LinkModal from './LinkModal';
+import WriteZone from './WriteZone';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
-import WriteZone from './WriteZone';
 
 const Editor = () => {
   const { title, content } = useSelector(state => state.writeContent);
@@ -52,7 +50,20 @@ const EditorContainer = styled.div`
 
   .ql-toolbar.ql-snow {
     display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 50%;
+    height: 4rem;
     border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 4px 4px -4px;
+    background-color: var(--bg-page2);
+
     button {
       display: flex;
       justify-content: center;
