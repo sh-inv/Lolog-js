@@ -37,7 +37,7 @@ const AfterContainer = styled.div`
     width: 48px;
     height: 100%;
     background: var(--primary1);
-    color: var(--text1);
+    color: var(--bg-page2);
     font-size: 1.5rem;
 
     &:hover {
@@ -52,7 +52,7 @@ const AfterContainer = styled.div`
     right: 0;
     margin-left: auto;
     margin-top: 0.7rem;
-    color: var(--prism-code-3);
+    color: var(--destructive2);
     cursor: pointer;
   }
 `;
