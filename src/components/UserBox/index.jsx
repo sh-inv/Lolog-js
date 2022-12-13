@@ -4,12 +4,12 @@ import User from './User';
 import Social from './Social';
 
 const UserBox = () => {
-  const { user } = useSelector(state => state.myLologData);
+  const { user, posts } = useSelector(state => state.myLologData);
 
   return (
     <UserBoxContainer className='user-box-container'>
-      <User userInfo={user} />
-      <Social />
+      <User userInfo={user} isOwner={posts[0]?.is_owner} />
+      <Social userInfo={user} />
     </UserBoxContainer>
   );
 };

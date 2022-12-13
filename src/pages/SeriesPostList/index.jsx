@@ -62,7 +62,8 @@ const SeriesPostList = () => {
           <EditPostList isModify={isModify} setIsModify={setIsModify} postList={postList} setPostList={setPostList} />
         ) : (
           <>
-            <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} /> <PostList />
+            <Sort isSort={isSort} setIsSort={setIsSort} onSort={onClickHandler} />
+            <PostList />
           </>
         )}
       </SeriesPostListContainer>
