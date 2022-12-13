@@ -63,7 +63,6 @@ const WriteZone = () => {
 
   const handleText = value => {
     dispatch(setWriteContent({ type: 'content', value: value }));
-    console.log(content);
   };
 
   return (

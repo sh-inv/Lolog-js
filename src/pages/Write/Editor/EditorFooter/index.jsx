@@ -1,26 +1,70 @@
-import axios from 'axios';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWriteContent } from '../../../../store/modules/write';
-import Button from '../../../../components/Button';
+import { apiClient } from '../../../../api';
 import { BiArrowBack } from 'react-icons/bi';
-import Toastify from '../../../../components/Toastify';
 import { toast } from 'react-toastify';
+import Toastify from '../../../../components/Toastify';
+import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const EditorFooter = () => {
-  const { title, content, uploadUrl, isReverse } = useSelector(state => state.writeContent);
+  const [timerOn, setTimerOn] = useState(false);
+  const { title, content, thumbnail, description, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
+  const initialTime = useRef(10);
+  const interval = useRef(null);
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    interval.current = setInterval(async () => {
+      initialTime.current -= 1;
+      setTime(initialTime.current);
+
+      console.log(initialTime.current);
+    }, 1000);
+    return () => clearInterval(interval.current);
+  }, [timerOn]);
+
+  useEffect(() => {
+    if (initialTime.current <= 0) {
+      clearInterval(interval.current);
+      autoSave();
+    }
+  }, [time]);
+
+  const autoSave = async () => {
+    if (title && content) {
+      try {
+        const config = {
+          headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+        };
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], status: 1, post_url: '', description: description };
+        const response = await apiClient.patch(`posts/104`, bodyData, config);
+        console.log(response);
+        toast.success('게시글 임시저장 완료');
+        initialTime.current = 10;
+        setTimerOn(!timerOn);
+      } catch (error) {
+        toast.error('게시글 임시저장 실패');
+        console.log(error);
+      }
+    } else {
+      toast.error('제목 또는 내용이 비어있습니다.');
+      initialTime.current = 10;
+      setTimerOn(!timerOn);
+    }
+  };
 
   const onSave = async () => {
     if (title && content) {
       try {
         const config = {
-          headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InN1YiI6MywibG9naW5faWQiOiJ0ZXN0VXNlciIsIm5hbWUiOiLsnKDruYgifSwiaWF0IjoxNjcwNTA4MzQxfQ.jMW-mdNJzRGuCMAtyuU5alzvTC9amlDXiA1hpWT8DDc` },
+          headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
         };
-        const bodyData = { title: title, content: content, thumbnail: '', tags: [], status: 3, post_url: uploadUrl, description: '' };
-
-        await axios.post(`http://localhost:8000/posts?status=3`, bodyData, config);
-        console.log(bodyData);
+        const bodyData = { title: title, content: content, thumbnail: '', tags: [], status: 3, post_url: '', description: '' };
+        const response = await apiClient.post(`http://localhost:8000/posts?status=3`, bodyData, config);
+        console.log(response);
         toast.success('게시글 임시저장 완료');
       } catch (error) {
         toast.error('게시글 임시저장 실패');
@@ -32,7 +76,6 @@ const EditorFooter = () => {
   };
 
   const onUploadModal = () => {
-    dispatch(setWriteContent({ type: 'uploadUrl', value: title }));
     dispatch(setWriteContent({ type: 'isUploadModal', value: true }));
   };
 
