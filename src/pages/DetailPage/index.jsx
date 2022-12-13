@@ -10,6 +10,7 @@ import CommentArea from './CommentArea';
 import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
+import { detailPageMaxWidth1920px, detailPageMaxWidth1024px, detailPageMaxWidth768px } from '../../styles/media';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -60,15 +61,9 @@ const DetailPage = () => {
 };
 
 const DetailPageContainer = styled.div`
-  width: 768px;
-  margin: 0 auto;
-  padding-bottom: 4rem;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin: 0;
-    padding: 0 1rem;
-  }
+  ${detailPageMaxWidth1920px}
+  ${detailPageMaxWidth1024px}
+  ${detailPageMaxWidth768px}
 `;
 
 export default DetailPage;

@@ -173,6 +173,63 @@ export const writeMaxWidth768px = `@media screen and (max-width: 768px) {
   }
 }`;
 
+//post viewer 반응형
+export const postViewerMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+}`;
+export const postViewerMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  font-size: 1rem;
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  h1, h2, h3, h4 {
+    margin-bottom: 0.75rem;
+  }
+}`;
+
+// detail page 반응형
+export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
+  width: 768px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}`;
+export const detailPageMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  .post-area-container {
+    .post-header-title {
+      font-size: 2.25rem;
+    }
+    .content-container {
+      padding: 0 1rem;
+      width: 768px;
+    }
+  }
+}`;
+export const detailPageMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem;
+
+  .information-container,
+  .post-area-container {
+  .series-container,
+  .authority-container {
+    font-size: 0.875rem;
+  }
+  .content-container {
+    width: 100%;
+  }
+}
+}`;
+
 //series 반응형
 export const SeriesMaxWidth768px = `@media screen and (max-width: 768px) {
   margin: 0px;

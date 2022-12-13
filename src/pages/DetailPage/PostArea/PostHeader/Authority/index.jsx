@@ -21,7 +21,7 @@ const Authority = ({ postId, status, userId }) => {
   };
 
   return (
-    <AuthorityContainer>
+    <AuthorityContainer className='authority-container'>
       <button onClick={() => navigate(`/write?id=${postId}&status=${status}`)}>수정</button>
       <button onClick={() => setIsDelModal(true)}>삭제</button>
       {isDelModal && <ConfirmModal title='포스트 삭제' message='정말로 삭제하시겠습니까?' onClose={() => setIsDelModal(false)} onMove={deletePost} />}

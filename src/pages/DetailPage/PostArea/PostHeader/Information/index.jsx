@@ -5,7 +5,7 @@ const Information = ({ userId, createAt }) => {
   const postDate = new Date(createAt);
 
   return (
-    <InformationContainer>
+    <InformationContainer className='information-container'>
       <span className='user-name'>{userId}</span>
       <span className='separator'>&#183;</span>
       <GetPostDate postDate={postDate} />

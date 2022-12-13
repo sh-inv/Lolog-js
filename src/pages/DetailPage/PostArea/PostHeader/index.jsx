@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const PostHeader = ({ postData, seriesData }) => {
   return (
     <PostHeaderContainer>
-      <h1>{postData.title}</h1>
+      <h1 className='post-header-title'>{postData.title}</h1>
       {postData.is_writer ? <Authority postId={postData.post_id} status={postData.status} userId={postData.login_id} /> : null}
       <Information userId={postData.login_id} createAt={postData.create_at} />
       <Tags tags={postData.tags} />

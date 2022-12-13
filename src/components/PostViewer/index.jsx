@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { postViewerMaxWidth1024px, postViewerMaxWidth768px } from '../../styles/media';
 
 const PostViewer = ({ content }) => {
   return (
@@ -17,6 +18,14 @@ const PostViewerContainer = styled.div`
   overflow-wrap: break-word;
   transition: color 0.125s ease-in 0s;
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
   h1 {
     font-size: 3rem;
     font-weight: 800;
@@ -25,6 +34,7 @@ const PostViewerContainer = styled.div`
   h2 {
     font-size: 2rem;
     font-weight: 800;
+    margin-bottom: 1rem;
   }
 
   strong {
@@ -69,6 +79,9 @@ const PostViewerContainer = styled.div`
   a:visited {
     color: var(--primary2);
   }
+
+  ${postViewerMaxWidth1024px}
+  ${postViewerMaxWidth768px}
 `;
 
 export default PostViewer;
