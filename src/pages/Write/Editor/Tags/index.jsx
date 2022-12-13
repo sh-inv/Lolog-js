@@ -16,7 +16,7 @@ const Tags = () => {
     }, 3000);
   };
 
-  const pushNewTag = e => {
+  const pushTag = e => {
     if (e.key === 'Enter') {
       const updateTags = [...tags];
       setInputValue('');
@@ -55,7 +55,7 @@ const Tags = () => {
         onChange={e => {
           setInputValue(e.target.value);
         }}
-        onKeyUp={pushNewTag}
+        onKeyUp={pushTag}
       />
       <div className='guide-box-positioner'>
         <div className={isGuide ? 'tag-input-guide-box guide-active' : 'tag-input-guide-box'}>
