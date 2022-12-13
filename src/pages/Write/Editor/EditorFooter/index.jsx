@@ -34,9 +34,9 @@ const EditorFooter = () => {
   useEffect(() => {
     if (initialTime.current <= 0) {
       clearInterval(interval.current);
-      onSave();
-      initialTime.current = autoSaveTerm;
-      setTimerOn(!timerOn);
+      // onSave();
+      // initialTime.current = autoSaveTerm;
+      // setTimerOn(!timerOn);
     }
   }, [time]);
 

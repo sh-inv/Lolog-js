@@ -4,6 +4,7 @@ const initialState = {
   title: '',
   content: '',
   thumbnail: '',
+  tags: [],
   seriesId: null,
   uploadType: '1',
   uploadUrl: 'title',
