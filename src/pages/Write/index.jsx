@@ -32,7 +32,7 @@ const Write = () => {
       dispatch(setWriteContent({ type: 'thumbnail', value: data.post.thumbnail }));
 
       if (postStatus !== '3') {
-        dispatch(setWriteContent({ type: 'seriesId', value: data.series[0].series_id }));
+        dispatch(setWriteContent({ type: 'seriesId', value: data.series ? data.series[0].series_id : null }));
         dispatch(setWriteContent({ type: 'uploadType', value: data.post.status }));
         dispatch(setWriteContent({ type: 'description', value: data.post.description }));
       }
