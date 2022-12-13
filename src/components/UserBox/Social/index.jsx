@@ -3,19 +3,20 @@ import { ImFacebook2 } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
 
-const Social = () => {
+const Social = ({ userInfo }) => {
   const socialInfo = {
-    email: 'you8inpark@gmail.com',
-    github: 'daydreamplace',
-    twitter: 'daydreamplace',
-    facebook: 'daydreamplace',
-    url: 'https://www.naver.com/',
+    email: userInfo.social_info_email,
+    github: userInfo.social_info_github,
+    twitter: userInfo.social_info_twitter,
+    facebook: userInfo.social_info_facebook,
+    url: userInfo.social_info_url,
   };
+  console.log(userInfo);
 
   const social = [
     { href: `https://github.com/${socialInfo.github}`, target: '_blank', icon: <AiFillGithub /> },
     { href: `https://twitter.com/${socialInfo.twitter}`, target: '_blank', icon: <AiOutlineTwitter /> },
-    { href: `https://www.facebook.com/${socialInfo.facebook}`, target: '_blank', icon: <AiFillGithub /> },
+    { href: `https://www.facebook.com/${socialInfo.facebook}`, target: '_blank', icon: <ImFacebook2 /> },
     { href: socialInfo.url, target: '_blank', icon: <AiFillHome /> },
     { href: `mailto:${socialInfo.email}`, icon: <MdEmail /> },
   ];
