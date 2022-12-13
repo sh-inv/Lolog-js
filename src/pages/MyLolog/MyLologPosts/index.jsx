@@ -23,7 +23,7 @@ const MyLologPosts = () => {
     (async () => {
       try {
         const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${pageNum}&limit=5&tag_id=${tagId}`);
-        console.log(data.posts);
+
         if (data.posts.length) {
           setNoMorePosts(true);
           setPostsData(prev => [...prev, ...data.posts]);
@@ -59,15 +59,13 @@ const MyLologPosts = () => {
     const observer = new IntersectionObserver(intersectionObserver, option);
     if (loader.current) {
       observer.observe(loader.current);
-      console.log('관찰시작');
     }
 
     return () => {
       if (loader.current) observer.unobserve(loader.current);
-      console.log('관찰종료');
     };
   }, [intersectionObserver, noMorePosts]);
-  // console.log(pageNum);
+
   return (
     <PostsContainer>
       {tagData && (

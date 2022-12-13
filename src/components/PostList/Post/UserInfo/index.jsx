@@ -5,7 +5,7 @@ import UserProfileImage from '../../../UserProfileImage';
 
 const UserInfo = ({ postData }) => {
   const { user_profile_image, user_login_id, post_likes, user_id } = postData;
-  console.log(postData);
+
   return (
     <UserInfoContainer>
       <Link to={`/${user_id}`} className='user'>

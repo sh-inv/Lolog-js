@@ -30,12 +30,10 @@ const PostList = ({ pageInfo }) => {
     const observer = new IntersectionObserver(intersectionObserver, option);
     if (loader.current) {
       observer.observe(loader.current);
-      console.log('관찰시작');
     }
 
     return () => {
       if (loader.current) observer.unobserve(loader.current);
-      console.log('관찰종료');
     };
   }, [intersectionObserver, noMorePosts]);
 
