@@ -21,6 +21,7 @@ const ReversePositionBtnContainer = styled.button`
   position: fixed;
   top: 1rem;
   left: ${props => (props.isReverse ? '45%' : '52%')};
+  z-index: 10;
   width: 2rem;
   height: 2rem;
   outline: 0;

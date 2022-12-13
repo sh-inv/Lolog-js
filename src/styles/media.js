@@ -108,7 +108,9 @@ export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
     width: 100%;
     height: 100%;
     padding: 2rem 3rem 4rem 3rem;
-    .editor-footer-positioner {
+    .editor-footer-positioner,
+    .ql-toolbar.ql-snow {
+      left: 0;
       width: 100%;
     }
   }
