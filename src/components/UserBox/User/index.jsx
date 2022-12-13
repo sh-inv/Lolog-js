@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
+import Toastify from '../../../components/Toastify';
 
-const User = ({ userInfo }) => {
+const User = ({ userInfo, isOwner }) => {
   const [isFollow, setIsFollow] = useState(false);
   // const [isFollow, setIsFollow] = useState(checked);
 
@@ -21,7 +23,7 @@ const User = ({ userInfo }) => {
       console.log(data);
       setIsFollow(true);
     } catch (error) {
-      console.log('팔로우 에러', error);
+      toast.error('팔로우에 실패했습니다.');
     }
   };
 
@@ -34,7 +36,6 @@ const User = ({ userInfo }) => {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       };
       await apiClient.delete('users/follow', body, config);
-      toast.success('팔로우가 해제되었습니다');
       setIsFollow(false);
     } catch (error) {
       console.log(error);
@@ -56,9 +57,10 @@ const User = ({ userInfo }) => {
               </div>
             </div>
           </div>
-          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />
+          {isOwner === 0 && <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />}
         </UserContainer>
         <Border />
+        <Toastify />
       </>
     )
   );

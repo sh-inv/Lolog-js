@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { MdLockOutline } from 'react-icons/md';
 import { apiClient } from '../../api';
+import GoogleForm from './GoogleForm';
+import EmailForm from './EmailForm';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { email } = useSelector(state => state.auth);
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -35,8 +38,6 @@ const Register = () => {
     passwordConfirmActive: false,
     introActive: false,
   });
-
-  const { email } = useSelector(state => state.auth);
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -131,8 +132,10 @@ const Register = () => {
     };
     try {
       const { data } = await apiClient.post('auth/signup?type=email', body);
-      const { token } = data;
+      const { token, id, profile_image } = data;
       localStorage.setItem('authToken', token);
+      localStorage.setItem('userId', id);
+      localStorage.setItem('userProfileImg', profile_image);
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -145,60 +148,57 @@ const Register = () => {
       <div className='description'>
         기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
       </div>
-      <div className='contents'>
-        <div className={nameActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-          <label>이름 ﹡</label>
-          <div className='input-wrapper'>
-            <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' onFocus={() => handleFocus('nameActive')} onBlur={() => handleBlur('nameActive')} />
-          </div>
-          <div className='validation'>{nameMessage}</div>
-        </div>
-        <div className='wrapper email-wrapper'>
-          <label>이메일</label>
-          <div className='input-wrapper'>
-            <input type='text' disabled value={email} />
-            <MdLockOutline />
-          </div>
-        </div>
-        <div className={idActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-          <label>아이디 ﹡</label>
-          <div className='input-wrapper'>
-            <input type='text' placeholder='아이디를 입력하세요' disabled={isIdDuplicateCheck === true} onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
-            {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onIdDuplicateCheck} />}
-          </div>
-          <div className='validation'>{idMessage}</div>
-        </div>
-        <div className={passwordActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-          <label>비밀번호 ﹡</label>
-          <div className='input-wrapper'>
-            <input type='password' placeholder='비밀번호를 입력하세요' onChange={handlePassword} value={password} maxLength='16' onFocus={() => handleFocus('passwordActive')} onBlur={() => handleBlur('passwordActive')} />
-          </div>
-          <div className='validation'>{passwordMessage}</div>
-        </div>
-        <div className={passwordConfirmActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-          <label>비밀번호 확인 ﹡</label>
-          <div className='input-wrapper'>
-            <input
-              type='password'
-              placeholder='비밀번호를 한번 더 입력하세요'
-              onChange={handlePasswordConfirm}
-              value={passwordConfirm}
-              maxLength='16'
-              onFocus={() => handleFocus('passwordConfirmActive')}
-              onBlur={() => handleBlur('passwordConfirmActive')}
-            />
-          </div>
-          <div className='validation'>{passwordConfrimMessage}</div>
-        </div>
-        <div className={introActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-          <label>한 줄 소개</label>
-          <div className='input-wrapper'>
-            <input type='text' placeholder='당신을 한 줄로 소개해보세요' onChange={handleIntro} value={intro} onFocus={() => handleFocus('introActive')} onBlur={() => handleBlur('introActive')} />
-          </div>
-        </div>
-      </div>
+      {location.pathname === '/register' && (
+        <EmailForm
+          nameActive={nameActive}
+          idActive={idActive}
+          passwordActive={passwordActive}
+          passwordConfirmActive={passwordConfirmActive}
+          introActive={introActive}
+          name={name}
+          email={email}
+          id={id}
+          password={password}
+          passwordConfirm={passwordConfirm}
+          intro={intro}
+          handleName={handleName}
+          handleId={handleId}
+          isIdDuplicateCheck={isIdDuplicateCheck}
+          onIdDuplicateCheck={onIdDuplicateCheck}
+          handlePassword={handlePassword}
+          handlePasswordConfirm={handlePasswordConfirm}
+          handleIntro={handleIntro}
+          handleFocus={handleFocus}
+          handleBlur={handleBlur}
+          nameMessage={nameMessage}
+          idMessage={idMessage}
+          passwordMessage={passwordMessage}
+          passwordConfrimMessage={passwordConfrimMessage}
+        />
+      )}
+      {location.pathname === '/register/google' && (
+        <GoogleForm
+          nameActive={nameActive}
+          idActive={idActive}
+          introActive={introActive}
+          name={name}
+          email={email}
+          id={id}
+          intro={intro}
+          handleName={handleName}
+          handleId={handleId}
+          handleIntro={handleIntro}
+          handleFocus={handleFocus}
+          handleBlur={handleBlur}
+          nameMessage={nameMessage}
+          idMessage={idMessage}
+        />
+      )}
       <div className='form-bottom'>
-        <div className='all-valid'>{!(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}</div>
+        <div className='all-valid'>
+          {location.pathname === '/register' && !(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}
+          {location.pathname === '/register/google' && !(isName && isId) && '모든 필수 항목을 입력해주세요'}
+        </div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
           <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />

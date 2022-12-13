@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { apiClient } from '../../api';
 import UserBox from '../../components/UserBox';
 import NavBar from './NavBar';
 import SearchBox from '../../components/SearchBox';
-import styled from 'styled-components';
-import { apiClient } from '../../api';
 import { setMyLologData } from '../../store/modules/mylologpostlist';
 
 const MyLolog = () => {
@@ -15,7 +15,12 @@ const MyLolog = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=1&tag_id=`);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        };
+        const { data } = await apiClient.get(`/lolog${location.pathname}?offset=1&limit=1&tag_id=`, config);
         dispatch(setMyLologData(data));
       } catch (error) {
         console.log('메인페이지 게시글 통신 오류 => ', error);
