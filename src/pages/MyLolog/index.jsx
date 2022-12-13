@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { apiClient } from '../../api';
 import UserBox from '../../components/UserBox';
 import NavBar from './NavBar';
 import SearchBox from '../../components/SearchBox';
-import styled from 'styled-components';
-import { apiClient } from '../../api';
 import { setMyLologData } from '../../store/modules/mylologpostlist';
 
 const MyLolog = () => {
