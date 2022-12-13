@@ -30,11 +30,16 @@ const Write = () => {
       dispatch(setWriteContent({ type: 'title', value: data.post.title }));
       dispatch(setWriteContent({ type: 'content', value: data.post.content }));
       dispatch(setWriteContent({ type: 'thumbnail', value: data.post.thumbnail }));
-      let tags = [];
-      data.post.tags.map(tag => {
-        tags.push(tag.tag_name);
-      });
-      dispatch(setWriteContent({ type: 'tags', value: tags }));
+      if (data.post.tags) {
+        let tags = [];
+        data.post.tags.map(tag => {
+          tags.push(tag.tag_name);
+        });
+        dispatch(setWriteContent({ type: 'tags', value: tags }));
+      } else {
+        dispatch(setWriteContent({ type: 'tags', value: [] }));
+      }
+
       if (postStatus === '3') {
         toast.success('임시글 불러오기 성공');
       } else {

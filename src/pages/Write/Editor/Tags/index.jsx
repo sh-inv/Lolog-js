@@ -46,17 +46,7 @@ const Tags = () => {
           </div>
         );
       })}
-      <input
-        className='tag-input'
-        type='text'
-        placeholder='태그를 입력하세요'
-        onClick={popupGuide}
-        value={inputValue}
-        onChange={e => {
-          setInputValue(e.target.value);
-        }}
-        onKeyUp={pushTag}
-      />
+      <input className='tag-input' type='text' placeholder='태그를 입력하세요' onClick={popupGuide} value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyUp={pushTag} />
       <div className='guide-box-positioner'>
         <div className={isGuide ? 'tag-input-guide-box guide-active' : 'tag-input-guide-box'}>
           <p>쉼표 혹는 엔터를 입력하여 태그를 등록할 수 있습니다.</p>
