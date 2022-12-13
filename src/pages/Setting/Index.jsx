@@ -23,7 +23,7 @@ const Setting = () => {
           data: { user },
         } = await apiClient.get('/users', config);
         dispatch(setUser(user));
-        console.log('1', user);
+        console.log(user);
       } catch (error) {
         console.log(error);
         dispatch(setUser(null));

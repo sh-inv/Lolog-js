@@ -42,8 +42,6 @@ const About = () => {
     loader();
   }, []);
 
-  console.log('000', isOwner);
-
   const modifyConfirm = async () => {
     const body = {
       about_blog: about,

@@ -3,17 +3,17 @@ import Thumbnail from '../../../../components/Thumbnail';
 import GetPostDate from '../../../../components/GetPostDate';
 import styled from 'styled-components';
 
-const Post = ({ id, title, src, contents, date, className }) => {
+const Post = ({ id, postId, title, src, contents, date, className }) => {
   return (
     <PostContainer className={className}>
       <h2>
         <span className='number'>{id}. </span>
-        <Link to={`/id/${title}`} className='title'>
+        <Link to={`/posts/${postId}`} className='title'>
           {title}
         </Link>
       </h2>
       <section>
-        <Link to={`/id/${title}`} className='thumbnail-wrapper'>
+        <Link to={`/posts/${postId}`} className='thumbnail-wrapper'>
           <Thumbnail src={src} className={'no-thumbnail'} />
         </Link>
         <div className='post-info'>
