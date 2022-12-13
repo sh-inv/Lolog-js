@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const EditorFooter = () => {
   const [timerOn, setTimerOn] = useState(false);
-  const { title, content, thumbnail, seriesId, description, isReverse } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, tags, seriesId, description, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const autoSaveTerm = 30;
@@ -46,7 +46,7 @@ const EditorFooter = () => {
         const config = {
           headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
         };
-        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], series_id: seriesId, status: 3, post_url: '', description: description };
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: tags, series_id: seriesId, status: 3, post_url: '', description: description };
 
         const postInfo = queryString.parse(location.search);
         if (postInfo.status === '3') {

@@ -34,6 +34,7 @@ const DetailPage = () => {
       dispatch(setDetailCommentsData(data.comments));
     } catch (error) {
       toast.error('게시글을 불러오지 못했습니다.');
+      console.log('detail page error =>', error);
     }
   };
 

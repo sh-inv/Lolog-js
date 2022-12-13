@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const SettingPublic = () => {
   const { uploadType } = useSelector(state => state.writeContent);
-  const initialValue = uploadType === 1 ? [true, false] : [false, true];
+  const initialValue = uploadType === 2 ? [false, true] : [true, false];
   const [btnActive, setBtnActive] = useState(initialValue);
   const dispatch = useDispatch();
 
@@ -33,11 +33,11 @@ const SettingPublic = () => {
     if (btnType.includes('public-btn')) {
       const changedActive = [true, false];
       setBtnActive(changedActive);
-      dispatch(setWriteContent({ type: 'uploadType', value: '1' }));
+      dispatch(setWriteContent({ type: 'uploadType', value: 1 }));
     } else {
       const changedActive = [false, true];
       setBtnActive(changedActive);
-      dispatch(setWriteContent({ type: 'uploadType', value: '2' }));
+      dispatch(setWriteContent({ type: 'uploadType', value: 2 }));
     }
   };
 
