@@ -30,11 +30,18 @@ const Tags = () => {
     }
   };
 
+  const removeTag = e => {
+    const updateTags = [...tags];
+    var delIndex = updateTags.indexOf(e.target.innerText);
+    updateTags.splice(delIndex, 1);
+    dispatch(setWriteContent({ type: 'tags', value: updateTags }));
+  };
+
   return (
     <TagsContainer isGuide={isGuide}>
       {tags.map(tag => {
         return (
-          <div key={tag} className='tag-wrapper'>
+          <div key={tag} className='tag-wrapper' onClick={removeTag}>
             <div className='tag'>{tag}</div>
           </div>
         );
