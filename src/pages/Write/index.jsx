@@ -18,23 +18,28 @@ const Write = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const initialSetting = async postId => {
+  const initialSetting = async (postId, postStatus) => {
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      const { data } = await apiClient.get(`/posts/${postId}`, config);
+      const apiUrl = postStatus === '3' ? '/posts/saves' : '/posts';
+      const { data } = await apiClient.get(`${apiUrl}/${postId}`, config);
       dispatch(setWriteContent({ type: 'title', value: data.post.title }));
       dispatch(setWriteContent({ type: 'content', value: data.post.content }));
       dispatch(setWriteContent({ type: 'thumbnail', value: data.post.thumbnail }));
-      dispatch(setWriteContent({ type: 'seriesId', value: data.series ? data.series[0].series_id : null }));
-      dispatch(setWriteContent({ type: 'uploadType', value: data.post.status }));
-      dispatch(setWriteContent({ type: 'description', value: data.post.description }));
-      toast.success('게시글 불러오기 성공');
+      if (postStatus === '3') {
+        toast.success('임시글 불러오기 성공');
+      } else {
+        dispatch(setWriteContent({ type: 'seriesId', value: data.series ? data.series[0].series_id : null }));
+        dispatch(setWriteContent({ type: 'uploadType', value: data.post.status }));
+        dispatch(setWriteContent({ type: 'description', value: data.post.description }));
+        toast.success('게시글 불러오기 성공');
+      }
     } catch (error) {
-      toast.error('임시글 불러오기 실패');
+      toast.error('게시글 불러오기 실패');
       console.log('write error =>', error);
     }
   };
@@ -43,7 +48,7 @@ const Write = () => {
     const setInitialValue = () => {
       const postInfo = queryString.parse(location.search);
       if (postInfo.id) {
-        initialSetting(postInfo.id);
+        initialSetting(postInfo.id, postInfo.status);
       }
     };
     setInitialValue();
