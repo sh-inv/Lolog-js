@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWriteContent } from '../../../../store/modules/write';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import { apiClient } from '../../../../api';
 import { BiArrowBack } from 'react-icons/bi';
 import { toast } from 'react-toastify';
@@ -10,18 +12,21 @@ import styled from 'styled-components';
 
 const EditorFooter = () => {
   const [timerOn, setTimerOn] = useState(false);
-  const { title, content, thumbnail, description, isReverse } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, seriesId, description, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
-  const initialTime = useRef(10);
+
+  const autoSaveTerm = 30;
+  const initialTime = useRef(autoSaveTerm);
   const interval = useRef(null);
   const [time, setTime] = useState(0);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     interval.current = setInterval(async () => {
       initialTime.current -= 1;
       setTime(initialTime.current);
-
-      console.log(initialTime.current);
     }, 1000);
     return () => clearInterval(interval.current);
   }, [timerOn]);
@@ -29,32 +34,11 @@ const EditorFooter = () => {
   useEffect(() => {
     if (initialTime.current <= 0) {
       clearInterval(interval.current);
-      // autoSave();
-    }
-  }, [time]);
-
-  const autoSave = async () => {
-    if (title && content) {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-        };
-        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], status: 1, post_url: '', description: description };
-        const response = await apiClient.patch(`posts/104`, bodyData, config);
-        console.log(response);
-        toast.success('게시글 임시저장 완료');
-        initialTime.current = 10;
-        setTimerOn(!timerOn);
-      } catch (error) {
-        toast.error('게시글 임시저장 실패');
-        console.log(error);
-      }
-    } else {
-      toast.error('제목 또는 내용이 비어있습니다.');
-      initialTime.current = 10;
+      onSave();
+      initialTime.current = autoSaveTerm;
       setTimerOn(!timerOn);
     }
-  };
+  }, [time]);
 
   const onSave = async () => {
     if (title && content) {
@@ -62,9 +46,15 @@ const EditorFooter = () => {
         const config = {
           headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
         };
-        const bodyData = { title: title, content: content, thumbnail: '', tags: [], status: 3, post_url: '', description: '' };
-        const response = await apiClient.post(`http://localhost:8000/posts?status=3`, bodyData, config);
-        console.log(response);
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], series_id: seriesId, status: 3, post_url: '', description: description };
+
+        const postInfo = queryString.parse(location.search);
+        if (postInfo.status === '3') {
+          await apiClient.patch(`posts/${postInfo.id}`, bodyData, config);
+        } else {
+          const response = await apiClient.post(`/posts?status=3`, bodyData, config);
+          navigate(`/write?id=${response.data.post_id}&status=3`);
+        }
         toast.success('게시글 임시저장 완료');
       } catch (error) {
         toast.error('게시글 임시저장 실패');
