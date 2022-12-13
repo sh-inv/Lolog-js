@@ -1,13 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWriteContent } from '../../../store/modules/write';
 import SettingThumbnail from './SettingThumbnail';
+import SettingDescription from './SettingDescription';
 import SettingPublic from './ SettingPublic';
 import SettingSeries from './SettingSeries';
 import ModalBtns from './ModalBtns';
-import SettingDescription from './SettingDescription';
 import styled from 'styled-components';
 
 const UploadModal = () => {
-  const { isSeriesList } = useSelector(state => state.writeContent);
+  const { isUploadModal, isSeriesList } = useSelector(state => state.writeContent);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isUploadModal) {
+      history.pushState(null, '', '');
+      window.onpopstate = () => {
+        dispatch(setWriteContent({ type: 'isUploadModal', value: false }));
+      };
+    } else {
+      window.onpopstate = () => {};
+    }
+  }, [isUploadModal]);
 
   return (
     <UploadModalContainer className='upload-modal-container'>
