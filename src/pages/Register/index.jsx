@@ -12,6 +12,7 @@ import Toastify from '../../components/Toastify';
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { email } = useSelector(state => state.auth);
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -37,11 +38,6 @@ const Register = () => {
     passwordConfirmActive: false,
     introActive: false,
   });
-
-  const { email } = useSelector(state => state.auth);
-
-  const emailForm = '/register';
-  const googleForm = '/register/google';
 
   const handleName = e => {
     const nameCurrent = e.target.value;
@@ -152,7 +148,7 @@ const Register = () => {
       <div className='description'>
         기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
       </div>
-      {location.pathname === emailForm && (
+      {location.pathname === '/register' && (
         <EmailForm
           nameActive={nameActive}
           idActive={idActive}
@@ -180,7 +176,7 @@ const Register = () => {
           passwordConfrimMessage={passwordConfrimMessage}
         />
       )}
-      {location.pathname === googleForm && (
+      {location.pathname === '/register/google' && (
         <GoogleForm
           nameActive={nameActive}
           idActive={idActive}
@@ -199,7 +195,10 @@ const Register = () => {
         />
       )}
       <div className='form-bottom'>
-        <div className='all-valid'>{!(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}</div>
+        <div className='all-valid'>
+          {location.pathname === '/register' && !(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}
+          {location.pathname === '/register/google' && !(isName && isId) && '모든 필수 항목을 입력해주세요'}
+        </div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
           <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />
