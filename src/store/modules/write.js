@@ -7,7 +7,7 @@ const initialState = {
   seriesId: null,
   uploadType: '1',
   uploadUrl: 'title',
-  discription: '',
+  description: '',
   isReverse: false,
   isUploadModal: false,
   isSeriesList: false,

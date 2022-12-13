@@ -29,7 +29,7 @@ const EditorFooter = () => {
   useEffect(() => {
     if (initialTime.current <= 0) {
       clearInterval(interval.current);
-      autoSave();
+      // autoSave();
     }
   }, [time]);
 

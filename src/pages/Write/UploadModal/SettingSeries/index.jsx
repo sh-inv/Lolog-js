@@ -16,6 +16,29 @@ const SettingSeries = () => {
   const { isSeriesList, seriesId } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const initialSetting = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        };
+        const { data } = await apiClient.get(`/series`, config);
+        data.series.map(seriesInfo => {
+          if (seriesInfo.series_id === seriesId) {
+            setSeriesName(seriesInfo.series_series_name);
+          }
+        });
+      } catch (error) {
+        toast.error('시리즈 불러오기 실패');
+        console.log('uploadModal series initial setting error =>', error);
+      }
+    };
+
+    initialSetting();
+  }, []);
+
   const getSeriesList = async () => {
     try {
       const config = {
@@ -28,7 +51,7 @@ const SettingSeries = () => {
       setSeriesList(data.series);
     } catch (error) {
       toast.error('시리즈 불러오기 실패');
-      console.log(error);
+      console.log('uploadModal series error =>', error);
     }
   };
 

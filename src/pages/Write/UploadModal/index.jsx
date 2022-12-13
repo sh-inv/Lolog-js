@@ -3,8 +3,8 @@ import SettingThumbnail from './SettingThumbnail';
 import SettingPublic from './ SettingPublic';
 import SettingSeries from './SettingSeries';
 import ModalBtns from './ModalBtns';
-import styled from 'styled-components';
 import SettingDescription from './SettingDescription';
+import styled from 'styled-components';
 
 const UploadModal = () => {
   const { isSeriesList } = useSelector(state => state.writeContent);

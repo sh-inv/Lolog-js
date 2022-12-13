@@ -12,7 +12,7 @@ const Editor = () => {
 
   return (
     <EditorContainer className='editor-container'>
-      <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
+      <textarea className='editor-title' placeholder='제목을 입력하세요' value={title} onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />

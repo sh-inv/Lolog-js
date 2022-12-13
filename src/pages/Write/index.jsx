@@ -18,26 +18,35 @@ const Write = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const initialSetting = async (postId, postStatus) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const apiUrl = postStatus === '3' ? '/posts/saves' : '/posts';
+      const { data } = await apiClient.get(`${apiUrl}/${postId}`, config);
+      dispatch(setWriteContent({ type: 'title', value: data.post.title }));
+      dispatch(setWriteContent({ type: 'content', value: data.post.content }));
+      dispatch(setWriteContent({ type: 'thumbnail', value: data.post.thumbnail }));
+
+      if (postStatus !== '3') {
+        dispatch(setWriteContent({ type: 'seriesId', value: data.series[0].series_id }));
+        dispatch(setWriteContent({ type: 'uploadType', value: data.post.status }));
+        dispatch(setWriteContent({ type: 'description', value: data.post.description }));
+      }
+    } catch (error) {
+      toast.error('임시글 불러오기 실패');
+      console.log('write error =>', error);
+    }
+  };
+
   useEffect(() => {
-    const setInitialValue = async () => {
-      const savePost = queryString.parse(location.search);
-      if (savePost.id) {
-        try {
-          const config = {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-            },
-          };
-          const { post } = await apiClient.get(`/posts/saves/${savePost.id}`, config);
-          dispatch(setWriteContent({ type: 'title', value: post.title }));
-          dispatch(setWriteContent({ type: 'content', value: post.content }));
-          dispatch(setWriteContent({ type: 'thumbnail', value: post.thumbnail }));
-          dispatch(setWriteContent({ type: 'seriesId', value: post.seriesId }));
-          dispatch(setWriteContent({ type: 'description', value: post.description }));
-        } catch (error) {
-          toast.error('임시글 불러오기 실패');
-          console.log('write saves error =>', error);
-        }
+    const setInitialValue = () => {
+      const postInfo = queryString.parse(location.search);
+      if (postInfo.id) {
+        initialSetting(postInfo.id, postInfo.status);
       }
     };
     setInitialValue();
