@@ -7,11 +7,11 @@ import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
 
 const Editor = () => {
-  const { title, content } = useSelector(state => state.writeContent);
+  const { title, content, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   return (
-    <EditorContainer className='editor-container'>
+    <EditorContainer className='editor-container' isReverse={isReverse}>
       <textarea className='editor-title' placeholder='제목을 입력하세요' value={title} onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
       <div className='dividing-line' />
       <Tags />
@@ -65,7 +65,7 @@ const EditorContainer = styled.div`
     justify-content: space-around;
     position: fixed;
     top: 0;
-    left: 0;
+    left: ${props => (props.isReverse ? '50%' : '0')};
     z-index: 10;
     width: 50%;
     height: 4rem;
