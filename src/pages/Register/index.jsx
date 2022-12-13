@@ -8,6 +8,8 @@ import { apiClient } from '../../api';
 import Button from '../../components/Button';
 import Toastify from '../../components/Toastify';
 
+import GoogleForm from './GoogleForm';
+
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -131,8 +133,10 @@ const Register = () => {
     };
     try {
       const { data } = await apiClient.post('auth/signup?type=email', body);
-      const { token } = data;
+      const { token, id, profile_image } = data;
       localStorage.setItem('authToken', token);
+      localStorage.setItem('userId', id);
+      localStorage.setItem('userProfileImg', profile_image);
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -145,7 +149,25 @@ const Register = () => {
       <div className='description'>
         기본 회원 정보를 등록해주세요. <span>﹡는 필수항목 입니다.</span>
       </div>
-      <div className='contents'>
+      <GoogleForm
+        nameActive={nameActive}
+        idActive={idActive}
+        introActive={introActive}
+        name={name}
+        email={email}
+        id={id}
+        intro={intro}
+        isIdDuplicateCheck={isIdDuplicateCheck}
+        onIdDuplicateCheck={onIdDuplicateCheck}
+        handleName={handleName}
+        handleId={handleId}
+        handleIntro={handleIntro}
+        handleFocus={handleFocus}
+        handleBlur={handleBlur}
+        nameMessage={nameMessage}
+        idMessage={idMessage}
+      />
+      {/* <div className='contents'>
         <div className={nameActive ? 'focus-wrapper wrapper' : 'wrapper'}>
           <label>이름 ﹡</label>
           <div className='input-wrapper'>
@@ -196,7 +218,7 @@ const Register = () => {
             <input type='text' placeholder='당신을 한 줄로 소개해보세요' onChange={handleIntro} value={intro} onFocus={() => handleFocus('introActive')} onBlur={() => handleBlur('introActive')} />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className='form-bottom'>
         <div className='all-valid'>{!(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}</div>
         <div className='button-wrapper'>

@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import GetPostDate from '../../../../components/GetPostDate';
 import EditButton from '../../../../components/EditButton';
 
-const Saves = ({ setPostId, title, contents, created_at, onModal }) => {
+const Saves = ({ id, setPostId, title, contents, created_at, onModal }) => {
   return (
     <SavesContainer>
-      <Link to={`write/${title}`}>
+      <Link to={`write?id=${id}&status=3`}>
         <h3>{title}</h3>
       </Link>
-      <Link to={`write/${title}`}>
+      <Link to={`write?id=${id}&status=3`}>
         <p>{contents}</p>
       </Link>
       <section>
