@@ -39,7 +39,6 @@ const App = () => {
         <Route path='/:id/series/:postid' element={<SeriesPostList />} />
         <Route path='/posts/:postid' element={<DetailPage />} />
         <Route path='/register' element={<Register />}>
-          <Route index element={<Register />} />
           <Route path='google' element={<Register />} />
         </Route>
         <Route path='/follow-list' element={<Follow />} />
