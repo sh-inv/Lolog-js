@@ -201,11 +201,27 @@ export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 768px;
   margin: 0 auto;
   padding-bottom: 4rem;
+  .post-area-container {
+    .information-container {
+      display: none;
+    }
+  }
+  
 }`;
 export const detailPageMaxWidth1024px = `@media screen and (max-width: 1024px) {
   .post-area-container {
     .post-header-title {
       font-size: 2.25rem;
+    }
+    .authority-container {
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .information-container {
+      display: flex;
+    }
+    .snb-container {
+      display: none;
     }
     .content-container {
       padding: 0 1rem;
@@ -224,6 +240,7 @@ export const detailPageMaxWidth768px = `@media screen and (max-width: 768px) {
   .authority-container {
     font-size: 0.875rem;
   }
+  
   .content-container {
     width: 100%;
   }
