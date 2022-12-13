@@ -48,12 +48,21 @@ const EditorContainer = styled.div`
     background: rgb(73, 80, 87);
   }
 
+  .ql-snow .ql-fill,
+  .ql-snow .ql-stroke.ql-fill {
+    fill: var(--text3);
+  }
+
+  .ql-snow .ql-stroke {
+    stroke: var(--text3);
+  }
+
   .ql-toolbar.ql-snow {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
+    -webkit-box-pack: space-around;
+    justify-content: space-around;
     position: fixed;
     top: 0;
     left: 0;
@@ -62,15 +71,16 @@ const EditorContainer = styled.div`
     height: 4rem;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.4) 0 4px 4px -4px;
-    background-color: var(--bg-page2);
+    background-color: var(--bg-element2);
 
     button {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 3rem;
-      height: 2rem;
+      height: 100%;
     }
+
     button + button {
       margin-left: 0 0.5rem;
     }

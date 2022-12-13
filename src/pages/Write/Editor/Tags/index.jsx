@@ -139,6 +139,7 @@ const TagsContainer = styled.div`
       letter-spacing: 0.1rem;
       transition: all 0.25s ease-in;
       opacity: ${props => (props.isGuide ? '1' : '0')};
+      pointer-events: none;
     }
 
     .guide-active {
