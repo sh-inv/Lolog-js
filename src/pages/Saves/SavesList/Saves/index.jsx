@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GetPostDate from '../../../../components/GetPostDate';
 import EditButton from '../../../../components/EditButton';
 
-const Saves = ({ id, setPostId, title, contents, created_at, onModal }) => {
+const Saves = ({ setPostId, title, contents, created_at, onModal }) => {
   return (
     <SavesContainer>
       <Link to={`write/${title}`}>
