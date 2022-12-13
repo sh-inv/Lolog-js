@@ -6,7 +6,6 @@ import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 
 const Information = ({ postData }) => {
-  console.log(postData);
   const postDate = new Date(postData.create_at);
 
   const [likeCount, setLikeCount] = useState(0);
