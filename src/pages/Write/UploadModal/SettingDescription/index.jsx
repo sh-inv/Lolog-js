@@ -3,15 +3,15 @@ import { setWriteContent } from '../../../../store/modules/write';
 import styled from 'styled-components';
 
 const SettingDescription = () => {
-  const { title, discription } = useSelector(state => state.writeContent);
+  const { title, description } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
-  const discriptionLenght = discription.replace(/<br\s*\/?>/gm, '\n').length;
+  const descriptionLenght = description.replace(/<br\s*\/?>/gm, '\n').length;
 
   return (
     <SettingDescriptionContainer>
       <h4>{title}</h4>
-      <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' value={discription} onChange={e => dispatch(setWriteContent({ type: 'discription', value: e.target.value }))} maxLength={150} />
-      <p style={{ color: discriptionLenght >= 150 ? 'var(--prism-code-3)' : 'var(--text1)' }}>{discriptionLenght}/150</p>
+      <textarea placeholder='당신의 포스트를 짧게 소개해보세요.' value={description} onChange={e => dispatch(setWriteContent({ type: 'description', value: e.target.value }))} maxLength={150} />
+      <p style={{ color: descriptionLenght >= 150 ? 'var(--prism-code-3)' : 'var(--text1)' }}>{descriptionLenght}/150</p>
     </SettingDescriptionContainer>
   );
 };

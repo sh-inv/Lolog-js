@@ -32,7 +32,7 @@ const Snbs = () => {
   return (
     <SnbsPositioner ref={snbRef}>
       <div className={ScrollActive ? 'fixed' : ''}>
-        <SnbContainer>
+        <SnbContainer className='snb-container'>
           <Like />
           <Share />
         </SnbContainer>

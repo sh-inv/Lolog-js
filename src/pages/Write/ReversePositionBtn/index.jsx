@@ -8,7 +8,7 @@ const ReversePositionBtn = () => {
   const dispatch = useDispatch();
 
   return (
-    <ReversePositionBtnContainer className='reverse-position-btn-container'>
+    <ReversePositionBtnContainer className='reverse-position-btn-container' isReverse={isReverse}>
       <FaExchangeAlt onClick={() => dispatch(setWriteContent({ type: 'isReverse', value: !isReverse }))} />
     </ReversePositionBtnContainer>
   );
@@ -20,7 +20,8 @@ const ReversePositionBtnContainer = styled.button`
   justify-content: center;
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  left: ${props => (props.isReverse ? '45%' : '52%')};
+  z-index: 10;
   width: 2rem;
   height: 2rem;
   outline: 0;

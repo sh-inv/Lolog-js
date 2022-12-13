@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWriteContent } from '../../../store/modules/write';
 import Tags from './Tags';
 import ToolBar from './ToolBar';
-import LinkModal from './LinkModal';
+import WriteZone from './WriteZone';
 import EditorFooter from './EditorFooter';
 import styled from 'styled-components';
-import WriteZone from './WriteZone';
 
 const Editor = () => {
-  const { title, content } = useSelector(state => state.writeContent);
+  const { title, content, isReverse } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   return (
-    <EditorContainer className='editor-container'>
-      <textarea className='editor-title' placeholder='제목을 입력하세요' onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
+    <EditorContainer className='editor-container' isReverse={isReverse}>
+      <textarea className='editor-title' placeholder='제목을 입력하세요' value={title} onChange={e => dispatch(setWriteContent({ type: 'title', value: e.target.value }))} />
       <div className='dividing-line' />
       <Tags />
       <ToolBar />
@@ -50,10 +48,41 @@ const EditorContainer = styled.div`
     background: rgb(73, 80, 87);
   }
 
+  .ql-snow .ql-fill,
+  .ql-snow .ql-stroke.ql-fill {
+    fill: var(--text3);
+  }
+
+  .ql-snow .ql-stroke {
+    stroke: var(--text3);
+  }
+
   .ql-toolbar.ql-snow {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: space-around;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    left: ${props => (props.isReverse ? '50%' : '0')};
+    z-index: 10;
+    width: 50%;
+    height: 4rem;
     border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 4px 4px -4px;
+    background-color: var(--bg-element2);
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3rem;
+      height: 100%;
+    }
+
     button + button {
-      margin: 0 0.5rem;
+      margin-left: 0 0.5rem;
     }
   }
 `;

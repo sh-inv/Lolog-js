@@ -11,7 +11,7 @@ const Series = ({ postId, seriesData }) => {
 
   return (
     seriesData && (
-      <SeriesContainer>
+      <SeriesContainer className='series-container'>
         <h2>
           <a href=''>{seriesTitle}</a>
         </h2>

@@ -31,8 +31,6 @@ const ToolBarContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
-    height: 3rem;
     padding: 0;
     outline: none;
     border: none;

@@ -63,7 +63,6 @@ const WriteZone = () => {
 
   const handleText = value => {
     dispatch(setWriteContent({ type: 'content', value: value }));
-    console.log(content);
   };
 
   return (
@@ -87,6 +86,14 @@ const WriteZoneContainer = styled.div`
 
   .ql-container.ql-snow {
     border: none;
+    .ql-editor {
+      padding: 1rem 0;
+      font-size: 1rem;
+    }
+    .ql-editor.ql-blank::before {
+      left: 0px;
+      color: var(--text3);
+    }
   }
 `;
 

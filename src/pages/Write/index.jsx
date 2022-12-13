@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
 import { useSelector, useDispatch } from 'react-redux';
 import { initialize, setWriteContent } from '../../store/modules/write';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
 import Toastify from '../../components/Toastify';
@@ -18,26 +18,47 @@ const Write = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const initialSetting = async (postId, postStatus) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      };
+      const apiUrl = postStatus === '3' ? '/posts/saves' : '/posts';
+      const { data } = await apiClient.get(`${apiUrl}/${postId}`, config);
+      dispatch(setWriteContent({ type: 'title', value: data.post.title }));
+      dispatch(setWriteContent({ type: 'content', value: data.post.content }));
+      dispatch(setWriteContent({ type: 'thumbnail', value: data.post.thumbnail }));
+      if (data.post.tags) {
+        let tags = [];
+        data.post.tags.map(tag => {
+          tags.push(tag.tag_name);
+        });
+        dispatch(setWriteContent({ type: 'tags', value: tags }));
+      } else {
+        dispatch(setWriteContent({ type: 'tags', value: [] }));
+      }
+
+      if (postStatus === '3') {
+        toast.success('임시글 불러오기 성공');
+      } else {
+        dispatch(setWriteContent({ type: 'seriesId', value: data.series ? data.series[0].series_id : null }));
+        dispatch(setWriteContent({ type: 'uploadType', value: data.post.status }));
+        dispatch(setWriteContent({ type: 'description', value: data.post.description }));
+        toast.success('게시글 불러오기 성공');
+      }
+    } catch (error) {
+      toast.error('게시글 불러오기 실패');
+      console.log('write error =>', error);
+    }
+  };
+
   useEffect(() => {
-    const setInitialValue = async () => {
-      const savePost = queryString.parse(location.search);
-      if (savePost.id) {
-        try {
-          const config = {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-            },
-          };
-          const { post } = await apiClient.get(`/posts/saves/${savePost.id}`, config);
-          dispatch(setWriteContent({ type: 'title', value: post.title }));
-          dispatch(setWriteContent({ type: 'content', value: post.content }));
-          dispatch(setWriteContent({ type: 'thumbnail', value: post.thumbnail }));
-          dispatch(setWriteContent({ type: 'seriesId', value: post.seriesId }));
-          dispatch(setWriteContent({ type: 'description', value: post.description }));
-        } catch (error) {
-          toast.error('임시글 불러오기 실패');
-          console.log('write saves error =>', error);
-        }
+    const setInitialValue = () => {
+      const postInfo = queryString.parse(location.search);
+      if (postInfo.id) {
+        initialSetting(postInfo.id, postInfo.status);
       }
     };
     setInitialValue();
