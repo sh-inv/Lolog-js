@@ -5,7 +5,7 @@ import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
 
-const User = ({ userInfo }) => {
+const User = ({ userInfo, isOwner }) => {
   const [isFollow, setIsFollow] = useState(false);
   // const [isFollow, setIsFollow] = useState(checked);
 
@@ -56,7 +56,7 @@ const User = ({ userInfo }) => {
               </div>
             </div>
           </div>
-          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />
+          {isOwner === 0 && <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />}
         </UserContainer>
         <Border />
       </>
