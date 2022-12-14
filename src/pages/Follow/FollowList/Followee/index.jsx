@@ -8,7 +8,7 @@ import FollowButton from '../../../../components/FollowButton';
 import ConfirmModal from '../../../../components/ConfirmModal';
 import Toastify from '../../../../components/Toastify';
 
-const Followee = ({ id, name, intro, profile }) => {
+const Followee = ({ id, name, title, intro, profile }) => {
   const [isModal, setIsModal] = useState(false);
 
   const unFollow = async () => {
@@ -35,7 +35,10 @@ const Followee = ({ id, name, intro, profile }) => {
             <Link to={`/${id}`}>
               <h3>{name}</h3>
             </Link>
-            <p>{intro}</p>
+            <p className='intro'>{intro}</p>
+            <Link to={`/${id}`}>
+              <h4 className='title'>{title}</h4>
+            </Link>
           </div>
           <FollowButton
             checked={true}
@@ -92,12 +95,23 @@ const FolloweeContainer = styled.div`
         font-size: 1.25rem;
       }
 
-      p {
+      .intro {
         margin-top: 0.25rem;
         margin-bottom: 0.5rem;
         line-height: 1.5;
         font-size: 1rem;
         color: var(--text3);
+      }
+
+      .title {
+        margin: 0px;
+        line-height: 1.5;
+        font-size: 1.25rem;
+        color: var(--text2);
+
+        :hover {
+          text-decoration: underline;
+        }
       }
     }
   }
