@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthModal from '../../components/AuthModal';
 import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
@@ -7,6 +7,9 @@ import RightIcons from './RightIcons';
 
 const Header = () => {
   const [isLoginModal, setIsLoginModal] = useState(false);
+  const location = useLocation();
+
+  if (window.location.pathname === '/write' || window.location.pathname === '/register') return null;
 
   return (
     <>

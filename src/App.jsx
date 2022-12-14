@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import Main from './pages/Main';
 import { Header } from './layout';
 import Search from './pages/Search';
@@ -17,11 +16,9 @@ import Follow from './pages/Follow';
 import GlobalStyle from './GlobalStyle';
 
 const App = () => {
-  const isDarkMode = useSelector(state => state.darkMode.isDarkMode);
-
   return (
     <>
-      <GlobalStyle isDarkMode={isDarkMode} />
+      <GlobalStyle />
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
