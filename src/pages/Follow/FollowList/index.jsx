@@ -5,6 +5,7 @@ import Followee from './Followee';
 
 const FollowList = () => {
   const [followList, setFollowList] = useState([]);
+  const [isNoFollowee, setIsNoFollowee] = useState(false);
 
   useEffect(() => {
     const getLoader = async () => {
@@ -19,7 +20,7 @@ const FollowList = () => {
       }
     };
     getLoader();
-  }, []);
+  }, [followList]);
 
   return (
     followList && (
