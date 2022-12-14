@@ -66,6 +66,7 @@ const ToggleMenuListContainer = styled.div`
   position: absolute;
   top: 3.5rem;
   right: 0;
+  z-index: 1;
   width: 12rem;
   margin-top: 0.3rem;
   margin-left: auto;

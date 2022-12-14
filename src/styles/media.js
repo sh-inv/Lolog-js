@@ -133,14 +133,22 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 }`;
 
 //write 반응형
-export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
+export const writeMInWidth1921px = `@media screen and (min-width: 1921px) {
   width: 100%;
-  height: 100%;
-
+  height: 100vh;
   .editor-container,
   .preview-container {
     width: 50%;
-    padding: 6rem 3rem 4rem 3rem;
+    padding: 2rem 3rem 4rem 3rem;
+  }
+}`;
+export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
+  width: 100%;
+  height: 100vh;
+  .editor-container,
+  .preview-container {
+    width: 50%;
+    padding: 2rem 3rem 4rem 3rem;
   }
 }`;
 export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
