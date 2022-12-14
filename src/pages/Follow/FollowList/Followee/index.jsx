@@ -13,11 +13,12 @@ const Followee = ({ id, name, intro, profile }) => {
 
   const unFollow = async () => {
     const body = {
-      followee_id: userInfo.id,
+      followee_id: id,
     };
     try {
-      const { data } = await apiClient.delete('users/follow', { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }, data: body });
-      dispatch(setIsFollowed(data.is_follower));
+      await apiClient.delete('users/follow', { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }, data: body });
+      setIsModal(false);
+      toast.success('팔로우가 해제되었습니다');
     } catch (error) {
       console.log(error);
     }

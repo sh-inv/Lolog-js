@@ -14,7 +14,6 @@ const FollowList = () => {
         };
         const { data } = await apiClient.get('users/follow', config);
         setFollowList(data.follow);
-        console.log(data.follow);
       } catch (error) {
         console.log(error);
       }
@@ -23,11 +22,13 @@ const FollowList = () => {
   }, []);
 
   return (
-    <FollowListContainer>
-      {followList.map(follow => {
-        return <Followee key={follow.followee_id} id={follow.followee_id} intro={follow.about_me} profile={follow.profile_image} name={follow.name} />;
-      })}
-    </FollowListContainer>
+    followList && (
+      <FollowListContainer>
+        {followList.map(follow => {
+          return <Followee key={follow.followee_id} id={follow.followee_id} intro={follow.about_me} profile={follow.profile_image} name={follow.name} />;
+        })}
+      </FollowListContainer>
+    )
   );
 };
 

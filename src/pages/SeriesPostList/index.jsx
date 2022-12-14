@@ -32,7 +32,6 @@ const SeriesPostList = () => {
           },
         };
         const { data } = await apiClient.get(`/series/posts/${seriesId}?sort=${isSort ? 'desc' : 'asc'}`, config);
-        console.log(data);
         dispatch(setSeriesPostList(data.series));
         setPostList(data.series);
         setSeriesName(data.series[0].series_name);
