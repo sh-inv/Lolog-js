@@ -2,7 +2,7 @@ import profile from '../../assets/profile.png';
 import styled from 'styled-components';
 
 const UserProfileImage = ({ source }) => {
-  return <UserProfileImageContainer alt='profile' src={source ? source : profile} />;
+  return <UserProfileImageContainer className='user-profile-image-container' alt='profile' src={source ? source : profile} />;
 };
 
 const UserProfileImageContainer = styled.img`

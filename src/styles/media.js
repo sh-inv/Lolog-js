@@ -9,6 +9,16 @@ export const maxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(100% - 2rem);
   margin: 0 auto;
 }`;
+export const maxWidth1024px = `@media screen and (max-width: 1024px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+  .right-icons-container {
+    .new-post {
+       display: none;
+    }
+  }
+}`;
 export const minWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
 }`;
