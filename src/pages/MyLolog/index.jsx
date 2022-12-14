@@ -12,7 +12,6 @@ const MyLolog = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.myLologData);
-  console.log('222333', user);
 
   useEffect(() => {
     (async () => {
