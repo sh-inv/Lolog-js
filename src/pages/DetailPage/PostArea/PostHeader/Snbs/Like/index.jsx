@@ -11,7 +11,7 @@ const Like = () => {
 
   useEffect(() => {
     setLikeCount(postData.post.likes);
-    setIsUserLike(Number(postData.post.is_liked));
+    setIsUserLike(postData.post.is_liked);
   }, [postData]);
 
   const like = async () => {
@@ -50,7 +50,7 @@ const Like = () => {
   };
 
   return (
-    <LikeContainer>
+    <LikeContainer className='like-container'>
       <div className={isUserLike ? 'icon-circle-wrapper active' : 'icon-circle-wrapper'} onClick={changeLike}>
         <FaHeart />
       </div>
