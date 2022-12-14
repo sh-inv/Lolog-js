@@ -19,7 +19,7 @@ const ThemeMode = () => {
   };
 
   return (
-    <ThemeModeContainer onClick={changeTheme}>
+    <ThemeModeContainer className='theme-mode-container' onClick={changeTheme}>
       <div className='setting-hover'>{isDarkMode ? <HiMoon /> : <BsFillSunFill />}</div>
     </ThemeModeContainer>
   );
