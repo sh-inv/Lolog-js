@@ -1,68 +1,66 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
 import Toastify from '../../../components/Toastify';
+import { setIsFollowed } from '../../../store/modules/mylologpostlist';
 
-const User = ({ userInfo, isOwner }) => {
-  const [isFollow, setIsFollow] = useState(false);
-  // const [isFollow, setIsFollow] = useState(checked);
+const User = ({ userInfo }) => {
+  const { is_owner, is_follower } = userInfo;
+  const dispatch = useDispatch();
 
   const onFollow = async () => {
     const body = {
-      followee_id: 9,
+      followee_id: userInfo.id,
     };
     try {
       const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       };
       const { data } = await apiClient.post('users/follow', body, config);
-      console.log(data);
-      setIsFollow(true);
+      console.log('팔로우하기', data.is_follower);
+      dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
-      toast.error('팔로우에 실패했습니다.');
+      console.log(error);
     }
   };
 
   const unFollow = async () => {
     const body = {
-      followee_id: 9,
+      followee_id: userInfo.id,
     };
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-      };
-      await apiClient.delete('users/follow', body, config);
-      setIsFollow(false);
+      const { data } = await apiClient.delete('users/follow', { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }, data: body });
+      dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    userInfo && (
-      <>
-        <UserContainer>
-          <div className='user'>
-            <Link to={`/${userInfo.id}`}>{userInfo.profile_image ? <img src={userInfo.profile_image} alt='profileImg' /> : <UserProfileImage />}</Link>
-            <div className='flex'>
-              <div className='user-info'>
-                <div className='user-name'>
-                  <Link to={`/${userInfo.id}`}>{userInfo.name}</Link>
-                </div>
-                <div className='description'>{userInfo.about_me}</div>
+    <>
+      <UserContainer>
+        <div className='user'>
+          <Link to={`/${userInfo.id}`}>
+            <UserProfileImage source={userInfo.profile_image} />
+          </Link>
+          <div className='flex'>
+            <div className='user-info'>
+              <div className='user-name'>
+                <Link to={`/${userInfo.id}`}>{userInfo.name}</Link>
               </div>
+              <div className='description'>{userInfo.about_me}</div>
             </div>
           </div>
-          {isOwner === 0 && <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />}
-        </UserContainer>
-        <Border />
-        <Toastify />
-      </>
-    )
+        </div>
+        {is_owner === 0 && <FollowButton isFollower={is_follower} onClick={is_follower ? unFollow : onFollow} checked={is_follower === '1'} />}
+      </UserContainer>
+      <Border />
+      <Toastify />
+    </>
   );
 };
 
@@ -83,6 +81,8 @@ const UserContainer = styled.div`
     }
 
     img {
+      width: 8rem;
+      height: 8rem;
       margin-bottom: 0;
       box-shadow: rgb(0 0 0 / 6%) 0px 0px 4px 0px;
 

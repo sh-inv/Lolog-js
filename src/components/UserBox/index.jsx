@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import User from './User';
 import Social from './Social';
 
-const UserBox = () => {
-  const { user, posts } = useSelector(state => state.myLologData);
-
+const UserBox = ({ userInfo }) => {
   return (
     <UserBoxContainer className='user-box-container'>
-      <User userInfo={user} isOwner={posts[0]?.is_owner} />
-      <Social userInfo={user} />
+      {userInfo && (
+        <>
+          <User userInfo={userInfo} />
+          <Social userInfo={userInfo} />
+        </>
+      )}
     </UserBoxContainer>
   );
 };

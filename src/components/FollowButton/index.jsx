@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { FiUserPlus, FiUserCheck } from 'react-icons/fi';
 import Button from '../Button';
 
-const FollowButton = ({ isFollow, checked, onClick }) => {
+const FollowButton = ({ isFollower, checked, onClick }) => {
   return (
     <FollowButtonContainer>
-      <Button icon={isFollow || checked ? <FiUserCheck /> : <FiUserPlus />} text={isFollow || checked ? '구독 중' : '구독하기'} color={isFollow || checked ? 'teal' : 'darkgray'} onClick={onClick} />
+      <Button icon={isFollower || checked ? <FiUserCheck /> : <FiUserPlus />} text={isFollower || checked ? '구독 중' : '구독하기'} color={isFollower || checked ? 'teal' : 'darkgray'} onClick={onClick} />
     </FollowButtonContainer>
   );
 };
