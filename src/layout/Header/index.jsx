@@ -51,7 +51,7 @@ const Header = () => {
                 </Link>
                 <div className='my-zone' ref={myZoneRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
                   <span className='profile'>
-                    <UserProfileImage source={localStorage.getItem('userProfileImg')} />
+                    <UserProfileImage source={localStorage.getItem('userProfileImg') === 'null' ? false : localStorage.getItem('userProfileImg')} />
                   </span>
                   <VscTriangleDown className='toggle' />
                 </div>

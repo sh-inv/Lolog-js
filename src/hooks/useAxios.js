@@ -22,7 +22,7 @@ const useAxios = (period, pageNum, name) => {
     sendQuery(period);
   }, [period, sendQuery, pageNum, name]);
 
-  return { postData, noMorePosts };
+  return { postData, noMorePosts, setPostData };
 };
 
 export default useAxios;

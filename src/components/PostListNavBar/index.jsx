@@ -6,7 +6,7 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
-const PostListNavBar = ({ setPeriod }) => {
+const PostListNavBar = ({ setPeriod, setPostData }) => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
   const navBar = [

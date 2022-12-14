@@ -16,7 +16,7 @@ const MyLologPost = ({ postData }) => {
           </div>
         </Link>
       )}
-      <Link to={`/${post_id}`}>
+      <Link to={`/posts/${post_id}`}>
         <h2 className='title'>{post_title}</h2>
       </Link>
       <p className='txt'>{post_description}</p>
