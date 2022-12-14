@@ -13,15 +13,11 @@ const Followee = ({ id, name, intro, profile }) => {
 
   const unFollow = async () => {
     const body = {
-      followee_id: id,
+      followee_id: userInfo.id,
     };
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-      };
-      await apiClient.delete('users/follow', body, config);
-      setIsModal(false);
-      toast.success('팔로우가 해제되었습니다');
+      const { data } = await apiClient.delete('users/follow', { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }, data: body });
+      dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
       console.log(error);
     }
@@ -30,12 +26,12 @@ const Followee = ({ id, name, intro, profile }) => {
   return (
     <>
       <FolloweeContainer>
-        <Link to={`/${name}`} className='profile-wrapper'>
+        <Link to={`/${id}`} className='profile-wrapper'>
           <UserProfileImage source={profile} />
         </Link>
         <div className='followee-wrapper'>
           <div className='intro-wrapper'>
-            <Link to={`/${name}`}>
+            <Link to={`/${id}`}>
               <h3>{name}</h3>
             </Link>
             <p>{intro}</p>
