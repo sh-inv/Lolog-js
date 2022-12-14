@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthModal from '../../components/AuthModal';
+import PostListNavBar from '../../components/PostListNavBar';
 import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
 import RightIcons from './RightIcons';
 
@@ -17,7 +18,7 @@ const Header = () => {
 
   const handleScroll = () => {
     const snbTop = headerRef.current.offsetTop;
-    if (ScrollY > snbTop + 64) {
+    if (ScrollY > snbTop + 116.4) {
       setScrollY(window.pageYOffset);
       setScrollActive(true);
     } else {
@@ -38,7 +39,7 @@ const Header = () => {
 
   return (
     <>
-      <HeaderPositioner ref={headerRef}>
+      <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
         <div className={ScrollActive ? 'header-fixed' : 'header'}>
           <div className='header-content'>
             <Link className='logo' to='/'>
@@ -46,6 +47,7 @@ const Header = () => {
             </Link>
             <RightIcons setIsLoginModal={setIsLoginModal} />
           </div>
+          {ScrollActive && <PostListNavBar />}
         </div>
       </HeaderPositioner>
       {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
@@ -55,16 +57,28 @@ const Header = () => {
 
 const HeaderPositioner = styled.div`
   margin: 0 auto;
+  margin-bottom: 1.5rem;
   padding: 0 1rem;
+  max-width: 1728px;
 
   .header-fixed {
     position: fixed;
     top: 0%;
     left: 50%;
     z-index: 1;
-    padding: 0 1rem;
+    width: 100%;
     background: var(--bg-element1);
     transform: translate(-50%, 0%);
+    .post-list-nav-bar-container {
+      max-width: 1728px;
+      margin: 0 auto;
+    }
+  }
+
+  .header {
+    .header-content {
+      width: 100%;
+    }
   }
 
   .header,
@@ -72,8 +86,10 @@ const HeaderPositioner = styled.div`
     .header-content {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      height: 4rem;
+      margin: 0 auto;
+      padding: ${props => (props.ScrollActive ? '0 1rem' : '0')};
+      max-width: 1728px;
+      height: ${props => (props.ScrollActive ? '3rem' : '4rem')};
 
       .logo {
         display: flex;

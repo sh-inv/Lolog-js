@@ -2,21 +2,36 @@
 export const maxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 1376px;
   .header-fixed {
-    width: 1376px;
+    .header-content {
+      width: 1376px;
+    }
+    .post-list-nav-bar-container {
+      width: 1376px;
+    }
   }
 }`;
 export const maxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;
   .header-fixed {
-    width: 1024px;
+    .header-content {
+      width: 1024px;
+    }
+    .post-list-nav-bar-container {
+      width: 1024px;
+    }
   }
 }`;
 export const maxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(100% - 2rem);
   margin: 0 auto;
   .header-fixed {
-    width: calc(100% - 2rem);
     margin: 0 auto;
+    .header-content {
+      width: calc(100% - 2rem);
+    }
+    .post-list-nav-bar-container {
+      width: calc(100% - 2rem);
+    }
   }
 }`;
 export const maxWidth1024px = `@media screen and (max-width: 1024px) {
@@ -31,6 +46,14 @@ export const maxWidth1024px = `@media screen and (max-width: 1024px) {
 }`;
 export const minWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
+  .header-fixed {
+    .header-content {
+      width: 250px;
+    }
+    .post-list-nav-bar-container {
+      width: 250px;
+    }
+  }
 }`;
 
 // search 반응형
