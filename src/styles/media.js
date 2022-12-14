@@ -1,13 +1,23 @@
 // postlist & 헤더 반응형
 export const maxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 1376px;
+  .header-fixed {
+    width: 1376px;
+  }
 }`;
 export const maxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;
+  .header-fixed {
+    width: 1024px;
+  }
 }`;
 export const maxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(100% - 2rem);
   margin: 0 auto;
+  .header-fixed {
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+  }
 }`;
 export const maxWidth1024px = `@media screen and (max-width: 1024px) {
   .logo {
@@ -107,7 +117,7 @@ export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   .editor-container,
   .preview-container {
     width: 50%;
-    padding: 2rem 3rem 4rem 3rem;
+    padding: 6rem 3rem 4rem 3rem;
   }
 }`;
 export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
