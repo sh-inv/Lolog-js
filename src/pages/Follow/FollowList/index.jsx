@@ -16,7 +16,6 @@ const FollowList = () => {
         };
         const { data } = await apiClient.get('users/follow', config);
         setFollowList(data.follow);
-        console.log(data.follow);
         !data.follow && setIsNoFollowee(true);
       } catch (error) {
         console.log(error);
