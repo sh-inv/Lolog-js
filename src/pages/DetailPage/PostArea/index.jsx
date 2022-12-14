@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const PostArea = () => {
   const { postData } = useSelector(state => state.detailData);
   const [userInfo, setUserInfo] = useState({});
-  console.log(postData);
+
   useEffect(() => {
     if (postData) {
       setUserInfo({

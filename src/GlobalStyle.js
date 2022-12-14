@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    margin-top: 4rem;
     background: var(--bg-page2);
     color: var(--text1);
     transition: background-color 0.2s;
