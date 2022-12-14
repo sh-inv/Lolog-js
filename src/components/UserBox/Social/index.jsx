@@ -25,12 +25,12 @@ const Social = ({ userInfo }) => {
         </a>
       )}
       {socialInfo.facebook && (
-        <a href={`https://github.com/${socialInfo.github}`} target='_blank' className='social-link'>
+        <a href={`https://facebook.com/${socialInfo.facebook}`} target='_blank' className='social-link'>
           <ImFacebook2 />
         </a>
       )}
       {socialInfo.url && (
-        <a href={`https://github.com/${socialInfo.github}`} target='_blank' className='social-link'>
+        <a href={`https://${socialInfo.url}`} target='_blank' className='social-link'>
           <AiFillHome />
         </a>
       )}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
 import UserBox from '../../components/UserBox';
@@ -11,6 +11,8 @@ import { setMyLologData } from '../../store/modules/mylologpostlist';
 const MyLolog = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.myLologData);
+  console.log('222333', user);
 
   useEffect(() => {
     (async () => {
@@ -30,7 +32,7 @@ const MyLolog = () => {
 
   return (
     <MyLologContainer>
-      <UserBox />
+      <UserBox userInfo={user} />
       <NavBar />
       <SearchBox />
       <Outlet />

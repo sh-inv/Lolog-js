@@ -8,15 +8,15 @@ import styled from 'styled-components';
 const PostArea = () => {
   const { postData } = useSelector(state => state.detailData);
   const [userInfo, setUserInfo] = useState({});
-
+  console.log(postData);
   useEffect(() => {
     if (postData) {
       setUserInfo({
-        userId: postData.post.user_id,
-        loginId: postData.post.login_id,
-        userName: postData.post.name,
-        profileImg: postData.post.profileImg,
-        aboutMe: postData.post.about_me,
+        user_id: postData.post.user_id,
+        login_id: postData.post.login_id,
+        name: postData.post.name,
+        profile_img: postData.post.profileImg,
+        about_me: postData.post.about_me,
       });
     }
   }, [postData]);
