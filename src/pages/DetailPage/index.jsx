@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
+import { initialize, setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
 import { useLocation } from 'react-router-dom';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ import CommentArea from './CommentArea';
 import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
-import { detailPageMaxWidth1920px, detailPageMaxWidth1024px, detailPageMaxWidth768px } from '../../styles/media';
+import { detailPageMaxWidth1920px, detailPageMaxWidth1024px, detailPageMaxWidth768px, detailPageMInWidth1921px } from '../../styles/media';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -44,6 +44,12 @@ const DetailPage = () => {
     getPostData();
   }, [location.pathname]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, []);
+
   return (
     <>
       <Toastify />
@@ -62,6 +68,7 @@ const DetailPage = () => {
 };
 
 const DetailPageContainer = styled.div`
+  ${detailPageMInWidth1921px}
   ${detailPageMaxWidth1920px}
   ${detailPageMaxWidth1024px}
   ${detailPageMaxWidth768px}

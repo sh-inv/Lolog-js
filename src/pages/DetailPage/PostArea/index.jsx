@@ -17,7 +17,8 @@ const PostArea = () => {
         name: postData.post.name,
         profile_image: postData.post.profile_image,
         about_me: postData.post.about_me,
-        is_owner: postData.post.is_writter,
+        is_owner: postData.post.is_writer,
+        is_follower: postData.post.is_follower,
       });
     }
   }, [postData]);
@@ -25,8 +26,8 @@ const PostArea = () => {
   return (
     postData && (
       <PostAreaContainer className='post-area-container'>
-        <PostHeader postData={postData.post} seriesData={postData.series} />
-        <Content postContent={postData.post.content} />
+        <PostHeader />
+        <Content />
         <UserBox className='post-area-user-info' userInfo={userInfo} />
       </PostAreaContainer>
     )

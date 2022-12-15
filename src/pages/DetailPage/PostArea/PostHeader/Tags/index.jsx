@@ -1,10 +1,13 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const Tags = ({ tags }) => {
+const Tags = () => {
+  const { postData } = useSelector(state => state.detailData);
+
   return (
     <TagsContainer>
-      {tags &&
-        tags.map(tag => {
+      {postData.post.tags &&
+        postData.post.tags.map(tag => {
           return (
             <a key={tag.tag_name} href={`/tags/${tag.tag_name}`}>
               {tag.tag_name}

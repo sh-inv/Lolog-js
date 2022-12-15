@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const EditorFooter = () => {
   const [timerOn, setTimerOn] = useState(false);
-  const { title, content, thumbnail, tags, seriesId, description, isReverse } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, tags, seriesId, description, isReverse, isUploadModal } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const autoSaveTerm = 30;
@@ -30,6 +30,15 @@ const EditorFooter = () => {
     }, 1000);
     return () => clearInterval(interval.current);
   }, [timerOn]);
+
+  useEffect(() => {
+    if (isUploadModal) {
+      clearInterval(interval.current);
+    } else {
+      initialTime.current = autoSaveTerm;
+      setTimerOn(!timerOn);
+    }
+  }, [isUploadModal]);
 
   useEffect(() => {
     if (initialTime.current <= 0) {
@@ -90,7 +99,7 @@ const Positioner = styled.div`
   position: fixed;
   left: ${props => (props.isReverse ? '50%' : '0')};
   bottom: 0;
-  z-index: 10;
+  z-index: 1;
   width: 50%;
   min-width: 340px;
 `;

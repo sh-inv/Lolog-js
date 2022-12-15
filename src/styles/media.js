@@ -169,10 +169,6 @@ export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
     display: none;
   }
   .upload-modal-container {
-    align-items: flex-start;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    overflow: auto;
     .upload-modal-content {
       width: 704px;
     }
@@ -248,13 +244,25 @@ export const postViewerMaxWidth768px = `@media screen and (max-width: 768px) {
 }`;
 
 // detail page 반응형
-export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
+export const detailPageMInWidth1921px = `@media screen and (min-width: 1921px) {
   width: 768px;
   margin: 0 auto;
   padding-bottom: 4rem;
   .post-area-container {
     .information-container {
       display: none;
+    }
+  }
+}`;
+export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
+  width: 768px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  .post-area-container {
+    .information-container {
+      .like-icon-container {
+        display: none;
+      }
     }
   }
   

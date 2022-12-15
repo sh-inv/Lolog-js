@@ -1,24 +1,25 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import styled from 'styled-components';
 
-const PreNext = ({ postId, seriesData }) => {
+const PreNext = () => {
+  const { postData } = useSelector(state => state.detailData);
   const navigate = useNavigate();
 
-  const index = seriesData.findIndex(i => i.post_id === postId);
+  const index = postData.series.findIndex(i => i.post_id === postData.post.post_id);
   const currentSort = index + 1;
-  const sortCount = seriesData.length;
+  const sortCount = postData.series.length;
 
   const preAbled = currentSort !== 1;
   const nextAbled = currentSort !== sortCount;
 
   const goToPre = () => {
-    preAbled && navigate(`/posts/${seriesData[index - 1].post_id}`);
+    preAbled && navigate(`/posts/${postData.series[index - 1].post_id}`);
   };
 
   const goToNext = () => {
-    nextAbled && navigate(`/posts/${seriesData[index + 1].post_id}`);
+    nextAbled && navigate(`/posts/${postData.series[index + 1].post_id}`);
   };
 
   return (

@@ -66,7 +66,7 @@ const EditorContainer = styled.div`
     position: fixed;
     top: 0;
     left: ${props => (props.isReverse ? '50%' : '0')};
-    z-index: 10;
+    z-index: 1;
     width: 50%;
     height: 4rem;
     border: none;
