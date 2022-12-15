@@ -248,6 +248,16 @@ export const postViewerMaxWidth768px = `@media screen and (max-width: 768px) {
 }`;
 
 // detail page 반응형
+export const detailPageMInWidth1921px = `@media screen and (min-width: 1921px) {
+  width: 768px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  .post-area-container {
+    .information-container {
+      display: none;
+    }
+  }
+}`;
 export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 768px;
   margin: 0 auto;
