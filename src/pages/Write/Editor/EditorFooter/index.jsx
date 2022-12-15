@@ -34,9 +34,9 @@ const EditorFooter = () => {
   useEffect(() => {
     if (initialTime.current <= 0) {
       clearInterval(interval.current);
-      // onSave();
-      // initialTime.current = autoSaveTerm;
-      // setTimerOn(!timerOn);
+      onSave();
+      initialTime.current = autoSaveTerm;
+      setTimerOn(!timerOn);
     }
   }, [time]);
 
@@ -89,7 +89,7 @@ const EditorFooter = () => {
 const Positioner = styled.div`
   position: fixed;
   left: ${props => (props.isReverse ? '50%' : '0')};
-  bottom: 0px;
+  bottom: 0;
   z-index: 10;
   width: 50%;
   min-width: 340px;

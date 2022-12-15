@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
-import Toastify from '../../../components/Toastify';
 import { setIsFollowed } from '../../../store/modules/mylologpostlist';
 
 const User = ({ userInfo }) => {
@@ -21,7 +19,6 @@ const User = ({ userInfo }) => {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       };
       const { data } = await apiClient.post('users/follow', body, config);
-      console.log('팔로우하기', data.is_follower);
       dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
       console.log(error);
@@ -59,7 +56,6 @@ const User = ({ userInfo }) => {
         {is_owner === 0 && <FollowButton isFollower={is_follower} onClick={is_follower ? unFollow : onFollow} checked={is_follower === '1'} />}
       </UserContainer>
       <Border />
-      <Toastify />
     </>
   );
 };

@@ -11,7 +11,7 @@ import Editor from './Editor';
 import Preview from './Preview';
 import UploadModal from './UploadModal';
 import styled from 'styled-components';
-import { writeMaxWidth1024px, writeMaxWidth1920px, writeMaxWidth768px } from '../../styles/media';
+import { writeMaxWidth1024px, writeMaxWidth1920px, writeMaxWidth768px, writeMInWidth1921px } from '../../styles/media';
 
 const Write = () => {
   const { isReverse, isUploadModal } = useSelector(state => state.writeContent);
@@ -92,7 +92,9 @@ const Write = () => {
 
 const WriteContainer = styled.div`
   display: flex;
+  padding-top: 4rem;
 
+  ${writeMInWidth1921px}
   ${writeMaxWidth1920px}
   ${writeMaxWidth1024px}
   ${writeMaxWidth768px}

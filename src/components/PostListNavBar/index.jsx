@@ -35,7 +35,7 @@ const PostListNavBar = ({ setPeriod, setPageNum }) => {
   ];
 
   return (
-    <PostListNavBarContainer>
+    <PostListNavBarContainer className='post-list-nav-bar-container'>
       <div className='nav'>
         <NavTab isLogin={isLogin}>
           {navBar.map(navItem => (
@@ -66,7 +66,6 @@ const PostListNavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.5rem;
 
   .icon {
     font-size: 1.4rem;
