@@ -8,7 +8,10 @@ import RightIcons from './RightIcons';
 
 const Header = () => {
   const location = useLocation();
-  if (window.location.pathname === '/write' || window.location.pathname === '/register') return null;
+  const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
+  const headerScrollCondition = window.location.pathname !== '/write' && window.location.pathname !== '/register';
+  const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
+  if (headerLenderConditon) return null;
 
   const [isLoginModal, setIsLoginModal] = useState(false);
 
@@ -17,7 +20,7 @@ const Header = () => {
   const headerRef = useRef();
 
   const handleScroll = () => {
-    if (window.location.pathname !== '/write' && window.location.pathname !== '/register') {
+    if (headerScrollCondition) {
       const headerTop = headerRef.current.offsetTop;
       if (ScrollY > headerTop + 116.4) {
         setScrollY(window.pageYOffset);
@@ -49,7 +52,7 @@ const Header = () => {
             </Link>
             <RightIcons setIsLoginModal={setIsLoginModal} />
           </div>
-          {ScrollActive && window.location.pathname === '/' && <PostListNavBar />}
+          {ScrollActive && postListNavBarConditon && <PostListNavBar />}
         </div>
       </HeaderPositioner>
       {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
