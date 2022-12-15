@@ -17,13 +17,15 @@ const Header = () => {
   const headerRef = useRef();
 
   const handleScroll = () => {
-    const snbTop = headerRef.current.offsetTop;
-    if (ScrollY > snbTop + 116.4) {
-      setScrollY(window.pageYOffset);
-      setScrollActive(true);
-    } else {
-      setScrollY(window.pageYOffset);
-      setScrollActive(false);
+    if (window.location.pathname !== '/write' && window.location.pathname !== '/register') {
+      const headerTop = headerRef.current.offsetTop;
+      if (ScrollY > headerTop + 116.4 && window.location.pathname === '/') {
+        setScrollY(window.pageYOffset);
+        setScrollActive(true);
+      } else {
+        setScrollY(window.pageYOffset);
+        setScrollActive(false);
+      }
     }
   };
 

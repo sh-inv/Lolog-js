@@ -20,7 +20,7 @@ const More = () => {
         } = await axios.get('data/postlist/more.json');
         setMoreContentList(moredata);
       } catch (error) {
-        console.log('error => ', error);
+        console.log('more button error => ', error);
       }
     })();
   }, []);
