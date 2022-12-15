@@ -19,7 +19,7 @@ const Header = () => {
   const handleScroll = () => {
     if (window.location.pathname !== '/write' && window.location.pathname !== '/register') {
       const headerTop = headerRef.current.offsetTop;
-      if (ScrollY > headerTop + 116.4 && window.location.pathname === '/') {
+      if (ScrollY > headerTop + 116.4) {
         setScrollY(window.pageYOffset);
         setScrollActive(true);
       } else {
@@ -49,7 +49,7 @@ const Header = () => {
             </Link>
             <RightIcons setIsLoginModal={setIsLoginModal} />
           </div>
-          {ScrollActive && <PostListNavBar />}
+          {ScrollActive && window.location.pathname === '/' && <PostListNavBar />}
         </div>
       </HeaderPositioner>
       {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
