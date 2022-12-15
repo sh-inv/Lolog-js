@@ -19,8 +19,10 @@ const UploadImage = () => {
 
   const uploadImage = async e => {
     e.preventDefault();
+
     const uploadFile = e.target.files[0];
     const formData = new FormData();
+    formData.delete('image', user.profile_image);
     formData.append('image', uploadFile);
 
     try {

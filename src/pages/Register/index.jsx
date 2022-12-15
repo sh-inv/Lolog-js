@@ -201,7 +201,7 @@ const Register = () => {
         </div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' color='teal' disabled={!(isName && isId && isPassword && isPasswordConfirm)} onClick={onRegister} />
+          <Button className='next' text='다음' color='teal' disabled={location.pathname === '/register' ? !(isName && isId && isPassword && isPasswordConfirm) : !(isName && isId)} onClick={onRegister} />
         </div>
       </div>
       <Toastify />

@@ -33,7 +33,7 @@ const EditPostList = ({ postList, setPostList }) => {
   }, [postList]);
 
   const renderPost = useCallback((post, index) => {
-    return <EditPost key={post.sort} index={index} id={post.sort} title={post.title} src={post.thumbnail} contents={post.content} date={post.create_at} movePost={movePost} />;
+    return <EditPost key={post.sort} index={index} id={post.sort} title={post.title} src={post.thumbnail} contents={post.description} date={post.create_at} movePost={movePost} />;
   }, []);
 
   return (

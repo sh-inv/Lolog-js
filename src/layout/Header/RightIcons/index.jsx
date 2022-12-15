@@ -37,7 +37,7 @@ const RightIcons = ({ setIsLoginModal }) => {
             새 글 작성
           </Link>
           <div className='toggle-open-container' ref={toggleRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
-            <UserProfileImage source={localStorage.getItem('userProfileImg')} />
+            <UserProfileImage source={localStorage.getItem('userProfileImg') === 'null' ? false : localStorage.getItem('userProfileImg')} />
             <VscTriangleDown className='toggle' />
           </div>
           {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}

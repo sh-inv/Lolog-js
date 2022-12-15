@@ -22,6 +22,7 @@ const DetailPage = () => {
       if (localStorage.getItem('authToken')) {
         return `Bearer ${localStorage.getItem('authToken')}`;
       }
+      return '';
     };
 
     try {

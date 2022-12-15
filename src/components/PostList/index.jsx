@@ -39,7 +39,7 @@ const PostList = ({ pageInfo }) => {
 
   return (
     <PostListContainer>
-      <PostListNavBar setPeriod={setPeriod} />
+      <PostListNavBar setPeriod={setPeriod} setPageNum={setPageNum} />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
           {postData.map((data, i) => {
