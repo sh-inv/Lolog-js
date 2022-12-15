@@ -19,7 +19,7 @@ const UploadImage = () => {
 
   const uploadImage = async e => {
     e.preventDefault();
-    console.log(user.profile_image);
+
     const uploadFile = e.target.files[0];
     const formData = new FormData();
     formData.delete('image', user.profile_image);
