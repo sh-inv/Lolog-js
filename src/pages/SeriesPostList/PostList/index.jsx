@@ -8,7 +8,7 @@ const PostList = () => {
   return (
     <PostListContainer>
       {seriesPostList.map((post, index) => {
-        return <Post key={post.sort} postId={post.post_id} id={index + 1} title={post.title} src={post.thumbnail} contents={post.content} date={post.create_at} className='post' />;
+        return <Post key={post.sort} postId={post.post_id} id={index + 1} title={post.title} src={post.thumbnail} contents={post.description} date={post.create_at} className='post' />;
       })}
     </PostListContainer>
   );

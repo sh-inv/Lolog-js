@@ -17,7 +17,6 @@ const NoSeriesCardContainer = styled.div`
   -webkit-box-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  margin-top: 6rem;
 
   img {
     width: 25rem;
@@ -27,8 +26,9 @@ const NoSeriesCardContainer = styled.div`
   }
 
   .description {
-    color: var(--text2);
-    font-size: 1.5rem;
+    color: var(--text3);
+    margin-bottom: 2rem;
+    font-size: 2rem;
   }
 `;
 
