@@ -12,7 +12,7 @@ const PostList = ({ pageInfo }) => {
   const [pageNum, setPageNum] = useState(1);
   const loader = useRef(null);
 
-  const { postData, noMorePosts, setPostData } = useAxios(period, pageNum, name);
+  const { postData, noMorePosts } = useAxios(period, pageNum, name);
 
   const intersectionObserver = useCallback(entries => {
     const target = entries[0];
@@ -39,7 +39,7 @@ const PostList = ({ pageInfo }) => {
 
   return (
     <PostListContainer>
-      <PostListNavBar setPeriod={setPeriod} setPostData={setPostData} />
+      <PostListNavBar setPeriod={setPeriod} setPageNum={setPageNum} />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
           {postData.map((data, i) => {
