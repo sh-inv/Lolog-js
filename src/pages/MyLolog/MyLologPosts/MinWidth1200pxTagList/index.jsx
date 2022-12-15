@@ -1,8 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { reload } from '../../../../utils/windowreload';
 
-const MinWidth1200pxTagList = ({ tagData, setTagId }) => {
+const MinWidth1200pxTagList = ({ tagData }) => {
   const location = useLocation();
+
   return (
     <MinWidth1200pxTagListContainer>
       <div className='tag-list'>태그 목록</div>
@@ -10,16 +12,14 @@ const MinWidth1200pxTagList = ({ tagData, setTagId }) => {
         {tagData.map(tag => (
           <li className='tag' key={tag.name}>
             <NavLink
-              to={tag.name === '전체보기' ? `${location.pathname}` : `${location.pathname}?tag=${tag.name}`}
+              to={tag.name === '전체보기' ? `${location.pathname}` : `${location.pathname}?tag=${tag.tag_id}`}
               className={() => {
                 const params = new URLSearchParams(location.search);
                 const getTag = params.get('tag');
-                if (getTag === tag.name || (!location.search && tag.name === '전체보기')) return 'tag-link active';
+                if (getTag === tag.tag_id || (!location.search && tag.name === '전체보기')) return 'tag-link active';
                 else return 'tag-link';
               }}
-              onClick={() => {
-                setTagId(tag.tag_id);
-              }}
+              onClick={reload}
             >
               {tag.name}
             </NavLink>

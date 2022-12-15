@@ -10,13 +10,13 @@ const MyLologPost = ({ postData }) => {
   return (
     <PostContainer>
       {post_thumbnail && (
-        <Link to={`/${post_id}`}>
+        <Link to={`/posts/${post_id}`}>
           <div className='thumbnail'>
             <Thumbnail src={post_thumbnail} />
           </div>
         </Link>
       )}
-      <Link to={`/${post_id}`}>
+      <Link to={`/posts/${post_id}`}>
         <h2 className='title'>{post_title}</h2>
       </Link>
       <p className='txt'>{post_description}</p>
