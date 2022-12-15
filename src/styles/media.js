@@ -260,7 +260,9 @@ export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
   padding-bottom: 4rem;
   .post-area-container {
     .information-container {
-      display: none;
+      .like-icon-container {
+        display: none;
+      }
     }
   }
   

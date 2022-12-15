@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
+import { initialize, setDetailCommentsData, setDetailPostData } from '../../store/modules/detailpage';
 import { useLocation } from 'react-router-dom';
 import { apiClient } from '../../api';
 import { toast } from 'react-toastify';
@@ -42,6 +42,12 @@ const DetailPage = () => {
   useEffect(() => {
     getPostData();
   }, [location.pathname]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, []);
 
   return (
     <>

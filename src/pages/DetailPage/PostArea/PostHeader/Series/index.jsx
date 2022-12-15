@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ImBookmark } from 'react-icons/im';
 import RouterList from './RouterList';
 import ListToggle from './ListToggle';
 import PreNext from './PreNext';
 import styled from 'styled-components';
 
-const Series = ({ postId, seriesData }) => {
+const Series = () => {
+  const { postData } = useSelector(state => state.detailData);
   const [isToggle, setIsToggle] = useState(false);
-  const seriesTitle = seriesData[0].series_name;
+  const seriesTitle = postData.series[0].series_name;
 
   return (
-    seriesData && (
+    postData.series && (
       <SeriesContainer className='series-container'>
         <h2>
           <a href=''>{seriesTitle}</a>
@@ -18,10 +20,10 @@ const Series = ({ postId, seriesData }) => {
         <div className='bookmark-icon-positioner'>
           <ImBookmark />
         </div>
-        {isToggle && <RouterList postId={postId} seriesData={seriesData} />}
+        {isToggle && <RouterList />}
         <div className='series-btns'>
           <ListToggle isToggle={isToggle} setIsToggle={setIsToggle} />
-          <PreNext postId={postId} seriesData={seriesData} />
+          <PreNext />
         </div>
       </SeriesContainer>
     )

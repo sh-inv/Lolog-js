@@ -24,7 +24,7 @@ const PostArea = () => {
   return (
     postData && (
       <PostAreaContainer className='post-area-container'>
-        <PostHeader postData={postData.post} seriesData={postData.series} />
+        <PostHeader />
         <Content postContent={postData.post.content} />
         <UserBox className='post-area-user-info' userInfo={userInfo} />
       </PostAreaContainer>

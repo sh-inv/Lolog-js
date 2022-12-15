@@ -1,14 +1,16 @@
+import { useSelector } from 'react-redux';
 import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 import LikeBtn from '../../../../../components/LikeBtn';
 
-const Information = ({ postData }) => {
-  const postDate = new Date(postData.create_at);
+const Information = () => {
+  const { postData } = useSelector(state => state.detailData);
+  const postDate = new Date(postData.post.create_at);
 
   return (
     <InformationContainer className='information-container'>
       <div className='information'>
-        <span className='user-name'>{postData.login_id}</span>
+        <span className='user-name'>{postData.post.login_id}</span>
         <span className='separator'>&#183;</span>
         <GetPostDate postDate={postDate} />
       </div>
