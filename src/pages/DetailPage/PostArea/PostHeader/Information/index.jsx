@@ -1,55 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { apiClient } from '../../../../../api';
-import { FaHeart } from 'react-icons/fa';
 import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
+import LikeBtn from '../../../../../components/LikeBtn';
 
 const Information = ({ postData }) => {
   const postDate = new Date(postData.create_at);
-
-  const [likeCount, setLikeCount] = useState(0);
-  const [isUserLike, setIsUserLike] = useState(false);
-
-  useEffect(() => {
-    setLikeCount(postData.likes);
-    setIsUserLike(postData.is_liked);
-  }, [postData]);
-
-  const like = async () => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      };
-      await apiClient.post(`/posts/${postData.post_id}/like`, '', config);
-      setLikeCount(prev => prev + 1);
-      setIsUserLike(true);
-    } catch (error) {
-      console.log('like error => ', error);
-    }
-  };
-
-  const unLike = async () => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      };
-      await apiClient.delete(`/posts/${postData.post_id}/like`, config);
-      setLikeCount(prev => prev - 1);
-      setIsUserLike(false);
-    } catch (error) {
-      console.log('unlike error => ', error);
-    }
-  };
-
-  const changeLike = e => {
-    const isLike = e.target.className.includes('active');
-    isLike ? unLike() : like();
-  };
 
   return (
     <InformationContainer className='information-container'>
@@ -58,10 +12,7 @@ const Information = ({ postData }) => {
         <span className='separator'>&#183;</span>
         <GetPostDate postDate={postDate} />
       </div>
-      <div className={isUserLike ? 'like active' : 'like'} onClick={changeLike}>
-        <FaHeart />
-        <span>{likeCount}</span>
-      </div>
+      <LikeBtn activeClassName='maxwidth-1023px-active' direction='row' />
     </InformationContainer>
   );
 };
@@ -87,7 +38,7 @@ const InformationContainer = styled.div`
     }
   }
 
-  .like {
+  .like-icon-container {
     display: flex;
     -webkit-box-pack: justify;
     justify-content: center;
@@ -114,7 +65,7 @@ const InformationContainer = styled.div`
     }
   }
 
-  .active {
+  .maxwidth-1023px-active {
     border-color: var(--primary2);
     background: var(--primary2);
     svg {
@@ -123,6 +74,15 @@ const InformationContainer = styled.div`
     span {
       color: white;
     }
+    .like-count {
+      color: white;
+    }
+  }
+
+  .like-count {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text3);
   }
 `;
 
