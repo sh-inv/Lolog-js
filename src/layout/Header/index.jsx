@@ -63,6 +63,15 @@ const HeaderPositioner = styled.div`
   padding: 0 1rem;
   max-width: 1728px;
 
+  @keyframes header-slidein {
+    from {
+      transform: translate(-50%, -50%);
+    }
+    to {
+      transform: translate(-50%, 0%);
+    }
+  }
+
   .header-fixed {
     position: fixed;
     top: 0%;
@@ -71,6 +80,7 @@ const HeaderPositioner = styled.div`
     width: 100%;
     background: var(--bg-element1);
     transform: translate(-50%, 0%);
+    animation: header-slidein 0.1s;
     .post-list-nav-bar-container {
       max-width: 1728px;
       margin: 0 auto;
