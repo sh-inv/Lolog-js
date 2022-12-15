@@ -12,7 +12,7 @@ import UserProfileImage from '../UserProfileImage';
 import Textarea from './Textarea';
 
 const CommentContent = ({ isNested, commentData }) => {
-  const { profile_img, user_id, create_at, is_comments_writer, content, comment_login_id, comment_id, post_id } = commentData;
+  const { comment_profile_image, user_id, create_at, is_comments_writer, content, comment_login_id, comment_id, post_id } = commentData;
   const [isModify, setIsModify] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const onClose = () => setIsDelete(false);
@@ -39,12 +39,12 @@ const CommentContent = ({ isNested, commentData }) => {
       <Toastify />
       <div className='profile-box'>
         <div className='profile'>
-          <Link to={`/${comment_login_id}`} className='profile-img'>
-            <UserProfileImage source={profile_img} />
+          <Link to={`/${user_id}`} className='profile-img'>
+            <UserProfileImage source={comment_profile_image} />
           </Link>
           <div className='profile-info'>
-            <Link to={`/${comment_login_id}`} className='user-id'>
-              {user_id}
+            <Link to={`/${user_id}`} className='user-id'>
+              {comment_login_id}
             </Link>
             <div className='create-at'>
               <GetPostDate postDate={create_at} />
