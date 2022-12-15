@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const EditorFooter = () => {
   const [timerOn, setTimerOn] = useState(false);
-  const { title, content, thumbnail, tags, seriesId, description, isReverse } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, tags, seriesId, description, isReverse, isUploadModal } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
 
   const autoSaveTerm = 30;
@@ -26,10 +26,20 @@ const EditorFooter = () => {
   useEffect(() => {
     interval.current = setInterval(async () => {
       initialTime.current -= 1;
+      console.log(initialTime);
       setTime(initialTime.current);
     }, 1000);
     return () => clearInterval(interval.current);
   }, [timerOn]);
+
+  useEffect(() => {
+    if (isUploadModal) {
+      clearInterval(interval.current);
+    } else {
+      initialTime.current = autoSaveTerm;
+      setTimerOn(!timerOn);
+    }
+  }, [isUploadModal]);
 
   useEffect(() => {
     if (initialTime.current <= 0) {
