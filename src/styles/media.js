@@ -1,16 +1,59 @@
 // postlist & 헤더 반응형
 export const maxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 1376px;
+  .header-fixed {
+    .header-content {
+      width: 1376px;
+    }
+    .post-list-nav-bar-container {
+      width: 1376px;
+    }
+  }
 }`;
 export const maxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;
+  .header-fixed {
+    .header-content {
+      width: 1024px;
+    }
+    .post-list-nav-bar-container {
+      width: 1024px;
+    }
+  }
 }`;
 export const maxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(100% - 2rem);
   margin: 0 auto;
+  .header-fixed {
+    margin: 0 auto;
+    .header-content {
+      width: calc(100% - 2rem);
+    }
+    .post-list-nav-bar-container {
+      width: calc(100% - 2rem);
+    }
+  }
+}`;
+export const maxWidth1024px = `@media screen and (max-width: 1024px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+  .right-icons-container {
+    .new-post {
+       display: none;
+    }
+  }
 }`;
 export const minWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
+  .header-fixed {
+    .header-content {
+      width: 250px;
+    }
+    .post-list-nav-bar-container {
+      width: 250px;
+    }
+  }
 }`;
 
 // search 반응형
@@ -90,10 +133,18 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 }`;
 
 //write 반응형
+export const writeMInWidth1921px = `@media screen and (min-width: 1921px) {
+  width: 100%;
+  height: 100vh;
+  .editor-container,
+  .preview-container {
+    width: 50%;
+    padding: 2rem 3rem 4rem 3rem;
+  }
+}`;
 export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 100%;
-  height: 100%;
-
+  height: 100vh;
   .editor-container,
   .preview-container {
     width: 50%;
