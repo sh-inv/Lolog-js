@@ -91,7 +91,6 @@ const SettingThumbnailContainer = styled.div`
   .have-thumbnail {
     padding: 0;
     background: inherit;
-
     img {
       width: 100%;
     }
