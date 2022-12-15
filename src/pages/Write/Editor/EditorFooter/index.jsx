@@ -26,7 +26,6 @@ const EditorFooter = () => {
   useEffect(() => {
     interval.current = setInterval(async () => {
       initialTime.current -= 1;
-      console.log(initialTime);
       setTime(initialTime.current);
     }, 1000);
     return () => clearInterval(interval.current);
@@ -100,7 +99,7 @@ const Positioner = styled.div`
   position: fixed;
   left: ${props => (props.isReverse ? '50%' : '0')};
   bottom: 0;
-  z-index: 10;
+  z-index: 1;
   width: 50%;
   min-width: 340px;
 `;
