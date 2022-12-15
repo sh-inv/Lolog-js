@@ -61,6 +61,7 @@ const Header = () => {
 };
 
 const HeaderPositioner = styled.div`
+  position: relative;
   margin: 0 auto;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
