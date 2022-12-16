@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWriteContent } from '../../../../store/modules/write';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import { apiClient } from '../../../../api';
 import { toast } from 'react-toastify';
 import Toastify from '../../../../components/Toastify';
@@ -9,8 +10,9 @@ import Button from '../../../../components/Button';
 import styled from 'styled-components';
 
 const ModalBtns = () => {
-  const { title, content, thumbnail, discription, seriesId, uploadType, uploadUrl, isSeriesList } = useSelector(state => state.writeContent);
+  const { title, content, thumbnail, tags, seriesId, uploadType, uploadUrl, description, isSeriesList } = useSelector(state => state.writeContent);
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const closeSeriesList = () => {
@@ -23,15 +25,24 @@ const ModalBtns = () => {
 
   const onUpload = async () => {
     if (title && content) {
+      const postInfo = queryString.parse(location.search);
+
       try {
         const config = {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`,
           },
         };
-        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: [], series_id: seriesId, status: uploadType, post_url: uploadUrl, description: discription };
-        const response = await apiClient.post(`/posts`, bodyData, config);
-        navigate(`/posts/${response.data.post_id}`);
+        const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: tags, series_id: seriesId, status: uploadType, post_url: uploadUrl, description: description };
+
+        console.log(bodyData);
+        if (postInfo.id) {
+          const response = await apiClient.patch(`/posts/${postInfo.id}`, bodyData, config);
+          navigate(`/posts/${response.data.post_id}`);
+        } else {
+          const response = await apiClient.post(`/posts`, bodyData, config);
+          navigate(`/posts/${response.data.post_id}`);
+        }
       } catch (error) {
         toast.error('게시글 업로드 실패');
         console.log(error);

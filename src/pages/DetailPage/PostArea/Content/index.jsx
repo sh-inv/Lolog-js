@@ -3,7 +3,7 @@ import PostViewer from '../../../../components/PostViewer';
 
 const Content = ({ postContent }) => {
   return (
-    <ContentContainer>
+    <ContentContainer className='content-container'>
       <PostViewer content={postContent} />
     </ContentContainer>
   );
@@ -11,7 +11,6 @@ const Content = ({ postContent }) => {
 
 const ContentContainer = styled.div`
   margin: 5rem auto 0px;
-  width: 768px;
 `;
 
 export default Content;

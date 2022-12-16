@@ -1,16 +1,59 @@
 // postlist & 헤더 반응형
 export const maxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 1376px;
+  .header-fixed {
+    .header-content {
+      width: 1376px;
+    }
+    .post-list-nav-bar-container {
+      width: 1376px;
+    }
+  }
 }`;
 export const maxWidth1440px = `@media screen and (max-width: 1440px) {
   width: 1024px;
+  .header-fixed {
+    .header-content {
+      width: 1024px;
+    }
+    .post-list-nav-bar-container {
+      width: 1024px;
+    }
+  }
 }`;
 export const maxWidth1056px = `@media screen and (max-width: 1056px) {
   width: calc(100% - 2rem);
   margin: 0 auto;
+  .header-fixed {
+    margin: 0 auto;
+    .header-content {
+      width: calc(100% - 2rem);
+    }
+    .post-list-nav-bar-container {
+      width: calc(100% - 2rem);
+    }
+  }
+}`;
+export const maxWidth1024px = `@media screen and (max-width: 1024px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+  .right-icons-container {
+    .new-post {
+       display: none;
+    }
+  }
 }`;
 export const minWidth250px = `@media screen and (max-width: 250px) {
   width: 250px;
+  .header-fixed {
+    .header-content {
+      width: 250px;
+    }
+    .post-list-nav-bar-container {
+      width: 250px;
+    }
+  }
 }`;
 
 // search 반응형
@@ -90,10 +133,18 @@ export const UserContentsTitleMaxWidth768px = `@media screen and (max-width: 768
 }`;
 
 //write 반응형
+export const writeMInWidth1921px = `@media screen and (min-width: 1921px) {
+  width: 100%;
+  height: 100vh;
+  .editor-container,
+  .preview-container {
+    width: 50%;
+    padding: 2rem 3rem 4rem 3rem;
+  }
+}`;
 export const writeMaxWidth1920px = `@media screen and (max-width: 1920px) {
   width: 100%;
-  height: 100%;
-
+  height: 100vh;
   .editor-container,
   .preview-container {
     width: 50%;
@@ -108,7 +159,9 @@ export const writeMaxWidth1024px = `@media screen and (max-width: 1024px) {
     width: 100%;
     height: 100%;
     padding: 2rem 3rem 4rem 3rem;
-    .editor-footer-positioner {
+    .editor-footer-positioner,
+    .ql-toolbar.ql-snow {
+      left: 0;
       width: 100%;
     }
   }
@@ -169,6 +222,80 @@ export const writeMaxWidth768px = `@media screen and (max-width: 768px) {
       }
     }
   }
+}`;
+
+//post viewer 반응형
+export const postViewerMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+}`;
+export const postViewerMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  font-size: 1rem;
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  h1, h2, h3, h4 {
+    margin-bottom: 0.75rem;
+  }
+}`;
+
+// detail page 반응형
+export const detailPageMaxWidth1920px = `@media screen and (max-width: 1920px) {
+  width: 768px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  .post-area-container {
+    .information-container {
+      display: none;
+    }
+  }
+  
+}`;
+export const detailPageMaxWidth1024px = `@media screen and (max-width: 1024px) {
+  .post-area-container {
+    .post-header-title {
+      font-size: 2.25rem;
+    }
+    .authority-container {
+      margin-top: -0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .information-container {
+      display: flex;
+    }
+    .snb-container {
+      display: none;
+    }
+    .content-container {
+      padding: 0 1rem;
+      width: 768px;
+    }
+  }
+}`;
+export const detailPageMaxWidth768px = `@media screen and (max-width: 768px) {
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem;
+
+  .information-container,
+  .post-area-container {
+  .series-container,
+  .authority-container {
+    font-size: 0.875rem;
+  }
+  
+  .content-container {
+    width: 100%;
+  }
+}
 }`;
 
 //series 반응형

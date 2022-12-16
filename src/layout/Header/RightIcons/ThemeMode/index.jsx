@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { darkMode, lightMode } from '../../../store/modules/header';
+import { darkMode, lightMode } from '../../../../store/modules/header';
 import { HiMoon } from 'react-icons/hi';
 import { BsFillSunFill } from 'react-icons/bs';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ const ThemeMode = () => {
   };
 
   return (
-    <ThemeModeContainer onClick={changeTheme}>
+    <ThemeModeContainer className='theme-mode-container' onClick={changeTheme}>
       <div className='setting-hover'>{isDarkMode ? <HiMoon /> : <BsFillSunFill />}</div>
     </ThemeModeContainer>
   );

@@ -10,6 +10,7 @@ import CommentArea from './CommentArea';
 import InterestingPost from './InterestingPost';
 import Toastify from '../../components/Toastify';
 import styled from 'styled-components';
+import { detailPageMaxWidth1920px, detailPageMaxWidth1024px, detailPageMaxWidth768px } from '../../styles/media';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const DetailPage = () => {
       if (localStorage.getItem('authToken')) {
         return `Bearer ${localStorage.getItem('authToken')}`;
       }
+      return '';
     };
 
     try {
@@ -34,6 +36,7 @@ const DetailPage = () => {
       dispatch(setDetailCommentsData(data.comments));
     } catch (error) {
       toast.error('게시글을 불러오지 못했습니다.');
+      console.log('detail page error =>', error);
     }
   };
 
@@ -59,15 +62,9 @@ const DetailPage = () => {
 };
 
 const DetailPageContainer = styled.div`
-  width: 768px;
-  margin: 0 auto;
-  padding-bottom: 4rem;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin: 0;
-    padding: 0 1rem;
-  }
+  ${detailPageMaxWidth1920px}
+  ${detailPageMaxWidth1024px}
+  ${detailPageMaxWidth768px}
 `;
 
 export default DetailPage;

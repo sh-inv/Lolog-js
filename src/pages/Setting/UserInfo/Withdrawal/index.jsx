@@ -22,8 +22,7 @@ const Withdrawal = () => {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
-      const resp = await apiClient.delete('/users', config);
-      console.log(resp.status);
+      await apiClient.delete('/users', config);
       setIsModal(false);
       navigate('/');
       toast.success(`회원탈퇴가 완료되었습니다.`);

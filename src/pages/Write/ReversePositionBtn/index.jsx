@@ -8,8 +8,8 @@ const ReversePositionBtn = () => {
   const dispatch = useDispatch();
 
   return (
-    <ReversePositionBtnContainer className='reverse-position-btn-container'>
-      <FaExchangeAlt onClick={() => dispatch(setWriteContent({ type: 'isReverse', value: !isReverse }))} />
+    <ReversePositionBtnContainer className='reverse-position-btn-container' isReverse={isReverse} onClick={() => dispatch(setWriteContent({ type: 'isReverse', value: !isReverse }))}>
+      <FaExchangeAlt />
     </ReversePositionBtnContainer>
   );
 };
@@ -19,10 +19,11 @@ const ReversePositionBtnContainer = styled.button`
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  width: 2rem;
-  height: 2rem;
+  top: 0.5rem;
+  left: ${props => (props.isReverse ? '44%' : '51%')};
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
   outline: 0;
   border: 0;
   background-color: inherit;
@@ -32,6 +33,10 @@ const ReversePositionBtnContainer = styled.button`
   &:hover {
     color: var(--text1);
     cursor: pointer;
+  }
+
+  svg {
+    pointer-events: none;
   }
 `;
 

@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const NavBar = () => {
   const location = useLocation();
+  const { user } = useSelector(state => state.myLologData);
+
   const myNav = [
     {
       id: 1,
@@ -21,7 +23,6 @@ const NavBar = () => {
       title: '소개',
     },
   ];
-  const { user } = useSelector(state => state.myLologData);
 
   return (
     <NavContainer>

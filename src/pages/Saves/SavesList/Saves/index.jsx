@@ -6,10 +6,10 @@ import EditButton from '../../../../components/EditButton';
 const Saves = ({ id, setPostId, title, contents, created_at, onModal }) => {
   return (
     <SavesContainer>
-      <Link to={`write/${title}`}>
+      <Link to={`write?id=${id}`}>
         <h3>{title}</h3>
       </Link>
-      <Link to={`write/${title}`}>
+      <Link to={`write?id=${id}`}>
         <p>{contents}</p>
       </Link>
       <section>

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PeriodFilter from './PeriodFilter';
 import More from './More';
 import styled from 'styled-components';
@@ -6,40 +6,53 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
-const PostListNavBar = ({ setPeriod }) => {
+const PostListNavBar = ({ setPeriod, setPageNum }) => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
+  const navigate = useNavigate();
   const navBar = [
     {
       name: '트렌딩',
       icon: <SlGraph className='icon' />,
       path: '/',
       query: 'trend',
+      view: true,
     },
     {
       name: '최신',
       icon: <AiOutlineClockCircle className='icon' />,
       path: '/recent',
       query: 'recent',
+      view: false,
+    },
+    {
+      name: '팔로우',
+      icon: <BsFillPeopleFill className='icon' />,
+      path: '/follow',
+      query: 'follow',
+      view: false,
     },
   ];
 
   return (
-    <PostListNavBarContainer>
+    <PostListNavBarContainer className='post-list-nav-bar-container'>
       <div className='nav'>
         <NavTab isLogin={isLogin}>
           {navBar.map(navItem => (
-            <NavLink to={navItem.path} key={navItem.name} className='tab-btn' end>
+            <Button
+              key={navItem.name}
+              onClick={() => {
+                setPageNum(1);
+                navigate(`${navItem.path}`);
+              }}
+              disabled={location.pathname === navItem.path}
+              isLogin={isLogin}
+              path={location.pathname === navItem.path}
+            >
               {navItem.icon}
               {navItem.name}
-            </NavLink>
+            </Button>
           ))}
-          {isLogin && (
-            <NavLink to='/follow' className='tab-btn' end>
-              <BsFillPeopleFill className='icon' />
-              팔로우
-            </NavLink>
-          )}
           <SlideBorder location={location} isLogin={isLogin} />
         </NavTab>
         {location.pathname === '/' && <PeriodFilter setPeriod={setPeriod} />}
@@ -53,7 +66,6 @@ const PostListNavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.5rem;
 
   .icon {
     font-size: 1.4rem;
@@ -79,20 +91,23 @@ const NavTab = styled.div`
   position: relative;
   display: flex;
   width: ${({ isLogin }) => (isLogin ? '21rem' : '14rem')};
+`;
 
-  .tab-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 7rem;
-    height: 3rem;
-    margin: 0;
-    font-size: 1.125rem;
-    color: var(--text3);
-  }
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  height: 3rem;
+  margin: 0;
+  border: none;
+  font-size: 1.125rem;
+  background: none;
+  color: ${({ path }) => (path ? 'var(--text1)' : 'var(--text3)')};
+  cursor: pointer;
 
-  .active {
-    color: var(--text1);
+  :nth-last-child(2) {
+    display: ${({ isLogin }) => (isLogin ? 'block' : 'none')};
   }
 `;
 
@@ -113,13 +128,12 @@ const SlideBorder = styled.div`
         return '0';
       }
       return '50%';
-      // location.pathname === '/' ? '0' : '50%';
     }
   }};
   display: block;
   width: ${({ isLogin }) => (isLogin ? '33.33333333333%' : '50%')};
   height: 2px;
-  background: #fff;
+  background: var(--border1);
   transition: ease all 0.3s;
 `;
 

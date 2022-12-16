@@ -3,30 +3,42 @@ import { ImFacebook2 } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
 
-const Social = () => {
+const Social = ({ userInfo }) => {
   const socialInfo = {
-    email: 'you8inpark@gmail.com',
-    github: 'daydreamplace',
-    twitter: 'daydreamplace',
-    facebook: 'daydreamplace',
-    url: 'https://www.naver.com/',
+    email: userInfo.social_info_email,
+    github: userInfo.social_info_github,
+    twitter: userInfo.social_info_twitter,
+    facebook: userInfo.social_info_facebook,
+    url: userInfo.social_info_url,
   };
-
-  const social = [
-    { href: `https://github.com/${socialInfo.github}`, target: '_blank', icon: <AiFillGithub /> },
-    { href: `https://twitter.com/${socialInfo.twitter}`, target: '_blank', icon: <AiOutlineTwitter /> },
-    { href: `https://www.facebook.com/${socialInfo.facebook}`, target: '_blank', icon: <AiFillGithub /> },
-    { href: socialInfo.url, target: '_blank', icon: <AiFillHome /> },
-    { href: `mailto:${socialInfo.email}`, icon: <MdEmail /> },
-  ];
 
   return (
     <SocialContainer>
-      {social.map(info => (
-        <a key={info.href} href={info.href} target={info.target} className='social-link'>
-          {info.icon}
+      {socialInfo.github && (
+        <a href={`https://github.com/${socialInfo.github}`} target='_blank' className='social-link'>
+          <AiFillGithub />
         </a>
-      ))}
+      )}
+      {socialInfo.twitter && (
+        <a href={`https://twitter.com/${socialInfo.twitter}`} target='_blank' className='social-link'>
+          <AiOutlineTwitter />
+        </a>
+      )}
+      {socialInfo.facebook && (
+        <a href={`https://facebook.com/${socialInfo.facebook}`} target='_blank' className='social-link'>
+          <ImFacebook2 />
+        </a>
+      )}
+      {socialInfo.url && (
+        <a href={`https://${socialInfo.url}`} target='_blank' className='social-link'>
+          <AiFillHome />
+        </a>
+      )}
+      {socialInfo.email && (
+        <a href={`mailto:${socialInfo.email}`} className='social-link'>
+          <MdEmail />
+        </a>
+      )}
     </SocialContainer>
   );
 };

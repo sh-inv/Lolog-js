@@ -1,66 +1,62 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { apiClient } from '../../../api';
 import UserProfileImage from '../../UserProfileImage';
 import FollowButton from '../../FollowButton';
+import { setIsFollowed } from '../../../store/modules/mylologpostlist';
 
 const User = ({ userInfo }) => {
-  const [isFollow, setIsFollow] = useState(false);
-  // const [isFollow, setIsFollow] = useState(checked);
+  const { is_owner, is_follower } = userInfo;
+  const dispatch = useDispatch();
 
   const onFollow = async () => {
     const body = {
-      followee_id: 9,
+      followee_id: userInfo.id,
     };
     try {
       const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       };
       const { data } = await apiClient.post('users/follow', body, config);
-      console.log(data);
-      setIsFollow(true);
+      dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
-      console.log('팔로우 에러', error);
+      console.log(error);
     }
   };
 
   const unFollow = async () => {
     const body = {
-      followee_id: 9,
+      followee_id: userInfo.id,
     };
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-      };
-      await apiClient.delete('users/follow', body, config);
-      toast.success('팔로우가 해제되었습니다');
-      setIsFollow(false);
+      const { data } = await apiClient.delete('users/follow', { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }, data: body });
+      dispatch(setIsFollowed(data.is_follower));
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    userInfo && (
-      <>
-        <UserContainer>
-          <div className='user'>
-            <Link to={`/${userInfo.id}`}>{userInfo.profile_image ? <img src={userInfo.profile_image} alt='profileImg' /> : <UserProfileImage />}</Link>
-            <div className='flex'>
-              <div className='user-info'>
-                <div className='user-name'>
-                  <Link to={`/${userInfo.id}`}>{userInfo.name}</Link>
-                </div>
-                <div className='description'>{userInfo.about_me}</div>
+    <>
+      <UserContainer>
+        <div className='user'>
+          <Link to={`/${userInfo.id}`}>
+            <UserProfileImage source={userInfo.profile_image} />
+          </Link>
+          <div className='flex'>
+            <div className='user-info'>
+              <div className='user-name'>
+                <Link to={`/${userInfo.id}`}>{userInfo.name}</Link>
               </div>
+              <div className='description'>{userInfo.about_me}</div>
             </div>
           </div>
-          <FollowButton isFollow={isFollow} setIsFollow={setIsFollow} onClick={isFollow ? unFollow : onFollow} />
-        </UserContainer>
-        <Border />
-      </>
-    )
+        </div>
+        {is_owner === 0 && <FollowButton isFollower={is_follower} onClick={is_follower ? unFollow : onFollow} checked={is_follower === '1'} />}
+      </UserContainer>
+      <Border />
+    </>
   );
 };
 
@@ -81,6 +77,8 @@ const UserContainer = styled.div`
     }
 
     img {
+      width: 8rem;
+      height: 8rem;
       margin-bottom: 0;
       box-shadow: rgb(0 0 0 / 6%) 0px 0px 4px 0px;
 

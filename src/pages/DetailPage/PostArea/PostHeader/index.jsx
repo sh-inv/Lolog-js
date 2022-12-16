@@ -1,14 +1,16 @@
-import styled from 'styled-components';
 import Information from './Information';
+import Authority from './Authority';
 import Series from './Series';
 import Snbs from './Snbs';
 import Tags from './Tags';
+import styled from 'styled-components';
 
 const PostHeader = ({ postData, seriesData }) => {
   return (
     <PostHeaderContainer>
-      <h1>{postData.title}</h1>
-      <Information userId={postData.login_id} createAt={postData.create_at} />
+      <h1 className='post-header-title'>{postData.title}</h1>
+      {postData.is_writer ? <Authority postId={postData.post_id} status={postData.status} userId={postData.login_id} /> : null}
+      <Information postData={postData} />
       <Tags tags={postData.tags} />
       <Snbs />
       {seriesData && <Series postId={postData.post_id} seriesData={seriesData} />}

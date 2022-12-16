@@ -4,12 +4,18 @@ import { apiClient } from '../api';
 const useAxios = (period, pageNum, name) => {
   const [postData, setPostData] = useState([]);
   const [noMorePosts, setNoMorePosts] = useState(false);
+
   const sendQuery = useCallback(async () => {
     try {
       const { data } = await apiClient.get(`/main?type=${name}&period=${period}&offset=${pageNum}&limit=30`);
       if (data.post.length) {
+        if (pageNum === 1) {
+          await setPostData([]);
+          await setPostData(data.post);
+        } else {
+          setPostData(prev => [...prev, ...data.post]);
+        }
         setNoMorePosts(true);
-        setPostData(prev => [...prev, ...data.post]);
       } else {
         setNoMorePosts(false);
       }

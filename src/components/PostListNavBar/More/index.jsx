@@ -10,20 +10,21 @@ const More = () => {
   const [isToggle, setIsToggle] = useState(false);
   const toggleBoxRef = useRef();
   const toggleBtnRef = useRef();
-  const [moreContentList, setMoreContentList] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { moredata },
-        } = await axios.get('data/postlist/more.json');
-        setMoreContentList(moredata);
-      } catch (error) {
-        console.log('error => ', error);
-      }
-    })();
-  }, []);
+  const moreContentList = [
+    {
+      name: '공지사항',
+      path: '',
+    },
+    {
+      name: '태그 목록',
+      path: '/tags',
+    },
+    {
+      name: '만든이',
+      path: '',
+    },
+  ];
 
   useEffect(() => {
     const clickOutside = e => {
