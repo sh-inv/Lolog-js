@@ -11,7 +11,7 @@ import RightIcons from './RightIcons';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { headerTitle, activeHeaderTitle } = matchPathName();
+  const { headerTitle, activeHeaderTitle, userId } = matchPathName();
   const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
   const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
   if (headerLenderConditon) return null;
@@ -61,7 +61,7 @@ const Header = () => {
                 Lolog
               </Link>
               {activeHeaderTitle && (
-                <Link className='logo' to='/'>
+                <Link className='logo' to={`/${userId}`}>
                   @{headerTitle}
                 </Link>
               )}

@@ -13,6 +13,7 @@ const matchPathName = () => {
       const postsRegex = /^\/posts\/[0-9]/g;
       const lologRegex = /^\/[0-9]/g;
       const path = location.pathname;
+
       if (postsRegex.test(path)) {
         const { data } = await apiClient.get(location.pathname);
         await setHeaderTitle(data.post.name);
@@ -21,7 +22,6 @@ const matchPathName = () => {
       } else if (lologRegex.test(path)) {
         const userIdPath = path.match(lologRegex);
         const { data } = await apiClient.get(`/lolog${userIdPath[0]}?offset=1&limit=1&tag_id=0`);
-        console.log(data);
         await setHeaderTitle(data.user.name);
         await setUserId(data.user.id);
         await setActiveHeaderTitle(true);
