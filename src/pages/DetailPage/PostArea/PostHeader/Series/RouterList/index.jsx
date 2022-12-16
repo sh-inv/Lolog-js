@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const RouterList = () => {
   const { postData } = useSelector(state => state.detailData);
-  console.log(postData.series);
 
   return (
     <RouterListContainer>

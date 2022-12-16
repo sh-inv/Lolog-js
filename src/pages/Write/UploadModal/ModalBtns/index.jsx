@@ -34,8 +34,6 @@ const ModalBtns = () => {
           },
         };
         const bodyData = { title: title, content: content, thumbnail: thumbnail, tags: tags, series_id: seriesId, status: uploadType, post_url: uploadUrl, description: description };
-
-        console.log(bodyData);
         if (postInfo.id) {
           const response = await apiClient.patch(`/posts/${postInfo.id}`, bodyData, config);
           navigate(`/posts/${response.data.post_id}`);

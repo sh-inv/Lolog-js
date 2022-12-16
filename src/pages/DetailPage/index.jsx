@@ -22,7 +22,7 @@ const DetailPage = () => {
       if (localStorage.getItem('authToken')) {
         return `Bearer ${localStorage.getItem('authToken')}`;
       }
-      return '';
+      return;
     };
 
     try {
@@ -42,13 +42,10 @@ const DetailPage = () => {
 
   useEffect(() => {
     getPostData();
-  }, [location.pathname]);
-
-  useEffect(() => {
     return () => {
       dispatch(initialize());
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>

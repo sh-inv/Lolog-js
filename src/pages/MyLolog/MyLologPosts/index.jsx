@@ -21,12 +21,13 @@ const MyLologPosts = () => {
   const getPostData = async () => {
     try {
       const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${pageNum}&limit=15&tag_id=${getTag ? getTag : 0}`);
-      if (data.posts.length) {
+      if (data.posts === null) {
+        setIsNoPost(true);
+        setTagData(data.tags);
+      } else if (data.posts.length) {
         setNoMorePosts(true);
         setPostsData(prev => [...prev, ...data.posts]);
         setTagData(data.tags);
-      } else if (data.posts === null) {
-        setIsNoPost(true);
       } else {
         setNoMorePosts(false);
       }

@@ -1,33 +1,29 @@
 import { useEffect } from 'react';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import PostList from '../../components/PostList';
+import { setName, setQuery } from '../../store/modules/mainnavbar';
 
 const Main = () => {
   const location = useLocation();
-  const [pageInfo, setPageInfo] = useState();
+  const dispatch = useDispatch();
+  const { name } = useSelector(state => state.mainNavBar);
 
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') {
-      setPageInfo({
-        name: 'trend',
-        query: 'week',
-      });
+      dispatch(setName('trend'));
+      dispatch(setQuery('week'));
     } else if (path === '/recent') {
-      setPageInfo({
-        name: 'recent',
-        query: '',
-      });
+      dispatch(setName('recent'));
+      dispatch(setQuery(''));
     } else {
-      setPageInfo({
-        name: 'follow',
-        query: '',
-      });
+      dispatch(setName('follow'));
+      dispatch(setQuery(''));
     }
   }, [location]);
 
-  return pageInfo && <PostList pageInfo={pageInfo} />;
+  return name && <PostList />;
 };
 
 export default Main;

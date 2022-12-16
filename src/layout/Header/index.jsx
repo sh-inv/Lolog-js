@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthModal from '../../components/AuthModal';
 import PostListNavBar from '../../components/PostListNavBar';
+import matchPathName from '../../hooks/matchPathName';
+import { resetPageNum } from '../../store/modules/mainnavbar';
 import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
 import RightIcons from './RightIcons';
 
 const Header = () => {
-  const location = useLocation();
+  const dispatch = useDispatch();
+  const { headerTitle, activeHeaderTitle, userId } = matchPathName();
   const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
   const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
   if (headerLenderConditon) return null;
@@ -39,16 +43,29 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, []);
 
   return (
     <>
       <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
         <div className={ScrollActive ? 'header-fixed' : 'header'}>
           <div className='header-content'>
-            <Link className='logo' to='/'>
-              velog
-            </Link>
+            <span className='logo-box'>
+              <Link
+                className='logo'
+                to='/'
+                onClick={() => {
+                  dispatch(resetPageNum());
+                }}
+              >
+                Lolog
+              </Link>
+              {activeHeaderTitle && (
+                <Link className='logo' to={`/${userId}`}>
+                  @{headerTitle}
+                </Link>
+              )}
+            </span>
             <RightIcons setIsLoginModal={setIsLoginModal} />
           </div>
           {ScrollActive && postListNavBarConditon && <PostListNavBar />}
@@ -106,11 +123,18 @@ const HeaderPositioner = styled.div`
       max-width: 1728px;
       height: ${props => (props.ScrollActive ? '3rem' : '4rem')};
 
-      .logo {
+      .logo-box {
         display: flex;
-        align-items: center;
-        font-size: 1.5rem;
-        letter-spacing: 0.2rem;
+        .logo {
+          display: flex;
+          align-items: center;
+          font-size: 1.5rem;
+          letter-spacing: 0.2rem;
+
+          :nth-child(2) {
+            margin-left: 1rem;
+          }
+        }
       }
     }
   }
