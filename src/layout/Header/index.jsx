@@ -8,7 +8,9 @@ import RightIcons from './RightIcons';
 
 const Header = () => {
   const location = useLocation();
-  if (window.location.pathname === '/write' || window.location.pathname === '/register') return null;
+  const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
+  const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
+  if (headerLenderConditon) return null;
 
   const [isLoginModal, setIsLoginModal] = useState(false);
 
@@ -17,13 +19,15 @@ const Header = () => {
   const headerRef = useRef();
 
   const handleScroll = () => {
-    const snbTop = headerRef.current.offsetTop;
-    if (ScrollY > snbTop + 116.4) {
-      setScrollY(window.pageYOffset);
-      setScrollActive(true);
-    } else {
-      setScrollY(window.pageYOffset);
-      setScrollActive(false);
+    if (window.location.pathname !== '/write' && window.location.pathname !== '/register') {
+      const headerTop = headerRef.current.offsetTop;
+      if (ScrollY > headerTop + 116.4) {
+        setScrollY(window.pageYOffset);
+        setScrollActive(true);
+      } else {
+        setScrollY(window.pageYOffset);
+        setScrollActive(false);
+      }
     }
   };
 
@@ -47,7 +51,7 @@ const Header = () => {
             </Link>
             <RightIcons setIsLoginModal={setIsLoginModal} />
           </div>
-          {ScrollActive && <PostListNavBar />}
+          {ScrollActive && postListNavBarConditon && <PostListNavBar />}
         </div>
       </HeaderPositioner>
       {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
@@ -56,10 +60,20 @@ const Header = () => {
 };
 
 const HeaderPositioner = styled.div`
+  position: relative;
   margin: 0 auto;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
   max-width: 1728px;
+
+  @keyframes header-slidein {
+    from {
+      transform: translate(-50%, -50%);
+    }
+    to {
+      transform: translate(-50%, 0%);
+    }
+  }
 
   .header-fixed {
     position: fixed;
@@ -69,6 +83,7 @@ const HeaderPositioner = styled.div`
     width: 100%;
     background: var(--bg-element1);
     transform: translate(-50%, 0%);
+    animation: header-slidein 0.1s;
     .post-list-nav-bar-container {
       max-width: 1728px;
       margin: 0 auto;

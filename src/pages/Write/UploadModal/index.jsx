@@ -52,11 +52,11 @@ const UploadModalContainer = styled.div`
   position: fixed;
   left: 0px;
   top: 0px;
+  z-index: 2;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: auto;
   background: var(--bg-element2);
-  z-index: 100;
-  animation: 0.25s ease-in 0s 1 normal forwards running bpwQty;
 
   .upload-modal-content {
     display: flex;

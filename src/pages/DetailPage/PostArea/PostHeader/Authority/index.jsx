@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../../../../api';
 import ConfirmModal from '../../../../../components/ConfirmModal/Index';
 import styled from 'styled-components';
 
-const Authority = ({ postId, status, userId }) => {
+const Authority = () => {
+  const { postData } = useSelector(state => state.detailData);
+
   const [isDelModal, setIsDelModal] = useState(false);
   const navigate = useNavigate();
 
@@ -13,8 +16,8 @@ const Authority = ({ postId, status, userId }) => {
       const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       };
-      await apiClient.delete(`/posts/${postId}`, config);
-      navigate(`/${userId}`);
+      await apiClient.delete(`/posts/${postData.post.post_id}`, config);
+      navigate(`/${postData.post.login_id}`);
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +25,7 @@ const Authority = ({ postId, status, userId }) => {
 
   return (
     <AuthorityContainer className='authority-container'>
-      <button onClick={() => navigate(`/write?id=${postId}&status=${status}`)}>수정</button>
+      <button onClick={() => navigate(`/write?id=${postData.post.post_id}&status=${postData.post.status}`)}>수정</button>
       <button onClick={() => setIsDelModal(true)}>삭제</button>
       {isDelModal && <ConfirmModal title='포스트 삭제' message='정말로 삭제하시겠습니까?' onClose={() => setIsDelModal(false)} onMove={deletePost} />}
     </AuthorityContainer>

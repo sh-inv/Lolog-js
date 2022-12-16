@@ -39,8 +39,8 @@ const RightIcons = ({ setIsLoginModal }) => {
           <div className='toggle-open-container' ref={toggleRef} onClick={() => setIsToggleOpen(!isToggleOpen)}>
             <UserProfileImage source={localStorage.getItem('userProfileImg') === 'null' ? false : localStorage.getItem('userProfileImg')} />
             <VscTriangleDown className='toggle' />
+            {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
           </div>
-          {isToggleOpen && <ToggleMenuList toggleMenuRef={toggleMenuRef} setIsToggleOpen={setIsToggleOpen} />}
         </>
       ) : (
         <button className='hover-link-btn login' onClick={() => setIsLoginModal(true)}>
@@ -111,11 +111,10 @@ const RightIconsContainer = styled.div`
     }
 
     .toggle {
-      position: relative;
-      margin-left: 0.5rem;
-      transition: all 0.125s ease-in 0s;
       width: 12px;
+      margin-left: 0.5rem;
       color: var(--bg-element9);
+      transition: all 0.125s ease-in 0s;
     }
 
     &:hover {

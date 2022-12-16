@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import Like from './Like';
+import LikeBtn from '../../../../../components/LikeBtn';
 import Share from './Share';
 import styled from 'styled-components';
 
@@ -33,7 +33,7 @@ const Snbs = () => {
     <SnbsPositioner ref={snbRef}>
       <div className={ScrollActive ? 'fixed' : ''}>
         <SnbContainer className='snb-container'>
-          <Like />
+          <LikeBtn activeClassName='minwidth-1024px-active' direction='column' />
           <Share />
         </SnbContainer>
       </div>
@@ -65,6 +65,7 @@ const SnbContainer = styled.div`
   border-radius: 2rem;
   background: var(--bg-element2);
 
+  .like-icon-container,
   .icon-circle-wrapper {
     display: flex;
     -webkit-box-align: center;
@@ -77,11 +78,50 @@ const SnbContainer = styled.div`
     border-radius: 1.5rem;
     cursor: pointer;
 
+    &:hover {
+      border-color: var(--text1);
+      color: var(--text1);
+    }
+
     svg {
       width: 24px;
       height: 24px;
       pointer-events: none;
     }
+  }
+
+  @keyframes spring {
+    from {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .minwidth-1024px-active {
+    animation: spring 0.25s 2;
+    border-color: var(--primary2);
+    background: var(--primary2);
+    color: var(--button-text);
+
+    &:hover {
+      border-color: rgb(56, 217, 169);
+      background: rgb(56, 217, 169);
+      color: var(--button-text);
+    }
+  }
+
+  .like-count {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--text2);
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: bold;
   }
 `;
 

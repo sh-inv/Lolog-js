@@ -45,7 +45,7 @@ const SettingThumbnail = () => {
 
   return (
     <ContentWrapper contentTitle={'포스트 미리보기'}>
-      <SettingThumbnailContainer>
+      <SettingThumbnailContainer className='setting-thumbnail-container'>
         {thumbnail ? (
           <div className='have-thumbnail'>
             <p>
@@ -56,7 +56,9 @@ const SettingThumbnail = () => {
               &#183;
               <span onClick={removeFileImage}>제거</span>
             </p>
-            <img src={thumbnail} alt='thumbnail' />
+            <div className='thumbnail-img-wrapper'>
+              <img src={thumbnail} alt='thumbnail' />
+            </div>
           </div>
         ) : (
           <div className='none-thumbnail'>
@@ -91,9 +93,11 @@ const SettingThumbnailContainer = styled.div`
   .have-thumbnail {
     padding: 0;
     background: inherit;
-
-    img {
-      width: 100%;
+    .thumbnail-img-wrapper {
+      img {
+        width: 100%;
+        max-height: 10rem;
+      }
     }
     p {
       display: flex;

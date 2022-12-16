@@ -34,7 +34,7 @@ const Create = ({ getSeriesList }) => {
 
   return (
     <CreateContainer>
-      <input className='url-create-input' type='text' placeholder='새로운 시리즈 이름을 입력하세요' onClick={() => setIsInputOpen(true)} value={addSeriesValue} onChange={e => setAddSeriesValue(e.target.value)} />
+      <input className='url-create-input' type='text' placeholder='새로운 시리즈 이름을 입력하세요' onClick={() => setIsInputOpen(true)} value={addSeriesValue} onChange={e => setAddSeriesValue(e.target.value.replace(/ /g, '-'))} />
       {isInputOpen && (
         <div className='url-slug-wrapper'>
           <div className='url-slug-input-wrapper'>

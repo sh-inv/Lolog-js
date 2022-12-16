@@ -1,12 +1,16 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const RouterList = ({ postId, seriesData }) => {
+const RouterList = () => {
+  const { postData } = useSelector(state => state.detailData);
+  console.log(postData.series);
+
   return (
     <RouterListContainer>
-      {seriesData.map(seriesInfo => {
+      {postData.series.map(seriesInfo => {
         return (
           <li key={seriesInfo.post_id}>
-            <a className={seriesInfo.post_id === postId ? 'current-post-link' : ''} href={`/posts/${seriesInfo.post_id}`}>
+            <a className={seriesInfo.post_id === postData.post.post_id ? 'current-post-link' : ''} href={`/posts/${seriesInfo.post_id}`}>
               {seriesInfo.title}
             </a>
           </li>

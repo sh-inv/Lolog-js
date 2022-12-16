@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { apiClient } from '../../api';
 import UserBox from '../../components/UserBox';
 import NavBar from './NavBar';
-import SearchBox from '../../components/SearchBox';
 import { setMyLologData } from '../../store/modules/mylologpostlist';
 
 const MyLolog = () => {
@@ -33,7 +32,6 @@ const MyLolog = () => {
     <MyLologContainer>
       <UserBox userInfo={user} />
       <NavBar />
-      <SearchBox />
       <Outlet />
     </MyLologContainer>
   );

@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import { apiClient } from '../../../api';
 import MaxWidth1199pxTagList from './MaxWidth1199pxTagList';
 import MinWidth1200pxTagList from './MinWidth1200pxTagList';
+import SearchBox from '../../../components/SearchBox';
 import MyLologPost from './MyLologPost';
 import MyLololgNoPost from './MyLololgNoPost';
-import { apiClient } from '../../../api';
+import styled from 'styled-components';
 
 const MyLologPosts = () => {
   const location = useLocation();
@@ -74,6 +75,7 @@ const MyLologPosts = () => {
           <MaxWidth1199pxTagList tagData={tagData} />
         </>
       )}
+      <SearchBox />
       {postsData && (
         <div className='post-padding'>
           {postsData.map((postData, i) => (
