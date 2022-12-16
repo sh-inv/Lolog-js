@@ -5,11 +5,14 @@ import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { resetPageNum } from '../../store/modules/mainnavbar';
 
-const PostListNavBar = ({ setPeriod, setPageNum }) => {
+const PostListNavBar = () => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const navBar = [
     {
       name: '트렌딩',
@@ -42,7 +45,7 @@ const PostListNavBar = ({ setPeriod, setPageNum }) => {
             <Button
               key={navItem.name}
               onClick={() => {
-                setPageNum(1);
+                dispatch(resetPageNum());
                 navigate(`${navItem.path}`);
               }}
               disabled={location.pathname === navItem.path}
@@ -55,7 +58,7 @@ const PostListNavBar = ({ setPeriod, setPageNum }) => {
           ))}
           <SlideBorder location={location} isLogin={isLogin} />
         </NavTab>
-        {location.pathname === '/' && <PeriodFilter setPeriod={setPeriod} />}
+        {location.pathname === '/' && <PeriodFilter />}
       </div>
       <More />
     </PostListNavBarContainer>

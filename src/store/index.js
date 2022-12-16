@@ -6,6 +6,7 @@ import { detailPageReducer } from './modules/detailPage';
 import { authReducer } from './modules/auth';
 import { seriesReducer } from './modules/seriespostlist';
 import { myLologReducer } from './modules/mylologpostlist';
+import { mainNavBarReducer } from './modules/mainnavbar';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     auth: authReducer,
     seriesPostList: seriesReducer,
     myLologData: myLologReducer,
+    mainNavBar: mainNavBarReducer,
   },
 });
 

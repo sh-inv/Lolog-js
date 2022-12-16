@@ -1,23 +1,23 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 import useAxios from '../../hooks/useAxios';
+import { plusPageNum } from '../../store/modules/mainnavbar';
 
-const PostList = ({ pageInfo }) => {
-  const { name, query } = pageInfo;
-  const [period, setPeriod] = useState(query);
-  const [pageNum, setPageNum] = useState(1);
+const PostList = () => {
+  const { name, query, pageNum } = useSelector(state => state.mainNavBar);
+  const dispatch = useDispatch();
   const loader = useRef(null);
-
-  const { postData, noMorePosts } = useAxios(period, pageNum, name);
+  const { postData, noMorePosts } = useAxios(query, pageNum, name);
 
   const intersectionObserver = useCallback(entries => {
     const target = entries[0];
     if (target.isIntersecting) {
-      setPageNum(prev => prev + 1);
+      dispatch(plusPageNum());
     }
     return;
   }, []);
@@ -39,7 +39,7 @@ const PostList = ({ pageInfo }) => {
 
   return (
     <PostListContainer>
-      <PostListNavBar setPeriod={setPeriod} setPageNum={setPageNum} />
+      <PostListNavBar />
       <div className='post-list-out-box'>
         <div className='post-list-inner-box'>
           {postData.map((data, i) => {

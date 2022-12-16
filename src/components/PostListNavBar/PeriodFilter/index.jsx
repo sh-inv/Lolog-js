@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
+import { setQuery } from '../../../store/modules/mainnavbar';
 
-const PeriodFilter = ({ setPeriod }) => {
+const PeriodFilter = () => {
   const [isToggle, setIsToggle] = useState(false);
   const [filter, setFilter] = useState('이번 주');
+  const dispatch = useDispatch();
   const [filterList, setFilterList] = useState([
     {
       name: '오늘',
@@ -60,7 +63,7 @@ const PeriodFilter = ({ setPeriod }) => {
                 arr.forEach(filter => (filter.view = false));
                 arr[i].view = true;
                 setFilterList(arr);
-                setPeriod(filter.query);
+                dispatch(setQuery(filter.query));
                 setFilter(filter.name);
                 setIsToggle(false);
               }}
