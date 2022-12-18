@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { themeModeReducer } from './modules/header';
 import { writeContentReducer } from './modules/write';
 import { userReducer } from './modules/user';
-import { detailPageReducer } from './modules/detailPage';
+import { detailPageReducer } from './modules/detailpage';
 import { authReducer } from './modules/auth';
 import { seriesReducer } from './modules/seriespostlist';
 import { myLologReducer } from './modules/mylologpostlist';
