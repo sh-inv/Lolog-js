@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../../../../api';
-import ConfirmModal from '../../../../../components/ConfirmModal/Index';
+import ConfirmModal from '../../../../../components/ConfirmModal';
 import styled from 'styled-components';
 
 const Authority = () => {
