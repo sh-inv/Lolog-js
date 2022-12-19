@@ -1,0 +1,32 @@
+{
+  "toggle": [
+    {
+      "name": "내 벨로그",
+      "path": "/id"
+    },
+    {
+      "name": "새 글 작성",
+      "path": "/write"
+    },
+    {
+      "name": "임시 글",
+      "path": "/saves"
+    },
+    {
+      "name": "팔로우 목록",
+      "path": "/follow-list"
+    },
+    {
+      "name": "읽기 목록",
+      "path": "/lists/liked"
+    },
+    {
+      "name": "설정",
+      "path": "/setting"
+    },
+    {
+      "name": "로그아웃",
+      "path": "/"
+    }
+  ]
+}
