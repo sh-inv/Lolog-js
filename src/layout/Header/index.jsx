@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import AuthModal from '../../components/AuthModal';
+import RightIcons from './RightIcons';
 import PostListNavBar from '../../components/PostListNavBar';
+import AuthModal from '../../components/AuthModal';
+import styled from 'styled-components';
 import matchPathName from '../../hooks/matchPathName';
 import { resetPageNum } from '../../store/modules/mainnavbar';
 import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
-import RightIcons from './RightIcons';
 
 const Header = () => {
   const dispatch = useDispatch();
