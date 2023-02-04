@@ -14,7 +14,6 @@ const Header = () => {
   const { headerTitle, activeHeaderTitle, userId } = matchPathName();
   const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
   const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
-  if (headerLenderConditon) return null;
 
   const [isLoginModal, setIsLoginModal] = useState(false);
 
@@ -47,31 +46,35 @@ const Header = () => {
 
   return (
     <>
-      <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
-        <div className={ScrollActive ? 'header-fixed' : 'header'}>
-          <div className='header-content'>
-            <span className='logo-box'>
-              <Link
-                className='logo'
-                to='/'
-                onClick={() => {
-                  dispatch(resetPageNum());
-                }}
-              >
-                Lolog
-              </Link>
-              {activeHeaderTitle && (
-                <Link className='logo' to={`/${userId}`}>
-                  @{headerTitle}
-                </Link>
-              )}
-            </span>
-            <RightIcons setIsLoginModal={setIsLoginModal} />
-          </div>
-          {ScrollActive && postListNavBarConditon && <PostListNavBar />}
-        </div>
-      </HeaderPositioner>
-      {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
+      {headerLenderConditon ? null : (
+        <>
+          <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
+            <div className={ScrollActive ? 'header-fixed' : 'header'}>
+              <div className='header-content'>
+                <span className='logo-box'>
+                  <Link
+                    className='logo'
+                    to='/'
+                    onClick={() => {
+                      dispatch(resetPageNum());
+                    }}
+                  >
+                    Lolog
+                  </Link>
+                  {activeHeaderTitle && (
+                    <Link className='logo' to={`/${userId}`}>
+                      @{headerTitle}
+                    </Link>
+                  )}
+                </span>
+                <RightIcons setIsLoginModal={setIsLoginModal} />
+              </div>
+              {ScrollActive && postListNavBarConditon && <PostListNavBar />}
+            </div>
+          </HeaderPositioner>
+          {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
+        </>
+      )}
     </>
   );
 };
