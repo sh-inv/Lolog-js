@@ -28,9 +28,7 @@ const Search = () => {
 
   useEffect(() => {
     getPostData();
-    return () => {
-      // dispatch(initialize());
-    };
+    return () => {};
   }, []);
 
   return (
