@@ -1,10 +1,37 @@
+import { useEffect } from 'react';
+import { apiClient } from '../../api';
 import SearchBox from '../../components/SearchBox';
 import styled from 'styled-components';
 import { searchMaxWidth768px } from '../../styles/media';
 
 const Search = () => {
-  // fork test 1
-  // fork test 2 update
+  const getPostData = async () => {
+    const isLogin = () => {
+      if (localStorage.getItem('authToken')) {
+        return `Bearer ${localStorage.getItem('authToken')}`;
+      }
+      return;
+    };
+
+    try {
+      const config = {
+        headers: {
+          Authorization: isLogin(),
+        },
+      };
+      const { data } = await apiClient.get(`main?type=trend&period=year&offset=1&limit=30`, config);
+      console.log('data>>', data);
+    } catch (error) {
+      console.log('search page error =>', error);
+    }
+  };
+
+  useEffect(() => {
+    getPostData();
+    return () => {
+      // dispatch(initialize());
+    };
+  }, []);
 
   return (
     <Positioner>
