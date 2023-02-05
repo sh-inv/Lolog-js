@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import AuthModal from '../../components/AuthModal';
-import PostListNavBar from '../../components/PostListNavBar';
-import matchPathName from '../../hooks/matchPathName';
 import { resetPageNum } from '../../store/modules/mainnavbar';
-import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
 import RightIcons from './RightIcons';
+import PostListNavBar from '../../components/PostListNavBar';
+import AuthModal from '../../components/AuthModal';
+import matchPathName from '../../hooks/matchPathName';
+import styled from 'styled-components';
+import { maxWidth1920px, maxWidth1440px, maxWidth1056px, maxWidth1024px, minWidth250px } from '../../styles/media';
 
 const Header = () => {
   const dispatch = useDispatch();
   const { headerTitle, activeHeaderTitle, userId } = matchPathName();
   const headerLenderConditon = window.location.pathname === '/write' || window.location.pathname === '/register';
   const postListNavBarConditon = window.location.pathname === '/' || window.location.pathname === '/recent' || window.location.pathname === '/follow';
-  if (headerLenderConditon) return null;
 
   const [isLoginModal, setIsLoginModal] = useState(false);
 
@@ -47,31 +46,35 @@ const Header = () => {
 
   return (
     <>
-      <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
-        <div className={ScrollActive ? 'header-fixed' : 'header'}>
-          <div className='header-content'>
-            <span className='logo-box'>
-              <Link
-                className='logo'
-                to='/'
-                onClick={() => {
-                  dispatch(resetPageNum());
-                }}
-              >
-                Lolog
-              </Link>
-              {activeHeaderTitle && (
-                <Link className='logo' to={`/${userId}`}>
-                  @{headerTitle}
-                </Link>
-              )}
-            </span>
-            <RightIcons setIsLoginModal={setIsLoginModal} />
-          </div>
-          {ScrollActive && postListNavBarConditon && <PostListNavBar />}
-        </div>
-      </HeaderPositioner>
-      {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
+      {headerLenderConditon ? null : (
+        <>
+          <HeaderPositioner ref={headerRef} ScrollActive={ScrollActive}>
+            <div className={ScrollActive ? 'header-fixed' : 'header'}>
+              <div className='header-content'>
+                <span className='logo-box'>
+                  <Link
+                    className='logo'
+                    to='/'
+                    onClick={() => {
+                      dispatch(resetPageNum());
+                    }}
+                  >
+                    L
+                  </Link>
+                  {activeHeaderTitle && (
+                    <Link className='header-title' to={`/${userId}`}>
+                      {headerTitle}
+                    </Link>
+                  )}
+                </span>
+                <RightIcons setIsLoginModal={setIsLoginModal} />
+              </div>
+              {ScrollActive && postListNavBarConditon && <PostListNavBar />}
+            </div>
+          </HeaderPositioner>
+          {isLoginModal && <AuthModal isLoginModal={isLoginModal} setIsLoginModal={setIsLoginModal} />}
+        </>
+      )}
     </>
   );
 };
@@ -125,7 +128,8 @@ const HeaderPositioner = styled.div`
 
       .logo-box {
         display: flex;
-        .logo {
+        .logo,
+        .header-title {
           display: flex;
           align-items: center;
           font-size: 1.5rem;
@@ -134,6 +138,9 @@ const HeaderPositioner = styled.div`
           :nth-child(2) {
             margin-left: 1rem;
           }
+        }
+        .header-title {
+          font-family: IndieFlowerTTFRegular, sans-serif, Arial;
         }
       }
     }
