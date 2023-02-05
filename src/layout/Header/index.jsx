@@ -59,11 +59,11 @@ const Header = () => {
                       dispatch(resetPageNum());
                     }}
                   >
-                    Lolog
+                    L
                   </Link>
                   {activeHeaderTitle && (
-                    <Link className='logo' to={`/${userId}`}>
-                      @{headerTitle}
+                    <Link className='header-title' to={`/${userId}`}>
+                      {headerTitle}
                     </Link>
                   )}
                 </span>
@@ -128,7 +128,8 @@ const HeaderPositioner = styled.div`
 
       .logo-box {
         display: flex;
-        .logo {
+        .logo,
+        .header-title {
           display: flex;
           align-items: center;
           font-size: 1.5rem;
@@ -137,6 +138,9 @@ const HeaderPositioner = styled.div`
           :nth-child(2) {
             margin-left: 1rem;
           }
+        }
+        .header-title {
+          font-family: IndieFlowerTTFRegular, sans-serif, Arial;
         }
       }
     }

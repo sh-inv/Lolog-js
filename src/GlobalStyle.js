@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { lightTheme, darkTheme } from './styles/color';
+import IndieFlowerTTFRegular from './fonts/IndieFlowerTTFRegular.ttf';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -42,6 +43,13 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     outline: none;
+  }
+
+  @font-face {
+        font-family: 'IndieFlowerTTFRegular';
+        src: local('IndieFlowerTTFRegular'), local('IndieFlowerTTFRegular');
+        font-style: normal;
+        src: url(${IndieFlowerTTFRegular}) format('truetype');
   }
 `;
 
