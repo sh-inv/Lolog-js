@@ -34,7 +34,7 @@ const Series = () => {
       {seriesCardList && !isNoSeries && (
         <SeriesContainer>
           {seriesCardList.map(series => {
-            return <SeriesCard key={series.series_id} seriesId={series.series_id} src={series.post_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.post_count} />;
+            return <SeriesCard key={series.series_id} seriesId={series.series_id} src={series.series_thumbnail} title={series.series_series_name} update={series.series_update_at} postCount={series.series_post_count} />;
           })}
         </SeriesContainer>
       )}
