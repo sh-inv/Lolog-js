@@ -4,7 +4,7 @@ import Thumbnail from '../../../../components/Thumbnail';
 import SeriesInfo from './SeriesInfo';
 import { SeriesPostMaxWidth768px } from '../../../../styles/media';
 
-const SeriesCard = ({ seriesId, src, title, update }) => {
+const SeriesCard = ({ seriesId, src, title, update, postCount }) => {
   return (
     <SeriesCardContainer>
       <ThumbnailContainer>
@@ -12,7 +12,7 @@ const SeriesCard = ({ seriesId, src, title, update }) => {
           <Thumbnail src={src} />
         </Link>
       </ThumbnailContainer>
-      <SeriesInfo title={title} update={update} />
+      <SeriesInfo title={title} update={update} postCount={postCount} />
     </SeriesCardContainer>
   );
 };
