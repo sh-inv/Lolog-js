@@ -10,8 +10,8 @@ const useAxios = (period, pageNum, name) => {
       const { data } = await apiClient.get(`/main?type=${name}&period=${period}&offset=${pageNum}&limit=30`);
       if (data.post.length) {
         if (pageNum === 1) {
-          await setPostData([]);
-          await setPostData(data.post);
+          setPostData([]);
+          setPostData(data.post);
         } else {
           setPostData(prev => [...prev, ...data.post]);
         }
@@ -25,7 +25,7 @@ const useAxios = (period, pageNum, name) => {
   }, [period, pageNum, name]);
 
   useEffect(() => {
-    sendQuery(period);
+    sendQuery();
   }, [period, sendQuery, pageNum, name]);
 
   return { postData, noMorePosts };

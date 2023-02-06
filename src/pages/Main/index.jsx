@@ -17,10 +17,11 @@ const Main = () => {
     } else if (path === '/recent') {
       dispatch(setName('recent'));
       dispatch(setQuery(''));
-    } else {
+    } else if (path === '/follow') {
       dispatch(setName('follow'));
       dispatch(setQuery(''));
     }
+    return;
   }, [location]);
 
   return name && <PostList />;
