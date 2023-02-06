@@ -18,8 +18,8 @@ const PostList = () => {
 
   useEffect(() => {
     dispatch(resetPageNum());
-    console.log('실행됨');
   }, [location.pathname]);
+
   const intersectionObserver = useCallback(entries => {
     const target = entries[0];
     if (target.isIntersecting) {
