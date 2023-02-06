@@ -5,14 +5,11 @@ import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
-import { resetPageNum } from '../../store/modules/mainnavbar';
 
 const PostListNavBar = () => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const navBar = [
     {
       name: '트렌딩',
@@ -45,7 +42,6 @@ const PostListNavBar = () => {
             <Button
               key={navItem.name}
               onClick={() => {
-                dispatch(resetPageNum());
                 navigate(`${navItem.path}`);
               }}
               disabled={location.pathname === navItem.path}
