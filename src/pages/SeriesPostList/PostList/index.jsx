@@ -4,6 +4,7 @@ import Post from './Post';
 
 const PostList = () => {
   const { seriesPostList } = useSelector(state => state.seriesPostList);
+  console.log(seriesPostList);
 
   return (
     <PostListContainer>
