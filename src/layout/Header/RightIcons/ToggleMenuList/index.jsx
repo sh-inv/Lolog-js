@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ToggleMenuList = ({ toggleMenuRef, setIsToggleOpen }) => {
   const toggleMenuList = [
     {
-      name: '내 벨로그',
+      name: '내 롤로그',
       path: `/${localStorage.getItem('userId')}`,
     },
     {
