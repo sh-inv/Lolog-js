@@ -16,7 +16,7 @@ const matchPathName = () => {
 
       if (postsRegex.test(path)) {
         const { data } = await apiClient.get(location.pathname);
-        await setHeaderTitle(`${data.post.login_id}.log`);
+        await setHeaderTitle(data.post.lolog_title);
         await setUserId(data.post.user_id);
         await setActiveHeaderTitle(true);
       } else if (lologRegex.test(path)) {
