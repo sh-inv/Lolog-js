@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { tabStyle } from '../../../styles/postlistnavbar';
-import { setQuery } from '../../../store/modules/mainnavbar';
+import { resetPageNum, setQuery } from '../../../store/modules/mainnavbar';
 
 const PeriodFilter = () => {
   const [isToggle, setIsToggle] = useState(false);
@@ -63,8 +63,9 @@ const PeriodFilter = () => {
                 arr.forEach(filter => (filter.view = false));
                 arr[i].view = true;
                 setFilterList(arr);
-                dispatch(setQuery(filter.query));
                 setFilter(filter.name);
+                dispatch(resetPageNum());
+                dispatch(setQuery(filter.query));
                 setIsToggle(false);
               }}
             >
