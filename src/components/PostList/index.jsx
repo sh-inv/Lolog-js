@@ -6,19 +6,13 @@ import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
 import useAxios from '../../hooks/useAxios';
-import { plusPageNum, resetPageNum } from '../../store/modules/mainnavbar';
-import { useLocation } from 'react-router-dom';
+import { plusPageNum } from '../../store/modules/mainnavbar';
 
 const PostList = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const { name, query, pageNum } = useSelector(state => state.mainNavBar);
   const loader = useRef(null);
   const { postData, noMorePosts } = useAxios(query, pageNum, name);
-
-  useEffect(() => {
-    dispatch(resetPageNum());
-  }, [location.pathname]);
 
   const intersectionObserver = useCallback(entries => {
     const target = entries[0];

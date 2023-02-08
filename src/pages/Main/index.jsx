@@ -2,27 +2,28 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import PostList from '../../components/PostList';
-import { setName, setQuery } from '../../store/modules/mainnavbar';
+import { resetPageNum, setName, setQuery } from '../../store/modules/mainnavbar';
 
 const Main = () => {
   const location = useLocation();
+  const pathname = location.pathname;
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.mainNavBar);
 
   useEffect(() => {
-    const path = location.pathname;
-    if (path === '/') {
+    if (pathname === '/') {
       dispatch(setName('trend'));
       dispatch(setQuery('week'));
-    } else if (path === '/recent') {
+    } else if (pathname === '/recent') {
       dispatch(setName('recent'));
       dispatch(setQuery(''));
-    } else if (path === '/follow') {
+    } else if (pathname === '/follow') {
       dispatch(setName('follow'));
       dispatch(setQuery(''));
     }
+    dispatch(resetPageNum());
     return;
-  }, [location]);
+  }, [pathname]);
 
   return name && <PostList />;
 };
