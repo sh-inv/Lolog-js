@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
+import { IoPeople } from 'react-icons/io5';
 
 const PostListNavBar = () => {
   const isLogin = localStorage.getItem('authToken');
@@ -27,7 +28,7 @@ const PostListNavBar = () => {
     },
     {
       name: '팔로우',
-      icon: <BsFillPeopleFill className='icon' />,
+      icon: <IoPeople className='icon' />,
       path: '/follow',
       query: 'follow',
       view: false,
@@ -106,7 +107,7 @@ const Button = styled.button`
   cursor: pointer;
 
   :nth-last-child(2) {
-    display: ${({ isLogin }) => (isLogin ? 'block' : 'none')};
+    display: ${({ isLogin }) => (isLogin ? 'inherit' : 'none')};
   }
 `;
 

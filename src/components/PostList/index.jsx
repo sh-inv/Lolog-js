@@ -5,14 +5,18 @@ import Post from './Post';
 import PostListNavBar from '../PostListNavBar';
 import PostSkeleton from '../PostSkeleton';
 import { maxWidth1056px, maxWidth1440px, maxWidth1920px, minWidth250px } from '../../styles/media';
-import useAxios from '../../hooks/useAxios';
+import usePostAxios from '../../hooks/usePostAxios';
 import { plusPageNum } from '../../store/modules/mainnavbar';
 
+const option = {
+  threshold: 1,
+};
+
 const PostList = () => {
-  const dispatch = useDispatch();
   const { name, query, pageNum } = useSelector(state => state.mainNavBar);
+  const { postData, noMorePosts } = usePostAxios(query, pageNum, name);
   const loader = useRef(null);
-  const { postData, noMorePosts } = useAxios(query, pageNum, name);
+  const dispatch = useDispatch();
 
   const intersectionObserver = useCallback(entries => {
     const target = entries[0];
@@ -21,10 +25,6 @@ const PostList = () => {
     }
     return;
   }, []);
-
-  const option = {
-    threshold: 1,
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(intersectionObserver, option);
@@ -45,7 +45,7 @@ const PostList = () => {
           {postData.map((data, i) => {
             return <Post key={i} postData={data} />;
           })}
-          {noMorePosts && postData.length ? <div ref={loader} /> : null}
+          {noMorePosts && postData.length && <div ref={loader} />}
           {noMorePosts && <PostSkeleton />}
         </div>
       </div>
@@ -63,11 +63,6 @@ const PostListContainer = styled.div`
       flex-wrap: wrap;
       margin: -1rem;
     }
-  }
-  .asasdasdasd {
-    width: 100%;
-    height: 300px;
-    background: #fff;
   }
 
   ${maxWidth1920px}
