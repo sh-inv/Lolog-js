@@ -60,9 +60,6 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
     }
   };
 
-  // const nestedComment = async () => {
-  // };
-
   return (
     <TextareaContainer>
       <Toastify />

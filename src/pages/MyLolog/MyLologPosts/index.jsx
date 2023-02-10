@@ -38,7 +38,7 @@ const MyLologPosts = () => {
 
   useEffect(() => {
     getPostData();
-  }, [location.pathname, pageNum, getTag]);
+  }, [location, pageNum, getTag]);
 
   // 무한 스크롤
 
@@ -72,7 +72,7 @@ const MyLologPosts = () => {
       {tagData && (
         <>
           <MinWidth1200pxTagList tagData={tagData} setPostsData={setPostsData} getPostData={getPostData} />
-          <MaxWidth1199pxTagList tagData={tagData} />
+          <MaxWidth1199pxTagList tagData={tagData} setPostsData={setPostsData} />
         </>
       )}
       <SearchBox />

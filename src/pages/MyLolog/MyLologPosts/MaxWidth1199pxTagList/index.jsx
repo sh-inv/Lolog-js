@@ -1,8 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { reload } from '../../../../utils/windowreload';
 
-const MaxWidth1199pxTagList = ({ tagData }) => {
+const MaxWidth1199pxTagList = ({ tagData, setPostsData }) => {
   const location = useLocation();
 
   return (
@@ -12,7 +11,9 @@ const MaxWidth1199pxTagList = ({ tagData }) => {
           <NavLink
             to={tag.name === '전체보기' ? `${location.pathname}` : `${location.pathname}?tag=${tag.tag_id}`}
             key={tag.name}
-            onClick={reload}
+            onClick={() => {
+              setPostsData([]);
+            }}
             className={() => {
               const params = new URLSearchParams(location.search);
               const getTag = params.get('tag');
