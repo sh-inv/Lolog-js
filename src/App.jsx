@@ -13,6 +13,7 @@ import SeriesPostList from './pages/SeriesPostList';
 import Register from './pages/Register';
 import DetailPage from './pages/DetailPage';
 import Follow from './pages/Follow';
+import GoogleAuth from './components/AuthModal/SocialAuth/GoogleAuth';
 import GlobalStyle from './GlobalStyle';
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path='google' element={<Register />} />
         </Route>
         <Route path='/follow-list' element={<Follow />} />
+        <Route path='/auth/google/callback' element={<GoogleAuth />} />
       </Routes>
     </>
   );

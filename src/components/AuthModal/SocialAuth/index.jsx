@@ -3,6 +3,7 @@ import { apiClient } from '../../../api';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
+import { GOOGLE_URL } from './OAuth';
 
 const SocialAuth = () => {
   const socialList = [
@@ -25,9 +26,10 @@ const SocialAuth = () => {
 
   const onSocialLogin = async social => {
     try {
-      const { data } = await apiClient.get(`auth/${social}`);
       if (social === 'google') {
-        window.open(data.redirect_url);
+        location.href = GOOGLE_URL;
+      } else {
+        await apiClient.get(`auth/${social}`);
       }
     } catch (error) {
       console.log(error);
