@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MaxWidth1199pxTagList = ({ tagData, setPostsData }) => {
+const MaxWidth1199pxTagList = ({ tagData, setPostsData, setPageNum }) => {
   const location = useLocation();
 
   return (
@@ -13,6 +13,7 @@ const MaxWidth1199pxTagList = ({ tagData, setPostsData }) => {
             key={tag.name}
             onClick={() => {
               setPostsData([]);
+              setPageNum(1);
             }}
             className={() => {
               const params = new URLSearchParams(location.search);

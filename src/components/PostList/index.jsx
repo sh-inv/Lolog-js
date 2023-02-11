@@ -45,7 +45,7 @@ const PostList = () => {
           {postData.map((data, i) => {
             return <Post key={i} postData={data} />;
           })}
-          {noMorePosts && postData.length && <div ref={loader} />}
+          {noMorePosts && postData.length > 0 && <div ref={loader} />}
           {noMorePosts && <PostSkeleton />}
         </div>
       </div>

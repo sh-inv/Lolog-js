@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MinWidth1200pxTagList = ({ tagData, setPostsData }) => {
+const MinWidth1200pxTagList = ({ tagData, setPostsData, setPageNum }) => {
   const location = useLocation();
 
   return (
@@ -20,6 +20,7 @@ const MinWidth1200pxTagList = ({ tagData, setPostsData }) => {
               }}
               onClick={() => {
                 setPostsData([]);
+                setPageNum(1);
               }}
             >
               {tag.name}

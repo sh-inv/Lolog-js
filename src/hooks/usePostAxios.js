@@ -22,7 +22,7 @@ const usePostAxios = (query, pageNum, name) => {
         },
       };
 
-      const { data } = await apiClient.get(`/main?type=${name}&period=${query}&offset=${pageNum}&limit=30`, config);
+      const { data } = await apiClient.get(`/main?type=${name}&period=${query}&offset=${pageNum}&limit=12`, config);
       if (data.post.length) {
         if (pageNum === 1) {
           setPostData([]);
