@@ -41,9 +41,10 @@ const PostNavBtnContainer = styled.div`
     cursor: pointer;
 
     .btn {
-      width: 32px;
+      min-width: 32px;
+      max-width: 32px;
       height: 32px;
-      border-radius: 16px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
