@@ -12,7 +12,7 @@ import Toastify from '../../components/Toastify';
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { email } = useSelector(state => state.auth);
+  const { email, googleAuth } = useSelector(state => state.auth);
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -57,9 +57,6 @@ const Register = () => {
     if (!idRegax.test(idCurrent)) {
       setIdMessage('아이디는 4자 이상의 영어와 숫자로 구성해야합니다');
       setIsId(false);
-      // } else if (idCurrent.length >= 4 && isIdDuplicateCheck === false) {
-      //   setIdMessage('아이디 중복 여부를 확인 해주세요');
-      //   setIsId(false);
     } else {
       setIdMessage('');
       setIsId(true);
@@ -78,6 +75,7 @@ const Register = () => {
       setIsPassword(true);
     }
   };
+
   const handlePasswordConfirm = e => {
     const passwordConfirmCurrent = e.target.value;
     setPasswordConfrim(passwordConfirmCurrent);
@@ -142,6 +140,24 @@ const Register = () => {
     }
   };
 
+  const onGoogleRegister = async () => {
+    const body = { ...googleAuth, login_id: id, about_me: intro };
+    try {
+      const { data } = await apiClient.post('auth/signup?type=google', body);
+      const { token, id, profile_image } = data;
+      console.log(profile_image);
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userId', id);
+      localStorage.setItem('userProfileImg', profile_image);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 409) {
+        toast.error(`이미 사용 중인 아이디입니다.`);
+      }
+    }
+  };
+
   return (
     <RegisterContainer>
       <h1>환영합니다!</h1>
@@ -181,8 +197,8 @@ const Register = () => {
           nameActive={nameActive}
           idActive={idActive}
           introActive={introActive}
-          name={name}
-          email={email}
+          name={googleAuth.name}
+          email={googleAuth.email}
           id={id}
           intro={intro}
           handleName={handleName}
@@ -192,16 +208,21 @@ const Register = () => {
           handleBlur={handleBlur}
           nameMessage={nameMessage}
           idMessage={idMessage}
+          isIdDuplicateCheck={isIdDuplicateCheck}
+          onIdDuplicateCheck={onIdDuplicateCheck}
         />
       )}
       <div className='form-bottom'>
-        <div className='all-valid'>
-          {location.pathname === '/register' && !(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요'}
-          {location.pathname === '/register/google' && !(isName && isId) && '모든 필수 항목을 입력해주세요'}
-        </div>
+        <div className='all-valid'>{location.pathname === '/register' ? !(isName && isId && isPassword && isPasswordConfirm) && '모든 필수 항목을 입력해주세요' : !isId && '아이디를 입력해주세요'}</div>
         <div className='button-wrapper'>
           <Button className='cancel' text='취소' color='gray' onClick={() => navigate('/')} />
-          <Button className='next' text='다음' color='teal' disabled={location.pathname === '/register' ? !(isName && isId && isPassword && isPasswordConfirm) : !(isName && isId)} onClick={onRegister} />
+          <Button
+            className='next'
+            text='다음'
+            color='teal'
+            disabled={location.pathname === '/register' ? !(isName && isId && isIdDuplicateCheck && isPassword && isPasswordConfirm) : !(isId && isIdDuplicateCheck)}
+            onClick={location.pathname === '/register' ? onRegister : onGoogleRegister}
+          />
         </div>
       </div>
       <Toastify />
