@@ -1,13 +1,31 @@
 import styled from 'styled-components';
 import { MdLockOutline } from 'react-icons/md';
+import Button from '../../../components/Button';
 
-const GoogleForm = ({ nameActive, idActive, introActive, name, email, id, intro, handleName, handleId, handleIntro, handleFocus, handleBlur, nameMessage, idMessage }) => {
+const GoogleForm = ({
+  //
+  nameActive,
+  idActive,
+  introActive,
+  name,
+  email,
+  id,
+  intro,
+  handleId,
+  handleIntro,
+  handleFocus,
+  handleBlur,
+  nameMessage,
+  idMessage,
+  isIdDuplicateCheck,
+  onIdDuplicateCheck,
+}) => {
   return (
     <GoogleFormContainer>
       <div className={nameActive ? 'focus-wrapper wrapper' : 'wrapper'}>
         <label>이름 ﹡</label>
         <div className='input-wrapper'>
-          <input type='text' placeholder='이름을 입력하세요' onChange={handleName} value={name} maxLength='20' onFocus={() => handleFocus('nameActive')} onBlur={() => handleBlur('nameActive')} />
+          <input type='text' placeholder='이름을 입력하세요' disabled value={name} />
         </div>
         <div className='validation'>{nameMessage}</div>
       </div>
@@ -21,7 +39,8 @@ const GoogleForm = ({ nameActive, idActive, introActive, name, email, id, intro,
       <div className={idActive ? 'focus-wrapper wrapper' : 'wrapper'}>
         <label>아이디 ﹡</label>
         <div className='input-wrapper'>
-          <input type='text' placeholder='아이디를 입력하세요' onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
+          <input type='text' placeholder='아이디를 입력하세요' disabled={isIdDuplicateCheck === true} onChange={handleId} value={id} onFocus={() => handleFocus('idActive')} onBlur={() => handleBlur('idActive')} />
+          {isIdDuplicateCheck ? <Button className='checked' disabled color='darkgray' text='완료' /> : <Button className='duplicate' color='teal' text='중복확인' onClick={onIdDuplicateCheck} />}
         </div>
         <div className='validation'>{idMessage}</div>
       </div>
