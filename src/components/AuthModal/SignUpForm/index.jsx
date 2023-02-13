@@ -15,7 +15,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
   const [code, setCode] = useState('');
   const [verifyCode, setVerifyCode] = useState('');
   const dispatch = useDispatch();
-  const { email, googleAuth } = useSelector(state => state.auth);
+  const { email } = useSelector(state => state.auth);
 
   const getEmail = e => {
     const emailRegax = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -58,7 +58,6 @@ const SignUpForm = ({ setIsLoginModal }) => {
     if (code === verifyCode) {
       navigate('/register');
       setIsLoginModal(false);
-      e.target.value = '';
     } else {
       e.preventDefault();
       toast.error('인증번호를 다시 확인해주세요');
@@ -68,7 +67,7 @@ const SignUpForm = ({ setIsLoginModal }) => {
   return (
     <SignUpFormContainer onSubmit={checkEmail}>
       <div className='input-wrapper'>
-        <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' onChange={getEmail} value={location.pathname === '/register' ? email : googleAuth.email} />
+        <input type='text' tabIndex='2' placeholder='이메일을 입력하세요.' onChange={getEmail} value={email} />
         <Button className='sign-up-button' text='중복확인' color='teal' onClick={isEmail ? checkEmail : error} tabIndex='4' />
       </div>
       {isEmailAuth && (
