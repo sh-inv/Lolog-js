@@ -34,7 +34,7 @@ const WriteZone = () => {
         };
         toast.error('이미지 업로드 준비중...');
         const response = await apiClient.post(`/uploads?image_url=${URL.createObjectURL(input.files[0])}`, formData, config);
-        const imgUrl = response.data.imageUrl[0];
+        const imgUrl = `http://localhost:8080/public/${response.data.imageUrl[0]}`;
         const quillObj = quillRef.current.getEditor();
         const range = quillObj.getSelection();
         quillObj.insertEmbed(range.index, 'image', imgUrl);
