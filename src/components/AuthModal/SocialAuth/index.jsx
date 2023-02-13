@@ -3,7 +3,7 @@ import { apiClient } from '../../../api';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
-// import { GOOGLE_URL } from './OAuth';
+import { GOOGLE_URL } from './OAuth';
 
 const SocialAuth = () => {
   const socialList = [
