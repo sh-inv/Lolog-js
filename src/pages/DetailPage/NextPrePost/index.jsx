@@ -3,6 +3,7 @@ import PostNavBtn from '../../../components/PostNavBtn';
 
 const NextPrePost = ({ postData }) => {
   const { pre_post, next_post } = postData;
+
   return (
     <NextPrePostContainer>
       {pre_post ? <PostNavBtn postData={pre_post} isLeft={true} /> : <div />}

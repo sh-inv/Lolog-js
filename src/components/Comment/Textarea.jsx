@@ -5,7 +5,7 @@ import Toastify from '../Toastify';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setDetailCommentsData } from '../../store/modules/detailpage';
+import { setDetailCommentsData, setDetailCommentsLengthData } from '../../store/modules/detailpage';
 
 const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested }) => {
   const [disable, setDisable] = useState(true);
@@ -48,6 +48,7 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
           config
         );
         dispatch(setDetailCommentsData(data.comments));
+        dispatch(setDetailCommentsLengthData(data.comment_count));
         textareaRef.current.value = '';
         if (isNested) {
           toast.success('대댓글 작성 성공');
@@ -59,9 +60,6 @@ const Textarea = ({ setIsModify, isModify, content, postId, commentId, isNested 
       }
     }
   };
-
-  // const nestedComment = async () => {
-  // };
 
   return (
     <TextareaContainer>
