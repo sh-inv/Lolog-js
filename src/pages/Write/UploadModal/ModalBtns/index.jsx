@@ -38,6 +38,7 @@ const ModalBtns = () => {
           const response = await apiClient.patch(`/posts/${postInfo.id}`, bodyData, config);
           navigate(`/posts/${response.data.post_id}`);
         } else {
+          console.log(bodyData);
           const response = await apiClient.post(`/posts`, bodyData, config);
           navigate(`/posts/${response.data.post_id}`);
         }
