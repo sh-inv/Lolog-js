@@ -57,7 +57,7 @@ const SettingThumbnail = () => {
               <span onClick={removeFileImage}>제거</span>
             </p>
             <div className='thumbnail-img-wrapper'>
-              <img src={thumbnail} alt='thumbnail' />
+              <img src={`http://localhost:8080/public/${thumbnail}`} alt='thumbnail' />
             </div>
           </div>
         ) : (
