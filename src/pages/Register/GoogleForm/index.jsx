@@ -23,7 +23,7 @@ const GoogleForm = ({
   return (
     <GoogleFormContainer>
       <div className={nameActive ? 'focus-wrapper wrapper' : 'wrapper'}>
-        <label>이름 ﹡</label>
+        <label>이름</label>
         <div className='input-wrapper'>
           <input type='text' placeholder='이름을 입력하세요' disabled value={name} />
         </div>

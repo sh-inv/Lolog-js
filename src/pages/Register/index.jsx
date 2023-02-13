@@ -145,6 +145,7 @@ const Register = () => {
     try {
       const { data } = await apiClient.post('auth/signup?type=google', body);
       const { token, id, profile_image } = data;
+      console.log(profile_image);
       localStorage.setItem('authToken', token);
       localStorage.setItem('userId', id);
       localStorage.setItem('userProfileImg', profile_image);
