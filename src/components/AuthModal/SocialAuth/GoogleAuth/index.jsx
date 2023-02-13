@@ -16,12 +16,12 @@ const Spinner = () => {
         localStorage.setItem('authToken', token.token);
         localStorage.setItem('userId', token.id);
         localStorage.setItem('userProfileImg', token.profile_image);
+        navigate('/');
       } catch (error) {
         console.log(error);
       }
     };
     googleAuth();
-    navigate('/');
   }, []);
 
   return <></>;
