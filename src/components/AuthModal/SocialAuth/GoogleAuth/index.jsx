@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import styled from 'styled-components';
-
-const GoogleAuth = () => {
-  return <GoogleAuthContainer> </GoogleAuthContainer>;
-};
-
-const GoogleAuthContainer = styled.div``;
-
-export default GoogleAuth;
-=======
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../../../api';
@@ -39,4 +28,3 @@ const Spinner = () => {
 };
 
 export default Spinner;
->>>>>>> develop
