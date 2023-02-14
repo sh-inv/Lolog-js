@@ -3,14 +3,14 @@ import GetPostDate from '../../../../../components/GetPostDate';
 import styled from 'styled-components';
 import { SeriesInfoMaxWidth768px } from '../../../../../styles/media';
 
-const SeriesInfo = ({ title, update }) => {
+const SeriesInfo = ({ title, update, postCount }) => {
   return (
     <SeriesInfoContainer>
       <h4>
         <Link to=''>{title}</Link>
       </h4>
       <div className='info'>
-        <span className='count'>0개의 포스트</span>
+        <span className='count'>{postCount}개의 포스트</span>
         <span className='dot'>·</span>
         마지막 업데이트 <GetPostDate postDate={update} />
       </div>

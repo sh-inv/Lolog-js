@@ -16,13 +16,21 @@ const matchPathName = () => {
 
       if (postsRegex.test(path)) {
         const { data } = await apiClient.get(location.pathname);
+<<<<<<< HEAD
         await setHeaderTitle(data.post.name);
+=======
+        await setHeaderTitle(data.post.lolog_title);
+>>>>>>> develop
         await setUserId(data.post.user_id);
         await setActiveHeaderTitle(true);
       } else if (lologRegex.test(path)) {
         const userIdPath = path.match(lologRegex);
         const { data } = await apiClient.get(`/lolog${userIdPath[0]}?offset=1&limit=1&tag_id=0`);
+<<<<<<< HEAD
         await setHeaderTitle(data.user.name);
+=======
+        await setHeaderTitle(data.user.title);
+>>>>>>> develop
         await setUserId(data.user.id);
         await setActiveHeaderTitle(true);
       } else {

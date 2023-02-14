@@ -5,11 +5,11 @@ import Comment from './Comment';
 
 const CommentArea = ({ postData }) => {
   const { post } = postData;
-  const { commentsData } = useSelector(state => state.detailData);
+  const { commentsData, commentLengthData } = useSelector(state => state.detailData);
 
   return (
     <CommentAreaContainer>
-      <h4 className='comments-count'>{post.comment_count}개의 댓글</h4>
+      <h4 className='comments-count'>{commentLengthData}개의 댓글</h4>
       <Textarea postId={post.post_id} />
       <div className='comments-list'>{commentsData && commentsData.map(commentData => <Comment key={commentData.comment_id} commentData={commentData} />)}</div>
     </CommentAreaContainer>
