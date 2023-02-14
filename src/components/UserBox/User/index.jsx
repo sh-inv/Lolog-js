@@ -53,7 +53,11 @@ const User = ({ userInfo }) => {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         {is_owner === 0 && <FollowButton isFollower={is_follower} onClick={is_follower ? unFollow : onFollow} checked={is_follower === '1'} />}
+=======
+        {is_owner === 0 || (localStorage.getItem('authToken') && <FollowButton isFollower={is_follower} onClick={is_follower ? unFollow : onFollow} checked={is_follower === '1'} />)}
+>>>>>>> develop
       </UserContainer>
       <Border />
     </>

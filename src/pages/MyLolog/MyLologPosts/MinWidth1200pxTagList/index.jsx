@@ -1,8 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { reload } from '../../../../utils/windowreload';
 
-const MinWidth1200pxTagList = ({ tagData }) => {
+const MinWidth1200pxTagList = ({ tagData, setPostsData, setPageNum }) => {
   const location = useLocation();
 
   return (
@@ -19,7 +18,10 @@ const MinWidth1200pxTagList = ({ tagData }) => {
                 if (getTag === tag.tag_id || (!location.search && tag.name === '전체보기')) return 'tag-link active';
                 else return 'tag-link';
               }}
-              onClick={reload}
+              onClick={() => {
+                setPostsData([]);
+                setPageNum(1);
+              }}
             >
               {tag.name}
             </NavLink>

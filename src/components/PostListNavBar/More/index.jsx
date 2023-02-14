@@ -18,7 +18,11 @@ const More = () => {
     },
     {
       name: '태그 목록',
+<<<<<<< HEAD
       path: '/tags',
+=======
+      path: '',
+>>>>>>> develop
     },
     {
       name: '만든이',

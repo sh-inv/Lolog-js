@@ -31,7 +31,7 @@ const SettingThumbnail = () => {
       };
       toast.error('이미지 로딩중...');
       const response = await apiClient.post(`/uploads?image_url=${URL.createObjectURL(e.target.files[0])}`, formData, config);
-      dispatch(setWriteContent({ type: 'thumbnail', value: response.data.imageUrl[0] }));
+      dispatch(setWriteContent({ type: 'thumbnail', value: `${response.data.imageUrl[0]}` }));
       toast.success('이미지 업로드 완료');
     } catch (error) {
       toast.success('이미지 업로드 실패');
@@ -57,7 +57,7 @@ const SettingThumbnail = () => {
               <span onClick={removeFileImage}>제거</span>
             </p>
             <div className='thumbnail-img-wrapper'>
-              <img src={thumbnail} alt='thumbnail' />
+              <img src={`http://localhost:8080/public/${thumbnail}`} alt='thumbnail' />
             </div>
           </div>
         ) : (

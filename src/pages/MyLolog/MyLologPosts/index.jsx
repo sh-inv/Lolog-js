@@ -9,26 +9,27 @@ import MyLololgNoPost from './MyLololgNoPost';
 import styled from 'styled-components';
 
 const MyLologPosts = () => {
-  const location = useLocation();
   const [postsData, setPostsData] = useState([]);
   const [tagData, setTagData] = useState([]);
   const [isNoPost, setIsNoPost] = useState(false);
   const [noMorePosts, setNoMorePosts] = useState(false);
   const [pageNum, setPageNum] = useState(1);
+  const location = useLocation();
   const params = new URLSearchParams(location.search);
   const getTag = params.get('tag');
 
   const getPostData = async () => {
     try {
-      const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${pageNum}&limit=15&tag_id=${getTag ? getTag : 0}`);
+      const { data } = await apiClient.get(`/lolog${location.pathname}?offset=${pageNum}&limit=5&tag_id=${getTag ? getTag : 0}`);
       if (data.posts === null) {
         setIsNoPost(true);
         setTagData(data.tags);
       } else if (data.posts.length) {
         setNoMorePosts(true);
+        setIsNoPost(false);
         setPostsData(prev => [...prev, ...data.posts]);
         setTagData(data.tags);
-      } else {
+      } else if (data.posts.length === 0) {
         setNoMorePosts(false);
       }
     } catch (error) {
@@ -38,10 +39,9 @@ const MyLologPosts = () => {
 
   useEffect(() => {
     getPostData();
-  }, [location.pathname, pageNum, getTag]);
+  }, [location, pageNum, getTag]);
 
   // 무한 스크롤
-
   const loader = useRef(null);
 
   const intersectionObserver = useCallback(entries => {
@@ -71,8 +71,8 @@ const MyLologPosts = () => {
     <PostsContainer>
       {tagData && (
         <>
-          <MinWidth1200pxTagList tagData={tagData} setPostsData={setPostsData} getPostData={getPostData} />
-          <MaxWidth1199pxTagList tagData={tagData} />
+          <MinWidth1200pxTagList tagData={tagData} setPostsData={setPostsData} setPageNum={setPageNum} />
+          <MaxWidth1199pxTagList tagData={tagData} setPostsData={setPostsData} setPageNum={setPageNum} />
         </>
       )}
       <SearchBox />
@@ -81,7 +81,7 @@ const MyLologPosts = () => {
           {postsData.map((postData, i) => (
             <MyLologPost key={i} postData={postData} />
           ))}
-          {noMorePosts && postsData.length ? <div ref={loader} className='loader-area' /> : null}
+          {noMorePosts && postsData.length > 0 && <div ref={loader} className='loader-area' />}
         </div>
       )}
       {isNoPost && <MyLololgNoPost />}
