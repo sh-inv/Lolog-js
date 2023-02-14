@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../store/modules/user';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
@@ -10,6 +10,7 @@ import { settingMaxWidth1024px, settingMaxWidth768px, settingUserMaxWidth768px }
 
 const Setting = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.user);
 
   useEffect(() => {
     const loader = async () => {
@@ -29,7 +30,7 @@ const Setting = () => {
       }
     };
     loader();
-  }, []);
+  }, [user]);
 
   return (
     <SettingPage>
