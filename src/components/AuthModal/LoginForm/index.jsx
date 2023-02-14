@@ -40,7 +40,6 @@ const LoginForm = ({ onClose }) => {
             id: '',
             password: '',
           });
-          window.location.reload();
           onClose();
         }
       } catch (error) {

@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Main from './pages/Main';
 import { Header } from './layout';
 import Search from './pages/Search';
@@ -17,6 +18,15 @@ import GoogleAuth from './components/AuthModal/SocialAuth/GoogleAuth';
 import GlobalStyle from './GlobalStyle';
 
 const App = () => {
+  const navigate = useNavigate();
+  let token = localStorage.getItem('authToken');
+
+  useEffect(() => {
+    if (!token && (location.pathname === '/follow-list' || '/saves' || '/setting' || 'write')) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <>
       <GlobalStyle />

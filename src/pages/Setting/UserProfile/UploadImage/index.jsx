@@ -19,12 +19,10 @@ const UploadImage = () => {
 
   const uploadImage = async e => {
     e.preventDefault();
-
     const uploadFile = e.target.files[0];
     const formData = new FormData();
     formData.delete('image', user.profile_image);
     formData.append('image', uploadFile);
-
     try {
       const config = {
         headers: {
@@ -39,6 +37,7 @@ const UploadImage = () => {
           profile_image: data.profile_image,
         })
       );
+      localStorage.setItem('userProfileImg', user.profile_image);
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +57,7 @@ const UploadImage = () => {
           profile_image: data.profile_image,
         })
       );
+      localStorage.setItem('userProfileImg', user.profile_image);
     } catch (error) {
       console.log(error);
     }
