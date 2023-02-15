@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { apiClient } from '../../api';
-<<<<<<< HEAD
-import { setDetailCommentsData } from '../../store/modules/detailpage';
-=======
 import { setDetailCommentsData, setDetailCommentsLengthData } from '../../store/modules/detailpage';
->>>>>>> develop
 import ConfirmModal from '../ConfirmModal';
 import GetPostDate from '../GetPostDate';
 import Toastify from '../Toastify';
@@ -31,10 +27,7 @@ const CommentContent = ({ isNested, commentData }) => {
       };
       const { data } = await apiClient.delete(`/comments/${post_id}/${comment_id}`, config);
       dispatch(setDetailCommentsData(data.comments));
-<<<<<<< HEAD
-=======
       dispatch(setDetailCommentsLengthData(data.comment_count));
->>>>>>> develop
       toast.success('댓글 삭제 성공');
     } catch (error) {
       toast.error('댓글 삭제 실패');
