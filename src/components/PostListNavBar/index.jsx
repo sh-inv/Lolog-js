@@ -5,21 +5,12 @@ import styled from 'styled-components';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SlGraph } from 'react-icons/sl';
 import { BsFillPeopleFill } from 'react-icons/bs';
-<<<<<<< HEAD
-import { useDispatch } from 'react-redux';
-import { resetPageNum } from '../../store/modules/mainnavbar';
-=======
 import { IoPeople } from 'react-icons/io5';
->>>>>>> develop
 
 const PostListNavBar = () => {
   const isLogin = localStorage.getItem('authToken');
   const location = useLocation();
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const dispatch = useDispatch();
-=======
->>>>>>> develop
   const navBar = [
     {
       name: '트렌딩',
@@ -37,11 +28,7 @@ const PostListNavBar = () => {
     },
     {
       name: '팔로우',
-<<<<<<< HEAD
-      icon: <BsFillPeopleFill className='icon' />,
-=======
       icon: <IoPeople className='icon' />,
->>>>>>> develop
       path: '/follow',
       query: 'follow',
       view: false,
@@ -56,10 +43,6 @@ const PostListNavBar = () => {
             <Button
               key={navItem.name}
               onClick={() => {
-<<<<<<< HEAD
-                dispatch(resetPageNum());
-=======
->>>>>>> develop
                 navigate(`${navItem.path}`);
               }}
               disabled={location.pathname === navItem.path}
@@ -124,11 +107,7 @@ const Button = styled.button`
   cursor: pointer;
 
   :nth-last-child(2) {
-<<<<<<< HEAD
-    display: ${({ isLogin }) => (isLogin ? 'block' : 'none')};
-=======
     display: ${({ isLogin }) => (isLogin ? 'inherit' : 'none')};
->>>>>>> develop
   }
 `;
 

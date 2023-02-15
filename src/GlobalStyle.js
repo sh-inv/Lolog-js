@@ -1,10 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { lightTheme, darkTheme } from './styles/color';
-<<<<<<< HEAD
-=======
 import IndieFlowerTTFRegular from './fonts/IndieFlowerTTFRegular.ttf';
->>>>>>> develop
 
 const GlobalStyle = createGlobalStyle`
 
