@@ -50,7 +50,7 @@ const PostListNavBar = () => {
               path={location.pathname === navItem.path}
             >
               {navItem.icon}
-              {navItem.name}
+              <span className='name'>{navItem.name}</span>
             </Button>
           ))}
           <SlideBorder location={location} isLogin={isLogin} />
@@ -67,10 +67,6 @@ const PostListNavBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  .icon {
-    font-size: 1.4rem;
-    margin-right: 0.5rem;
-  }
   .nav {
     position: relative;
     display: flex;
@@ -91,6 +87,10 @@ const NavTab = styled.div`
   position: relative;
   display: flex;
   width: ${({ isLogin }) => (isLogin ? '21rem' : '14rem')};
+
+  @media screen and (max-width: 501px) {
+    width: ${({ isLogin }) => (isLogin ? '15rem' : '10rem')};
+  }
 `;
 
 const Button = styled.button`
@@ -108,6 +108,30 @@ const Button = styled.button`
 
   :nth-last-child(2) {
     display: ${({ isLogin }) => (isLogin ? 'inherit' : 'none')};
+  }
+
+  .icon {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+  }
+
+  .name {
+    width: calc(100% - 3rem);
+  }
+
+  @media screen and (max-width: 501px) {
+    width: 5rem;
+    height: 2rem;
+    font-size: 0.875rem;
+
+    .icon {
+      font-size: 1rem;
+      margin-right: 0.1rem;
+    }
+
+    .name {
+      width: calc(100% - 1.1rem);
+    }
   }
 `;
 
@@ -135,6 +159,10 @@ const SlideBorder = styled.div`
   height: 2px;
   background: var(--border1);
   transition: ease all 0.3s;
+
+  @media screen and (max-width: 501px) {
+    height: 1px;
+  }
 `;
 
 export default PostListNavBar;
