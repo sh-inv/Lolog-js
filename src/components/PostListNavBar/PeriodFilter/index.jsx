@@ -7,7 +7,7 @@ import { resetPageNum, setQuery } from '../../../store/modules/mainnavbar';
 
 const PeriodFilter = () => {
   const [isToggle, setIsToggle] = useState(false);
-  const [filter, setFilter] = useState('이번 주');
+  const [filter, setFilter] = useState('올해');
   const dispatch = useDispatch();
   const [filterList, setFilterList] = useState([
     {
@@ -18,7 +18,7 @@ const PeriodFilter = () => {
     {
       name: '이번 주',
       query: 'week',
-      view: true,
+      view: false,
     },
     {
       name: '이번 달',
@@ -28,7 +28,7 @@ const PeriodFilter = () => {
     {
       name: '올해',
       query: 'year',
-      view: false,
+      view: true,
     },
   ]);
   const toggleBtnRef = useRef();
