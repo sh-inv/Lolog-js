@@ -16,21 +16,18 @@ const PostListNavBar = () => {
       name: '트렌딩',
       icon: <SlGraph className='icon' />,
       path: '/',
-      query: 'trend',
       view: true,
     },
     {
       name: '최신',
       icon: <AiOutlineClockCircle className='icon' />,
       path: '/recent',
-      query: 'recent',
       view: false,
     },
     {
       name: '팔로우',
       icon: <IoPeople className='icon' />,
       path: '/follow',
-      query: 'follow',
       view: false,
     },
   ];
