@@ -13,7 +13,7 @@ const Main = () => {
   useEffect(() => {
     if (pathname === '/') {
       dispatch(setName('trend'));
-      dispatch(setQuery('week'));
+      dispatch(setQuery('year'));
     } else if (pathname === '/recent') {
       dispatch(setName('recent'));
       dispatch(setQuery(''));
